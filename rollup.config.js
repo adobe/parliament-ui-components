@@ -31,9 +31,12 @@ export default {
     svgr(),
     babel({
       exclude: 'node_modules/**',
-      plugins: [ 'external-helpers' ]
+      plugins: ['external-helpers']
     }),
     resolve(),
-    commonjs()
+    commonjs({
+      include: ['node_modules/**'],
+      exclude: ['node_modules/gatsby/**']
+    })
   ]
 }
