@@ -1,7 +1,14 @@
-import ExampleComponent from './'
+import Header from './Header'
+import Footer from './Footer'
 
-describe('ExampleComponent', () => {
+describe('Header', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
+    expect(Header).toBeTruthy()
+  })
+})
+
+describe('Footer', () => {
+  it('is truthy', () => {
+    expect(Footer).toBeTruthy()
   })
 })
