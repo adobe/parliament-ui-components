@@ -13,15 +13,19 @@ npm install --save parliament-ui-components
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import MyComponent from 'parliament-ui-components'
+import { Header, Footer } from 'parliament-ui-components';
 
 class Example extends Component {
-  render () {
+  render() {
     return (
-      <MyComponent />
-    )
+      <>
+        <Header siteTitle={title} />
+        <div>Hello world!</div>
+        <Footer />
+      </>
+    );
   }
 }
 ```
