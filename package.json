@@ -9,7 +9,7 @@
     "url": "git@git.corp.adobe.com:devrel/parliament-ui-components.git"
   },
   "publishConfig": {
-    "registry": "https://artifactory.corp.adobe.com/artifactory/api/npm/npm-parliament-release/"
+    "registry": "https://artifactory.corp.adobe.com/artifactory/api/npm/npm-adobe-release/"
   },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
