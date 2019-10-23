@@ -1,11 +1,11 @@
-import React from "react"
-import Provider from "@react/react-spectrum/Provider"
-import { Header, Footer } from "parliament-ui-components"
+import React from 'react'
+import Provider from '@react/react-spectrum/Provider'
+import { Header, Footer } from 'parliament-ui-components'
 
 const index = () => {
-  const title = "Test Title"
+  const title = 'Test Title'
   return (
-    <Provider theme="lightest">
+    <Provider theme='lightest'>
       <Header siteTitle={title} />
       <div>Hello world!</div>
       <Footer />
