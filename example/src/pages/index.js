@@ -1,6 +1,6 @@
 import React from 'react'
 import Provider from '@react/react-spectrum/Provider'
-import { Header, Footer } from 'parliament-ui-components'
+import { Header, Footer, Feedback } from 'parliament-ui-components'
 
 const index = () => {
   const title = 'Test Title'
@@ -8,6 +8,7 @@ const index = () => {
     <Provider theme='lightest'>
       <Header siteTitle={title} />
       <div>Hello world!</div>
+      <Feedback gitUrl='https://git.corp.adobe.com/devrel/parliament-client-template' />
       <Footer />
     </Provider>
   )
