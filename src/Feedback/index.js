@@ -4,14 +4,20 @@ import PropTypes from 'prop-types'
 const Heading = require('@react/react-spectrum/Heading').default
 const Link = require('@react/react-spectrum/Link').default
 
-const Feedback = ({ gitUrl }) => {
+const Feedback = ({ gitUrl, filePath, branch }) => {
   return (
     <Fragment>
       <Heading variant='subtitle3'>Improve this page</Heading>
-      <Link style={{ display: 'block' }} href={`${gitUrl}`}>
+      <Link
+        style={{ display: 'block' }}
+        href={`${gitUrl}/blob/${branch}/${filePath}`}
+      >
         Edit this page
       </Link>
-      <Link style={{ display: 'block' }} href={`${gitUrl}/issues/new`}>
+      <Link
+        style={{ display: 'block' }}
+        href={`${gitUrl}/issues/new?body=Issue%20in%20${filePath}`}
+      >
         Log an issue
       </Link>
     </Fragment>
@@ -19,10 +25,14 @@ const Feedback = ({ gitUrl }) => {
 }
 
 Feedback.propTypes = {
+  branch: PropTypes.string,
+  filePath: PropTypes.string,
   gitUrl: PropTypes.string
 }
 
 Feedback.defaultProps = {
+  branch: ``,
+  filePath: ``,
   gitUrl: ``
 }
 

@@ -8,7 +8,11 @@ const index = () => {
     <Provider theme='lightest'>
       <Header siteTitle={title} />
       <div>Hello world!</div>
-      <Feedback gitUrl='https://git.corp.adobe.com/devrel/parliament-client-template' />
+      <Feedback
+        gitUrl='https://git.corp.adobe.com/devrel/parliament-client-template'
+        filePath='README.md'
+        branch='master'
+      />
       <Footer />
     </Provider>
   )
