@@ -78,6 +78,10 @@
     "rollup-plugin-postcss": "^1.6.2",
     "rollup-plugin-url": "^1.4.0"
   },
+  "dependencies": {
+    "gatsby": "^2.17.6",
+    "regenerator-runtime": "^0.13.3"
+  },
   "files": [
     "dist"
   ]

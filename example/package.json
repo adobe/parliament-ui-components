@@ -18,7 +18,8 @@
     "gatsby-plugin-remove-serviceworker": "^1.0.0",
     "parliament-ui-components": "file:..",
     "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "react-dom": "^16.10.2",
+    "regenerator-runtime": "^0.13.3"
   },
   "devDependencies": {
     "prettier": "^1.18.2"
