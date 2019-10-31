@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Provider from '@react/react-spectrum/Provider'
 import { Header, Footer, Feedback, Nav } from 'parliament-ui-components'
 
@@ -21,13 +22,14 @@ const data = {
   ]
 }
 
-const index = () => {
+const index = ({ location }) => {
+  console.log(location)
   const title = 'Test Title'
   return (
     <Provider theme='lightest'>
       <Header siteTitle={title} />
       <div>Hello world!</div>
-      <Nav data={data.pages} />
+      <Nav data={data.pages} path={location.path} />
       <Feedback
         gitUrl='https://git.corp.adobe.com/devrel/parliament-client-template'
         filePath='README.md'
@@ -36,6 +38,14 @@ const index = () => {
       <Footer />
     </Provider>
   )
+}
+
+index.propTypes = {
+  location: PropTypes.object
+}
+
+index.defaultProps = {
+  location: {}
 }
 
 export default index

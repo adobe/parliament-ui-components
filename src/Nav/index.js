@@ -30,9 +30,9 @@ const nav = data => {
   })
 }
 
-const defaultFocus = data => {
+const defaultFocus = (data, path) => {
   for (let page of data) {
-    if (page.url === document.location.pathname) {
+    if (page.url === path) {
       return page.label
     } else if (page.children) {
       return defaultFocus(page.children)
@@ -40,13 +40,13 @@ const defaultFocus = data => {
   }
 }
 
-const Nav = ({ data }) => {
+const Nav = ({ data, path }) => {
   return (
     <nav>
       <Heading variant='subtitle3'>Topics</Heading>
       <SideNav
         autoFocus={true}
-        defaultValue={defaultFocus(data)}
+        defaultValue={defaultFocus(data, path)}
         isNested={false}
         manageTabIndex={false}
         typeToSelect
@@ -59,10 +59,12 @@ const Nav = ({ data }) => {
 }
 
 Nav.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
+  path: PropTypes.string
 }
 
 Nav.defaultProps = {
-  data: []
+  data: [],
+  path: ''
 }
 export default Nav
