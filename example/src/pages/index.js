@@ -23,13 +23,12 @@ const data = {
 }
 
 const index = ({ location }) => {
-  console.log(location)
   const title = 'Test Title'
   return (
     <Provider theme='lightest'>
       <Header siteTitle={title} />
       <div>Hello world!</div>
-      <Nav data={data.pages} path={location.path} />
+      <Nav data={data.pages} path={location.pathname} />
       <Feedback
         gitUrl='https://git.corp.adobe.com/devrel/parliament-client-template'
         filePath='README.md'

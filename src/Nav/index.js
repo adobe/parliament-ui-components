@@ -35,7 +35,7 @@ const defaultFocus = (data, path) => {
     if (page.url === path) {
       return page.label
     } else if (page.children) {
-      return defaultFocus(page.children)
+      return defaultFocus(page.children, path)
     }
   }
 }
