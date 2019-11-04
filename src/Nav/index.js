@@ -7,9 +7,17 @@ const { SideNav, SideNavItem } = require('@react/react-spectrum/SideNav')
 const Folder = require('@react/react-spectrum/Icon/Folder').default
 const WebPage = require('@react/react-spectrum/Icon/WebPage').default
 
+const splitPath = (path, urlPrefix) => {
+  if (path.indexOf(urlPrefix) > -1) {
+    return path.split(urlPrefix)[1]
+  } else {
+    return path
+  }
+}
+
 const nav = (data, urlPrefix) => {
   return data.map((node, index) => {
-    const splitPath = node.path ? node.path.split(urlPrefix)[1] : ''
+    const updatedPath = splitPath(node.path, urlPrefix)
     return (
       <SideNavItem
         key={index}
@@ -19,7 +27,7 @@ const nav = (data, urlPrefix) => {
         defaultExpanded={true}
         icon={node.pages && node.pages.length > 0 ? <Folder /> : <WebPage />}
         onClick={() => {
-          if (splitPath) navigate(splitPath)
+          if (updatedPath) navigate(updatedPath)
         }}
         label={node.title}
         target='_self'
@@ -33,8 +41,8 @@ const nav = (data, urlPrefix) => {
 
 const defaultFocus = (data, selected, urlPrefix) => {
   for (let node of data) {
-    const splitPath = node.path ? node.path.split(urlPrefix)[1] : ''
-    if (splitPath === selected) {
+    const updatedPath = splitPath(node.path, urlPrefix)
+    if (updatedPath === selected) {
       return node.title
     } else if (node.pages) {
       return defaultFocus(node.pages, selected, urlPrefix)

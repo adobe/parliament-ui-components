@@ -123,7 +123,7 @@ const data = {
     {
       importedFileName: 'Support',
       pages: [],
-      path: 'AdobeDocs/adobeio-auth/stage/Support/Index.md',
+      path: 'Support/Index.md',
       title: 'Support'
     }
   ]
