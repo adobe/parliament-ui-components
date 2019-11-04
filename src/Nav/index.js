@@ -7,8 +7,9 @@ const { SideNav, SideNavItem } = require('@react/react-spectrum/SideNav')
 const Folder = require('@react/react-spectrum/Icon/Folder').default
 const WebPage = require('@react/react-spectrum/Icon/WebPage').default
 
-const nav = data => {
+const nav = (data, urlPrefix) => {
   return data.map((node, index) => {
+    const splitPath = node.path ? node.path.split(urlPrefix)[1] : ''
     return (
       <SideNavItem
         key={index}
@@ -16,43 +17,44 @@ const nav = data => {
         isNested={false}
         disabled={false}
         defaultExpanded={true}
-        icon={!node.children ? <WebPage /> : <Folder />}
+        icon={node.pages && node.pages.length > 0 ? <Folder /> : <WebPage />}
         onClick={() => {
-          if (node.url) navigate(node.url)
+          if (splitPath) navigate(splitPath)
         }}
-        label={node.label}
+        label={node.title}
         target='_self'
-        value={node.label}
+        value={node.title}
       >
-        {node.children ? nav(node.children) : ''}
+        {node.pages ? nav(node.pages, urlPrefix) : ''}
       </SideNavItem>
     )
   })
 }
 
-const defaultFocus = (data, path) => {
-  for (let page of data) {
-    if (page.url === path) {
-      return page.label
-    } else if (page.children) {
-      return defaultFocus(page.children, path)
+const defaultFocus = (data, selected, urlPrefix) => {
+  for (let node of data) {
+    const splitPath = node.path ? node.path.split(urlPrefix)[1] : ''
+    if (splitPath === selected) {
+      return node.title
+    } else if (node.pages) {
+      return defaultFocus(node.pages, selected, urlPrefix)
     }
   }
 }
 
-const Nav = ({ data, path }) => {
+const Nav = ({ data, selected, urlPrefix }) => {
   return (
     <nav>
       <Heading variant='subtitle3'>Topics</Heading>
       <SideNav
         autoFocus={true}
-        defaultValue={defaultFocus(data, path)}
+        defaultValue={defaultFocus(data, selected, urlPrefix)}
         isNested={false}
         manageTabIndex={false}
         typeToSelect
         variant='multiLevel'
       >
-        {nav(data)}
+        {nav(data, urlPrefix)}
       </SideNav>
     </nav>
   )
@@ -60,11 +62,13 @@ const Nav = ({ data, path }) => {
 
 Nav.propTypes = {
   data: PropTypes.array,
-  path: PropTypes.string
+  selected: PropTypes.string,
+  urlPrefix: PropTypes.string
 }
 
 Nav.defaultProps = {
   data: [],
-  path: ''
+  selected: '',
+  urlPrefix: ''
 }
 export default Nav
