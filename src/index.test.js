@@ -2,7 +2,7 @@ import Header from './Header'
 import Footer from './Footer'
 import Feedback from './Feedback'
 import Nav from './Nav'
-import useManifestPath from './useManifestPath'
+import { stripManifestPath } from './ManifestUtils'
 
 describe('Header', () => {
   it('is truthy', () => {
@@ -28,16 +28,16 @@ describe('Nav', () => {
   })
 })
 
-describe('useManifestPath', () => {
+describe('stripManifestPath', () => {
   it('is truthy', () => {
-    expect(useManifestPath).toBeTruthy()
+    expect(stripManifestPath).toBeTruthy()
   })
   it('empty to return empty', () => {
-    expect(useManifestPath('', 'fake/path')).toEqual('')
+    expect(stripManifestPath('', 'fake/path')).toEqual('')
   })
   it('lower case to work', () => {
     expect(
-      useManifestPath(
+      stripManifestPath(
         'adobedocs/adobeio-events/master/using.md',
         'adobedocs/adobeio-events/master'
       )
@@ -45,7 +45,7 @@ describe('useManifestPath', () => {
   })
   it('upper case to work', () => {
     expect(
-      useManifestPath(
+      stripManifestPath(
         'AdobeDocs/adobeio-events/master/using.md',
         'AdobeDocs/adobeio-events/master'
       )
@@ -53,7 +53,7 @@ describe('useManifestPath', () => {
   })
   it('mixed case to work', () => {
     expect(
-      useManifestPath(
+      stripManifestPath(
         'AdobeDocs/adobeio-events/master/using.md',
         'adobedocs/adobeio-events/master'
       )
@@ -61,7 +61,7 @@ describe('useManifestPath', () => {
   })
   it('reversed mixed case to work', () => {
     expect(
-      useManifestPath(
+      stripManifestPath(
         'adobedocs/adobeio-events/master/using.md',
         'AdobeDocs/adobeio-events/master'
       )
@@ -69,12 +69,12 @@ describe('useManifestPath', () => {
   })
   it('no url prefix to leave path unchanged', () => {
     expect(
-      useManifestPath('adobedocs/adobeio-events/master/using.md', '')
+      stripManifestPath('adobedocs/adobeio-events/master/using.md', '')
     ).toEqual('adobedocs/adobeio-events/master/using.md')
   })
   it('undefined url prefix to leave path unchanged', () => {
-    expect(useManifestPath('adobedocs/adobeio-events/master/using.md')).toEqual(
-      'adobedocs/adobeio-events/master/using.md'
-    )
+    expect(
+      stripManifestPath('adobedocs/adobeio-events/master/using.md')
+    ).toEqual('adobedocs/adobeio-events/master/using.md')
   })
 })

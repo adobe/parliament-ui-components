@@ -1,4 +1,4 @@
-function useManifestPath(path, urlPrefix = '') {
+function stripManifestPath(path, urlPrefix = '') {
   if (!path) {
     return ''
   }
@@ -10,4 +10,4 @@ function useManifestPath(path, urlPrefix = '') {
   }
 }
 
-export default useManifestPath
+export { stripManifestPath }

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
-import { useManifestPath } from '../useManifestPath'
+import { stripManifestPath } from '../ManifestUtils'
 
 const Heading = require('@react/react-spectrum/Heading').default
 const { SideNav, SideNavItem } = require('@react/react-spectrum/SideNav')
@@ -10,7 +10,7 @@ const WebPage = require('@react/react-spectrum/Icon/WebPage').default
 
 const nav = (data, urlPrefix) => {
   return data.map((node, index) => {
-    const updatedPath = useManifestPath(node.path, urlPrefix)
+    const updatedPath = stripManifestPath(node.path, urlPrefix)
     return (
       <SideNavItem
         key={index}
@@ -34,7 +34,7 @@ const nav = (data, urlPrefix) => {
 
 const defaultFocus = (data, selected, urlPrefix) => {
   for (let node of data) {
-    const updatedPath = useManifestPath(node.path, urlPrefix)
+    const updatedPath = stripManifestPath(node.path, urlPrefix)
     if (updatedPath === selected) {
       return node.title
     } else if (node.pages) {
