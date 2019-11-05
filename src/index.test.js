@@ -2,6 +2,7 @@ import Header from './Header'
 import Footer from './Footer'
 import Feedback from './Feedback'
 import Nav from './Nav'
+import useManifestPath from './useManifestPath'
 
 describe('Header', () => {
   it('is truthy', () => {
@@ -24,5 +25,56 @@ describe('Feedback', () => {
 describe('Nav', () => {
   it('is truthy', () => {
     expect(Nav).toBeTruthy()
+  })
+})
+
+describe('useManifestPath', () => {
+  it('is truthy', () => {
+    expect(useManifestPath).toBeTruthy()
+  })
+  it('empty to return empty', () => {
+    expect(useManifestPath('', 'fake/path')).toEqual('')
+  })
+  it('lower case to work', () => {
+    expect(
+      useManifestPath(
+        'adobedocs/adobeio-events/master/using.md',
+        'adobedocs/adobeio-events/master'
+      )
+    ).toEqual('/using.md')
+  })
+  it('upper case to work', () => {
+    expect(
+      useManifestPath(
+        'AdobeDocs/adobeio-events/master/using.md',
+        'AdobeDocs/adobeio-events/master'
+      )
+    ).toEqual('/using.md')
+  })
+  it('mixed case to work', () => {
+    expect(
+      useManifestPath(
+        'AdobeDocs/adobeio-events/master/using.md',
+        'adobedocs/adobeio-events/master'
+      )
+    ).toEqual('/using.md')
+  })
+  it('reversed mixed case to work', () => {
+    expect(
+      useManifestPath(
+        'adobedocs/adobeio-events/master/using.md',
+        'AdobeDocs/adobeio-events/master'
+      )
+    ).toEqual('/using.md')
+  })
+  it('no url prefix to leave path unchanged', () => {
+    expect(
+      useManifestPath('adobedocs/adobeio-events/master/using.md', '')
+    ).toEqual('adobedocs/adobeio-events/master/using.md')
+  })
+  it('undefined url prefix to leave path unchanged', () => {
+    expect(useManifestPath('adobedocs/adobeio-events/master/using.md')).toEqual(
+      'adobedocs/adobeio-events/master/using.md'
+    )
   })
 })
