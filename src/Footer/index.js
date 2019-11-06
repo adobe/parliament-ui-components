@@ -1,8 +1,14 @@
 import React from 'react'
 
 const Footer = () => (
-  <React.Fragment>
-    <footer style={{ padding: '0' }}>
+  <div
+    style={{
+      flexBasis: '100%',
+      maxWidth: '100%',
+      padding: '0px 8px'
+    }}
+  >
+    <footer style={{ display: 'flex', flexDirection: 'column' }}>
       <div style={{ width: '100%', margin: '0 auto', fontSize: '11px' }}>
         <div
           style={{
@@ -76,7 +82,7 @@ const Footer = () => (
         </div>
       </div>
     </footer>
-  </React.Fragment>
+  </div>
 )
 
 export default Footer
