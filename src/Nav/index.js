@@ -3,10 +3,7 @@ import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
 import { stripManifestPath } from '../ManifestUtils'
 
-const Heading = require('@react/react-spectrum/Heading').default
 const { SideNav, SideNavItem } = require('@react/react-spectrum/SideNav')
-const Folder = require('@react/react-spectrum/Icon/Folder').default
-const WebPage = require('@react/react-spectrum/Icon/WebPage').default
 
 const nav = (data, urlPrefix) => {
   return data.map((node, index) => {
@@ -18,7 +15,6 @@ const nav = (data, urlPrefix) => {
         isNested={false}
         disabled={false}
         defaultExpanded={true}
-        icon={node.pages && node.pages.length > 0 ? <Folder /> : <WebPage />}
         onClick={() => {
           if (updatedPath) navigate(updatedPath)
         }}
@@ -46,7 +42,6 @@ const defaultFocus = (data, selected, urlPrefix) => {
 const Nav = ({ data, selected, urlPrefix }) => {
   return (
     <nav>
-      <Heading variant='subtitle3'>Topics</Heading>
       <SideNav
         autoFocus={true}
         defaultValue={defaultFocus(data, selected, urlPrefix)}
