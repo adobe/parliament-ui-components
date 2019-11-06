@@ -35,6 +35,12 @@ const data = {
           pages: [],
           path: 'adobedocs/adobeio-events/master/intro/journaling_api.md',
           title: 'Journaling API'
+        },
+        {
+          importedFileName: 'test.md',
+          pages: [],
+          path: 'test/path/test.md',
+          title: 'Test of Focus'
         }
       ],
       path: 'adobedocs/adobeio-events/master/readme.md',
@@ -128,7 +134,7 @@ const index = ({ location }) => {
       <div>Hello world!</div>
       <Nav
         data={data.pages}
-        path={location.pathname}
+        selected='test/path/test.md'
         urlPrefix='adobedocs/adobeio-events/master'
       />
       <Feedback

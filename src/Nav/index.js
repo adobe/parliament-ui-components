@@ -28,15 +28,36 @@ const nav = (data, urlPrefix) => {
   })
 }
 
-const defaultFocus = (data, selected, urlPrefix) => {
-  for (let node of data) {
-    const updatedPath = stripManifestPath(node.path, urlPrefix)
-    if (updatedPath === selected) {
-      return node.title
-    } else if (node.pages) {
-      return defaultFocus(node.pages, selected, urlPrefix)
+const defaultFocus = (theObject, selected, urlPrefix) => {
+  var result = null
+  if (theObject instanceof Array) {
+    for (var i = 0; i < theObject.length; i++) {
+      result = defaultFocus(theObject[i], selected, urlPrefix)
+      if (result) {
+        break
+      }
+    }
+  } else {
+    for (var prop in theObject) {
+      console.log(prop + ': ' + theObject[prop])
+      if (prop === 'path') {
+        const updatedPath = stripManifestPath(theObject[prop], urlPrefix)
+        if (updatedPath === selected) {
+          return theObject.title
+        }
+      }
+      if (
+        theObject[prop] instanceof Object ||
+        theObject[prop] instanceof Array
+      ) {
+        result = defaultFocus(theObject[prop], selected, urlPrefix)
+        if (result) {
+          break
+        }
+      }
     }
   }
+  return result
 }
 
 const Nav = ({ data, selected, urlPrefix }) => {
