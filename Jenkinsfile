@@ -5,6 +5,7 @@ pipeline {
 
     environment{
         GITHUB_CLONE_URL = 'git@git.corp.adobe.com:devrel/parliament-ui-components.git'
+        GITHUB_PUSH_URL = 'git.corp.adobe.com/devrel/parliament-ui-components.git'
         GITHUB_CLONE_CREDENTIALS = 'smacdona-git.corp'
         GITHUB_CLONE_ORG = 'devrel'
         GITHUB_CLONE_REPO = 'parliament-ui-components'
@@ -68,18 +69,15 @@ pipeline {
                 }
             }
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'smacdona-git.corp', keyFileVariable: 'GITHUB_KEY')]) {
-                    withEnv(["GIT_SSH_COMMAND=ssh -i $GITHUB_KEY -o StrictHostKeyChecking=no"]) {
-                        nodejs('Node') {
-                          print "git key is ${GITHUB_KEY}"
-                          sh "git checkout -- package-lock.json"
-                          sh "npm version patch"
-                          sh "git commit --amend -m 'tagging release [ci skip]'"
-                          sh "git push --tags ${GITHUB_CLONE_URL} master"
-                        }
+                withCredentials([usernamePassword(credentialsId:'smacdona-git-corp-pat', usernameVariable: 'USERNAME', passwordVariable: 'APITOKEN')]) {
+                    nodejs('Node') {
+                        sh "git checkout -- package-lock.json"
+                        sh "npm version patch"
+                        sh "git commit --amend -m 'tagging release [ci skip]'"
+                        sh "git push --tags https://${USERNAME}:${APITOKEN}@${GITHUB_PUSH_URL} master"
                     }
                 }
-                withCredentials([usernamePassword(credentialsId:'smacdona-git-corp-pat', usernameVariable: 'USERNAME', passwordVariable: 'APITOKEN')]) {
+                withCredentials([usernamePassword(credentialsId:'smacdona-artifactory', usernameVariable: 'USERNAME', passwordVariable: 'APITOKEN')]) {
                     nodejs('Node') {
                       sh """
                         export HOME=/tmp
