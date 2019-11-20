@@ -82,7 +82,6 @@ pipeline {
                       sh """
                         export HOME=/tmp
                         curl -u \${USERNAME}:\${APITOKEN} https://artifactory.corp.adobe.com/artifactory/api/npm/auth > \$HOME/.npmrc
-                        cat \$HOME/.npmrc
                         npm publish
                       """
                     }
