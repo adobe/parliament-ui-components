@@ -135,7 +135,7 @@ const index = ({ location }) => {
       <Nav
         data={data.pages}
         selected='test/path/test.md'
-        urlPrefix='adobedocs/adobeio-events/master'
+        gitInfo={{ org: 'adobedocs', name: 'adobeio-events', branch: 'master' }}
       />
       <Feedback
         gitUrl='https://git.corp.adobe.com/devrel/parliament-client-template'
