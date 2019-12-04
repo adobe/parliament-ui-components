@@ -49,7 +49,7 @@ const Nav = ({ data, selected, gitInfo }) => {
 Nav.propTypes = {
   data: PropTypes.array,
   selected: PropTypes.string,
-  gitInfo: PropTypes.string
+  gitInfo: PropTypes.object
 }
 
 Nav.defaultProps = {
