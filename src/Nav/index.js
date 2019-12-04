@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
-import { stripManifestPath } from '../ManifestUtils';
+import { stripManifestPath, defaultFocus } from '../ManifestUtils';
 
 const { SideNav, SideNavItem } = require('@react/react-spectrum/SideNav')
 
@@ -27,37 +27,6 @@ const nav = (data, gitInfo) => {
       </SideNavItem>
     )
   })
-};
-
-const defaultFocus = (theObject, selected, urlPrefix) => {
-  var result = null
-  if (theObject instanceof Array) {
-    for (var i = 0; i < theObject.length; i++) {
-      result = defaultFocus(theObject[i], selected, urlPrefix)
-      if (result) {
-        break
-      }
-    }
-  } else {
-    for (var prop in theObject) {
-      if (prop === 'path') {
-        const updatedPath = stripManifestPath(theObject[prop], urlPrefix)
-        if (selected.endsWith(updatedPath)) {
-          return theObject.title
-        }
-      }
-      if (
-        theObject[prop] instanceof Object ||
-        theObject[prop] instanceof Array
-      ) {
-        result = defaultFocus(theObject[prop], selected, urlPrefix)
-        if (result) {
-          break
-        }
-      }
-    }
-  }
-  return result
 };
 
 const Nav = ({ data, selected, gitInfo }) => {
@@ -88,4 +57,5 @@ Nav.defaultProps = {
   selected: '',
   gitInfo: {}
 }
+
 export default Nav
