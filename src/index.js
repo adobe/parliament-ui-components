@@ -1,5 +1,5 @@
-export { default as Feedback } from './Feedback'
-export { default as Header } from './Header'
-export { default as Footer } from './Footer'
-export { default as Nav } from './Nav'
-export { stripManifestPath } from './ManifestUtils'
+export { default as Feedback } from './Feedback';
+export { default as Header } from './Header';
+export { default as Footer } from './Footer';
+export { default as Nav } from './Nav';
+export { stripManifestPath, defaultFocus } from './ManifestUtils';

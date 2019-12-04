@@ -2,7 +2,158 @@ import Header from './Header';
 import Footer from './Footer';
 import Feedback from './Feedback';
 import Nav from './Nav';
-import { stripManifestPath } from './ManifestUtils';
+import { stripManifestPath, defaultFocus } from './ManifestUtils';
+
+const manifest = {
+  author: 'Nathan Price',
+  base_path: 'https://raw.githubusercontent.com',
+  description: 'Analytics',
+  meta_description: 'default description',
+  meta_keywords: 'adobe, analytics',
+  name: 'Analytics',
+  pages: [
+    {
+      importedFileName: 'readme',
+      pages: [],
+      path: 'AdobeDocs/analytics-1.4-apis/master/README.md',
+      title: 'Overview'
+    },
+    {
+      importedFileName: 'getting-started-2',
+      pages: [
+        {
+          importedFileName: 'index',
+          pages: [],
+          path:
+            'AdobeDocs/analytics-1.4-apis/master/docs/reporting-api/index.md',
+          title: 'Reporting API'
+        },
+        {
+          importedFileName: 'index',
+          pages: [],
+          path: 'AdobeDocs/analytics-1.4-apis/master/docs/admin-api/index.md',
+          title: 'Admin API'
+        },
+        {
+          importedFileName: 'index',
+          pages: [],
+          path:
+            'AdobeDocs/analytics-1.4-apis/master/docs/live-stream-api/index.md',
+          title: 'Live Stream'
+        },
+        {
+          importedFileName: 'index',
+          pages: [],
+          path:
+            'AdobeDocs/analytics-1.4-apis/master/docs/data-feeds-api/index.md',
+          title: 'Data Feeds'
+        },
+        {
+          importedFileName: 'index',
+          pages: [],
+          path:
+            'AdobeDocs/analytics-1.4-apis/master/docs/data-sources-api/index.md',
+          title: 'Data Sources'
+        },
+        {
+          importedFileName: 'index',
+          pages: [],
+          path:
+            'AdobeDocs/analytics-1.4-apis/master/docs/data-insertion-api/index.md',
+          title: 'Data Insertion'
+        },
+        {
+          importedFileName: 'index',
+          pages: [],
+          path:
+            'AdobeDocs/analytics-1.4-apis/master/docs/data-warehouse-api/index.md',
+          title: 'Data Warehouse'
+        },
+        {
+          importedFileName: 'index',
+          pages: [],
+          path:
+            'AdobeDocs/analytics-1.4-apis/master/docs/classifications-api/index.md',
+          title: 'Classifications'
+        },
+        {
+          importedFileName: 'index',
+          pages: [],
+          path:
+            'AdobeDocs/analytics-1.4-apis/master/docs/calc-metrics-api/index.md',
+          title: 'Calculated Metrics'
+        },
+        {
+          importedFileName: 'index',
+          pages: [],
+          path:
+            'AdobeDocs/analytics-1.4-apis/master/docs/segments-api/index.md',
+          title: 'Segments'
+        },
+        {
+          importedFileName: 'jwt',
+          pages: [],
+          path: 'AdobeDocs/analytics-1.4-apis/master/jwt.md',
+          title: 'JWT Authentication'
+        }
+      ],
+      path:
+        'AdobeDocs/analytics-1.4-apis/blob/master/docs/getting-started/getting-started-2.md',
+      title: 'Getting Started'
+    },
+    {
+      importedFileName: 'index',
+      pages: [
+        {
+          importedFileName: 'index',
+          pages: [],
+          path:
+            'AdobeDocs/analytics-1.4-apis/master/docs/recommendations-api/index.md',
+          title: 'Legacy Recommendations API'
+        },
+        {
+          importedFileName: 'index',
+          pages: [],
+          path: 'AdobeDocs/analytics-1.4-apis/master/docs/target-api/index.md',
+          title: 'Legacy Target API'
+        },
+        {
+          importedFileName: 'index',
+          pages: [],
+          path: 'AdobeDocs/analytics-1.4-apis/master/docs/saint-api/index.md',
+          title: 'Legacy Saint API'
+        },
+        {
+          importedFileName: 'index',
+          pages: [],
+          path:
+            'AdobeDocs/analytics-1.4-apis/master/docs/reporting-api-1.3/index.md',
+          title: 'Legacy Reporting API'
+        },
+        {
+          importedFileName: 'index',
+          pages: [],
+          path:
+            'AdobeDocs/analytics-1.4-apis/master/docs/admin-api-1.3/index.md',
+          title: 'Legacy Admin API'
+        },
+        {
+          importedFileName: 'index',
+          pages: [],
+          path:
+            'AdobeDocs/analytics-1.4-apis/master/docs/authentication/index.md',
+          title: 'Legacy Authentication'
+        }
+      ],
+      path: 'AdobeDocs/analytics-1.4-apis/docs/APIEOL.md',
+      title: 'Legacy 1.3 APIs'
+    }
+  ],
+  publish_date: '11/11/2019',
+  show_edit_github_banner: false,
+  version: '2.0.0',
+  view_type: 'mdbook'
+}
 
 describe('Header', () => {
   it('is truthy', () => {
@@ -112,5 +263,35 @@ describe('stripManifestPath', () => {
         name: 'stock-api-docs'
       })
     ).toEqual('/docs/01-getting-started.md')
+  })
+})
+
+describe('defaultFocus', () => {
+  it('is truthy', () => {
+    expect(defaultFocus).toBeTruthy()
+  })
+  it('org/name/branch', () => {
+    let result = defaultFocus(
+      manifest,
+      'http://docs.corp.adobe.com/authentication/adobe-io/docs/reporting-api/index.md',
+      { org: 'AdobeDocs', name: 'analytics-1.4-apis', branch: 'master' }
+    )
+    expect(result === 'Reporting API').toBe(true)
+  })
+  it('org/name', () => {
+    let result = defaultFocus(
+      manifest,
+      'http://docs.corp.adobe.com/authentication/adobe-io/docs/docs/APIEOL.md',
+      { org: 'AdobeDocs', name: 'analytics-1.4-apis', branch: 'master' }
+    )
+    expect(result === 'Legacy 1.3 APIs').toBe(true)
+  })
+  it('deep in strucure', () => {
+    let result = defaultFocus(
+      manifest,
+      'http://docs.corp.adobe.com/authentication/adobe-io/docs/authentication/index.md',
+      { org: 'AdobeDocs', name: 'analytics-1.4-apis', branch: 'master' }
+    )
+    expect(result === 'Legacy Authentication').toBe(true)
   })
 })
