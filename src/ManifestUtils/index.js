@@ -40,9 +40,10 @@ function defaultFocus(theObject, selected, urlPrefix) {
     for (var prop in theObject) {
       if (prop === 'path') {
         const updatedPath = stripManifestPath(theObject[prop], urlPrefix)
-        // console.log('Selected: ' + selected)
-        // console.log('Path:     ' + updatedPath)
-        if (selected.toLowerCase().endsWith(updatedPath.toLowerCase())) {
+        if (
+          updatedPath &&
+          selected.toLowerCase().endsWith(updatedPath.toLowerCase())
+        ) {
           return theObject.title
         }
       }
