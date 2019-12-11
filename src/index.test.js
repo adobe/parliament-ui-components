@@ -264,6 +264,24 @@ describe('stripManifestPath', () => {
       })
     ).toEqual('/docs/01-getting-started.md')
   })
+  it('remote link with org in url', () => {
+    expect(
+      stripManifestPath('https://adobe.io/authentication', {
+        org: 'adobe',
+        name: 'stock-api-docs',
+        branch: 'master'
+      })
+    ).toEqual('https://adobe.io/authentication')
+  })
+  it('remote link without org in url', () => {
+    expect(
+      stripManifestPath('https://adobe.io/authentication', {
+        org: 'adobedocs',
+        name: 'stock-api-docs',
+        branch: 'master'
+      })
+    ).toEqual('https://adobe.io/authentication')
+  })
 })
 
 describe('defaultFocus', () => {

@@ -2,6 +2,9 @@ function stripManifestPath(path, { org = '', name = '', branch = '' } = {}) {
   if (!path) {
     return '';
   }
+  if (path.startsWith('http://') || path.startsWith('https://')) {
+    return path
+  }
   let urlPrefix = '';
   if (org) {
     urlPrefix += org
