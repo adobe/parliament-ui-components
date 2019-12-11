@@ -17,7 +17,16 @@ const nav = (data, gitInfo) => {
         disabled={false}
         defaultExpanded={true}
         onClick={() => {
-          if (updatedPath) navigate(updatedPath)
+          if (updatedPath) {
+            if (
+              updatedPath.startsWith('http://') ||
+              updatedPath.startsWith('https://')
+            ) {
+              document.location.href = updatedPath
+            } else {
+              navigate(updatedPath)
+            }
+          }
         }}
         label={node.title}
         target='_self'
