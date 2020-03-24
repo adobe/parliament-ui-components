@@ -1,29 +1,29 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'gatsby'
+import React from "react"
+import PropTypes from "prop-types"
+import { Link } from "gatsby"
 
-const Heading = require('@react/react-spectrum/Heading').default
+const Heading = require("@react/react-spectrum/Heading").default
 
 const Header = ({ siteTitle }) => {
   return (
     <header
       style={{
-        background: `#2f2c2c`,
-        marginBottom: `1.45rem`
+        background: "#2f2c2c",
+        marginBottom: "1.45rem"
       }}
     >
       <div
         style={{
-          margin: `0 auto`,
-          padding: `1.45rem 1.0875rem`
+          margin: "0 auto",
+          padding: "1.45rem 1.0875rem"
         }}
       >
         <Heading style={{ margin: 0 }}>
           <Link
-            to='/'
+            to="/"
             style={{
-              color: `white`,
-              textDecoration: `none`
+              color: "white",
+              textDecoration: "none"
             }}
           >
             {siteTitle}
@@ -39,7 +39,7 @@ Header.propTypes = {
 }
 
 Header.defaultProps = {
-  siteTitle: ``
+  siteTitle: ""
 }
 
 export default Header
