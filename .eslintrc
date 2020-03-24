@@ -13,6 +13,8 @@
     "space-before-function-paren": 0,
 
     // allow specifying true explicitly for boolean props
-    "react/jsx-boolean-value": 0
+    "react/jsx-boolean-value": 0,
+    "quotes": [2, "double"],
+    "jsx-quotes": ["error", "prefer-double"]
   }
 }
