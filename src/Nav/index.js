@@ -8,7 +8,6 @@ const { SideNav, SideNavItem } = require("@react/react-spectrum/SideNav")
 const nav = (data, gitInfo) => {
   return data.map((node, index) => {
     const updatedPath = stripManifestPath(node.path, gitInfo)
-    console.log(updatedPath)
     return (
       <SideNavItem
         key={index}
