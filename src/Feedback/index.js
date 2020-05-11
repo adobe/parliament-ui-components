@@ -10,7 +10,7 @@ const Feedback = ({ gitUrl, filePath, branch }) => {
       <Heading variant="subtitle3">Improve this page</Heading>
       <Link
         style={{ display: "block" }}
-        href={`${gitUrl}/blob/${branch}/${filePath}`}
+        href={`${gitUrl}/edit/${branch}/${filePath}`}
       >
         Edit this page
       </Link>
