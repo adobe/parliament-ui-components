@@ -79,6 +79,8 @@
     "rollup-plugin-url": "^1.4.0"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.27",
+    "@emotion/styled": "^10.0.27",
     "gatsby": "^2.17.6",
     "regenerator-runtime": "^0.13.3"
   },
