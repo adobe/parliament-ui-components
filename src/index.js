@@ -11,3 +11,7 @@ export {
   OpenApiGridFooter,
   OpenApiGridNav
 } from "./OpenApiGrid"
+/*
+export { default as Next } from "./Next"
+export { default as Prev } from "./Prev"
+*/
