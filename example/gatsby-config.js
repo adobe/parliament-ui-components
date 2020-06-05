@@ -6,5 +6,5 @@
 
 module.exports = {
   /* Your site config here */
-  plugins: ['gatsby-plugin-remove-serviceworker']
+  plugins: ["gatsby-plugin-remove-serviceworker"]
 }
