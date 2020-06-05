@@ -1,22 +1,22 @@
-function stripManifestPath(path, { org = "", name = "", branch = "" } = {}) {
+function stripManifestPath(path, { org = '', name = '', branch = '' } = {}) {
   if (!path) {
-    return ""
+    return ''
   }
-  if (path.startsWith("http://") || path.startsWith("https://")) {
+  if (path.startsWith('http://') || path.startsWith('https://')) {
     return path
   }
-  let urlPrefix = ""
+  let urlPrefix = ''
   if (org) {
     urlPrefix += org
   }
   if (name) {
-    urlPrefix += urlPrefix !== "" ? "/" + name : name
+    urlPrefix += urlPrefix !== '' ? '/' + name : name
   }
   if (branch) {
-    urlPrefix += urlPrefix !== "" ? "/" + branch : branch
+    urlPrefix += urlPrefix !== '' ? '/' + branch : branch
   }
   // Normal case with org/name/branch
-  let location = path.toLowerCase().indexOf(urlPrefix.toLowerCase())
+  const location = path.toLowerCase().indexOf(urlPrefix.toLowerCase())
   if (location > -1) {
     return path.substring(location + urlPrefix.length)
   } else if (path.toLowerCase().indexOf(name.toLowerCase() > -1)) {
@@ -40,7 +40,7 @@ function defaultFocus(theObject, selected, urlPrefix) {
     }
   } else {
     for (var prop in theObject) {
-      if (prop === "path") {
+      if (prop === 'path') {
         const updatedPath = stripManifestPath(theObject[prop], urlPrefix)
         if (
           updatedPath &&

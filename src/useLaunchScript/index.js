@@ -1,10 +1,10 @@
-import { useEffect } from "react"
+import { useEffect } from 'react'
 
-const useLaunchScript = scriptUrl => {
+const useLaunchScript = (scriptUrl) => {
   useEffect(() => {
-    const script = document.createElement("script")
+    const script = document.createElement('script')
     script.src = scriptUrl
-    script.async = "true"
+    script.async = 'true'
     document.body.appendChild(script)
   }, [scriptUrl])
 }
