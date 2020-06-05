@@ -2,6 +2,8 @@ import Header from './Header'
 import Footer from './Footer'
 import Feedback from './Feedback'
 import Nav from './Nav'
+import Next from './Next'
+import Prev from './Prev'
 import { stripManifestPath, defaultFocus } from './ManifestUtils'
 
 const manifest = {
@@ -176,6 +178,18 @@ describe('Feedback', () => {
 describe('Nav', () => {
   it('is truthy', () => {
     expect(Nav).toBeTruthy()
+  })
+})
+
+describe('Next', () => {
+  it('is truthy', () => {
+    expect(Next).toBeTruthy()
+  })
+})
+
+describe('Prev', () => {
+  it('is truthy', () => {
+    expect(Prev).toBeTruthy()
   })
 })
 
