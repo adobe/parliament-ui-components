@@ -1,21 +1,23 @@
-# parliament-ui-components
+# parliament-ui-components-too
 
 > UI Components for Parliament projects
 
-[![NPM](https://img.shields.io/npm/v/parliament-ui-components.svg)](https://www.npmjs.com/package/parliament-ui-components) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+> Made with create-react-library
+
+[![NPM](https://img.shields.io/npm/v/parliament-ui-components-too.svg)](https://www.npmjs.com/package/parliament-ui-components-too) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install --save parliament-ui-components
+npm install --save @parliament/parliament-ui-components
 ```
 
 ## Usage
 
 ```jsx
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import { Header, Footer } from 'parliament-ui-components';
+import { Header, Footer } from '@parliament/parliament-ui-components'
 
 class Example extends Component {
   render() {
@@ -25,11 +27,11 @@ class Example extends Component {
         <div>Hello world!</div>
         <Footer />
       </>
-    );
+    )
   }
 }
 ```
 
 ## License
 
-Apache-2.0
+Apache-2.0 © [smacdona](https://github.com/smacdona)
