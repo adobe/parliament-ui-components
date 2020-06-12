@@ -1,4 +1,4 @@
-# parliament-ui-components-too
+# parliament-ui-components
 
 > UI Components for Parliament projects
 
