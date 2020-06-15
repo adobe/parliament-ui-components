@@ -32,6 +32,30 @@ class Example extends Component {
 }
 ```
 
+## Development
+
+This project depends on libraries that are internal to Adobe, such as `react-spectrum`.
+You will need to edit your `~/.npmrc` file to successfully install all dependencies.
+
+Follow the [installation instructions][] in the react-spectrum README to connect to Adobe's internal npm registry.
+
+### Install dependencies
+
+```sh
+npm install
+```
+
+### Run Storybook
+
+This project uses [Storybook][] for testing the look and behavior of its UI components.
+
+```sh
+npm run storybook
+```
+
 ## License
 
 Apache-2.0 © [smacdona](https://github.com/smacdona)
+
+[installation instructions]: https://git.corp.adobe.com/React/react-spectrum-v2#npm
+[storybook]: https://storybook.js.org/
