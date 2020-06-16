@@ -1,17 +1,17 @@
 import React from 'react'
 
-import Feedback from '../index'
+import ActionButtons from '../index'
 
 export default {
-  title: 'components/Feedback'
+  title: 'components/ActionButtons'
 }
 
-export const feedback = () => {
+export const actionbuttons = () => {
   const props = {
     branch: 'stable',
     filePath: '/path/to/file',
     gitUrl: 'github.url'
   }
 
-  return <Feedback {...props} />
+  return <ActionButtons {...props} />
 }
