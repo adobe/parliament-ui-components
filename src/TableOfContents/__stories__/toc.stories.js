@@ -14,7 +14,14 @@ export const empty = () => {
 
 export const withData = () => {
   const props = {
-    tableOfContents: mockData
+    tableOfContents: mockData.regular
+  }
+  return <TableOfContents {...props} />
+}
+
+export const withTwoH1s = () => {
+  const props = {
+    tableOfContents: mockData.twoH1s
   }
   return <TableOfContents {...props} />
 }

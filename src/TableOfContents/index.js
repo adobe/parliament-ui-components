@@ -10,7 +10,9 @@ const TableOfContents = ({ tableOfContents }) => {
   const headerOneList = root.querySelector('ul')
   if (headerOneList) {
     const headerTwoList = headerOneList.querySelector('ul')
-    html = headerTwoList.toString()
+    if (headerTwoList) {
+      html = headerTwoList.toString()
+    }
   }
   return (
     <div
