@@ -53,6 +53,26 @@ This project uses [Storybook][] for testing the look and behavior of its UI comp
 npm run storybook
 ```
 
+### Importing React-Spectrum Components
+
+Currently we are using react-spectrum v2, with plans to upgrade to v3. One of the things we've noticed that importing a Component from react-spectrum using:
+
+```javascript
+import Search from '@react/react-spectrum/Search'
+```
+
+works great in Storybook but when we import it into other projects like [parliament-client-template](https://git.corp.adobe.com/devrel/parliament-client-template) it throws an error.
+
+```
+Uncaught Error: Invariant Violation: Element type is invalid: expected a string (for built-in components) or a class/function but got: object
+```
+
+Since it's difficult to change any webpack settings in a Gatsby project we can work around this error by importing react-spectrum components like this:
+
+```javascript
+const Search = require('@react/react-spectrum/Search').default
+```
+
 ## License
 
 Apache-2.0 © [smacdona](https://github.com/smacdona)
