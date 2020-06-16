@@ -37,7 +37,7 @@ class Example extends Component {
 This project depends on libraries that are internal to Adobe, such as `react-spectrum`.
 You will need to edit your `~/.npmrc` file to successfully install all dependencies.
 
-Follow the [installation instructions][] in the react-spectrum README to connect to Adobe's internal npm registry.
+Follow the [installation instructions](https://react-spectrum.corp.adobe.com/guides/getting_started) in the react-spectrum README to connect to Adobe's internal npm registry.
 
 ### Install dependencies
 
