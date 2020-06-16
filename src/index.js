@@ -12,3 +12,4 @@ export {
   OpenApiGridFooter,
   OpenApiGridNav
 } from './OpenApiGrid'
+export { default as TableOfContents } from './TableOfContents'
