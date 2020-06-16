@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import React from 'react'
 import Heading from '@react/react-spectrum/Heading'
 import { parse } from 'node-html-parser'
 
@@ -21,11 +20,11 @@ const TableOfContents = ({ tableOfContents, stripH1 }) => {
   const html = stripH1 ? stripOuterH1(tableOfContents) : tableOfContents
   return (
     <div
-      css={css`
-        height: 70vh;
-        overflow-y: auto;
-        overflow-x: hidden;
-      `}
+      style={{
+        height: '70vh',
+        overflowY: 'auto',
+        overflowX: 'hidden'
+      }}
     >
       <Heading variant='subtitle3'>On this page</Heading>
       <span className='toc' dangerouslySetInnerHTML={{ __html: html }} />
