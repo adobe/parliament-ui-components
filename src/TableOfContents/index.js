@@ -1,6 +1,6 @@
 import React from 'react'
-import Heading from '@react/react-spectrum/Heading'
 import { parse } from 'node-html-parser'
+const Heading = require('@react/react-spectrum/Heading').default
 
 const stripOuterH1 = function (toc) {
   let html = ''
