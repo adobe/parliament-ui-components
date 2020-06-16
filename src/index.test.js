@@ -4,6 +4,7 @@ import Feedback from './Feedback'
 import Nav from './Nav'
 import Next from './Next'
 import Prev from './Prev'
+import TableOfContents from './TableOfContents'
 import { stripManifestPath, defaultFocus } from './ManifestUtils'
 
 const manifest = {
@@ -190,6 +191,12 @@ describe('Next', () => {
 describe('Prev', () => {
   it('is truthy', () => {
     expect(Prev).toBeTruthy()
+  })
+})
+
+describe('TableOfContents', () => {
+  it('is truthy', () => {
+    expect(TableOfContents).toBeTruthy()
   })
 })
 
