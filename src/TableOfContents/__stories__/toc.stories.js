@@ -19,6 +19,14 @@ export const withData = () => {
   return <TableOfContents {...props} />
 }
 
+export const withDataStripH1 = () => {
+  const props = {
+    tableOfContents: mockData.regular,
+    stripH1: true
+  }
+  return <TableOfContents {...props} />
+}
+
 export const withTwoH1s = () => {
   const props = {
     tableOfContents: mockData.twoH1s

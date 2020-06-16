@@ -3,10 +3,9 @@ import { css, jsx } from '@emotion/core'
 import Heading from '@react/react-spectrum/Heading'
 import { parse } from 'node-html-parser'
 
-const TableOfContents = ({ tableOfContents }) => {
-  // Removing the H1 from the ToC
+const stripOuterH1 = function (toc) {
   let html = ''
-  const root = parse(tableOfContents)
+  const root = parse(toc)
   const headerOneList = root.querySelector('ul')
   if (headerOneList) {
     const headerTwoList = headerOneList.querySelector('ul')
@@ -14,6 +13,12 @@ const TableOfContents = ({ tableOfContents }) => {
       html = headerTwoList.toString()
     }
   }
+  return html
+}
+
+const TableOfContents = ({ tableOfContents, stripH1 }) => {
+  // Removing the H1 from the ToC
+  const html = stripH1 ? stripOuterH1(tableOfContents) : tableOfContents
   return (
     <div
       css={css`
