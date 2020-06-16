@@ -1,10 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { parse } from 'node-html-parser'
 const Heading = require('@react/react-spectrum/Heading').default
 
 const stripOuterH1 = function (toc) {
   let html = ''
   const root = parse(toc)
+  console.log(root)
   const headerOneList = root.querySelector('ul')
   if (headerOneList) {
     const headerTwoList = headerOneList.querySelector('ul')
@@ -15,7 +17,14 @@ const stripOuterH1 = function (toc) {
   return html
 }
 
-const TableOfContents = ({ tableOfContents, stripH1 }) => {
+/*
+const createToC = (tableOfContents, maxDepth, stripH1) => {
+  const depth = 1
+  const root = parse(tableOfContents)
+}
+*/
+
+const TableOfContents = ({ tableOfContents, depth, stripH1 }) => {
   // Removing the H1 from the ToC
   const html = stripH1 ? stripOuterH1(tableOfContents) : tableOfContents
   return (
@@ -32,4 +41,15 @@ const TableOfContents = ({ tableOfContents, stripH1 }) => {
   )
 }
 
+TableOfContents.propTypes = {
+  tableOfContents: PropTypes.string,
+  depth: PropTypes.number,
+  stripH1: PropTypes.bool
+}
+
+TableOfContents.defaultProps = {
+  tableOfContents: '',
+  depth: 2,
+  stripH1: true
+}
 export default TableOfContents

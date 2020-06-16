@@ -6,7 +6,7 @@ import { withKnobs, select, text } from '@storybook/addon-knobs'
 
 import Header from '../Header'
 import Footer from '../Footer'
-import Feedback from '../Feedback'
+import ActionButtons from '../ActionButtons'
 import Nav from '../Nav'
 
 import mockData from './mockData'
@@ -42,7 +42,7 @@ export const basic = () => {
         selected='test/path/test.md'
         gitInfo={{ org: 'adobedocs', name: 'adobeio-events', branch: 'master' }}
       />
-      <Feedback
+      <ActionButtons
         gitUrl='https://git.corp.adobe.com/devrel/parliament-client-template'
         filePath='README.md'
         branch='master'

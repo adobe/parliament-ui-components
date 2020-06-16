@@ -1,4 +1,4 @@
-export { default as Feedback } from './Feedback'
+export { default as ActionButtons } from './ActionButtons'
 export { default as Header } from './Header'
 export { default as Footer } from './Footer'
 export { default as Nav } from './Nav'

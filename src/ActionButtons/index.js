@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const Heading = require('@react/react-spectrum/Heading').default
 const Link = require('@react/react-spectrum/Link').default
 
-const Feedback = ({ gitUrl, filePath, branch }) => {
+const ActionButtons = ({ gitUrl, filePath, branch }) => {
   return (
     <Fragment>
       <Heading variant='subtitle3'>Improve this page</Heading>
@@ -24,16 +24,16 @@ const Feedback = ({ gitUrl, filePath, branch }) => {
   )
 }
 
-Feedback.propTypes = {
+ActionButtons.propTypes = {
   branch: PropTypes.string,
   filePath: PropTypes.string,
   gitUrl: PropTypes.string
 }
 
-Feedback.defaultProps = {
+ActionButtons.defaultProps = {
   branch: '',
   filePath: '',
   gitUrl: ''
 }
 
-export default Feedback
+export default ActionButtons

@@ -1,6 +1,6 @@
 import Header from './Header'
 import Footer from './Footer'
-import Feedback from './Feedback'
+import ActionButtons from './ActionButtons'
 import Nav from './Nav'
 import Next from './Next'
 import Prev from './Prev'
@@ -170,9 +170,9 @@ describe('Footer', () => {
   })
 })
 
-describe('Feedback', () => {
+describe('ActionButtons', () => {
   it('is truthy', () => {
-    expect(Feedback).toBeTruthy()
+    expect(ActionButtons).toBeTruthy()
   })
 })
 
