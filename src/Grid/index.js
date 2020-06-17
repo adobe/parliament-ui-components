@@ -5,15 +5,15 @@ const Grid = styled.div`
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   @media screen and (min-width: 1201px) {
-    grid-template-rows: 1fr 30px
-    grid-template-columns: minmax(256px, 256px) repeat(11, 1fr);
+    grid-template-rows: 1fr 30px;
+    grid-template-columns: 256px repeat(11, 1fr);
   }
   @media screen and (min-width: 768px) and (max-width: 1200px) {
-    grid-template-rows: 1fr 30px
-    grid-template-columns: minmax(256px, 256px) repeat(9, 1fr);
+    grid-template-rows: 1fr 30px;
+    grid-template-columns: 256px repeat(9, 1fr);
   }
   @media screen and (max-width: 767px) {
-    grid-template-rows: 1fr 1fr 30px
+    grid-template-rows: 30px 1fr 30px;
     grid-template-columns: repeat(10, 1fr);
   }
 `
