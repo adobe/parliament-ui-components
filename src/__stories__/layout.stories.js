@@ -55,7 +55,7 @@ export const basic = () => {
             }}
           />
         </GridNav>
-        <GridContent>
+        <GridContent style={{ background: 'white' }}>
           <GridContentInner>
             <div>{content}</div>
             <ActionButtons
