@@ -8,6 +8,13 @@ import Header from '../Header'
 import Footer from '../Footer'
 import ActionButtons from '../ActionButtons'
 import Nav from '../Nav'
+import {
+  Grid,
+  GridContent,
+  GridContentInner,
+  GridFooter,
+  GridNav
+} from '../Grid'
 
 import mockData from './mockData'
 
@@ -36,18 +43,32 @@ export const basic = () => {
   return (
     <Provider theme={themes}>
       <Header siteTitle={title} />
-      <div>{content}</div>
-      <Nav
-        data={mockData.pages}
-        selected='test/path/test.md'
-        gitInfo={{ org: 'adobedocs', name: 'adobeio-events', branch: 'master' }}
-      />
-      <ActionButtons
-        gitUrl='https://git.corp.adobe.com/devrel/parliament-client-template'
-        filePath='README.md'
-        branch='master'
-      />
-      <Footer />
+      <Grid>
+        <GridNav>
+          <Nav
+            data={mockData.pages}
+            selected='test/path/test.md'
+            gitInfo={{
+              org: 'adobedocs',
+              name: 'adobeio-events',
+              branch: 'master'
+            }}
+          />
+        </GridNav>
+        <GridContent>
+          <GridContentInner>
+            <div>{content}</div>
+            <ActionButtons
+              gitUrl='https://git.corp.adobe.com/devrel/parliament-client-template'
+              filePath='README.md'
+              branch='master'
+            />
+          </GridContentInner>
+        </GridContent>
+        <GridFooter>
+          <Footer />
+        </GridFooter>
+      </Grid>
     </Provider>
   )
 }

@@ -39,6 +39,10 @@ const GridContent = styled.div`
     grid-area: 2 / 1 / 3 / 11;
   }
 `
+const GridContentInner = styled.div`
+  max-width: 1120px;
+  margin: 0 auto;
+`
 
 const GridFooter = styled.div`
   @media screen and (min-width: 1201px) {
@@ -61,4 +65,4 @@ const GridNav = styled.div`
   }
 `
 
-export { Grid, GridContent, GridFooter, GridNav }
+export { Grid, GridContent, GridContentInner, GridFooter, GridNav }
