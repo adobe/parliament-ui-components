@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
 import { stripManifestPath, defaultFocus } from '../ManifestUtils'
 
+import './index.css'
+
 const { SideNav, SideNavItem } = require('@react/react-spectrum/SideNav')
 
 const nav = (data, gitInfo) => {
