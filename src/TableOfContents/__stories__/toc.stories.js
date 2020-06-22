@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Provider from '@react/react-spectrum/Provider'
+
 import TableOfContents from '../index'
 import mockData from './mockData'
 
@@ -9,14 +11,22 @@ export default {
 
 export const empty = () => {
   const props = { tableOfContents: '' }
-  return <TableOfContents {...props} />
+  return (
+    <Provider theme='lightest'>
+      <TableOfContents {...props} />
+    </Provider>
+  )
 }
 
 export const withData = () => {
   const props = {
     tableOfContents: mockData.regular
   }
-  return <TableOfContents {...props} />
+  return (
+    <Provider theme='lightest'>
+      <TableOfContents {...props} />
+    </Provider>
+  )
 }
 
 export const withDataStripH1 = () => {
@@ -24,14 +34,22 @@ export const withDataStripH1 = () => {
     tableOfContents: mockData.regular,
     stripH1: true
   }
-  return <TableOfContents {...props} />
+  return (
+    <Provider theme='lightest'>
+      <TableOfContents {...props} />
+    </Provider>
+  )
 }
 
 export const withTwoH1s = () => {
   const props = {
     tableOfContents: mockData.twoH1s
   }
-  return <TableOfContents {...props} />
+  return (
+    <Provider theme='lightest'>
+      <TableOfContents {...props} />
+    </Provider>
+  )
 }
 
 withData.story = { name: 'With Data' }

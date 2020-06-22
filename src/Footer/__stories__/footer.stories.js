@@ -1,4 +1,7 @@
 import React from 'react'
+
+import Provider from '@react/react-spectrum/Provider'
+
 import Footer from '../index'
 
 export default {
@@ -6,5 +9,9 @@ export default {
 }
 
 export const footer = () => {
-  return <Footer />
+  return (
+    <Provider theme='lightest'>
+      <Footer />
+    </Provider>
+  )
 }

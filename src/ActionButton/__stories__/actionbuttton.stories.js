@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Provider from '@react/react-spectrum/Provider'
+
 import ActionButton from '../index'
 
 const ChevronRight = require('@react/react-spectrum/Icon/ChevronRight').default
@@ -15,5 +17,9 @@ export const actionbuttons = () => {
     icon: <ChevronRight />
   }
 
-  return <ActionButton {...props} />
+  return (
+    <Provider theme='lightest'>
+      <ActionButton {...props} />
+    </Provider>
+  )
 }

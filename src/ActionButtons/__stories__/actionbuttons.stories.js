@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Provider from '@react/react-spectrum/Provider'
+
 import ActionButtons from '../index'
 
 export default {
@@ -13,5 +15,9 @@ export const actionbuttons = () => {
     gitUrl: 'github.url'
   }
 
-  return <ActionButtons {...props} />
+  return (
+    <Provider theme='lightest'>
+      <ActionButtons {...props} />
+    </Provider>
+  )
 }
