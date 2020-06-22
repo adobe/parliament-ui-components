@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Provider from '@react/react-spectrum/Provider'
+
 import Header from '../index'
 
 export default {
@@ -11,5 +13,9 @@ export const header = () => {
     siteTitle: 'My Documentation Site'
   }
 
-  return <Header {...props} />
+  return (
+    <Provider theme='lightest'>
+      <Header {...props} />
+    </Provider>
+  )
 }

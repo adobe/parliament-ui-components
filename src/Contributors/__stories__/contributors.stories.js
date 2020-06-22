@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Provider from '@react/react-spectrum/Provider'
+
 import Contributors from '../index'
 
 export default {
@@ -15,7 +17,11 @@ export const oneCommitter = () => {
     gitUrl: ''
   }
 
-  return <Contributors {...props} />
+  return (
+    <Provider theme='lightest'>
+      <Contributors {...props} />
+    </Provider>
+  )
 }
 
 export const threeCommitter = () => {
@@ -29,7 +35,11 @@ export const threeCommitter = () => {
     gitUrl: ''
   }
 
-  return <Contributors {...props} />
+  return (
+    <Provider theme='lightest'>
+      <Contributors {...props} />
+    </Provider>
+  )
 }
 
 export const fiveCommitter = () => {
@@ -45,7 +55,11 @@ export const fiveCommitter = () => {
     gitUrl: ''
   }
 
-  return <Contributors {...props} />
+  return (
+    <Provider theme='lightest'>
+      <Contributors {...props} />
+    </Provider>
+  )
 }
 
 export const dontShowSixCommitter = () => {
@@ -62,5 +76,9 @@ export const dontShowSixCommitter = () => {
     gitUrl: ''
   }
 
-  return <Contributors {...props} />
+  return (
+    <Provider theme='lightest'>
+      <Contributors {...props} />
+    </Provider>
+  )
 }

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Provider from '@react/react-spectrum/Provider'
+
 import Nav from '../index'
 
 import mockData from './mockData'
@@ -20,7 +22,11 @@ export const empty = () => {
     gitInfo: baseGitInfo,
     selected: 'selected/path/index.md'
   }
-  return <Nav {...props} />
+  return (
+    <Provider theme='lightest'>
+      <Nav {...props} />
+    </Provider>
+  )
 }
 
 export const withData = () => {
@@ -29,7 +35,11 @@ export const withData = () => {
     gitInfo: baseGitInfo,
     selected: 'test/path/test.md'
   }
-  return <Nav {...props} />
+  return (
+    <Provider theme='lightest'>
+      <Nav {...props} />
+    </Provider>
+  )
 }
 
 withData.story = { name: 'With Data' }
