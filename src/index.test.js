@@ -5,6 +5,7 @@ import Nav from './Nav'
 import Next from './Next'
 import Prev from './Prev'
 import TableOfContents from './TableOfContents'
+import Contributors from './Contributors'
 import { stripManifestPath, defaultFocus } from './ManifestUtils'
 
 const manifest = {
@@ -197,6 +198,12 @@ describe('Prev', () => {
 describe('TableOfContents', () => {
   it('is truthy', () => {
     expect(TableOfContents).toBeTruthy()
+  })
+})
+
+describe('Contributors', () => {
+  it('is truthy', () => {
+    expect(Contributors).toBeTruthy()
   })
 })
 
