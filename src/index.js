@@ -20,3 +20,4 @@ export {
   OpenApiGridNav
 } from './OpenApiGrid'
 export { default as TableOfContents } from './TableOfContents'
+export { default as Contributors } from './Contributors'
