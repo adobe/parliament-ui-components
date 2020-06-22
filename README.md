@@ -79,3 +79,8 @@ Apache-2.0 © [smacdona](https://github.com/smacdona)
 
 [installation instructions]: https://git.corp.adobe.com/React/react-spectrum-v2#npm
 [storybook]: https://storybook.js.org/
+
+
+## Contributing
+
+Contributions are welcomed! Read the [Contributing Guide](./.github/CONTRIBUTING.md) for more information.
