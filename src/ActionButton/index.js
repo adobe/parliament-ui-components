@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Button } from '@react-spectrum/button'
+import { ActionButton as Button } from '@react-spectrum/button'
+import { Text } from '@react-spectrum/text'
 
-const ActionButtons = ({ label, url, icon }) => {
+const ActionButton = ({ label, url, icon }) => {
   return (
     <Button
       autoFocus={false}
@@ -12,27 +13,27 @@ const ActionButtons = ({ label, url, icon }) => {
       element='button'
       holdAffordance={false}
       invalid={false}
-      label={label}
-      icon={icon}
       logic={false}
       onClick={() => {
         document.location.href = url
       }}
-      quiet
+      isQuiet
       selected={false}
-      variant='action'
-    />
+    >
+      {icon}
+      <Text>{label}</Text>
+    </Button>
   )
 }
 
-ActionButtons.propTypes = {
+ActionButton.propTypes = {
   label: PropTypes.string,
   url: PropTypes.string
 }
 
-ActionButtons.defaultProps = {
+ActionButton.defaultProps = {
   label: '',
   url: ''
 }
 
-export default ActionButtons
+export default ActionButton
