@@ -17,7 +17,7 @@ export const actionbuttons = () => {
   }
 
   return (
-    <Provider theme={theme}>
+    <Provider theme={theme} colorScheme='light'>
       <ActionButtons {...props} />
     </Provider>
   )
