@@ -39,6 +39,7 @@
     "@react-spectrum/provider": "^3.0.0-rc.3",
     "@react-spectrum/text": "^3.0.0-rc.0",
     "@react-spectrum/theme-default": "^3.0.0-rc.3",
+    "@spectrum-css/vars": "^2.3.0",
     "@spectrum-icons/workflow": "^3.0.0-rc.3",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-knobs": "^5.3.19",

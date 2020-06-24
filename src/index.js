@@ -21,3 +21,4 @@ export {
 } from './OpenApiGrid'
 export { default as TableOfContents } from './TableOfContents'
 export { default as Contributors } from './Contributors'
+export { default as LIGHT } from './Themes'
