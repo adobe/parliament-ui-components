@@ -35,7 +35,7 @@ const Contributors = ({ gitUrl, committers, date }) => {
       `}
       href={gitUrl}
       target='_blank'
-      rel='noreferrer'
+      rel='noopener noreferrer'
     >
       <div
         css={css`

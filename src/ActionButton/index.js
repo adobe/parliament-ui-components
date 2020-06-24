@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Button = require('@react/react-spectrum/Button').default
+import { Button } from '@react-spectrum/button'
 
 const ActionButtons = ({ label, url, icon }) => {
   return (

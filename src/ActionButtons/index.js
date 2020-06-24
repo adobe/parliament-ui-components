@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 import ActionButton from '../ActionButton'
 
-const Bug = require('@react/react-spectrum/Icon/Bug').default
-const Edit = require('@react/react-spectrum/Icon/Edit').default
+import Bug from '@spectrum-icons/workflow/Bug'
+import Edit from '@spectrum-icons/workflow/Edit'
 
 const ActionButtons = ({ gitUrl, filePath, branch }) => {
   return (
