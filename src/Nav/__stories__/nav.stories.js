@@ -24,7 +24,7 @@ export const empty = () => {
     selected: 'selected/path/index.md'
   }
   return (
-    <Provider theme='lightest'>
+    <Provider theme={theme} colorScheme='light'>
       <Nav {...props} />
     </Provider>
   )
@@ -37,7 +37,7 @@ export const withData = () => {
     selected: 'test/path/test.md'
   }
   return (
-    <Provider theme={theme}>
+    <Provider theme={theme} colorScheme='light'>
       <Nav {...props} />
     </Provider>
   )

@@ -13,7 +13,7 @@ export default {
 export const empty = () => {
   const props = { tableOfContents: '' }
   return (
-    <Provider theme={theme}>
+    <Provider theme={theme} colorScheme='light'>
       <TableOfContents {...props} />
     </Provider>
   )
@@ -24,7 +24,7 @@ export const withData = () => {
     tableOfContents: mockData.regular
   }
   return (
-    <Provider theme={theme}>
+    <Provider theme={theme} colorScheme='light'>
       <TableOfContents {...props} />
     </Provider>
   )
@@ -36,7 +36,7 @@ export const withDataStripH1 = () => {
     stripH1: true
   }
   return (
-    <Provider theme={theme}>
+    <Provider theme={theme} colorScheme='light'>
       <TableOfContents {...props} />
     </Provider>
   )
@@ -47,7 +47,7 @@ export const withTwoH1s = () => {
     tableOfContents: mockData.twoH1s
   }
   return (
-    <Provider theme={theme}>
+    <Provider theme={theme} colorScheme='light'>
       <TableOfContents {...props} />
     </Provider>
   )
