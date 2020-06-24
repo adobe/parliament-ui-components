@@ -15,7 +15,7 @@ export const header = () => {
   }
 
   return (
-    <Provider theme={theme}>
+    <Provider theme={theme} colorScheme='light'>
       <Header {...props} />
     </Provider>
   )

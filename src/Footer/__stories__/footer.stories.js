@@ -11,7 +11,7 @@ export default {
 
 export const footer = () => {
   return (
-    <Provider theme={theme}>
+    <Provider theme={theme} colorScheme='light'>
       <Footer />
     </Provider>
   )
