@@ -1,6 +1,7 @@
 import React from 'react'
 
-import Provider from '@react/react-spectrum/Provider'
+import { Provider } from '@react-spectrum/provider'
+import { theme } from '@react-spectrum/theme-default'
 
 import { withKnobs, select, text } from '@storybook/addon-knobs'
 
@@ -41,7 +42,7 @@ export const basic = () => {
   const content = text('Content', 'Hello World!', 'Options')
 
   return (
-    <Provider theme={themes}>
+    <Provider theme={theme}>
       <Header siteTitle={title} />
       <Grid>
         <GridNav>

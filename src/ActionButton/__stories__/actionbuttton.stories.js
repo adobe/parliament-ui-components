@@ -1,10 +1,11 @@
 import React from 'react'
 
-import Provider from '@react/react-spectrum/Provider'
+import { Provider } from '@react-spectrum/provider'
+import { theme } from '@react-spectrum/theme-default'
 
 import ActionButton from '../index'
 
-const ChevronRight = require('@react/react-spectrum/Icon/ChevronRight').default
+import Bug from '@spectrum-icons/workflow/Bug'
 
 export default {
   title: 'components/ActionButton'
@@ -14,11 +15,11 @@ export const actionbuttons = () => {
   const props = {
     label: 'stable',
     url: '/path/to/file',
-    icon: <ChevronRight />
+    icon: <Bug />
   }
 
   return (
-    <Provider theme='lightest'>
+    <Provider theme={theme}>
       <ActionButton {...props} />
     </Provider>
   )

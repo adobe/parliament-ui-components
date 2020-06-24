@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
 import { stripManifestPath, defaultFocus } from '../ManifestUtils'
 
+import '@spectrum-css/sidenav'
 import './index.css'
 
-const { SideNav, SideNavItem } = require('@react/react-spectrum/SideNav')
-
 const nav = (data, gitInfo) => {
+  /*
   return data.map((node, index) => {
     const updatedPath = stripManifestPath(node.path, gitInfo)
     return (
@@ -37,9 +37,41 @@ const nav = (data, gitInfo) => {
       </SideNavItem>
     )
   })
+  */
+  return (
+    <ul className='spectrum-SideNav'>
+      {data.map((node, index) => {
+        const updatedPath = stripManifestPath(node.path, gitInfo)
+        return (
+          <li className='spectrum-SideNav-item' key={index}>
+            <a
+              href='#'
+              className='spectrum-SideNav-itemLink'
+              onClick={() => {
+                if (updatedPath) {
+                  if (
+                    updatedPath.startsWith('http://') ||
+                    updatedPath.startsWith('https://')
+                  ) {
+                    document.location.href = updatedPath
+                  } else {
+                    navigate(updatedPath)
+                  }
+                }
+              }}
+            >
+              {node.title}
+            </a>
+            {node.pages ? nav(node.pages, gitInfo) : ''}
+          </li>
+        )
+      })}
+    </ul>
+  )
 }
 
 const Nav = ({ data, selected, gitInfo }) => {
+  /*
   return (
     <SideNav
       autoFocus
@@ -52,6 +84,8 @@ const Nav = ({ data, selected, gitInfo }) => {
       {nav(data, gitInfo)}
     </SideNav>
   )
+  */
+  return <nav>{nav(data, gitInfo)}</nav>
 }
 
 Nav.propTypes = {

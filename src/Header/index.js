@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
-const Heading = require('@react/react-spectrum/Heading').default
+import { Heading } from '@react-spectrum/text'
 
 const Header = ({ siteTitle }) => {
   return (
