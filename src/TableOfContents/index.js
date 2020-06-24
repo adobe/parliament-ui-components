@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { parse } from 'node-html-parser'
-const Heading = require('@react/react-spectrum/Heading').default
+import { Heading } from '@react-spectrum/text'
 
 const stripOuterH1 = function (toc) {
   let html = ''

@@ -1,6 +1,7 @@
 import React from 'react'
 
-import Provider from '@react/react-spectrum/Provider'
+import { Provider } from '@react-spectrum/provider'
+import { theme } from '@react-spectrum/theme-default'
 
 import Contributors from '../index'
 
@@ -18,7 +19,7 @@ export const oneCommitter = () => {
   }
 
   return (
-    <Provider theme='lightest'>
+    <Provider theme={theme}>
       <Contributors {...props} />
     </Provider>
   )

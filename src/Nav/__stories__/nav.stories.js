@@ -1,6 +1,7 @@
 import React from 'react'
 
-import Provider from '@react/react-spectrum/Provider'
+import { Provider } from '@react-spectrum/provider'
+import { theme } from '@react-spectrum/theme-default'
 
 import Nav from '../index'
 
@@ -36,7 +37,7 @@ export const withData = () => {
     selected: 'test/path/test.md'
   }
   return (
-    <Provider theme='lightest'>
+    <Provider theme={theme}>
       <Nav {...props} />
     </Provider>
   )

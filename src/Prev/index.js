@@ -3,7 +3,7 @@ import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
-const ChevronLeft = require('@react/react-spectrum/Icon/ChevronLeft').default
+import ChevronLeft from '@spectrum-icons/workflow/ChevronLeft'
 
 const Prev = ({ url, title }) => {
   return (
