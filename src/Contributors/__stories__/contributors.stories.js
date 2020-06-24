@@ -19,7 +19,7 @@ export const oneCommitter = () => {
   }
 
   return (
-    <Provider theme={theme}>
+    <Provider theme={theme} colorScheme='light'>
       <Contributors {...props} />
     </Provider>
   )
@@ -37,7 +37,7 @@ export const threeCommitter = () => {
   }
 
   return (
-    <Provider theme='lightest'>
+    <Provider theme={theme} colorScheme='light'>
       <Contributors {...props} />
     </Provider>
   )
@@ -57,7 +57,7 @@ export const fiveCommitter = () => {
   }
 
   return (
-    <Provider theme='lightest'>
+    <Provider theme={theme} colorScheme='light'>
       <Contributors {...props} />
     </Provider>
   )
@@ -78,7 +78,7 @@ export const dontShowSixCommitter = () => {
   }
 
   return (
-    <Provider theme='lightest'>
+    <Provider theme={theme} colorScheme='light'>
       <Contributors {...props} />
     </Provider>
   )
