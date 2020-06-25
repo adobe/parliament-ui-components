@@ -35,7 +35,7 @@ const TableOfContents = ({ tableOfContents, depth, stripH1 }) => {
         overflowX: 'hidden'
       }}
     >
-      <Heading variant='subtitle3'>On this page</Heading>
+      <Heading level={5}>On this page</Heading>
       <span className='toc' dangerouslySetInnerHTML={{ __html: html }} />
     </div>
   )
