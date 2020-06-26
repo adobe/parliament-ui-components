@@ -6,6 +6,7 @@ import Next from './Next'
 import Prev from './Prev'
 import TableOfContents from './TableOfContents'
 import Contributors from './Contributors'
+import Alert from './Alert'
 import { stripManifestPath, defaultFocus } from './ManifestUtils'
 
 const manifest = {
@@ -204,6 +205,12 @@ describe('TableOfContents', () => {
 describe('Contributors', () => {
   it('is truthy', () => {
     expect(Contributors).toBeTruthy()
+  })
+})
+
+describe('Alert', () => {
+  it('is truthy', () => {
+    expect(Alert).toBeTruthy()
   })
 })
 

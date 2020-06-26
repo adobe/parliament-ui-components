@@ -22,3 +22,4 @@ export {
 export { default as TableOfContents } from './TableOfContents'
 export { default as Contributors } from './Contributors'
 export { Table, THead, TH, TBody, TR, TD } from './SpectrumTable'
+export { default as Alert } from './Alert'
