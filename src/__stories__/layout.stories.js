@@ -25,13 +25,11 @@ export default {
 }
 
 export const basic = () => {
-  const themes = select(
-    'Themes',
+  const colorScheme = select(
+    'Color Scheme',
     {
-      Lightest: 'lightest',
       Light: 'light',
-      Dark: 'dark',
-      Darkest: 'darkest'
+      Dark: 'dark'
     },
     'light',
     'Options'
@@ -42,7 +40,7 @@ export const basic = () => {
   const content = text('Content', 'Hello World!', 'Options')
 
   return (
-    <Provider theme={theme}>
+    <Provider theme={theme} colorScheme={colorScheme}>
       <Header siteTitle={title} />
       <Grid>
         <GridNav>
