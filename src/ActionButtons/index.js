@@ -9,8 +9,7 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
-import styled from '@emotion/styled'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import ActionButton from '../ActionButton'
@@ -18,29 +17,20 @@ import ActionButton from '../ActionButton'
 import Bug from '@spectrum-icons/workflow/Bug'
 import Edit from '@spectrum-icons/workflow/Edit'
 
-const Container = styled('div')`
-  & > * {
-    padding-right: 8px;
-  }
-  & > *:last-child {
-    padding-right: 0px;
-  }
-`
-
 const ActionButtons = ({ gitUrl, filePath, branch }) => {
   return (
-    <Container>
+    <Fragment>
       <ActionButton
         label='Edit this page'
         url={`${gitUrl}/edit/${branch}/${filePath}`}
-        icon={<Edit />}
+        icon={<Edit size='S' />}
       />
       <ActionButton
         label='Log an issue'
         url={`${gitUrl}/issues/new?body=Issue%20in%20${filePath}`}
-        icon={<Bug />}
+        icon={<Bug size='S' />}
       />
-    </Container>
+    </Fragment>
   )
 }
 
