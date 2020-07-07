@@ -26,7 +26,7 @@ export const actionbuttons = () => {
   const props = {
     label: 'stable',
     url: '/path/to/file',
-    icon: <Bug />
+    icon: <Bug size='S' />
   }
 
   return (
