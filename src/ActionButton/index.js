@@ -9,31 +9,45 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
 
-import { ActionButton as Button } from '@react-spectrum/button'
-import { Text } from '@react-spectrum/text'
+// import { Text } from '@react-spectrum/text'
+import '@spectrum-css/button'
+// import '@spectrum-css/typography'
 
 const ActionButton = ({ label, url, icon }) => {
   return (
-    <Button
-      autoFocus={false}
-      block={false}
-      disabled={false}
-      element='button'
-      holdAffordance={false}
-      invalid={false}
-      logic={false}
+    <button
+      className='spectrum-ActionButton spectrum-ActionButton--quiet'
       onClick={() => {
         document.location.href = url
       }}
-      isQuiet
-      selected={false}
     >
       {icon}
-      <Text>{label}</Text>
-    </Button>
+      <span
+        className='spectrum-ActionButton-label'
+        css={css`
+          padding-left: var(
+            --spectrum-actionbutton-icon-padding-x,
+            var(--spectrum-global-dimension-size-85)
+          );
+          padding-right: calc(
+            var(
+                --spectrum-actionbutton-text-padding-x,
+                var(--spectrum-global-dimension-size-150)
+              ) -
+              var(
+                --spectrum-actionbutton-icon-padding-x,
+                var(--spectrum-global-dimension-size-85)
+              )
+          );
+        `}
+      >
+        {label}
+      </span>
+    </button>
   )
 }
 
