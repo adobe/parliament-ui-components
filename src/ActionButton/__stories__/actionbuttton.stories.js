@@ -25,7 +25,9 @@ export default {
 export const actionbuttons = () => {
   const props = {
     label: 'stable',
-    url: '/path/to/file',
+    onClick: () => {
+      console.log('button was clicked')
+    },
     icon: <Bug size='S' />
   }
 

@@ -17,13 +17,11 @@ import PropTypes from 'prop-types'
 import '@spectrum-css/button'
 // import '@spectrum-css/typography'
 
-const ActionButton = ({ label, url, icon }) => {
+const ActionButton = ({ label, onClick, icon }) => {
   return (
     <button
       className='spectrum-ActionButton spectrum-ActionButton--quiet'
-      onClick={() => {
-        document.location.href = url
-      }}
+      onClick={onClick}
     >
       {icon}
       <span
@@ -53,12 +51,12 @@ const ActionButton = ({ label, url, icon }) => {
 
 ActionButton.propTypes = {
   label: PropTypes.string,
-  url: PropTypes.string
+  onClick: PropTypes.func
 }
 
 ActionButton.defaultProps = {
   label: '',
-  url: ''
+  onClick: null
 }
 
 export default ActionButton

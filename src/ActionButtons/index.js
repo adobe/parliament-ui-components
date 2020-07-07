@@ -22,12 +22,16 @@ const ActionButtons = ({ gitUrl, filePath, branch }) => {
     <Fragment>
       <ActionButton
         label='Edit this page'
-        url={`${gitUrl}/edit/${branch}/${filePath}`}
+        onClick={() => {
+          document.location.href = `${gitUrl}/edit/${branch}/${filePath}`
+        }}
         icon={<Edit size='S' />}
       />
       <ActionButton
         label='Log an issue'
-        url={`${gitUrl}/issues/new?body=Issue%20in%20${filePath}`}
+        onClick={() => {
+          document.location.href = `${gitUrl}/issues/new?body=Issue%20in%20${filePath}`
+        }}
         icon={<Bug size='S' />}
       />
     </Fragment>
