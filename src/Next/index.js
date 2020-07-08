@@ -15,30 +15,33 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
 import ChevronRight from '@spectrum-icons/workflow/ChevronRight'
+import '@spectrum-css/link'
+import '@spectrum-css/typography'
 
 const Next = ({ url, title }) => {
   return (
-    <Link
-      to={url}
-      rel='next'
-      css={css`
-        color: rgb(13, 102, 208);
-        text-decoration: none;
-        &:hover {
-          text-decoration: underline;
-        }
-      `}
-    >
-      {title}{' '}
-      <ChevronRight
+    <div className='spectrum-Body spectrum-Body--M'>
+      <Link
+        to={url}
+        rel='next'
         css={css`
-          height: 1em;
-          width: 1em;
-          top: 0.125em;
-          position: relative;
+          text-decoration: none !important;
+          &:hover {
+            text-decoration: underline !important;
+          }
         `}
-      />
-    </Link>
+        className='spectrum-Link'
+      >
+        <span>{title}</span>
+        <span
+          css={css`
+            vertical-align: text-top;
+          `}
+        >
+          <ChevronRight size='S' />
+        </span>
+      </Link>
+    </div>
   )
 }
 

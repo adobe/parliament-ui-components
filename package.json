@@ -73,6 +73,7 @@
     "@react-spectrum/theme-default": "^3.0.0-rc.3",
     "@spectrum-css/alert": "^3.0.0-beta.3",
     "@spectrum-css/button": "^3.0.0-beta.3",
+    "@spectrum-css/link": "^3.0.0",
     "@spectrum-css/sidenav": "^3.0.0-beta.2",
     "@spectrum-css/table": "^3.0.0-beta.3",
     "@spectrum-css/typography": "^2.1.3",
