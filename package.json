@@ -1,16 +1,14 @@
 {
-  "name": "@parliament/parliament-ui-components",
+  "name": "@adobe/parliament-ui-components",
   "version": "1.0.4",
   "description": "UI Components for Parliament projects",
-  "author": "smacdona",
+  "author": "macdonst",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git@git.corp.adobe.com:devrel/parliament-ui-components.git"
+    "url": "git@github.com:adobe/parliament-ui-components.git"
   },
-  "publishConfig": {
-    "registry": "https://artifactory.corp.adobe.com/artifactory/api/npm/npm-adobe-release/"
-  },
+  "homepage": "https://github.com/adobe/parliament-ui-components#readme",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
