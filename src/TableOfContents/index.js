@@ -17,7 +17,6 @@ import { Heading } from '@react-spectrum/text'
 const stripOuterH1 = function (toc) {
   let html = ''
   const root = parse(toc)
-  console.log(root)
   const headerOneList = root.querySelector('ul')
   if (headerOneList) {
     const headerTwoList = headerOneList.querySelector('ul')
