@@ -11,6 +11,7 @@ governing permissions and limitations under the License.
 */
 export { default as ActionButton } from './ActionButton'
 export { default as ActionButtons } from './ActionButtons'
+export { Button } from './Button'
 export { default as Header } from './Header'
 export { default as Footer } from './Footer'
 export { default as Nav } from './Nav'
