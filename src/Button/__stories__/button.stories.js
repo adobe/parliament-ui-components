@@ -24,36 +24,36 @@ export default {
 export const PrimaryButton = () => {
   const props = {
     variant: 'primary'
-  };
-  
+  }
+
   return (
     <Provider theme={theme} colorScheme='light'>
       <Button {...props}>Primary Button</Button>
     </Provider>
   )
-};
+}
 
 export const SecondaryButton = () => {
   const props = {
     variant: 'secondary'
-  };
-  
+  }
+
   return (
     <Provider theme={theme} colorScheme='light'>
       <Button {...props}>Secondary Button</Button>
     </Provider>
   )
-};
+}
 
 export const QuietPrimaryButton = () => {
   const props = {
     variant: 'primary',
     isQuiet: true
-  };
-  
+  }
+
   return (
     <Provider theme={theme} colorScheme='light'>
       <Button {...props}>Quiet Primary Button</Button>
     </Provider>
   )
-};
+}

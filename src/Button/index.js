@@ -10,10 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import '@spectrum-css/button';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import '@spectrum-css/button'
 
 const Button = ({ children, variant, isQuiet, className, ...props }) => (
   <button
@@ -22,14 +22,15 @@ const Button = ({ children, variant, isQuiet, className, ...props }) => (
       'spectrum-Button',
       `spectrum-Button--${variant}`,
       { 'spectrum-Button--quiet': isQuiet }
-    ])}>
+    ])}
+  >
     {children}
   </button>
-);
+)
 
 Button.propTypes = {
   variant: PropTypes.string,
   isQuiet: PropTypes.bool
-};
+}
 
-export { Button };
+export { Button }
