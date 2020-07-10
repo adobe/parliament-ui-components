@@ -76,7 +76,9 @@
     "@spectrum-css/table": "^3.0.0-beta.3",
     "@spectrum-css/typography": "^2.1.3",
     "@spectrum-icons/workflow": "^3.0.0-rc.3",
+    "classnames": "^2.2.6",
     "gatsby": "^2.17.6",
-    "node-html-parser": "^1.2.19"
+    "node-html-parser": "^1.2.19",
+    "prop-types": "^15.7.2"
   }
 }
