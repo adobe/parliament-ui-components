@@ -22,20 +22,19 @@ import Close from '@spectrum-icons/workflow/Close'
 import '@spectrum-css/icon'
 import '@spectrum-css/search'
 import '@spectrum-css/textfield'
-import '@spectrum-css/vars'
 
 import './index.css'
 
 const SearchField = ({
-  label,
-  placeholder,
+  label = 'Search',
+  placeholder = 'Enter text',
   onChange,
   onClear,
   onSubmit,
-  icon,
-  isQuiet,
-  isDisabled,
-  value,
+  icon = <Magnify size='S' />,
+  isQuiet = false,
+  isDisabled = false,
+  value = '',
   ...props
 }) => {
   const [searchTerm, setSearchTerm] = useState(value)
@@ -90,15 +89,6 @@ SearchField.propTypes = {
   isQuiet: PropTypes.bool,
   isDisabled: PropTypes.bool,
   value: PropTypes.string
-}
-
-SearchField.defaultProps = {
-  label: 'Search',
-  placeholder: 'Enter text',
-  isQuiet: false,
-  isDisabled: false,
-  icon: <Magnify size='S' />,
-  value: ''
 }
 
 export default SearchField
