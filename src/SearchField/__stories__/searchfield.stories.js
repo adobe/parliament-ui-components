@@ -23,7 +23,11 @@ export default {
 }
 
 export const SearchFieldDefault = () => {
-  const props = {}
+  const props = {
+    onSubmit: (searchTerm) => {
+      console.log(searchTerm)
+    }
+  }
 
   return (
     <Provider theme={theme} colorScheme='light' scale='medium'>
@@ -34,6 +38,9 @@ export const SearchFieldDefault = () => {
 
 export const SearchFieldLabelAndPlaceholder = () => {
   const props = {
+    onSubmit: (searchTerm) => {
+      console.log(searchTerm)
+    },
     label: 'Search',
     placeholder: 'search field'
   }
@@ -47,6 +54,9 @@ export const SearchFieldLabelAndPlaceholder = () => {
 
 export const SearchFieldReplaceIcon = () => {
   const props = {
+    onSubmit: (searchTerm) => {
+      console.log(searchTerm)
+    },
     icon: <Bug size='S' />
   }
 
@@ -59,6 +69,9 @@ export const SearchFieldReplaceIcon = () => {
 
 export const SearchFieldDisabled = () => {
   const props = {
+    onSubmit: (searchTerm) => {
+      console.log(searchTerm)
+    },
     isDisabled: true
   }
 
@@ -71,6 +84,9 @@ export const SearchFieldDisabled = () => {
 
 export const SearchFieldQuiet = () => {
   const props = {
+    onSubmit: (searchTerm) => {
+      console.log(searchTerm)
+    },
     isQuiet: true
   }
 
@@ -83,6 +99,9 @@ export const SearchFieldQuiet = () => {
 
 export const SearchFieldWithValue = () => {
   const props = {
+    onSubmit: (searchTerm) => {
+      console.log(searchTerm)
+    },
     value: 'my value'
   }
 
