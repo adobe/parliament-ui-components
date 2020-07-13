@@ -11,32 +11,11 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import '@spectrum-css/link'
 import classNames from 'classnames'
-import '@spectrum-css/button'
 
-const Button = ({ children, variant, isQuiet, className, ...props }) => (
-  <button
-    className={classNames(className, [
-      'spectrum-Button',
-      `spectrum-Button--${variant}`,
-      { 'spectrum-Button--quiet': isQuiet }
-    ])}
-    {...props}
-  >
+export const Link = ({ children, className, href, ...props }) => (
+  <a {...props} href={href} className={classNames(className, 'spectrum-Link')}>
     {children}
-  </button>
+  </a>
 )
-
-Button.propTypes = {
-  variant: PropTypes.oneOf([
-    'cta',
-    'overBackground',
-    'primary',
-    'secondary',
-    'negative'
-  ]),
-  isQuiet: PropTypes.bool
-}
-
-export { Button }
