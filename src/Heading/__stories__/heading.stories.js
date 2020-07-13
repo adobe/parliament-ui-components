@@ -11,32 +11,30 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import '@spectrum-css/button'
 
-const Button = ({ children, variant, isQuiet, className, ...props }) => (
-  <button
-    className={classNames(className, [
-      'spectrum-Button',
-      `spectrum-Button--${variant}`,
-      { 'spectrum-Button--quiet': isQuiet }
-    ])}
-    {...props}
-  >
-    {children}
-  </button>
-)
+import { Provider } from '@react-spectrum/provider'
+import { theme } from '@react-spectrum/theme-default'
 
-Button.propTypes = {
-  variant: PropTypes.oneOf([
-    'cta',
-    'overBackground',
-    'primary',
-    'secondary',
-    'negative'
-  ]),
-  isQuiet: PropTypes.bool
+import { Heading1, Heading2, Heading3 } from '../index'
+
+export default {
+  title: 'components/Heading'
 }
 
-export { Button }
+export const heading1 = () => (
+  <Provider theme={theme} colorScheme='light'>
+    <Heading1>Heading 1</Heading1>
+  </Provider>
+)
+
+export const heading2 = () => (
+  <Provider theme={theme} colorScheme='light'>
+    <Heading2>Heading 2</Heading2>
+  </Provider>
+)
+
+export const heading3 = () => (
+  <Provider theme={theme} colorScheme='light'>
+    <Heading3>Heading 3</Heading3>
+  </Provider>
+)
