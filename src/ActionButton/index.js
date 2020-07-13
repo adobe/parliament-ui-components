@@ -10,53 +10,42 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-// import { Text } from '@react-spectrum/text'
 import '@spectrum-css/button'
-// import '@spectrum-css/typography'
 
-const ActionButton = ({ label, onClick, icon }) => {
+import './index.css'
+
+const ActionButton = ({
+  children,
+  onPress,
+  isQuiet = false,
+  isDisabled = false,
+  ...props
+}) => {
   return (
     <button
-      className='spectrum-ActionButton spectrum-ActionButton--quiet'
-      onClick={onClick}
+      className={classNames([
+        'spectrum-ActionButton',
+        { 'spectrum-ActionButton--quiet': isQuiet },
+        { 'is-disabled': isDisabled },
+        'parliament-ActionButtons'
+      ])}
+      onClick={onPress}
+      disabled={isDisabled}
+      {...props}
     >
-      {icon}
-      <span
-        className='spectrum-ActionButton-label'
-        css={css`
-          padding-left: var(
-            --spectrum-actionbutton-icon-padding-x,
-            var(--spectrum-global-dimension-size-85)
-          );
-          padding-right: calc(
-            var(
-                --spectrum-actionbutton-text-padding-x,
-                var(--spectrum-global-dimension-size-150)
-              ) -
-              var(
-                --spectrum-actionbutton-icon-padding-x,
-                var(--spectrum-global-dimension-size-85)
-              )
-          );
-        `}
-      >
-        {label}
-      </span>
+      {children}
     </button>
   )
 }
 
 ActionButton.propTypes = {
-  label: PropTypes.string,
-  onClick: PropTypes.func
-}
-
-ActionButton.defaultProps = {
-  label: '',
-  onClick: null
+  onPress: PropTypes.func,
+  isQuiet: PropTypes.bool,
+  isDisabled: PropTypes.bool
 }
 
 export default ActionButton
