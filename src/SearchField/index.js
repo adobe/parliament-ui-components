@@ -46,7 +46,10 @@ const SearchField = ({
         { 'spectrum-Search--quiet': isQuiet },
         { 'is-disabled': isDisabled }
       ])}
-      onSubmit={onSubmit}
+      onSubmit={(e) => {
+        e.preventDefault()
+        onSubmit(searchTerm)
+      }}
     >
       <div
         className={classNames([
