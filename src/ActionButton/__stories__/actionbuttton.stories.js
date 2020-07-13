@@ -13,6 +13,7 @@ import React from 'react'
 
 import { Provider } from '@react-spectrum/provider'
 import { theme } from '@react-spectrum/theme-default'
+import { Text } from '@react-spectrum/text'
 
 import ActionButton from '../index'
 
@@ -22,18 +23,105 @@ export default {
   title: 'components/ActionButton'
 }
 
-export const actionbuttons = () => {
+export const ActionButtonDefault = () => {
   const props = {
-    label: 'stable',
-    onClick: () => {
+    onPress: () => {
       console.log('button was clicked')
-    },
-    icon: <Bug size='S' />
+    }
   }
 
   return (
     <Provider theme={theme} colorScheme='light'>
-      <ActionButton {...props} />
+      <ActionButton {...props}>
+        <Text>stable</Text>
+      </ActionButton>
+    </Provider>
+  )
+}
+
+export const ActionButtonDefaultIcon = () => {
+  const props = {
+    onPress: () => {
+      console.log('button was clicked')
+    }
+  }
+
+  return (
+    <Provider theme={theme} colorScheme='light'>
+      <ActionButton {...props}>
+        <Bug size='S' />
+        <Text>stable</Text>
+      </ActionButton>
+    </Provider>
+  )
+}
+
+export const ActionButtonQuiet = () => {
+  const props = {
+    isQuiet: true,
+    onPress: () => {
+      console.log('button was clicked')
+    }
+  }
+
+  return (
+    <Provider theme={theme} colorScheme='light'>
+      <ActionButton {...props}>
+        <Text>stable</Text>
+      </ActionButton>
+    </Provider>
+  )
+}
+
+export const ActionButtonQuietIcon = () => {
+  const props = {
+    isQuiet: true,
+    onPress: () => {
+      console.log('button was clicked')
+    }
+  }
+
+  return (
+    <Provider theme={theme} colorScheme='light'>
+      <ActionButton {...props}>
+        <Bug size='S' />
+        <Text>stable</Text>
+      </ActionButton>
+    </Provider>
+  )
+}
+
+export const ActionButtonDisabled = () => {
+  const props = {
+    isDisabled: true,
+    onPress: () => {
+      console.log('button was clicked')
+    }
+  }
+
+  return (
+    <Provider theme={theme} colorScheme='light'>
+      <ActionButton {...props}>
+        <Text>stable</Text>
+      </ActionButton>
+    </Provider>
+  )
+}
+
+export const ActionButtonDisabledIcon = () => {
+  const props = {
+    isDisabled: true,
+    onPress: () => {
+      console.log('button was clicked')
+    }
+  }
+
+  return (
+    <Provider theme={theme} colorScheme='light'>
+      <ActionButton {...props}>
+        <Bug size='S' />
+        <Text>stable</Text>
+      </ActionButton>
     </Provider>
   )
 }
