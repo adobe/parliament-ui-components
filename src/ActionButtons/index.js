@@ -12,6 +12,8 @@ governing permissions and limitations under the License.
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
+import { Text } from '@react-spectrum/text'
+
 import ActionButton from '../ActionButton'
 
 import Bug from '@spectrum-icons/workflow/Bug'
@@ -21,19 +23,23 @@ const ActionButtons = ({ gitUrl, filePath, branch }) => {
   return (
     <Fragment>
       <ActionButton
-        label='Edit this page'
-        onClick={() => {
+        isQuiet
+        onPress={() => {
           document.location.href = `${gitUrl}/edit/${branch}/${filePath}`
         }}
-        icon={<Edit size='S' />}
-      />
+      >
+        <Edit size='S' />
+        <Text>Edit this page</Text>
+      </ActionButton>
       <ActionButton
-        label='Log an issue'
-        onClick={() => {
+        isQuiet
+        onPress={() => {
           document.location.href = `${gitUrl}/issues/new?body=Issue%20in%20${filePath}`
         }}
-        icon={<Bug size='S' />}
-      />
+      >
+        <Bug size='S' />
+        <Text>Log an issue</Text>
+      </ActionButton>
     </Fragment>
   )
 }
