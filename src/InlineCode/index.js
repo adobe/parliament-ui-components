@@ -10,33 +10,23 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import PropTypes from 'prop-types'
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
 import classNames from 'classnames'
-import '@spectrum-css/button'
+import '@spectrum-css/typography'
+import '@spectrum-css/well'
 
-const Button = ({ children, variant, isQuiet, className, ...props }) => (
-  <button
-    className={classNames(className, [
-      'spectrum-Button',
-      `spectrum-Button--${variant}`,
-      { 'spectrum-Button--quiet': isQuiet }
-    ])}
+export const InlineCode = ({ children, className, ...props }) => (
+  <code
+    className={classNames(className, 'spectrum-Code4', 'spectrum-Well')}
+    css={css`
+      padding: 0 var(--spectrum-global-dimension-static-size-50);
+      margin: 0;
+      display: inline-block;
+      min-width: auto;
+    `}
     {...props}
   >
     {children}
-  </button>
+  </code>
 )
-
-Button.propTypes = {
-  variant: PropTypes.oneOf([
-    'cta',
-    'overBackground',
-    'primary',
-    'secondary',
-    'negative'
-  ]),
-  isQuiet: PropTypes.bool
-}
-
-export { Button }

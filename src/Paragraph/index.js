@@ -11,32 +11,11 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import '@spectrum-css/button'
+import '@spectrum-css/typography'
 
-const Button = ({ children, variant, isQuiet, className, ...props }) => (
-  <button
-    className={classNames(className, [
-      'spectrum-Button',
-      `spectrum-Button--${variant}`,
-      { 'spectrum-Button--quiet': isQuiet }
-    ])}
-    {...props}
-  >
+export const Paragraph = ({ children, className, ...props }) => (
+  <p className={classNames(className, 'spectrum-Body--M')} {...props}>
     {children}
-  </button>
+  </p>
 )
-
-Button.propTypes = {
-  variant: PropTypes.oneOf([
-    'cta',
-    'overBackground',
-    'primary',
-    'secondary',
-    'negative'
-  ]),
-  isQuiet: PropTypes.bool
-}
-
-export { Button }
