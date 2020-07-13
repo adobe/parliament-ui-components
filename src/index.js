@@ -11,13 +11,10 @@ governing permissions and limitations under the License.
 */
 export { default as ActionButton } from './ActionButton'
 export { default as ActionButtons } from './ActionButtons'
+export { default as Alert } from './Alert'
 export { Button } from './Button'
-export { default as Header } from './Header'
+export { default as Contributors } from './Contributors'
 export { default as Footer } from './Footer'
-export { default as Nav } from './Nav'
-export { default as Next } from './Next'
-export { default as Prev } from './Prev'
-export { stripManifestPath, defaultFocus } from './ManifestUtils'
 export {
   Grid,
   GridContent,
@@ -25,14 +22,22 @@ export {
   GridFooter,
   GridNav
 } from './Grid'
+export { default as Header } from './Header'
+export { Heading1, Heading2, Heading3 } from './Heading'
+export { InlineCode } from './InlineCode'
+export { Link } from './Link'
+export { List } from './List'
+export { default as Nav } from './Nav'
+export { default as Next } from './Next'
 export {
   OpenApiGrid,
   OpenApiGridContent,
   OpenApiGridFooter,
   OpenApiGridNav
 } from './OpenApiGrid'
-export { default as TableOfContents } from './TableOfContents'
-export { default as Contributors } from './Contributors'
-export { Table, THead, TH, TBody, TR, TD } from './SpectrumTable'
-export { default as Alert } from './Alert'
+export { Paragraph } from './Paragraph'
+export { default as Prev } from './Prev'
 export { default as SearchField } from './SearchField'
+export { stripManifestPath, defaultFocus } from './ManifestUtils'
+export { default as TableOfContents } from './TableOfContents'
+export { Table, THead, TH, TBody, TR, TD } from './SpectrumTable'
