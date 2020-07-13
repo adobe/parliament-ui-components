@@ -19,8 +19,17 @@ import ActionButton from '../index'
 
 import Bug from '@spectrum-icons/workflow/Bug'
 
+const Wrapper = (storyFn) => {
+  return (
+    <Provider theme={theme} colorScheme='light'>
+      {storyFn()}
+    </Provider>
+  )
+}
+
 export default {
-  title: 'components/ActionButton'
+  title: 'components/ActionButton',
+  decorators: [Wrapper]
 }
 
 export const ActionButtonDefault = () => {
@@ -31,11 +40,9 @@ export const ActionButtonDefault = () => {
   }
 
   return (
-    <Provider theme={theme} colorScheme='light'>
-      <ActionButton {...props}>
-        <Text>stable</Text>
-      </ActionButton>
-    </Provider>
+    <ActionButton {...props}>
+      <Text>stable</Text>
+    </ActionButton>
   )
 }
 
@@ -47,12 +54,10 @@ export const ActionButtonDefaultIcon = () => {
   }
 
   return (
-    <Provider theme={theme} colorScheme='light'>
-      <ActionButton {...props}>
-        <Bug size='S' />
-        <Text>stable</Text>
-      </ActionButton>
-    </Provider>
+    <ActionButton {...props}>
+      <Bug size='S' />
+      <Text>stable</Text>
+    </ActionButton>
   )
 }
 
@@ -65,11 +70,9 @@ export const ActionButtonQuiet = () => {
   }
 
   return (
-    <Provider theme={theme} colorScheme='light'>
-      <ActionButton {...props}>
-        <Text>stable</Text>
-      </ActionButton>
-    </Provider>
+    <ActionButton {...props}>
+      <Text>stable</Text>
+    </ActionButton>
   )
 }
 
@@ -82,12 +85,10 @@ export const ActionButtonQuietIcon = () => {
   }
 
   return (
-    <Provider theme={theme} colorScheme='light'>
-      <ActionButton {...props}>
-        <Bug size='S' />
-        <Text>stable</Text>
-      </ActionButton>
-    </Provider>
+    <ActionButton {...props}>
+      <Bug size='S' />
+      <Text>stable</Text>
+    </ActionButton>
   )
 }
 
@@ -100,11 +101,9 @@ export const ActionButtonDisabled = () => {
   }
 
   return (
-    <Provider theme={theme} colorScheme='light'>
-      <ActionButton {...props}>
-        <Text>stable</Text>
-      </ActionButton>
-    </Provider>
+    <ActionButton {...props}>
+      <Text>stable</Text>
+    </ActionButton>
   )
 }
 
@@ -117,11 +116,9 @@ export const ActionButtonDisabledIcon = () => {
   }
 
   return (
-    <Provider theme={theme} colorScheme='light'>
-      <ActionButton {...props}>
-        <Bug size='S' />
-        <Text>stable</Text>
-      </ActionButton>
-    </Provider>
+    <ActionButton {...props}>
+      <Bug size='S' />
+      <Text>stable</Text>
+    </ActionButton>
   )
 }
