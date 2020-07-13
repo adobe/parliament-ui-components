@@ -30,7 +30,8 @@ const ActionButton = ({
       className={classNames([
         'spectrum-ActionButton',
         { 'spectrum-ActionButton--quiet': isQuiet },
-        { 'is-disabled': isDisabled }
+        { 'is-disabled': isDisabled },
+        'parliament-ActionButtons'
       ])}
       onClick={onPress}
       disabled={isDisabled}
