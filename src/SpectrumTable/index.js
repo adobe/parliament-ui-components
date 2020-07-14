@@ -11,17 +11,28 @@ governing permissions and limitations under the License.
 */
 import React from 'react'
 
+import classNames from 'classnames'
+
 import '@spectrum-css/table'
 
-const Table = ({ children }) => {
-  return <table className='spectrum-Table'>{children}</table>
+const Table = ({ children, isQuiet }) => {
+  return (
+    <table
+      className={classNames([
+        'spectrum-Table',
+        { 'spectrum-Table--quiet': isQuiet }
+      ])}
+    >
+      {children}
+    </table>
+  )
 }
 
 const THead = ({ children }) => {
   return <thead className='spectrum-Table-head'>{children}</thead>
 }
 
-const TH = ({ children }) => {
+const Th = ({ children }) => {
   return <th className='spectrum-Table-headCell'>{children}</th>
 }
 
@@ -29,12 +40,12 @@ const TBody = ({ children }) => {
   return <tbody className='spectrum-Table-body'>{children}</tbody>
 }
 
-const TR = ({ children }) => {
+const Tr = ({ children }) => {
   return <tr className='spectrum-Table-row'>{children}</tr>
 }
 
-const TD = ({ children }) => {
+const Td = ({ children }) => {
   return <td className='spectrum-Table-cell'>{children}</td>
 }
 
-export { Table, THead, TH, TBody, TR, TD }
+export { Table, THead, Th, TBody, Tr, Td }
