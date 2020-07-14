@@ -24,7 +24,6 @@ export {
 } from './Grid'
 export { default as Header } from './Header'
 export { Heading1, Heading2, Heading3 } from './Heading'
-export { InlineCode } from './InlineCode'
 export { Link } from './Link'
 export { List } from './List'
 export { default as Nav } from './Nav'

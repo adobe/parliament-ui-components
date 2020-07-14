@@ -18,7 +18,7 @@ import { Divider } from '@react-spectrum/divider'
 import { Link } from '../Link'
 
 const Heading1 = ({ children, className, ...props }) => (
-  <h1 className={classNames(className, 'spectrum-Heading--XXXL')} {...props}>
+  <h1 className={classNames(className, 'spectrum-Heading--XL spectrum-Heading--light')} {...props}>
     {children}
   </h1>
 )
