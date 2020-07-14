@@ -16,8 +16,9 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs",
-    "start": "microbundle-crl watch --no-compress --format modern,cjs",
+    "build": "microbundle-crl --no-compress --format modern,cjs --css-modules false && npm run stripcsscomments",
+    "start": "microbundle-crl watch --no-compress --format modern,cjs --css-modules false",
+    "stripcsscomments": "cp dist/index.css dist/temp.css && strip-css-comments dist/temp.css > dist/index.css && rm dist/temp.css",
     "prepare": "run-s build",
     "storybook": "start-storybook",
     "test": "run-s test:unit test:lint test:build",
@@ -58,6 +59,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
+    "strip-css-comments-cli": "^2.0.2",
     "style-loader": "^1.2.1"
   },
   "files": [
