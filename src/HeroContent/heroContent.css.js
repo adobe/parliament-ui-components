@@ -19,7 +19,8 @@ export default {
     padding: '0px 50px'
   },
   heading: {
-    marginTop: '0px'
+    marginTop: '0px',
+    marginBottom: '16px',
   },
   content: {},
   illustration: {
