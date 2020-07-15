@@ -12,6 +12,7 @@ governing permissions and limitations under the License.
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { navigate } from 'gatsby'
 
 import '@spectrum-css/sidenav'
 
@@ -35,8 +36,15 @@ const nav = (items, selectedKeys, disabledKeys, onSelectionChange) => {
               className='spectrum-SideNav-itemLink'
               onClick={(e) => {
                 e.preventDefault()
-                if (onSelectionChange) {
-                  onSelectionChange(item)
+                if (item.path) {
+                  if (
+                    item.path.startsWith('http://') ||
+                    item.path.startsWith('https://')
+                  ) {
+                    document.location.href = item.path
+                  } else {
+                    navigate(item.path)
+                  }
                 }
               }}
             >
@@ -58,20 +66,14 @@ const nav = (items, selectedKeys, disabledKeys, onSelectionChange) => {
   )
 }
 
-const SideNav = ({
-  items = [],
-  selectedKeys = [],
-  disabledKeys = [],
-  onSelectionChange
-}) => {
-  return <nav>{nav(items, selectedKeys, disabledKeys, onSelectionChange)}</nav>
+const SideNav = ({ items = [], selectedKeys = [], disabledKeys = [] }) => {
+  return <nav>{nav(items, selectedKeys, disabledKeys)}</nav>
 }
 
 SideNav.propTypes = {
   items: PropTypes.array,
   selectedKeys: PropTypes.array,
-  disabledKeys: PropTypes.array,
-  onSelectionChange: PropTypes.func
+  disabledKeys: PropTypes.array
 }
 
 export default SideNav
