@@ -37,6 +37,7 @@ export {
 export { Paragraph } from './Paragraph'
 export { default as Prev } from './Prev'
 export { default as SearchField } from './SearchField'
+export { default as SideNav } from './SideNav'
 export { stripManifestPath, defaultFocus } from './ManifestUtils'
 export { default as TableOfContents } from './TableOfContents'
 export { Table, THead, TH, TBody, TR, TD } from './SpectrumTable'
