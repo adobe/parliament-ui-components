@@ -36,14 +36,13 @@ export default {
 export const FlatItems = () => {
   const props = {
     items: [
-      { name: 'Aardvark' },
-      { name: 'Kangaroo' },
-      { name: 'Snake' },
-      { name: 'Hippo' }
+      { name: 'Aardvark', path: 'aardvark' },
+      { name: 'Kangaroo', path: 'kangaroo' },
+      { name: 'Snake', path: 'snake' },
+      { name: 'Hippo', path: 'hippo' }
     ],
     selectedKeys: ['Kangaroo'],
-    disabledKeys: ['Snake'],
-    onSelectionChange: (item) => console.log(item)
+    disabledKeys: ['Snake']
   }
   return <SideNav {...props} />
 }
@@ -57,8 +56,7 @@ export const FlatItemsWithIcon = () => {
       { name: 'Hippo', icon: icon }
     ],
     selectedKeys: ['Kangaroo'],
-    disabledKeys: ['Snake'],
-    onSelectionChange: (item) => console.log(item)
+    disabledKeys: ['Snake']
   }
   return <SideNav {...props} />
 }
@@ -77,8 +75,7 @@ export const Multilevel = () => {
       { name: 'Reptiles', children: [{ name: 'Snake' }] }
     ],
     selectedKeys: ['Kangaroo'],
-    disabledKeys: ['Snake'],
-    onSelectionChange: (item) => console.log(item)
+    disabledKeys: ['Snake']
   }
   return <SideNav {...props} />
 }
