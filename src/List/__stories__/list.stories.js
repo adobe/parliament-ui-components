@@ -12,8 +12,7 @@
 
 import React from 'react'
 
-import { Provider } from '@react-spectrum/provider'
-import { theme } from '@react-spectrum/theme-default'
+import { defaultTheme, Provider } from '@adobe/react-spectrum'
 
 import { List } from '../index'
 
@@ -23,7 +22,7 @@ export default {
 
 export const list = () => {
   return (
-    <Provider theme={theme} colorScheme='light'>
+    <Provider theme={defaultTheme} colorScheme='light'>
       <List>
         <li>Item 1</li>
         <li>Item 2</li>

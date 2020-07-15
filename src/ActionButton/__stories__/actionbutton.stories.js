@@ -11,9 +11,7 @@ governing permissions and limitations under the License.
 */
 import React from 'react'
 
-import { Provider } from '@react-spectrum/provider'
-import { theme } from '@react-spectrum/theme-default'
-import { Text } from '@react-spectrum/text'
+import { defaultTheme, Provider, Text } from '@adobe/react-spectrum'
 
 import ActionButton from '../index'
 
@@ -21,7 +19,7 @@ import Bug from '@spectrum-icons/workflow/Bug'
 
 const Wrapper = (storyFn) => {
   return (
-    <Provider theme={theme} colorScheme='light'>
+    <Provider theme={defaultTheme} colorScheme='light'>
       {storyFn()}
     </Provider>
   )

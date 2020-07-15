@@ -11,8 +11,7 @@ governing permissions and limitations under the License.
 */
 import React from 'react'
 
-import { Provider } from '@react-spectrum/provider'
-import { theme } from '@react-spectrum/theme-default'
+import { defaultTheme, Provider } from '@adobe/react-spectrum'
 
 import ActionButtons from '../index'
 
@@ -28,7 +27,7 @@ export const actionbuttons = () => {
   }
 
   return (
-    <Provider theme={theme} colorScheme='light'>
+    <Provider theme={defaultTheme} colorScheme='light'>
       <ActionButtons {...props} />
     </Provider>
   )
