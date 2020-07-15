@@ -12,58 +12,52 @@ governing permissions and limitations under the License.
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { navigate } from 'gatsby'
+import { Link } from 'gatsby'
 
 import '@spectrum-css/sidenav'
 
 import './index.css'
 
+const isExternalPath = (path) => {
+  return path.startsWith('http://') || path.startsWith('https://')
+}
+
 const nav = (items, selectedKeys, disabledKeys, onSelectionChange) => {
-  return (
-    <ul className='spectrum-SideNav spectrum-SideNav--multiLevel'>
-      {items.map((item, index) => {
-        return (
-          <li
-            className={classNames([
-              'spectrum-SideNav-item',
-              { 'is-selected': selectedKeys.includes(item.name) },
-              { 'is-disabled': disabledKeys.includes(item.name) }
-            ])}
-            key={index}
-          >
-            <a
-              href='#'
-              className='spectrum-SideNav-itemLink'
-              onClick={(e) => {
-                e.preventDefault()
-                if (item.path) {
-                  if (
-                    item.path.startsWith('http://') ||
-                    item.path.startsWith('https://')
-                  ) {
-                    document.location.href = item.path
-                  } else {
-                    navigate(item.path)
-                  }
-                }
-              }}
-            >
-              {item.icon ? item.icon : ''}
-              {item.name}
-            </a>
-            {item.children
-              ? nav(
-                  item.children,
-                  selectedKeys,
-                  disabledKeys,
-                  onSelectionChange
-                )
-              : ''}
-          </li>
-        )
-      })}
-    </ul>
-  )
+  const classes = {
+    root: 'spectrum-SideNav spectrum-SideNav--multiLevel',
+    link: 'spectrum-SideNav-itemLink'
+  }
+
+  const listItems = items.map((item, index) => {
+    let link = undefined
+
+    const {name, icon, path} = item;
+
+    const subTree = item.children ? nav( item.children,selectedKeys, disabledKeys, onSelectionChange ) : undefined;
+
+    const itemClasses = classNames([
+      'spectrum-SideNav-item',
+      { 'is-selected': selectedKeys.includes(name) },
+      { 'is-disabled': disabledKeys.includes(name) }
+    ])
+
+    if(path){
+      if(isExternalPath(path)){
+        link = <a href={path} className={classes.link}>{name}</a>
+      }
+      else{
+        link = <Link to={path} className={classes.link}>{name}</Link>
+      }
+    }
+    else {
+      link = <span className={classes.link}>{icon}{item.name}</span>
+    }
+
+    return <li className={itemClasses}>{link}{subTree}</li>
+  
+  })
+
+  return <ul className={classes.root}>{listItems}</ul>
 }
 
 const SideNav = ({ items = [], selectedKeys = [], disabledKeys = [] }) => {
