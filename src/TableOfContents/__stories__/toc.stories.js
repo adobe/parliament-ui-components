@@ -11,8 +11,7 @@ governing permissions and limitations under the License.
 */
 import React from 'react'
 
-import { Provider } from '@react-spectrum/provider'
-import { theme } from '@react-spectrum/theme-default'
+import { defaultTheme, Provider } from '@adobe/react-spectrum'
 
 import TableOfContents from '../index'
 import mockData from './mockData'
@@ -24,7 +23,7 @@ export default {
 export const empty = () => {
   const props = { tableOfContents: '' }
   return (
-    <Provider theme={theme} colorScheme='light'>
+    <Provider theme={defaultTheme} colorScheme='light'>
       <TableOfContents {...props} />
     </Provider>
   )
@@ -35,7 +34,7 @@ export const withData = () => {
     tableOfContents: mockData.regular
   }
   return (
-    <Provider theme={theme} colorScheme='light'>
+    <Provider theme={defaultTheme} colorScheme='light'>
       <TableOfContents {...props} />
     </Provider>
   )
@@ -47,7 +46,7 @@ export const withDataStripH1 = () => {
     stripH1: true
   }
   return (
-    <Provider theme={theme} colorScheme='light'>
+    <Provider theme={defaultTheme} colorScheme='light'>
       <TableOfContents {...props} />
     </Provider>
   )
@@ -58,7 +57,7 @@ export const withTwoH1s = () => {
     tableOfContents: mockData.twoH1s
   }
   return (
-    <Provider theme={theme} colorScheme='light'>
+    <Provider theme={defaultTheme} colorScheme='light'>
       <TableOfContents {...props} />
     </Provider>
   )
