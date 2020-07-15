@@ -18,6 +18,7 @@ import Prev from './Prev'
 import TableOfContents from './TableOfContents'
 import Contributors from './Contributors'
 import Alert from './Alert'
+import SideNav from './SideNav'
 import { stripManifestPath, defaultFocus } from './ManifestUtils'
 
 const manifest = {
@@ -222,6 +223,12 @@ describe('Contributors', () => {
 describe('Alert', () => {
   it('is truthy', () => {
     expect(Alert).toBeTruthy()
+  })
+})
+
+describe('SideNav', () => {
+  it('is truthy', () => {
+    expect(SideNav).toBeTruthy()
   })
 })
 
