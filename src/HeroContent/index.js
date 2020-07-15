@@ -1,1 +1,1 @@
-export {default} from './heroContent';
+export { default } from './heroContent'
