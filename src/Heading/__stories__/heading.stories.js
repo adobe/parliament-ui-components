@@ -12,8 +12,7 @@
 
 import React from 'react'
 
-import { Provider } from '@react-spectrum/provider'
-import { theme } from '@react-spectrum/theme-default'
+import { defaultTheme, Provider } from '@adobe/react-spectrum'
 
 import { Heading1, Heading2, Heading3 } from '../index'
 
@@ -22,19 +21,19 @@ export default {
 }
 
 export const heading1 = () => (
-  <Provider theme={theme} colorScheme='light'>
+  <Provider theme={defaultTheme} colorScheme='light'>
     <Heading1>Heading 1</Heading1>
   </Provider>
 )
 
 export const heading2 = () => (
-  <Provider theme={theme} colorScheme='light'>
+  <Provider theme={defaultTheme} colorScheme='light'>
     <Heading2>Heading 2</Heading2>
   </Provider>
 )
 
 export const heading3 = () => (
-  <Provider theme={theme} colorScheme='light'>
+  <Provider theme={defaultTheme} colorScheme='light'>
     <Heading3>Heading 3</Heading3>
   </Provider>
 )

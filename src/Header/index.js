@@ -13,7 +13,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
-import { Heading } from '@react-spectrum/text'
+import { Heading } from '@adobe/react-spectrum'
 
 const Header = ({ siteTitle }) => {
   return (
