@@ -12,33 +12,40 @@ governing permissions and limitations under the License.
 import React from 'react'
 import HeroContent from '../heroContent'
 
+import { withKnobs, text } from '@storybook/addon-knobs'
+
 import { defaultTheme, Provider } from '@adobe/react-spectrum'
 
 import officeImage from './office.svg'
 
-const Wrapper = storyFn => {
-    return <Provider theme={defaultTheme} colorScheme="light">{storyFn()}</Provider>
+const Wrapper = (storyFn) => {
+  return (
+    <Provider theme={defaultTheme} colorScheme='light'>
+      {storyFn()}
+    </Provider>
+  )
 }
 export default {
   title: 'components/HeroContent',
-  decorators:[Wrapper]
-}
-
-const DEFAULT_PROPS = {
-  title: 'Lorem ipsum v2.0',
-  imagePath: officeImage,
+  decorators: [withKnobs, Wrapper]
 }
 
 export const heroContent = () => {
+  const title = text('Title', 'Lorem ipsum v2.0', 'Options')
+  const description = text(
+    'Description',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce volutpat pellentesque eros, nec lacinia nunc volutpat non. Mauris et bibendum lectus. Praesent vel ipsum ornare, scelerisque ex sed, aliquam est.',
+    'Options'
+  )
+  const bgColor = text('Background color', undefined, 'Options')
+  const textColor = text('Text Color', undefined, 'Options')
+
   const props = {
-    ...DEFAULT_PROPS
+    title,
+    bgColor,
+    textColor,
+    imagePath: officeImage
   }
 
-  return (
-    <HeroContent {...props}>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce volutpat
-      pellentesque eros, nec lacinia nunc volutpat non. Mauris et bibendum
-      lectus. Praesent vel ipsum ornare, scelerisque ex sed, aliquam est.
-    </HeroContent>
-  )
+  return <HeroContent {...props}>{description}</HeroContent>
 }
