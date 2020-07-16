@@ -11,7 +11,8 @@ governing permissions and limitations under the License.
 */
 import React from 'react'
 
-import { defaultTheme, Provider } from '@adobe/react-spectrum'
+import { Provider } from '@react-spectrum/provider'
+import { theme } from '@react-spectrum/theme-default'
 
 import { withKnobs, select, text } from '@storybook/addon-knobs'
 
@@ -50,7 +51,7 @@ export const basic = () => {
   const content = text('Content', 'Hello World!', 'Options')
 
   return (
-    <Provider theme={defaultTheme} colorScheme={colorScheme}>
+    <Provider theme={theme} colorScheme={colorScheme}>
       <Header siteTitle={title} />
       <Grid>
         <GridNav>

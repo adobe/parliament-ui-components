@@ -11,7 +11,8 @@ governing permissions and limitations under the License.
 */
 import React from 'react'
 
-import { defaultTheme, Provider } from '@adobe/react-spectrum'
+import { Provider } from '@react-spectrum/provider'
+import { theme } from '@react-spectrum/theme-default'
 
 import Footer from '../index'
 
@@ -21,7 +22,7 @@ export default {
 
 export const footer = () => {
   return (
-    <Provider theme={defaultTheme} colorScheme='light'>
+    <Provider theme={theme} colorScheme='light'>
       <Footer />
     </Provider>
   )

@@ -11,7 +11,8 @@ governing permissions and limitations under the License.
 */
 import React from 'react'
 
-import { defaultTheme, Provider } from '@adobe/react-spectrum'
+import { Provider } from '@react-spectrum/provider'
+import { theme } from '@react-spectrum/theme-default'
 
 import Contributors from '../index'
 
@@ -29,7 +30,7 @@ export const oneCommitter = () => {
   }
 
   return (
-    <Provider theme={defaultTheme} colorScheme='light'>
+    <Provider theme={theme} colorScheme='light'>
       <Contributors {...props} />
     </Provider>
   )
@@ -47,7 +48,7 @@ export const threeCommitter = () => {
   }
 
   return (
-    <Provider theme={defaultTheme} colorScheme='light'>
+    <Provider theme={theme} colorScheme='light'>
       <Contributors {...props} />
     </Provider>
   )
@@ -67,7 +68,7 @@ export const fiveCommitter = () => {
   }
 
   return (
-    <Provider theme={defaultTheme} colorScheme='light'>
+    <Provider theme={theme} colorScheme='light'>
       <Contributors {...props} />
     </Provider>
   )
@@ -88,7 +89,7 @@ export const dontShowSixCommitter = () => {
   }
 
   return (
-    <Provider theme={defaultTheme} colorScheme='light'>
+    <Provider theme={theme} colorScheme='light'>
       <Contributors {...props} />
     </Provider>
   )

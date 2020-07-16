@@ -12,7 +12,7 @@ governing permissions and limitations under the License.
 import React from 'react'
 import PropTypes from 'prop-types'
 import { parse } from 'node-html-parser'
-import { Heading } from '@adobe/react-spectrum'
+import { Heading } from '@react-spectrum/text'
 
 const stripOuterH1 = function (toc) {
   let html = ''

@@ -66,9 +66,12 @@
     "dist"
   ],
   "dependencies": {
-    "@adobe/react-spectrum": "^3.0.2",
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
+    "@react-spectrum/divider": "^3.0.2",
+    "@react-spectrum/provider": "^3.0.2",
+    "@react-spectrum/text": "^3.0.2",
+    "@react-spectrum/theme-default": "^3.0.2",
     "@spectrum-css/alert": "^3.0.0-beta.3",
     "@spectrum-css/button": "^3.0.0-beta.3",
     "@spectrum-css/icon": "^2.1.1",
