@@ -86,4 +86,88 @@ const Heading3 = ({ children, className, id, ...props }) => (
   </div>
 )
 
-export { Heading1, Heading2, Heading3 }
+const Heading4 = ({ children, className, id, ...props }) => (
+  <div>
+    <h4
+      className={classNames(className, 'spectrum-Heading--S')}
+      css={css`
+        & a {
+          visibility: hidden;
+        }
+
+        &:hover a {
+          visibility: visible;
+        }
+      `}
+      {...props}
+    >
+      {children}
+      <Link
+        css={css`
+          margin-inline-start: var(--spectrum-global-dimension-static-size-50);
+        `}
+        href={`#${id}`}
+      >
+        #
+      </Link>
+    </h4>
+  </div>
+)
+
+const Heading5 = ({ children, className, id, ...props }) => (
+  <div>
+    <h5
+      className={classNames(className, 'spectrum-Heading--XS')}
+      css={css`
+        & a {
+          visibility: hidden;
+        }
+
+        &:hover a {
+          visibility: visible;
+        }
+      `}
+      {...props}
+    >
+      {children}
+      <Link
+        css={css`
+          margin-inline-start: var(--spectrum-global-dimension-static-size-50);
+        `}
+        href={`#${id}`}
+      >
+        #
+      </Link>
+    </h5>
+  </div>
+)
+
+const Heading6 = ({ children, className, id, ...props }) => (
+  <div>
+    <h6
+      className={classNames(className, 'spectrum-Heading--XXS')}
+      css={css`
+        & a {
+          visibility: hidden;
+        }
+
+        &:hover a {
+          visibility: visible;
+        }
+      `}
+      {...props}
+    >
+      {children}
+      <Link
+        css={css`
+          margin-inline-start: var(--spectrum-global-dimension-static-size-50);
+        `}
+        href={`#${id}`}
+      >
+        #
+      </Link>
+    </h6>
+  </div>
+)
+
+export { Heading1, Heading2, Heading3, Heading4, Heading5, Heading6 }
