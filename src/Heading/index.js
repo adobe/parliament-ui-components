@@ -17,11 +17,13 @@ import '@spectrum-css/typography'
 import { Divider } from '@react-spectrum/divider'
 import { Link } from '../Link'
 
+import './index.css'
+
 const Heading1 = ({ children, className, ...props }) => (
   <h1
     className={classNames(
       className,
-      'spectrum-Heading--XL spectrum-Heading--light'
+      'spectrum-Heading spectrum-Heading--XL spectrum-Heading--light'
     )}
     {...props}
   >
@@ -32,16 +34,7 @@ const Heading1 = ({ children, className, ...props }) => (
 const Heading2 = ({ children, className, id, ...props }) => (
   <div>
     <h2
-      className={classNames(className, 'spectrum-Heading--L')}
-      css={css`
-        & a {
-          visibility: hidden;
-        }
-
-        &:hover a {
-          visibility: visible;
-        }
-      `}
+      className={classNames(className, 'spectrum-Heading spectrum-Heading--L')}
       {...props}
     >
       {children}
@@ -61,16 +54,7 @@ const Heading2 = ({ children, className, id, ...props }) => (
 const Heading3 = ({ children, className, id, ...props }) => (
   <div>
     <h3
-      className={classNames(className, 'spectrum-Heading--M')}
-      css={css`
-        & a {
-          visibility: hidden;
-        }
-
-        &:hover a {
-          visibility: visible;
-        }
-      `}
+      className={classNames(className, 'spectrum-Heading spectrum-Heading--M')}
       {...props}
     >
       {children}
@@ -89,16 +73,7 @@ const Heading3 = ({ children, className, id, ...props }) => (
 const Heading4 = ({ children, className, id, ...props }) => (
   <div>
     <h4
-      className={classNames(className, 'spectrum-Heading--S')}
-      css={css`
-        & a {
-          visibility: hidden;
-        }
-
-        &:hover a {
-          visibility: visible;
-        }
-      `}
+      className={classNames(className, 'spectrum-Heading spectrum-Heading--S')}
       {...props}
     >
       {children}
@@ -117,16 +92,7 @@ const Heading4 = ({ children, className, id, ...props }) => (
 const Heading5 = ({ children, className, id, ...props }) => (
   <div>
     <h5
-      className={classNames(className, 'spectrum-Heading--XS')}
-      css={css`
-        & a {
-          visibility: hidden;
-        }
-
-        &:hover a {
-          visibility: visible;
-        }
-      `}
+      className={classNames(className, 'spectrum-Heading spectrum-Heading--XS')}
       {...props}
     >
       {children}
@@ -145,16 +111,10 @@ const Heading5 = ({ children, className, id, ...props }) => (
 const Heading6 = ({ children, className, id, ...props }) => (
   <div>
     <h6
-      className={classNames(className, 'spectrum-Heading--XXS')}
-      css={css`
-        & a {
-          visibility: hidden;
-        }
-
-        &:hover a {
-          visibility: visible;
-        }
-      `}
+      className={classNames(
+        className,
+        'spectrum-Heading spectrum-Heading--XXS'
+      )}
       {...props}
     >
       {children}
