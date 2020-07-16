@@ -15,26 +15,36 @@ import React from 'react'
 import { Provider } from '@react-spectrum/provider'
 import { theme } from '@react-spectrum/theme-default'
 
-import { Heading1, Heading2, Heading3 } from '../index'
+import {
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Heading5,
+  Heading6
+} from '../index'
 
-export default {
-  title: 'components/Heading'
+const Wrapper = (storyFn) => {
+  return (
+    <Provider theme={theme} colorScheme='light'>
+      {storyFn()}
+    </Provider>
+  )
 }
 
-export const heading1 = () => (
-  <Provider theme={theme} colorScheme='light'>
-    <Heading1>Heading 1</Heading1>
-  </Provider>
-)
+export default {
+  title: 'components/Heading',
+  decorators: [Wrapper]
+}
 
-export const heading2 = () => (
-  <Provider theme={theme} colorScheme='light'>
-    <Heading2>Heading 2</Heading2>
-  </Provider>
-)
+export const heading1 = () => <Heading1>Heading 1</Heading1>
 
-export const heading3 = () => (
-  <Provider theme={theme} colorScheme='light'>
-    <Heading3>Heading 3</Heading3>
-  </Provider>
-)
+export const heading2 = () => <Heading2>Heading 2</Heading2>
+
+export const heading3 = () => <Heading3>Heading 3</Heading3>
+
+export const heading4 = () => <Heading4>Heading 4</Heading4>
+
+export const heading5 = () => <Heading5>Heading 5</Heading5>
+
+export const heading6 = () => <Heading6>Heading 6</Heading6>
