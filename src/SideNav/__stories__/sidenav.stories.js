@@ -10,7 +10,8 @@ governing permissions and limitations under the License.
 */
 import React from 'react'
 
-import { defaultTheme, Provider } from '@adobe/react-spectrum'
+import { Provider } from '@react-spectrum/provider'
+import { theme } from '@react-spectrum/theme-default'
 
 import Star from '@spectrum-icons/workflow/Star'
 
@@ -20,7 +21,7 @@ const icon = <Star size='S' />
 
 const Wrapper = (storyFn) => {
   return (
-    <Provider theme={defaultTheme} colorScheme='light'>
+    <Provider theme={theme} colorScheme='light'>
       {storyFn()}
     </Provider>
   )

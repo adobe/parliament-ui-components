@@ -14,7 +14,7 @@
 import { css, jsx } from '@emotion/core'
 import classNames from 'classnames'
 import '@spectrum-css/typography'
-import { Divider } from '@adobe/react-spectrum'
+import { Divider } from '@react-spectrum/divider'
 import { Link } from '../Link'
 
 const Heading1 = ({ children, className, ...props }) => (

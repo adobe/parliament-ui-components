@@ -12,7 +12,7 @@ governing permissions and limitations under the License.
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
-import { Text } from '@adobe/react-spectrum'
+import { Text } from '@react-spectrum/text'
 
 import ActionButton from '../ActionButton'
 

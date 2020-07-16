@@ -12,7 +12,8 @@
 
 import React from 'react'
 
-import { defaultTheme, Provider } from '@adobe/react-spectrum'
+import { Provider } from '@react-spectrum/provider'
+import { theme } from '@react-spectrum/theme-default'
 
 import { Button } from '../index'
 
@@ -26,7 +27,7 @@ export const PrimaryButton = () => {
   }
 
   return (
-    <Provider theme={defaultTheme} colorScheme='light'>
+    <Provider theme={theme} colorScheme='light'>
       <Button {...props}>Primary Button</Button>
     </Provider>
   )
@@ -38,7 +39,7 @@ export const SecondaryButton = () => {
   }
 
   return (
-    <Provider theme={defaultTheme} colorScheme='light'>
+    <Provider theme={theme} colorScheme='light'>
       <Button {...props}>Secondary Button</Button>
     </Provider>
   )
@@ -51,7 +52,7 @@ export const QuietPrimaryButton = () => {
   }
 
   return (
-    <Provider theme={defaultTheme} colorScheme='light'>
+    <Provider theme={theme} colorScheme='light'>
       <Button {...props}>Quiet Primary Button</Button>
     </Provider>
   )

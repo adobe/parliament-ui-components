@@ -12,7 +12,8 @@
 
 import React from 'react'
 
-import { defaultTheme, Provider } from '@adobe/react-spectrum'
+import { Provider } from '@react-spectrum/provider'
+import { theme } from '@react-spectrum/theme-default'
 
 import { Link } from '../index'
 
@@ -22,7 +23,7 @@ export default {
 
 export const link = () => {
   return (
-    <Provider theme={defaultTheme} colorScheme='light'>
+    <Provider theme={theme} colorScheme='light'>
       <Link href='https://adobe.io'>adobe.io</Link>
     </Provider>
   )
