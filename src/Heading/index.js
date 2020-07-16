@@ -31,103 +31,58 @@ const Heading1 = ({ children, className, ...props }) => (
   </h1>
 )
 
-const Heading2 = ({ children, className, id, ...props }) => (
-  <div>
-    <h2
-      className={classNames(className, 'spectrum-Heading spectrum-Heading--L')}
-      {...props}
-    >
-      {children}
-      <Link
-        href={`#${id}`}
-        css={css`
-          margin-inline-start: var(--spectrum-global-dimension-static-size-100);
-        `}
-      >
-        #
-      </Link>
-    </h2>
-    <Divider marginBottom='size-300' />
-  </div>
-)
-
-const Heading3 = ({ children, className, id, ...props }) => (
-  <div>
-    <h3
-      className={classNames(className, 'spectrum-Heading spectrum-Heading--M')}
-      {...props}
-    >
-      {children}
-      <Link
-        css={css`
-          margin-inline-start: var(--spectrum-global-dimension-static-size-50);
-        `}
-        href={`#${id}`}
-      >
-        #
-      </Link>
-    </h3>
-  </div>
-)
-
-const Heading4 = ({ children, className, id, ...props }) => (
-  <div>
-    <h4
-      className={classNames(className, 'spectrum-Heading spectrum-Heading--S')}
-      {...props}
-    >
-      {children}
-      <Link
-        css={css`
-          margin-inline-start: var(--spectrum-global-dimension-static-size-50);
-        `}
-        href={`#${id}`}
-      >
-        #
-      </Link>
-    </h4>
-  </div>
-)
-
-const Heading5 = ({ children, className, id, ...props }) => (
-  <div>
-    <h5
-      className={classNames(className, 'spectrum-Heading spectrum-Heading--XS')}
-      {...props}
-    >
-      {children}
-      <Link
-        css={css`
-          margin-inline-start: var(--spectrum-global-dimension-static-size-50);
-        `}
-        href={`#${id}`}
-      >
-        #
-      </Link>
-    </h5>
-  </div>
-)
-
-const Heading6 = ({ children, className, id, ...props }) => (
-  <div>
-    <h6
+const createHeading = (
+  level,
+  { linkMargin, children, className, id, ...props }
+) => {
+  const HeadingTag = `h${level}`
+  const styles = {
+    2: { size: 'L', linkMargin: '--spectrum-global-dimension-static-size-100' },
+    3: { size: 'M', linkMargin: '--spectrum-global-dimension-static-size-50' },
+    4: { size: 'S', linkMargin: '--spectrum-global-dimension-static-size-50' },
+    5: {
+      size: 'XS',
+      linkMargin: '--spectrum-global-dimension-static-size-50'
+    },
+    6: {
+      size: 'XXS',
+      linkMargin: '--spectrum-global-dimension-static-size-50'
+    }
+  }
+  return (
+    <HeadingTag
       className={classNames(
         className,
-        'spectrum-Heading spectrum-Heading--XXS'
+        `spectrum-Heading spectrum-Heading--${styles[level].size}`
       )}
       {...props}
     >
       {children}
       <Link
-        css={css`
-          margin-inline-start: var(--spectrum-global-dimension-static-size-50);
-        `}
         href={`#${id}`}
+        css={css`
+          margin-inline-start: var(${styles[level].linkMargin});
+        `}
       >
         #
       </Link>
-    </h6>
+    </HeadingTag>
+  )
+}
+
+const Heading2 = (props) => (
+  <div>
+    {createHeading(2, props)}
+    <Divider marginBottom='size-300' />
   </div>
 )
+
+const Heading3 = (props) => <div>{createHeading(3, props)}</div>
+
+const Heading4 = (props) => <div>{createHeading(4, props)}</div>
+
+const Heading5 = (props) => <div>{createHeading(5, props)}</div>
+
+const Heading6 = (props) => <div>{createHeading(6, props)}</div>
 
 export { Heading1, Heading2, Heading3, Heading4, Heading5, Heading6 }
