@@ -29,11 +29,13 @@ const nav = (items, selectedKeys, disabledKeys, onSelectionChange) => {
   }
 
   const listItems = items.map((item, index) => {
-    let link = undefined
+    let link
 
-    const {name, icon, path} = item;
+    const { name, icon, path } = item
 
-    const subTree = item.children ? nav( item.children,selectedKeys, disabledKeys, onSelectionChange ) : undefined;
+    const subTree = item.children
+      ? nav(item.children, selectedKeys, disabledKeys, onSelectionChange)
+      : undefined
 
     const itemClasses = classNames([
       'spectrum-SideNav-item',
@@ -41,20 +43,35 @@ const nav = (items, selectedKeys, disabledKeys, onSelectionChange) => {
       { 'is-disabled': disabledKeys.includes(name) }
     ])
 
-    if(path){
-      if(isExternalPath(path)){
-        link = <a href={path} className={classes.link}>{name}</a>
+    if (path) {
+      if (isExternalPath(path)) {
+        link = (
+          <a href={path} className={classes.link}>
+            {name}
+          </a>
+        )
+      } else {
+        link = (
+          <Link to={path} className={classes.link}>
+            {name}
+          </Link>
+        )
       }
-      else{
-        link = <Link to={path} className={classes.link}>{name}</Link>
-      }
-    }
-    else {
-      link = <span className={classes.link}>{icon}{item.name}</span>
+    } else {
+      link = (
+        <span className={classes.link}>
+          {icon}
+          {item.name}
+        </span>
+      )
     }
 
-    return <li className={itemClasses}>{link}{subTree}</li>
-  
+    return (
+      <li key={index} className={itemClasses}>
+        {link}
+        {subTree}
+      </li>
+    )
   })
 
   return <ul className={classes.root}>{listItems}</ul>
