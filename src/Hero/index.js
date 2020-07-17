@@ -67,9 +67,9 @@ const Hero = ({ background = '#1D7DEE', heading, text, image }) => {
 
 Hero.propTypes = {
   background: PropTypes.string,
-  heading: PropTypes.func,
-  text: PropTypes.func,
-  image: PropTypes.func
+  heading: PropTypes.element,
+  text: PropTypes.element,
+  image: PropTypes.element
 }
 
 export { Hero }
