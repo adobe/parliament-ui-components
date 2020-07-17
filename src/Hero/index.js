@@ -45,19 +45,21 @@ const Hero = ({ background = '#1D7DEE', heading, text, image }) => {
             `
           })}
         </View>
-        <View>
-          {React.cloneElement(image, {
-            className: '',
-            css: css`
-              margin: 0;
-              & img {
-                min-width: 750px;
-                max-height: 210px;
-                object-fit: contain;
-              }
-            `
-          })}
-        </View>
+        {image && (
+          <View>
+            {React.cloneElement(image, {
+              className: '',
+              css: css`
+                margin: 0;
+                & img {
+                  min-width: 750px;
+                  max-height: 210px;
+                  object-fit: contain;
+                }
+              `
+            })}
+          </View>
+        )}
       </Flex>
     </section>
   )
