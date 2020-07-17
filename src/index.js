@@ -23,7 +23,14 @@ export {
   GridNav
 } from './Grid'
 export { default as Header } from './Header'
-export { Heading1, Heading2, Heading3 } from './Heading'
+export {
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Heading5,
+  Heading6
+} from './Heading'
 export { Link } from './Link'
 export { List } from './List'
 export { default as Nav } from './Nav'
