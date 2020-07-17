@@ -16,8 +16,17 @@ import { theme } from '@react-spectrum/theme-default'
 
 import { Contributors } from '../index'
 
+const Wrapper = (storyFn) => {
+  return (
+    <Provider theme={theme} colorScheme='light'>
+      {storyFn()}
+    </Provider>
+  )
+}
+
 export default {
-  title: 'components/Contributors'
+  title: 'components/Contributors',
+  decorators: [Wrapper]
 }
 
 export const oneCommitter = () => {
@@ -27,11 +36,7 @@ export const oneCommitter = () => {
     href: ''
   }
 
-  return (
-    <Provider theme={theme} colorScheme='light'>
-      <Contributors {...props} />
-    </Provider>
-  )
+  return <Contributors {...props} />
 }
 
 export const threeCommitter = () => {
@@ -45,11 +50,7 @@ export const threeCommitter = () => {
     href: ''
   }
 
-  return (
-    <Provider theme={theme} colorScheme='light'>
-      <Contributors {...props} />
-    </Provider>
-  )
+  return <Contributors {...props} />
 }
 
 export const fiveCommitter = () => {
@@ -65,11 +66,7 @@ export const fiveCommitter = () => {
     href: ''
   }
 
-  return (
-    <Provider theme={theme} colorScheme='light'>
-      <Contributors {...props} />
-    </Provider>
-  )
+  return <Contributors {...props} />
 }
 
 export const dontShowSixCommitter = () => {
@@ -86,9 +83,5 @@ export const dontShowSixCommitter = () => {
     href: ''
   }
 
-  return (
-    <Provider theme={theme} colorScheme='light'>
-      <Contributors {...props} />
-    </Provider>
-  )
+  return <Contributors {...props} />
 }
