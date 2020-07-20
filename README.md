@@ -35,6 +35,8 @@ class Example extends Component {
 }
 ```
 
+and don't forget to import the packages styles from `@adobe/parliament-ui-components/dist/index.css`.
+
 ## Development
 
 ### Install dependencies
