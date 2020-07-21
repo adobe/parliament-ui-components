@@ -68,14 +68,20 @@ const SearchField = ({
           disabled={isDisabled}
           className='spectrum-Textfield-input spectrum-Search-input'
           autoComplete='off'
-          onChange={onChange || ((e) => setSearchTerm(e.target.value))}
+          onChange={(e) => {
+            setSearchTerm(e.target.value)
+            onChange && onChange(e.target.value)
+          }}
           {...props}
         />
         <button
           type='reset'
           aria-label='Clear search field'
           className='spectrum-ClearButton spectrum-Search-clearButton'
-          onClick={onClear || (() => setSearchTerm(''))}
+          onClick={() => {
+            setSearchTerm('')
+            onClear && onClear()
+          }}
         >
           <Close size='S' />
         </button>

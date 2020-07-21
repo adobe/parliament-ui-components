@@ -18,8 +18,17 @@ import Bug from '@spectrum-icons/workflow/Bug'
 
 import SearchField from '../index'
 
+const Wrapper = (storyFn) => {
+  return (
+    <Provider theme={theme} colorScheme='light'>
+      {storyFn()}
+    </Provider>
+  )
+}
+
 export default {
-  title: 'components/SearchField'
+  title: 'components/SearchField',
+  decorators: [Wrapper]
 }
 
 export const SearchFieldDefault = () => {
@@ -29,11 +38,7 @@ export const SearchFieldDefault = () => {
     }
   }
 
-  return (
-    <Provider theme={theme} colorScheme='light' scale='medium'>
-      <SearchField {...props} />
-    </Provider>
-  )
+  return <SearchField {...props} />
 }
 
 export const SearchFieldLabelAndPlaceholder = () => {
@@ -60,11 +65,7 @@ export const SearchFieldReplaceIcon = () => {
     icon: <Bug size='S' />
   }
 
-  return (
-    <Provider theme={theme} colorScheme='light' scale='medium'>
-      <SearchField {...props} />
-    </Provider>
-  )
+  return <SearchField {...props} />
 }
 
 export const SearchFieldDisabled = () => {
@@ -75,11 +76,7 @@ export const SearchFieldDisabled = () => {
     isDisabled: true
   }
 
-  return (
-    <Provider theme={theme} colorScheme='light' scale='medium'>
-      <SearchField {...props} />
-    </Provider>
-  )
+  return <SearchField {...props} />
 }
 
 export const SearchFieldQuiet = () => {
@@ -90,11 +87,7 @@ export const SearchFieldQuiet = () => {
     isQuiet: true
   }
 
-  return (
-    <Provider theme={theme} colorScheme='light' scale='medium'>
-      <SearchField {...props} />
-    </Provider>
-  )
+  return <SearchField {...props} />
 }
 
 export const SearchFieldWithValue = () => {
@@ -105,9 +98,35 @@ export const SearchFieldWithValue = () => {
     value: 'my value'
   }
 
-  return (
-    <Provider theme={theme} colorScheme='light' scale='medium'>
-      <SearchField {...props} />
-    </Provider>
-  )
+  return <SearchField {...props} />
+}
+
+export const SearchFieldOnSubmit = () => {
+  const props = {
+    onSubmit: (searchTerm) => {
+      window.alert(searchTerm)
+    }
+  }
+
+  return <SearchField {...props} />
+}
+
+export const SearchFieldOnChange = () => {
+  const props = {
+    onChange: (searchTerm) => {
+      console.log(searchTerm)
+    }
+  }
+
+  return <SearchField {...props} />
+}
+
+export const SearchFieldOnClear = () => {
+  const props = {
+    onClear: () => {
+      window.alert('Cleared!')
+    }
+  }
+
+  return <SearchField {...props} />
 }
