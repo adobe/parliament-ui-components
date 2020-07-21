@@ -16,7 +16,8 @@ import Nav from './Nav'
 import Next from './Next'
 import Prev from './Prev'
 import TableOfContents from './TableOfContents'
-import Contributors from './Contributors'
+import { Contributors } from './Contributors'
+import { Feedback } from './Feedback'
 import Alert from './Alert'
 import SideNav from './SideNav'
 import { stripManifestPath, defaultFocus } from './ManifestUtils'
@@ -217,6 +218,12 @@ describe('TableOfContents', () => {
 describe('Contributors', () => {
   it('is truthy', () => {
     expect(Contributors).toBeTruthy()
+  })
+})
+
+describe('Feedback', () => {
+  it('is truthy', () => {
+    expect(Feedback).toBeTruthy()
   })
 })
 
