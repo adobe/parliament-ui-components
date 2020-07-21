@@ -73,6 +73,7 @@ const SearchField = ({
         />
         <button
           type='reset'
+          aria-label='Clear search field'
           className='spectrum-ClearButton spectrum-Search-clearButton'
           onClick={onClear || (() => setSearchTerm(''))}
         >
