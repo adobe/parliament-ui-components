@@ -27,6 +27,7 @@ const ActionButtons = ({ gitUrl, filePath, branch }) => {
         onPress={() => {
           document.location.href = `${gitUrl}/edit/${branch}/${filePath}`
         }}
+        aria-label='Edit page'
       >
         <Edit size='S' />
         <Text>Edit this page</Text>
@@ -36,6 +37,7 @@ const ActionButtons = ({ gitUrl, filePath, branch }) => {
         onPress={() => {
           document.location.href = `${gitUrl}/issues/new?body=Issue%20in%20${filePath}`
         }}
+        aria-label='Log issue'
       >
         <Bug size='S' />
         <Text>Log an issue</Text>
