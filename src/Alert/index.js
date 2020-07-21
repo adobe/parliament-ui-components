@@ -44,7 +44,7 @@ const Alert = ({ header, variant, children }) => {
       <div className='spectrum-Icon spectrum-UIIcon-InfoLarge spectrum-Alert-icon'>
         {icon}
       </div>
-      <div className='spectrum-Alert-header'>{header}</div>
+      {header && <div className='spectrum-Alert-header'>{header}</div>}
       <div className='spectrum-Alert-content'>{children}</div>
     </div>
   )
