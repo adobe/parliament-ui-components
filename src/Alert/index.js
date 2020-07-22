@@ -17,26 +17,30 @@ import AlertIcon from '@spectrum-icons/workflow/Alert'
 
 import '@spectrum-css/alert'
 
-const Alert = ({ header, variant, children }) => {
+const Alert = ({ variant, children }) => {
   let variantClassName = 'spectrum-Alert--info'
-  let icon = <Info />
+  let icon = <Info size='S' UNSAFE_style={{ width: '14px', height: '14px' }} />
   switch (variant) {
     case 'help':
       variantClassName = 'spectrum-Alert--help'
-      icon = <Help />
+      icon = <Help size='S' UNSAFE_style={{ width: '14px', height: '14px' }} />
       break
     case 'error':
       variantClassName = 'spectrum-Alert--error'
-      icon = <AlertIcon />
+      icon = (
+        <AlertIcon size='S' UNSAFE_style={{ width: '14px', height: '14px' }} />
+      )
       break
     case 'warning':
       variantClassName = 'spectrum-Alert--warning'
-      icon = <AlertIcon />
+      icon = (
+        <AlertIcon size='S' UNSAFE_style={{ width: '14px', height: '14px' }} />
+      )
       break
     case 'info':
     default:
       variantClassName = 'spectrum-Alert--info'
-      icon = <Info />
+      icon = <Info size='S' UNSAFE_style={{ width: '14px', height: '14px' }} />
       break
   }
   return (
@@ -44,7 +48,6 @@ const Alert = ({ header, variant, children }) => {
       <div className='spectrum-Icon spectrum-UIIcon-InfoLarge spectrum-Alert-icon'>
         {icon}
       </div>
-      {header && <div className='spectrum-Alert-header'>{header}</div>}
       <div className='spectrum-Alert-content'>{children}</div>
     </div>
   )

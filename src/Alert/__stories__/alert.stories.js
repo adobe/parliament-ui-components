@@ -42,34 +42,8 @@ export const AlertInfo = () => {
   )
 }
 
-export const AlertInfoHeader = () => {
-  const props = {
-    header: 'Info',
-    variant: 'info'
-  }
-
-  return (
-    <Alert {...props}>
-      <Text>This is the Info alert component</Text>
-    </Alert>
-  )
-}
-
 export const AlertHelp = () => {
   const props = {
-    variant: 'help'
-  }
-
-  return (
-    <Alert {...props}>
-      <Text>This is the Help alert component</Text>
-    </Alert>
-  )
-}
-
-export const AlertHelpHeader = () => {
-  const props = {
-    header: 'Help',
     variant: 'help'
   }
 
@@ -92,34 +66,8 @@ export const AlertWarning = () => {
   )
 }
 
-export const AlertWarningHeader = () => {
-  const props = {
-    header: 'Warning',
-    variant: 'warning'
-  }
-
-  return (
-    <Alert {...props}>
-      <Text>This is the Warning alert component</Text>
-    </Alert>
-  )
-}
-
 export const AlertError = () => {
   const props = {
-    variant: 'error'
-  }
-
-  return (
-    <Alert {...props}>
-      <Text>This is the Error alert component</Text>
-    </Alert>
-  )
-}
-
-export const AlertErrorHeader = () => {
-  const props = {
-    header: 'Error',
     variant: 'error'
   }
 
