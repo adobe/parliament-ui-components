@@ -20,7 +20,11 @@ const Popover = ({ children, isOpen, style }) => {
   return (
     <div
       style={style}
-      className={classNames(['spectrum-Popover', { 'is-open': isOpen }])}
+      className={classNames([
+        'spectrum-Popover',
+        'spectrum-Popover--bottom',
+        { 'is-open': isOpen }
+      ])}
     >
       {children}
     </div>
