@@ -48,7 +48,9 @@ const Alert = ({ variant, children }) => {
       <div className='spectrum-Icon spectrum-UIIcon-InfoLarge spectrum-Alert-icon'>
         {icon}
       </div>
-      <div className='spectrum-Alert-content'>{children}</div>
+      <div className='spectrum-Alert-content' style={{ margin: '0' }}>
+        {children}
+      </div>
     </div>
   )
 }
