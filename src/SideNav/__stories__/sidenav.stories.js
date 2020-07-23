@@ -35,10 +35,10 @@ export default {
 export const FlatItems = () => {
   const props = {
     items: [
-      { name: 'Aardvark', path: 'aardvark' },
-      { name: 'Kangaroo', path: 'kangaroo' },
-      { name: 'Snake', path: 'snake' },
-      { name: 'Hippo', path: 'hippo' }
+      { title: 'Aardvark', path: 'aardvark' },
+      { title: 'Kangaroo', path: 'kangaroo' },
+      { title: 'Snake', path: 'snake' },
+      { title: 'Hippo', path: 'hippo' }
     ],
     selectedKeys: ['Kangaroo'],
     disabledKeys: ['Snake']
@@ -49,10 +49,10 @@ export const FlatItems = () => {
 export const FlatItemsWithIcon = () => {
   const props = {
     items: [
-      { name: 'Aardvark', icon: icon },
-      { name: 'Kangaroo', icon: icon },
-      { name: 'Snake', icon: icon },
-      { name: 'Hippo', icon: icon }
+      { title: 'Aardvark', icon: icon },
+      { title: 'Kangaroo', icon: icon },
+      { title: 'Snake', icon: icon },
+      { title: 'Hippo', icon: icon }
     ],
     selectedKeys: ['Kangaroo'],
     disabledKeys: ['Snake']
@@ -64,14 +64,14 @@ export const Multilevel = () => {
   const props = {
     items: [
       {
-        name: 'Mammals',
+        title: 'Mammals',
         children: [
-          { name: 'Aardvark' },
-          { name: 'Kangaroo' },
-          { name: 'Hippo' }
+          { title: 'Aardvark' },
+          { title: 'Kangaroo' },
+          { title: 'Hippo' }
         ]
       },
-      { name: 'Reptiles', children: [{ name: 'Snake' }] }
+      { title: 'Reptiles', children: [{ title: 'Snake' }] }
     ],
     selectedKeys: ['Kangaroo'],
     disabledKeys: ['Snake']

@@ -31,7 +31,7 @@ const nav = (items, selectedKeys, disabledKeys, onSelectionChange) => {
   const listItems = items.map((item, index) => {
     let link
 
-    const { name, icon, path } = item
+    const { title, icon, path } = item
 
     const subTree = item.children
       ? nav(item.children, selectedKeys, disabledKeys, onSelectionChange)
@@ -39,21 +39,21 @@ const nav = (items, selectedKeys, disabledKeys, onSelectionChange) => {
 
     const itemClasses = classNames([
       'spectrum-SideNav-item',
-      { 'is-selected': selectedKeys.includes(name) },
-      { 'is-disabled': disabledKeys.includes(name) }
+      { 'is-selected': selectedKeys.includes(title) },
+      { 'is-disabled': disabledKeys.includes(title) }
     ])
 
     if (path) {
       if (isExternalPath(path)) {
         link = (
           <a href={path} className={classes.link}>
-            {name}
+            {title}
           </a>
         )
       } else {
         link = (
           <Link to={path} className={classes.link}>
-            {name}
+            {title}
           </Link>
         )
       }
@@ -61,7 +61,7 @@ const nav = (items, selectedKeys, disabledKeys, onSelectionChange) => {
       link = (
         <span className={classes.link}>
           {icon}
-          {item.name}
+          {item.title}
         </span>
       )
     }
