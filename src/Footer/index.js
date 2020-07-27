@@ -9,94 +9,59 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
+import { Flex } from '@react-spectrum/layout'
+import { View } from '@react-spectrum/view'
+import { Divider } from '@react-spectrum/divider'
+import '@spectrum-css/typography'
 
-const Footer = () => {
-  const year = new Date().getFullYear()
-  return (
-    <div
-      style={{
-        flexBasis: '100%',
-        maxWidth: '100%',
-        padding: '0px 8px'
-      }}
-    >
-      <footer style={{ display: 'flex', flexDirection: 'column' }}>
-        <div style={{ width: '100%', margin: '0 auto', fontSize: '11px' }}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              flexWrap: 'wrap',
-              float: 'right',
-              padding: '8px !important'
-            }}
-          >
-            <ul style={{ listStyle: 'none' }}>
-              <li
-                style={{
-                  display: 'inline'
-                }}
-              >
-                Copyright © {year} Adobe. All rights reserved. /{' '}
-              </li>
-              <li
-                style={{
-                  display: 'inline'
-                }}
-              >
-                <a
-                  style={{
-                    textDecoration: 'none',
-                    color: 'inherit',
-                    transition: 'color .1s ease,fill .1s ease'
-                  }}
-                  href='https://www.adobe.com/privacy.html'
-                >
-                  Privacy
-                </a>{' '}
-                /{' '}
-              </li>
-              <li
-                style={{
-                  display: 'inline'
-                }}
-              >
-                <a
-                  style={{
-                    textDecoration: 'none',
-                    color: 'inherit',
-                    transition: 'color .1s ease,fill .1s ease'
-                  }}
-                  href='https://www.adobe.com/legal/terms.html'
-                >
-                  Terms of Use
-                </a>{' '}
-                /{' '}
-              </li>
-              <li
-                style={{
-                  display: 'inline'
-                }}
-              >
-                <a
-                  style={{
-                    textDecoration: 'none',
-                    color: 'inherit',
-                    transition: 'color .1s ease,fill .1s ease'
-                  }}
-                  href='https://www.adobe.com/privacy/cookies.html'
-                >
-                  Cookies
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </footer>
-    </div>
-  )
-}
+const Footer = () => (
+  <footer
+    className='spectrum-Body--XS'
+    css={css`
+      margin: 0 var(--spectrum-global-dimension-static-size-400);
+    `}
+  >
+    <Divider size='M' />
+    <Flex justifyContent='space-between' alignItems='center'>
+      <View>
+        <ul
+          css={css`
+            display: inline-flex;
+            list-style: none;
+            padding: 0;
+            & > li {
+              margin-right: var(--spectrum-global-dimension-static-size-400);
+            }
+            & > li > a {
+              text-decoration: none;
+              color: inherit;
+              transition: color 0.1s ease, fill 0.1s ease;
+            }
+          `}
+        >
+          <li>
+            <a href='https://www.adobe.com/legal/terms.html'>Terms of use</a>
+          </li>
+          <li>
+            <a href='https://www.adobe.com/privacy.html'>Privacy policy</a>
+          </li>
+          <li>
+            <a href='https://www.adobe.com/privacy/cookies.html'>Cookies</a>
+          </li>
+          <li>
+            Language: <u>English</u>
+          </li>
+        </ul>
+      </View>
+      <View>
+        <span>
+          Copyright © {new Date().getFullYear()} Adobe. All rights reserved.
+        </span>
+      </View>
+    </Flex>
+  </footer>
+)
 
 export default Footer
