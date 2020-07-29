@@ -13,7 +13,7 @@ governing permissions and limitations under the License.
 import { jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
 
-import { Item } from './'
+import Item from './Item'
 
 import '@spectrum-css/menu'
 
