@@ -102,3 +102,6 @@ public
 
 # distribution folder
 dist
+
+# Visual Studio Code
+.vscode/*
