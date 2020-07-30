@@ -16,11 +16,13 @@ import classNames from 'classnames'
 import '@spectrum-css/typography'
 import { Divider } from '@react-spectrum/divider'
 import { Link } from '../Link'
+import slugify from 'slugify'
 
 import './index.css'
 
 const Heading1 = ({ children, className, ...props }) => (
   <h1
+    id={slugify(children, { lower: true })}
     className={classNames(
       className,
       'spectrum-Heading spectrum-Heading--XL spectrum-Heading--light'
@@ -51,6 +53,7 @@ const createHeading = (
   }
   return (
     <HeadingTag
+      id={slugify(children, { lower: true })}
       className={classNames(
         className,
         `spectrum-Heading spectrum-Heading--${styles[level].size}`
