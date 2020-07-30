@@ -15,7 +15,11 @@ import '@spectrum-css/link'
 import classNames from 'classnames'
 
 export const Link = ({ children, className, href, ...props }) => (
-  <a {...props} href={href} className={classNames(className, 'spectrum-Link')}>
+  <a
+    {...props}
+    href={href}
+    className={classNames(className, 'spectrum-Link spectrum-Link--quiet')}
+  >
     {children}
   </a>
 )
