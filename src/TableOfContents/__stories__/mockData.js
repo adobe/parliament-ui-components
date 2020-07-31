@@ -10,10 +10,120 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 const mockData = {
-  regular:
-    '<ul>\n<li>\n<p><a href="/CLA-Management.md/#cla-management">CLA Management</a></p>\n<ul>\n<li><a href="/CLA-Management.md/#outbound-clas">Outbound CLAs</a></li>\n<li><a href="/CLA-Management.md/#inbound-clas">Inbound CLAs</a></li>\n</ul>\n</li>\n</ul>',
-  twoH1s:
-    '<ul>\n<li><a href="/README.md/#handbook">handbook</a></li>\n<li><a href="/README.md/#table-of-contents">Table of Contents</a></li>\n</ul>'
+  regular: {
+    items: [
+      {
+        url: '#step-2-add-templates',
+        title: 'Step 2: Add templates',
+        items: [
+          {
+            url: '#template-conventions',
+            title: 'Template conventions'
+          },
+          {
+            url: '#template-configuration',
+            title: 'Template configuration'
+          },
+          {
+            url: '#quote-preview_template',
+            title: 'Quote preview_template',
+            items: [
+              {
+                url: '#attr',
+                title: 'Attributes'
+              },
+              {
+                url: '#ko-style',
+                title: 'KO-Styles'
+              },
+              {
+                url: '#css',
+                title: 'CSS'
+              },
+              {
+                url: '#class',
+                title: 'Class'
+              },
+              {
+                url: '#liveedit',
+                title: 'LiveEdit'
+              },
+              {
+                url: '#event',
+                title: 'Event'
+              }
+            ]
+          },
+          {
+            url: '#quote-master_template',
+            title: 'Quote master_template',
+            items: [
+              {
+                url: '#html',
+                title: 'Html'
+              }
+            ]
+          },
+          {
+            url: '#next',
+            title: 'Next'
+          }
+        ]
+      }
+    ]
+  },
+  twoH1s: {
+    items: [
+      {
+        url: '#Heading 1',
+        title: 'Step 3: Add components (optional)'
+      },
+      {
+        url: '#Another Heading 1',
+        title: 'Step 3: Add components (optional)'
+      },
+      {
+        url: '#And Yet Another Heading 1',
+        title: 'Another Heading1',
+        items: [
+          {
+            url: '#about-components',
+            title: 'About components'
+          },
+          {
+            url: '#component-conventions',
+            title: 'Component conventions'
+          },
+          {
+            url: '#component-configuration',
+            title: 'Component configuration'
+          },
+          {
+            url: '#quote-preview_component',
+            title: 'Quote preview_component',
+            items: [
+              {
+                url: '#extend-from-preview',
+                title: 'Extend from Preview'
+              },
+              {
+                url: '#customize-the-options-menu',
+                title: 'Customize the options menu'
+              }
+            ]
+          },
+          {
+            url: '#quote-master_component',
+            title: 'Quote master_component'
+          },
+          {
+            url: '#next',
+            title: 'Next'
+          }
+        ]
+      }
+    ]
+  }
 }
 
 export default mockData
