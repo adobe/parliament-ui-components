@@ -11,55 +11,48 @@ governing permissions and limitations under the License.
 */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { parse } from 'node-html-parser'
 import { Heading } from '@react-spectrum/text'
 
-const stripOuterH1 = function (toc) {
-  let html = ''
-  const root = parse(toc)
-  const headerOneList = root.querySelector('ul')
-  if (headerOneList) {
-    const headerTwoList = headerOneList.querySelector('ul')
-    if (headerTwoList) {
-      html = headerTwoList.toString()
-    }
+import './index.css'
+
+const TableOfContents = ({ tableOfContents }) => {
+  const index = tableOfContents.items && tableOfContents.items.length - 1
+
+  const tocOutline = {
+    items: tableOfContents.items && tableOfContents.items[index].items
   }
-  return html
-}
 
-/*
-const createToC = (tableOfContents, maxDepth, stripH1) => {
-  const depth = 1
-  const root = parse(tableOfContents)
-}
-*/
-
-const TableOfContents = ({ tableOfContents, depth, stripH1 }) => {
-  // Removing the H1 from the ToC
-  const html = stripH1 ? stripOuterH1(tableOfContents) : tableOfContents
   return (
-    <div
-      style={{
-        height: '70vh',
-        overflowY: 'auto',
-        overflowX: 'hidden'
-      }}
-    >
-      <Heading level={5}>On this page</Heading>
-      <span className='toc' dangerouslySetInnerHTML={{ __html: html }} />
-    </div>
+    <React.Fragment>
+      <Heading level={4}>On this page</Heading>
+      <span className='tableOfContents'>
+        <ul>
+          <ul>{tocOutline.items && tocOutline.items.map(renderItem)}</ul>
+        </ul>
+      </span>
+    </React.Fragment>
   )
 }
 
+const renderItem = (item) => (
+  <li className='item' key={item.title}>
+    {item.items ? (
+      <ul>
+        <a href={item.url}>{item.title}</a>
+        {item.items.map(renderItem)}
+      </ul>
+    ) : (
+      <a href={item.url}>{item.title}</a>
+    )}
+  </li>
+)
+
 TableOfContents.propTypes = {
-  tableOfContents: PropTypes.string,
-  depth: PropTypes.number,
-  stripH1: PropTypes.bool
+  tableOfContents: PropTypes.object
 }
 
 TableOfContents.defaultProps = {
-  tableOfContents: '',
-  depth: 2,
-  stripH1: true
+  tableOfContents: {}
 }
+
 export default TableOfContents
