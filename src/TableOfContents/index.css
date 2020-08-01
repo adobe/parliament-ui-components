@@ -9,8 +9,9 @@
  *  OF ANY KIND, either express or implied. See the License for the specific language
  *  governing permissions and limitations under the License.
  */
-h4 {
-  margin: 0;
+
+h6 {
+  margin-bottom: 4px !important;
 }
 
 ul {
@@ -33,15 +34,18 @@ span.tableOfContents * {
   text-decoration: none;
   max-width: 200px;
   list-style-type: none;
-  /* margin-left: -.75em; */
 }
 
 span.tableOfContents ul {
   margin: 0;
 }
 
+span.tableOfContents > ul > li.item {
+  margin-left: 0 !important;
+}
+
 .item {
-  margin-top: 8px;
+  margin-top: 5px;
   margin-bottom: 0;
-  margin-left: .75em !important;
+  margin-left: 1em !important;
 }
