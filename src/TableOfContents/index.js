@@ -11,7 +11,7 @@ governing permissions and limitations under the License.
 */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Heading } from '@react-spectrum/text'
+import { Heading6 } from '../Heading'
 
 import './index.css'
 
@@ -24,11 +24,9 @@ const TableOfContents = ({ tableOfContents }) => {
 
   return (
     <React.Fragment>
-      <Heading level={4}>On this page</Heading>
+      <Heading6>ON THIS PAGE</Heading6>
       <span className='tableOfContents'>
-        <ul>
-          <ul>{tocOutline.items && tocOutline.items.map(renderItem)}</ul>
-        </ul>
+        <ul>{tocOutline.items && tocOutline.items.map(renderItem)}</ul>
       </span>
     </React.Fragment>
   )
