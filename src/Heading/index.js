@@ -37,9 +37,9 @@ const createHeading = (
   const HeadingTag = `h${level}`
   const isHeading1 = level === 1
   const isHeading2 = level === 2
-  const marginLink = `var(--spectrum-global-dimension-static-size-${
+  const marginLink = `margin-inline-start: var(--spectrum-global-dimension-static-size-${
     isHeading2 ? '100' : '50'
-  }`
+  });`
 
   return (
     <>
@@ -76,7 +76,7 @@ const createHeading = (
           <Link
             href={`#${id}`}
             css={css`
-              margin-inline-start: ${marginLink};
+              ${marginLink}
             `}
           >
             #
