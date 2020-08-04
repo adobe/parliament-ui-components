@@ -34,7 +34,7 @@ const Item = ({
         { 'is-selected': isSelected },
         { 'is-disabled': isDisabled }
       ])}
-      role='option'
+      role='menuitem'
       aria-selected={isSelected}
       aria-disabled={isDisabled}
       tabIndex='0'
