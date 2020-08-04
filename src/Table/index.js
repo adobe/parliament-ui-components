@@ -15,10 +15,10 @@ import classNames from 'classnames'
 
 import '@spectrum-css/table'
 
-const Table = ({ children, isQuiet, ...props }) => {
+const Table = ({ children, isQuiet, className, ...props }) => {
   return (
     <table
-      className={classNames([
+      className={classNames(className, [
         'spectrum-Table',
         { 'spectrum-Table--quiet': isQuiet }
       ])}
@@ -29,24 +29,44 @@ const Table = ({ children, isQuiet, ...props }) => {
   )
 }
 
-const THead = ({ children }) => {
-  return <thead className='spectrum-Table-head'>{children}</thead>
+const THead = ({ children, className }) => {
+  return (
+    <thead className={classNames(className, ['spectrum-Table-head'])}>
+      {children}
+    </thead>
+  )
 }
 
-const Th = ({ children }) => {
-  return <th className='spectrum-Table-headCell'>{children}</th>
+const Th = ({ children, className }) => {
+  return (
+    <th className={classNames(className, ['spectrum-Table-headCell'])}>
+      {children}
+    </th>
+  )
 }
 
-const TBody = ({ children }) => {
-  return <tbody className='spectrum-Table-body'>{children}</tbody>
+const TBody = ({ children, className }) => {
+  return (
+    <tbody className={classNames(className, ['spectrum-Table-body'])}>
+      {children}
+    </tbody>
+  )
 }
 
-const Tr = ({ children }) => {
-  return <tr className='spectrum-Table-row'>{children}</tr>
+const Tr = ({ children, className }) => {
+  return (
+    <tr className={classNames(className, ['spectrum-Table-row'])}>
+      {children}
+    </tr>
+  )
 }
 
-const Td = ({ children }) => {
-  return <td className='spectrum-Table-cell'>{children}</td>
+const Td = ({ children, className }) => {
+  return (
+    <td className={classNames(className, ['spectrum-Table-cell'])}>
+      {children}
+    </td>
+  )
 }
 
 export { Table, THead, Th, TBody, Tr, Td }
