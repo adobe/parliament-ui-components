@@ -75,6 +75,7 @@
     "@spectrum-css/sidenav": "^3.0.0-beta.2",
     "@spectrum-css/table": "^3.0.0-beta.3",
     "@spectrum-css/tabs": "^3.0.0-beta.3",
+    "@spectrum-css/tags": "^3.0.0-beta.3",
     "@spectrum-css/textfield": "^3.0.0-beta.3",
     "@spectrum-css/typography": "^2.1.3",
     "@spectrum-css/vars": "^2.3.0",
