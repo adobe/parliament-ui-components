@@ -43,23 +43,21 @@ const GlobalHeader = ({ globalNav, pages, docs, location }) => {
   const [openSecondaryMenu, setOpenSecondaryMenu] = useState(false)
   const [isAnimated, setIsAnimated] = useState(false)
 
-  const positionSelectedTabIndicator = (path, tabs) => {
-    const selectedTab =
-      tabs[pages.indexOf(findSelectedTopPage(location.pathname, pages))]
-
-    if (selectedTab) {
-      selectedTabIndicator.current.style.transform = `translate(${selectedTab.current.offsetLeft}px, 0px)`
-      selectedTabIndicator.current.style.width = `${selectedTab.current.offsetWidth}px`
-    }
+  const positionSelectedTabIndicator = () => {
+    const selectedTab = tabs.filter((tab) => tab.current)[
+      pages.indexOf(findSelectedTopPage(location.pathname, pages))
+    ]
+    selectedTabIndicator.current.style.transform = `translate(${selectedTab.current.offsetLeft}px, 0px)`
+    selectedTabIndicator.current.style.width = `${selectedTab.current.offsetWidth}px`
   }
 
   useEffect(() => {
     selectedTabIndicator.current.style.transition = isAnimated ? '' : 'none'
-    positionSelectedTabIndicator(location.pathname, tabs)
+    positionSelectedTabIndicator()
 
     // Font affects positioning of the Tab indicator
     document.fonts.ready.then(() => {
-      positionSelectedTabIndicator(location.pathname, tabs)
+      positionSelectedTabIndicator()
       setIsAnimated(true)
     })
   }, [location.pathname])
@@ -88,9 +86,8 @@ const GlobalHeader = ({ globalNav, pages, docs, location }) => {
     <header
       role='banner'
       css={css`
-        ${stretched};
-        border-bottom: var(--spectrum-global-dimension-static-size-10) solid
-          var(--spectrum-global-color-gray-200);
+        ${stretched}
+        border-bottom: var(--spectrum-global-dimension-static-size-10) solid var(--spectrum-global-color-gray-200);
         box-sizing: border-box;
       `}
     >
@@ -243,7 +240,14 @@ const GlobalHeader = ({ globalNav, pages, docs, location }) => {
                           max-width: none !important;
                         `}
                       >
-                        <Flex gap='size-400'>
+                        <div
+                          css={css`
+                            display: flex;
+                            gap: var(
+                              --spectrum-global-dimension-static-size-200
+                            );
+                          `}
+                        >
                           {menu.sections.map((section, i) => (
                             <React.Fragment key={i}>
                               <View>
@@ -257,11 +261,12 @@ const GlobalHeader = ({ globalNav, pages, docs, location }) => {
                                     </strong>
                                   </View>
                                 )}
-                                <ul className='spectrum-AssetList'>
+                                <ul className='spectrum-AssetList' role='menu'>
                                   {section.pages.map((page, k) => (
                                     <li
                                       key={k}
                                       className='spectrum-AssetList-item'
+                                      role='menuitem'
                                       css={css`
                                         width: auto !important;
                                         height: auto !important;
@@ -322,7 +327,7 @@ const GlobalHeader = ({ globalNav, pages, docs, location }) => {
                               )}
                             </React.Fragment>
                           ))}
-                        </Flex>
+                        </div>
                         {menu.sections[0].viewAll && (
                           <View marginTop='size-100' marginStart='size-200'>
                             <Link

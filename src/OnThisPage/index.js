@@ -12,11 +12,17 @@
 
 import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
+import { View } from '@react-spectrum/view'
 import { css } from '@emotion/core'
 import classNames from 'classnames'
 import { Link } from '../Link'
-import '@spectrum-css/typography'
 import { layoutColumns } from '../utils'
+import { ChevronDown } from '../Icons'
+import '@spectrum-css/typography'
+import '@spectrum-css/icon'
+import '@spectrum-css/dropdown'
+import '@spectrum-css/popover'
+import '@spectrum-css/menu'
 
 const OnThisPage = ({ tableOfContents }) => {
   const [activeHeadingLink, setActiveHeadingLink] = useState('')
@@ -90,12 +96,11 @@ const OnThisPage = ({ tableOfContents }) => {
   }, [])
 
   const Outline = ({ withSubHeading }) => (
-    <nav
+    <View
+      elementType='nav'
       role='navigation'
       aria-label='Article Outline'
-      css={css`
-        margin: var(--spectrum-global-dimension-static-size-400) 0;
-      `}
+      marginY='size-400'
     >
       <h4
         className='spectrum-Detail--L'
@@ -159,19 +164,116 @@ const OnThisPage = ({ tableOfContents }) => {
           </li>
         ))}
       </ol>
-    </nav>
+    </View>
   )
+
+  const OutlinePicker = () => {
+    const popover = useRef(null)
+    const [openMenu, setOpenMenu] = useState(false)
+    const id = new Date().getTime()
+
+    useEffect(() => {
+      const onClick = (event) => {
+        if (!popover.current.contains(event.target)) {
+          setOpenMenu(false)
+        }
+      }
+
+      document.addEventListener('click', onClick)
+
+      return () => document.removeEventListener('click', onClick)
+    }, [])
+
+    return (
+      <View marginY='size-400'>
+        <h4
+          className='spectrum-Detail--L'
+          css={css`
+            color: var(--spectrum-global-color-gray-600);
+            margin-bottom: var(--spectrum-global-dimension-static-size-200);
+          `}
+        >
+          On this page
+        </h4>
+        <div
+          className={classNames('spectrum-Dropdown', {
+            'is-open': openMenu
+          })}
+        >
+          <button
+            className={classNames(
+              'spectrum-FieldButton',
+              'spectrum-Dropdown-trigger',
+              { 'is-selected': openMenu }
+            )}
+            aria-haspopup='listbox'
+            aria-expanded={openMenu}
+            aria-controls={id}
+            onClick={(event) => {
+              event.stopPropagation()
+              event.nativeEvent.stopImmediatePropagation()
+              setOpenMenu(!openMenu)
+            }}
+          >
+            <span className='spectrum-Dropdown-label is-placeholder'>
+              Navigate to section
+            </span>
+            <ChevronDown className='spectrum-Dropdown-icon' />
+          </button>
+          <div
+            aria-hidden={!openMenu}
+            css={css`
+              width: 100%;
+              z-index: 1;
+              max-height: var(--spectrum-global-dimension-static-size-2400);
+            `}
+            className={classNames(
+              'spectrum-Popover',
+              'spectrum-Popover--bottom',
+              'spectrum-Dropdown-popover',
+              { 'is-open': openMenu }
+            )}
+            ref={popover}
+          >
+            <ul className='spectrum-Menu' role='listbox'>
+              {tableOfContentsItems.map((section, index) => (
+                <li
+                  key={index}
+                  className='spectrum-Menu-item'
+                  role='option'
+                  tabIndex='0'
+                >
+                  <a
+                    css={css`
+                      text-decoration: none;
+                      color: inherit;
+                    `}
+                    href={section.url}
+                    className='spectrum-Menu-itemLabel'
+                  >
+                    {section.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </View>
+    )
+  }
 
   return tableOfContentsItems ? (
     <>
       <div ref={outlineRef}>
-        <Outline />
+        {tableOfContentsItems.length <= 10 ? <Outline /> : <OutlinePicker />}
       </div>
       <aside
         className={isPinned ? 'is-pinned' : ''}
         aria-hidden={!isPinned}
         css={css`
           position: fixed;
+          overflow: auto;
+          bottom: 0;
           top: var(--spectrum-global-dimension-static-size-800);
           padding-left: var(--spectrum-global-dimension-static-size-900);
           left: ${layoutColumns(9)};
