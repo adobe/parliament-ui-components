@@ -14,9 +14,11 @@ governing permissions and limitations under the License.
 import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { Link } from '../Link'
+import { View } from '@react-spectrum/view'
 
 import '@spectrum-css/typography'
 import '@spectrum-css/link'
+import { Heading } from '@react-spectrum/text'
 
 const TableOfContents = ({ tableOfContents }) => {
   const index = tableOfContents.items && tableOfContents.items.length - 1
@@ -26,12 +28,11 @@ const TableOfContents = ({ tableOfContents }) => {
   }
 
   return (
-    <nav
+    <View
+      elementType='nav'
       role='navigation'
       aria-label='Article Outline'
-      css={css`
-        margin: var(--spectrum-global-dimension-static-size-400) 0;
-      `}
+      marginY='size-400'
     >
       <h4
         className='spectrum-Detail--L'
@@ -64,7 +65,7 @@ const TableOfContents = ({ tableOfContents }) => {
             tableOfContentsItems.items.map(renderItem, index)}
         </ul>
       </span>
-    </nav>
+    </View>
   )
 }
 
