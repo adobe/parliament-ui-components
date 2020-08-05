@@ -10,10 +10,11 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { useEffect, useState, useRef } from 'react'
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
+import { Fragment, useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { View } from '@react-spectrum/view'
-import { css } from '@emotion/core'
 import classNames from 'classnames'
 import { Link } from '../Link'
 import { layoutColumns } from '../utils'
@@ -263,7 +264,7 @@ const OnThisPage = ({ tableOfContents }) => {
   }
 
   return tableOfContentsItems ? (
-    <>
+    <Fragment>
       <div ref={outlineRef}>
         {tableOfContentsItems.length <= 10 ? <Outline /> : <OutlinePicker />}
       </div>
@@ -293,7 +294,7 @@ const OnThisPage = ({ tableOfContents }) => {
       >
         <Outline withSubHeading />
       </aside>
-    </>
+    </Fragment>
   ) : null
 }
 

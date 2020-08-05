@@ -9,7 +9,8 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-
+/** @jsx jsx */
+import { jsx } from '@emotion/core'
 import { withPrefix } from 'gatsby'
 
 export const layoutColumns = (columns, gutters = []) =>
@@ -110,3 +111,11 @@ export const findSelectedPageSiblings = (pathname, pages) => {
 
   return siblings
 }
+
+export const cloneElement = (element, props) =>
+  jsx(element.type, {
+    key: element.key,
+    ref: element.ref,
+    ...element.props,
+    ...props
+  })

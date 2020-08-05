@@ -10,8 +10,9 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import { css } from '@emotion/core'
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
+import { Fragment } from 'react'
 import classNames from 'classnames'
 import '@spectrum-css/typography'
 import { Divider } from '@react-spectrum/divider'
@@ -42,7 +43,7 @@ const createHeading = (
   });`
 
   return (
-    <>
+    <Fragment>
       {!isHeading1 && <Anchor id={id} />}
       <HeadingTag
         {...props}
@@ -56,13 +57,13 @@ const createHeading = (
         css={css`
           ${isHeading1
             ? `& + p {
-          margin-top: var(--spectrum-global-dimension-static-size-300) !important;
-          font-size: var(--spectrum-global-dimension-static-size-225);
-        }`
+              margin-top: var(--spectrum-global-dimension-static-size-300) !important;
+              font-size: var(--spectrum-global-dimension-static-size-225);
+            }`
             : `& a {
-          opacity: 0;
-          transition: opacity var(--spectrum-global-animation-duration-100) ease-in-out;
-        }
+              opacity: 0;
+              transition: opacity var(--spectrum-global-animation-duration-100) ease-in-out;
+            }
 
         &:hover a {
           opacity: 1;
@@ -84,7 +85,7 @@ const createHeading = (
         )}
       </HeadingTag>
       {isHeading2 && <Divider marginBottom='size-300' />}
-    </>
+    </Fragment>
   )
 }
 

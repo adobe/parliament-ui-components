@@ -47,7 +47,7 @@ export const hero = () => {
     <Paragraph>
       <img
         alt=''
-        src='https://raw.githubusercontent.com/adobe/gatsby-theme-spectrum-example/main/src/pages/illustration.png'
+        src='https://raw.githubusercontent.com/adobe/gatsby-theme-parliament-example/main/src/pages/overview/illustration.png'
       />
     </Paragraph>
   )
