@@ -9,57 +9,94 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
+
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
-import { parse } from 'node-html-parser'
-import { Heading } from '@react-spectrum/text'
+import { Link } from '../Link'
+import { View } from '@react-spectrum/view'
 
-const stripOuterH1 = function (toc) {
-  let html = ''
-  const root = parse(toc)
-  const headerOneList = root.querySelector('ul')
-  if (headerOneList) {
-    const headerTwoList = headerOneList.querySelector('ul')
-    if (headerTwoList) {
-      html = headerTwoList.toString()
-    }
+import '@spectrum-css/typography'
+import '@spectrum-css/link'
+
+const TableOfContents = ({ tableOfContents }) => {
+  const index = tableOfContents.items && tableOfContents.items.length - 1
+
+  const tableOfContentsItems = {
+    items: tableOfContents.items && tableOfContents.items[index].items
   }
-  return html
-}
 
-/*
-const createToC = (tableOfContents, maxDepth, stripH1) => {
-  const depth = 1
-  const root = parse(tableOfContents)
-}
-*/
-
-const TableOfContents = ({ tableOfContents, depth, stripH1 }) => {
-  // Removing the H1 from the ToC
-  const html = stripH1 ? stripOuterH1(tableOfContents) : tableOfContents
   return (
-    <div
-      style={{
-        height: '70vh',
-        overflowY: 'auto',
-        overflowX: 'hidden'
-      }}
+    <View
+      elementType='nav'
+      role='navigation'
+      aria-label='Article Outline'
+      marginY='size-400'
     >
-      <Heading level={5}>On this page</Heading>
-      <span className='toc' dangerouslySetInnerHTML={{ __html: html }} />
-    </div>
+      <h4
+        className='spectrum-Detail--L'
+        css={css`
+          color: var(--spectrum-global-color-gray-600);
+        `}
+      >
+        On this page
+      </h4>
+      <span
+        css={css`
+          * {
+            list-style: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-decoration: none;
+            max-width: 200px;
+          }
+        `}
+      >
+        <ul
+          className='spectrum-Body--M'
+          css={css`
+            margin: 0;
+            padding-left: 0;
+          `}
+        >
+          {tableOfContentsItems.items &&
+            tableOfContentsItems.items.map(renderItem, index)}
+        </ul>
+      </span>
+    </View>
   )
 }
 
+const renderItem = (item, index) => (
+  <li
+    key={index}
+    css={css`
+      margin-top: var(--spectrum-global-dimension-static-size-150);
+    `}
+  >
+    {item.items ? (
+      <ul
+        css={css`
+          list-style: none;
+          padding-left: var(--spectrum-global-dimension-static-size-200);
+        `}
+      >
+        <Link href={item.url}>{item.title}</Link>
+        {item.items.map(renderItem)}
+      </ul>
+    ) : (
+      <Link href={item.url}>{item.title}</Link>
+    )}
+  </li>
+)
+
 TableOfContents.propTypes = {
-  tableOfContents: PropTypes.string,
-  depth: PropTypes.number,
-  stripH1: PropTypes.bool
+  tableOfContents: PropTypes.object
 }
 
 TableOfContents.defaultProps = {
-  tableOfContents: '',
-  depth: 2,
-  stripH1: true
+  tableOfContents: {}
 }
+
 export default TableOfContents
