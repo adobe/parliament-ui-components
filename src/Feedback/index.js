@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import React from 'react'
+import { css } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { Flex } from '@react-spectrum/layout'
 import { View } from '@react-spectrum/view'
@@ -26,7 +26,12 @@ const Feedback = ({ onYes, onNo }) => (
     >
       Was this helpful ?
     </span>
-    <Flex gap='size-200'>
+    <div
+      css={css`
+        display: flex;
+        gap: var(--spectrum-global-dimension-static-size-200);
+      `}
+    >
       <View>
         <Button
           variant='primary'
@@ -47,7 +52,7 @@ const Feedback = ({ onYes, onNo }) => (
           No
         </Button>
       </View>
-    </Flex>
+    </div>
   </Flex>
 )
 
