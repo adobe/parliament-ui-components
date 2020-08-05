@@ -9,38 +9,84 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Heading6 } from '../Heading'
 
-import './index.css'
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
+import PropTypes from 'prop-types'
+import { Link } from '../Link'
+
+import '@spectrum-css/typography'
+import '@spectrum-css/link'
 
 const TableOfContents = ({ tableOfContents }) => {
   const index = tableOfContents.items && tableOfContents.items.length - 1
 
-  const tocOutline = {
+  const tableOfContentsItems = {
     items: tableOfContents.items && tableOfContents.items[index].items
   }
 
   return (
-    <React.Fragment>
-      <Heading6>ON THIS PAGE</Heading6>
-      <span className='tableOfContents'>
-        <ul>{tocOutline.items && tocOutline.items.map(renderItem)}</ul>
+    <nav
+      role='navigation'
+      aria-label='Article Outline'
+      css={css`
+        margin: var(--spectrum-global-dimension-static-size-400) 0;
+      `}
+    >
+      <h4
+        className='spectrum-Detail--L'
+        css={css`
+          color: var(--spectrum-global-color-gray-600);
+        `}
+      >
+        On this page
+      </h4>
+      <span
+        css={css`
+          * {
+            list-style: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-decoration: none;
+            max-width: 200px;
+          }
+        `}
+      >
+        <ul
+          className='spectrum-Body--M'
+          css={css`
+            margin: 0;
+            padding-left: 0;
+          `}
+        >
+          {tableOfContentsItems.items &&
+            tableOfContentsItems.items.map(renderItem, index)}
+        </ul>
       </span>
-    </React.Fragment>
+    </nav>
   )
 }
 
-const renderItem = (item) => (
-  <li className='item' key={item.title}>
+const renderItem = (item, index) => (
+  <li
+    key={index}
+    css={css`
+      margin-top: var(--spectrum-global-dimension-static-size-150);
+    `}
+  >
     {item.items ? (
-      <ul>
-        <a href={item.url}>{item.title}</a>
+      <ul
+        css={css`
+          list-style: none;
+          padding-left: var(--spectrum-global-dimension-static-size-200);
+        `}
+      >
+        <Link href={item.url}>{item.title}</Link>
         {item.items.map(renderItem)}
       </ul>
     ) : (
-      <a href={item.url}>{item.title}</a>
+      <Link href={item.url}>{item.title}</Link>
     )}
   </li>
 )
