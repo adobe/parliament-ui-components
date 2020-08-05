@@ -18,7 +18,6 @@ import { View } from '@react-spectrum/view'
 
 import '@spectrum-css/typography'
 import '@spectrum-css/link'
-import { Heading } from '@react-spectrum/text'
 
 const TableOfContents = ({ tableOfContents }) => {
   const index = tableOfContents.items && tableOfContents.items.length - 1
