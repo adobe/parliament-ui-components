@@ -90,7 +90,7 @@ const ParametersTable = ({ title, items }) => (
   </div>
 )
 
-const Parameters = ({ title = 'Parameters', items = [] }) => {
+const Parameters = ({ items = [] }) => {
   const queryParams = items.filter((item) => item.in === 'query')
   const headerParams = items.filter((item) => item.in === 'header')
   const pathParams = items.filter((item) => item.in === 'path')
@@ -112,7 +112,7 @@ const Parameters = ({ title = 'Parameters', items = [] }) => {
         <ParametersTable title='Query Parameters' items={queryParams} />
       ) : undefined}
       {bodyParams.length > 0 ? (
-        <ParametersTable title='Body Parameters' items={bodyParams} />
+        <ParametersTable title='Request Body Schema' items={bodyParams} />
       ) : undefined}
     </div>
   )
