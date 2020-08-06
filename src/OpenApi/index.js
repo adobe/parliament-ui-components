@@ -10,11 +10,12 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { jsx } from '@emotion/core'
 import React from 'react'
 import PropTypes from 'prop-types'
 
 import Info from './Info'
+import Paths from './Paths'
 import Tag from './Tag'
 
 import '@spectrum-css/tags'
@@ -26,7 +27,8 @@ const OpenApi = ({ spec = {} }) => {
       <Info info={spec.info} />
       {spec.tags.map((tag, index) => (
         <React.Fragment key={index}>
-          <Tag name={tag.name} description={tag.description} />
+          <Tag name={tag.name} description={tag.summary} />
+          <Paths tag={tag.name} spec={spec} />
         </React.Fragment>
       ))}
     </div>

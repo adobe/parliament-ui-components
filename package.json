@@ -68,6 +68,7 @@
     "@spectrum-css/button": "^3.0.0-beta.3",
     "@spectrum-css/dropdown": "^3.0.0-beta.3",
     "@spectrum-css/icon": "^2.1.1",
+    "@spectrum-css/label": "^2.0.7",
     "@spectrum-css/link": "^3.0.0",
     "@spectrum-css/menu": "^3.0.0-beta.2",
     "@spectrum-css/popover": "^3.0.0-beta.3",
