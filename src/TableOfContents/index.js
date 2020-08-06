@@ -73,6 +73,7 @@ const renderItem = (item, index) => (
     key={index}
     css={css`
       margin-top: var(--spectrum-global-dimension-static-size-150);
+      margin-bottom: 0;
     `}
   >
     {item.items ? (
@@ -80,6 +81,9 @@ const renderItem = (item, index) => (
         css={css`
           list-style: none;
           padding-left: var(--spectrum-global-dimension-static-size-200);
+          margin-left: 0;
+          margin-bottom: 0;
+          margin-top: 0;
         `}
       >
         <Link
