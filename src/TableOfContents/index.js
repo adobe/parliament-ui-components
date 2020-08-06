@@ -72,7 +72,7 @@ const renderItem = (item, index) => (
   <li
     key={index}
     css={css`
-      margin-top: var(--spectrum-global-dimension-static-size-150);
+      margin-top: var(--spectrum-global-dimension-static-size-50);
       margin-bottom: 0;
     `}
   >
