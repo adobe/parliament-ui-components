@@ -29,6 +29,10 @@ const Paths = ({ tag = '', spec = {} }) => {
   const paths = Object.entries(spec.paths).filter(
     ([url, routes]) =>
       Object.entries(routes).filter(([verb, obj]) => {
+        // OpenAPI 3.0 has a global parameters object.
+        if (verb === 'parameters') {
+          return false
+        }
         return obj.tags.includes(tag)
       }).length > 0
   )
@@ -37,7 +41,9 @@ const Paths = ({ tag = '', spec = {} }) => {
     <React.Fragment>
       {paths.map(([path, verbs]) => {
         return Object.entries(verbs).map(([verb, obj]) => {
-          return <Path path={path} verb={verb} data={obj} spec={spec} />
+          if (verb !== 'parameters') {
+            return <Path path={path} verb={verb} data={obj} spec={spec} />
+          }
         })
       })}
     </React.Fragment>
@@ -45,6 +51,7 @@ const Paths = ({ tag = '', spec = {} }) => {
 }
 
 const Path = ({ path = '', verb = '', data = {}, spec = {} }) => {
+  const definitions = spec.swagger ? spec.definitions : spec.components.schemas
   return (
     <Grid
       areas={['reference  code']}
@@ -71,7 +78,7 @@ const Path = ({ path = '', verb = '', data = {}, spec = {} }) => {
         >
           {data.description}
         </Paragraph>
-        <Parameters items={data.parameters} definitions={spec.definitions} />
+        <Parameters data={data} definitions={definitions} />
         <Responses responses={data.responses} />
       </View>
       <View gridArea='code' UNSAFE_style={{ backgroundColor: '#323232' }}>

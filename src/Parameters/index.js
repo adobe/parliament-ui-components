@@ -103,20 +103,35 @@ const ParametersTable = ({ title, items, description }) => (
   </div>
 )
 
-const extractDefinitionName = (schema) => {
-  if (schema.$ref) {
-    const path = schema.$ref.split('/')
+const extractDefinitionName = (body) => {
+  if (body.schema && body.schema.$ref) {
+    // Open API 2.0
+    const path = body.schema.$ref.split('/')
+    return path[path.length - 1]
+  } else if (body.$ref) {
+    // Open API 3.0
+    const path = body.$ref.split('/')
     return path[path.length - 1]
   } else {
     return ''
   }
 }
 
+const extractType = (value) => {
+  if (value.type) {
+    return value.type
+  } else if (value.allOf) {
+    return 'object'
+  }
+}
+
 const createBodyItems = (bodyParams, definitions) => {
   const bodyItems = []
   if (bodyParams.length > 0) {
-    const definitionName = extractDefinitionName(bodyParams[0].schema)
+    console.log(bodyParams)
+    const definitionName = extractDefinitionName(bodyParams[0])
     console.log(definitionName)
+    console.log(definitions)
     // console.log(definitions[definitionName].properties)
     if (definitions[definitionName] && definitions[definitionName].properties) {
       Object.entries(definitions[definitionName].properties).map(
@@ -124,7 +139,7 @@ const createBodyItems = (bodyParams, definitions) => {
           bodyItems.push({
             name: key,
             description: value.description,
-            type: value.type,
+            type: extractType(value),
             required: value.required
           })
         }
@@ -135,14 +150,17 @@ const createBodyItems = (bodyParams, definitions) => {
   return bodyItems
 }
 
-const Parameters = ({ items = [], definitions = {}, spec = {} }) => {
+const Parameters = ({ data = {}, definitions = {}, spec = {} }) => {
+  const items = data.parameters ? data.parameters : []
   const queryParams = items.filter((item) => item.in === 'query')
   const headerParams = items.filter((item) => item.in === 'header')
   const pathParams = items.filter((item) => item.in === 'path')
   const cookieParams = items.filter((item) => item.in === 'cookie')
   const bodyParams = items.filter((item) => item.in === 'body')
 
-  console.log(definitions)
+  if (data.requestBody) {
+    bodyParams.push(data.requestBody)
+  }
 
   const bodyDefinitions = createBodyItems(bodyParams, definitions)
 
