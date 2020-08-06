@@ -20,6 +20,7 @@ import { View } from '@react-spectrum/view'
 
 import { Paragraph } from '../Paragraph'
 import Parameters from '../Parameters'
+import Responses from './Responses'
 import Verb from './Verb'
 
 import '@spectrum-css/typography'
@@ -71,6 +72,7 @@ const Path = ({ path = '', verb = '', data = {}, spec = {} }) => {
           {data.description}
         </Paragraph>
         <Parameters items={data.parameters} definitions={spec.definitions} />
+        <Responses responses={data.responses} />
       </View>
       <View gridArea='code' UNSAFE_style={{ backgroundColor: '#323232' }}>
         code{' '}
