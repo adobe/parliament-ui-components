@@ -13,6 +13,9 @@ governing permissions and limitations under the License.
 import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
 
+import $RefParser from '@apidevtools/json-schema-ref-parser'
+
+import { Paragraph } from '../Paragraph'
 import { Table, TBody, Tr, Td } from '../SpectrumTable'
 
 import '@spectrum-css/tags'
@@ -24,7 +27,7 @@ const buildTag = (label) => (
   </div>
 )
 
-const ParametersTable = ({ title, items }) => (
+const ParametersTable = ({ title, items, description }) => (
   <div
     css={css`
       margin-bottom: var(
@@ -44,6 +47,7 @@ const ParametersTable = ({ title, items }) => (
     >
       <strong>{title}</strong>
     </div>
+    {description ? <Paragraph>{description}</Paragraph> : undefined}
     <Table
       isQuiet
       css={css`
@@ -90,12 +94,46 @@ const ParametersTable = ({ title, items }) => (
   </div>
 )
 
-const Parameters = ({ items = [] }) => {
+const extractDefinitionName = (schema) => {
+  if (schema.$ref) {
+    const path = schema.$ref.split('/')
+    return path[path.length - 1]
+  } else {
+    return ''
+  }
+}
+
+const createBodyItems = (bodyParams, definitions) => {
+  const bodyItems = []
+  if (bodyParams.length > 0) {
+    const definitionName = extractDefinitionName(bodyParams[0].schema)
+    console.log(definitionName)
+    // console.log(definitions[definitionName].properties)
+    if (definitions[definitionName] && definitions[definitionName].properties) {
+      Object.entries(definitions[definitionName].properties).map(
+        ([key, value]) => {
+          bodyItems.push({
+            name: key,
+            description: value.description,
+            type: value.type
+          })
+        }
+      )
+    }
+  }
+  return bodyItems
+}
+
+const Parameters = ({ items = [], definitions = {} }) => {
   const queryParams = items.filter((item) => item.in === 'query')
   const headerParams = items.filter((item) => item.in === 'header')
   const pathParams = items.filter((item) => item.in === 'path')
   const cookieParams = items.filter((item) => item.in === 'cookie')
   const bodyParams = items.filter((item) => item.in === 'body')
+
+  console.log(definitions)
+
+  const bodyDefinitions = createBodyItems(bodyParams, definitions)
 
   return (
     <div>
@@ -112,7 +150,11 @@ const Parameters = ({ items = [] }) => {
         <ParametersTable title='Query Parameters' items={queryParams} />
       ) : undefined}
       {bodyParams.length > 0 ? (
-        <ParametersTable title='Request Body Schema' items={bodyParams} />
+        <ParametersTable
+          title='Request Body Schema'
+          items={bodyDefinitions}
+          description={bodyParams[0].description}
+        />
       ) : undefined}
     </div>
   )

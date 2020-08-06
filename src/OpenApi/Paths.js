@@ -36,14 +36,14 @@ const Paths = ({ tag = '', spec = {} }) => {
     <React.Fragment>
       {paths.map(([path, verbs]) => {
         return Object.entries(verbs).map(([verb, obj]) => {
-          return <Path path={path} verb={verb} data={obj} />
+          return <Path path={path} verb={verb} data={obj} spec={spec} />
         })
       })}
     </React.Fragment>
   )
 }
 
-const Path = ({ path = '', verb = '', data = {} }) => {
+const Path = ({ path = '', verb = '', data = {}, spec = {} }) => {
   return (
     <Grid
       areas={['reference  code']}
@@ -70,7 +70,7 @@ const Path = ({ path = '', verb = '', data = {} }) => {
         >
           {data.description}
         </Paragraph>
-        <Parameters items={data.parameters} />
+        <Parameters items={data.parameters} definitions={spec.definitions} />
       </View>
       <View gridArea='code' UNSAFE_style={{ backgroundColor: '#323232' }}>
         code{' '}
