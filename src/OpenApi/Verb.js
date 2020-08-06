@@ -13,31 +13,51 @@ governing permissions and limitations under the License.
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 
 import '@spectrum-css/label'
 
 const Verb = ({ label = 'get' }) => {
+  let color = '--spectrum-global-color-blue-400'
+  switch (label) {
+    case 'patch':
+      color = '--spectrum-global-color-seafoam-400'
+      break
+    case 'put':
+      color = '--spectrum-global-color-orange-400'
+      break
+    case 'post':
+      color = '--spectrum-global-color-green-400'
+      break
+    case 'head':
+      color = '--spectrum-global-color-fuchsia-400'
+      break
+    case 'delete':
+      color = '--spectrum-global-color-red-400'
+      break
+    case 'get':
+    default:
+      color = '--spectrum-global-color-blue-400'
+      break
+  }
+
   return (
-    <span
-      className={classNames([
-        'spectrum-Label',
-        { 'spectrum-Label--blue': label === 'get' },
-        { 'spectrum-Label--seafoam': label === 'patch' },
-        { 'spectrum-Label--orange': label === 'put' },
-        { 'spectrum-Label--green': label === 'post' },
-        { 'spectrum-Label--fuchsia': label === 'head' },
-        { 'spectrum-Label--red': label === 'delete' }
-      ])}
+    <strong
       css={css`
+        text-transform: uppercase;
+        border: 2px solid var(${color});
+        border-radius: var(--spectrum-global-dimension-size-50);
+        color: var(${color});
+        font-size: var(--spectrum-global-dimension-size-125);
         margin-right: var(
           --spectrum-global-dimension-size-100,
           var(--spectrum-alias-size-100)
         );
+        padding: var(--spectrum-global-dimension-size-50)
+          var(--spectrum-global-dimension-size-125);
       `}
     >
       {label}
-    </span>
+    </strong>
   )
 }
 

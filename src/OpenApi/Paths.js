@@ -17,6 +17,8 @@ import PropTypes from 'prop-types'
 import { Divider } from '@react-spectrum/divider'
 import { Grid } from '@react-spectrum/layout'
 import { View } from '@react-spectrum/view'
+import { Provider } from '@react-spectrum/provider'
+import { theme } from '@react-spectrum/theme-default'
 
 import { Paragraph } from '../Paragraph'
 import Parameters from '../Parameters'
@@ -24,6 +26,7 @@ import Responses from './Responses'
 import Verb from './Verb'
 
 import '@spectrum-css/typography'
+import '@spectrum-css/well'
 
 const Paths = ({ tag = '', spec = {} }) => {
   const paths = Object.entries(spec.paths).filter(
@@ -61,13 +64,11 @@ const Path = ({ path = '', verb = '', data = {}, spec = {} }) => {
       marginBotton='size-400'
     >
       <View gridArea='reference'>
-        <div>
-          <h1 className='spectrum-Heading spectrum-Heading--M spectrum-Heading--light'>
-            <Verb label={verb} />
-            <strong>{data.summary}</strong>
-          </h1>
-          <Divider marginBottom='size-400' />
-        </div>
+        <h1 className='spectrum-Heading spectrum-Heading--M spectrum-Heading--light'>
+          <Verb label={verb} />
+          <strong>{data.summary}</strong>
+        </h1>
+        <Divider marginBottom='size-400' />
         <Paragraph
           css={css`
             margin-bottom: var(
@@ -81,8 +82,20 @@ const Path = ({ path = '', verb = '', data = {}, spec = {} }) => {
         <Parameters data={data} definitions={definitions} />
         <Responses responses={data.responses} />
       </View>
-      <View gridArea='code' UNSAFE_style={{ backgroundColor: '#323232' }}>
-        code{' '}
+      <View gridArea='code'>
+        <Provider theme={theme} colorScheme='dark'>
+          <span className='spectrum-Well'>
+            <Verb label={verb} />
+            <span
+              css={css`
+                font-weight: 700;
+                color: white;
+              `}
+            >
+              {path}
+            </span>
+          </span>
+        </Provider>
       </View>
     </Grid>
   )
