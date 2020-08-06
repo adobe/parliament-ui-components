@@ -71,13 +71,15 @@ const ParametersTable = ({ title, items, description }) => (
                 >
                   {item.name}
                 </span>
-                <span
-                  css={css`
-                    color: var(--spectrum-global-color-red-700);
-                  `}
-                >
-                  {item.required ? 'required' : undefined}
-                </span>
+                {item.required ? (
+                  <span
+                    css={css`
+                      color: var(--spectrum-global-color-red-700);
+                    `}
+                  >
+                    required
+                  </span>
+                ) : undefined}
               </Flex>
             </Td>
             <Td
