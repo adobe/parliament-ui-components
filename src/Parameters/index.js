@@ -13,7 +13,7 @@ governing permissions and limitations under the License.
 import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
 
-import $RefParser from '@apidevtools/json-schema-ref-parser'
+import { Flex } from '@react-spectrum/layout'
 
 import { Paragraph } from '../Paragraph'
 import { Table, TBody, Tr, Td } from '../SpectrumTable'
@@ -63,13 +63,22 @@ const ParametersTable = ({ title, items, description }) => (
                 width: 20%;
               `}
             >
-              <span
-                css={css`
-                  font-weight: 700;
-                `}
-              >
-                {item.name}
-              </span>
+              <Flex direction='column'>
+                <span
+                  css={css`
+                    font-weight: 700;
+                  `}
+                >
+                  {item.name}
+                </span>
+                <span
+                  css={css`
+                    color: var(--spectrum-global-color-red-700);
+                  `}
+                >
+                  {item.required ? 'required' : undefined}
+                </span>
+              </Flex>
             </Td>
             <Td
               css={css`
@@ -115,16 +124,18 @@ const createBodyItems = (bodyParams, definitions) => {
           bodyItems.push({
             name: key,
             description: value.description,
-            type: value.type
+            type: value.type,
+            required: value.required
           })
         }
       )
     }
   }
+
   return bodyItems
 }
 
-const Parameters = ({ items = [], definitions = {} }) => {
+const Parameters = ({ items = [], definitions = {}, spec = {} }) => {
   const queryParams = items.filter((item) => item.in === 'query')
   const headerParams = items.filter((item) => item.in === 'header')
   const pathParams = items.filter((item) => item.in === 'path')
