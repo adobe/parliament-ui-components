@@ -123,6 +123,84 @@ const mockData = {
         ]
       }
     ]
+  },
+  moreTestData: {
+    items: [
+      {
+        url: '#segment-definition-data-structure',
+        title: 'Segment Definition Data Structure',
+        items: [
+          {
+            url: '#terms',
+            title: 'Terms',
+            items: [
+              {
+                url: '#schema',
+                title: 'Schema'
+              },
+              {
+                url: '#attributes',
+                title: 'Attributes'
+              },
+              {
+                url: '#context',
+                title: 'Context'
+              },
+              {
+                url: '#row',
+                title: 'Row'
+              },
+              {
+                url: '#container',
+                title: 'Container'
+              },
+              {
+                url: '#container-set',
+                title: 'Container Set'
+              },
+              {
+                url: '#data-set',
+                title: 'Data Set'
+              }
+            ]
+          },
+          {
+            url: '#schema-functions',
+            title: 'Schema Functions'
+          },
+          {
+            url: '#available-data-comparison-functions',
+            title: 'Available Data Comparison Functions'
+          },
+          {
+            url: '#segment-definition-examples',
+            title: 'Segment Definition Examples',
+            items: [
+              {
+                url: '#example-1',
+                title: 'Example 1'
+              },
+              {
+                url: '#example-2',
+                title: 'Example 2'
+              },
+              {
+                url: '#example-3',
+                title: 'Example 3'
+              },
+              {
+                url: '#example-4',
+                title: 'Example 4'
+              },
+              {
+                url: '#example-5',
+                title: 'Example 5'
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 }
 

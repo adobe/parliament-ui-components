@@ -82,7 +82,14 @@ const renderItem = (item, index) => (
           padding-left: var(--spectrum-global-dimension-static-size-200);
         `}
       >
-        <Link href={item.url}>{item.title}</Link>
+        <Link
+          href={item.url}
+          css={css`
+            margin-left: -16px;
+          `}
+        >
+          {item.title}
+        </Link>
         {item.items.map(renderItem)}
       </ul>
     ) : (

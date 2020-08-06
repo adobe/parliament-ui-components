@@ -52,5 +52,17 @@ export const withTwoH1s = () => {
   )
 }
 
+export const withDifferentData = () => {
+  const props = {
+    tableOfContents: mockData.moreTestData
+  }
+  return (
+    <Provider theme={theme} colorScheme='light'>
+      <TableOfContents {...props} />
+    </Provider>
+  )
+}
+
 withData.story = { name: 'With Data' }
 withTwoH1s.story = { name: 'With Two+ H1s' }
+withDifferentData.story = { name: 'With Different Data' }
