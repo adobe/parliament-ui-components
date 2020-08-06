@@ -72,7 +72,7 @@ const renderItem = (item, index) => (
   <li
     key={index}
     css={css`
-      margin-top: var(--spectrum-global-dimension-static-size-50);
+      margin-top: var(--spectrum-global-dimension-static-size-100);
       margin-bottom: 0;
     `}
   >
@@ -101,6 +101,8 @@ const renderItem = (item, index) => (
     )}
   </li>
 )
+
+// :rocket
 
 TableOfContents.propTypes = {
   tableOfContents: PropTypes.object
