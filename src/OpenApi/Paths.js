@@ -72,7 +72,9 @@ const Path = ({ path = '', verb = '', data = {} }) => {
         </Paragraph>
         <Parameters items={data.parameters} />
       </View>
-      <View gridArea='code'>code </View>
+      <View gridArea='code' UNSAFE_style={{ backgroundColor: '#323232' }}>
+        code{' '}
+      </View>
     </Grid>
   )
 }
