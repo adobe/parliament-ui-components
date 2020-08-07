@@ -20,4 +20,4 @@ const useLaunchScript = (scriptUrl) => {
   }, [scriptUrl])
 }
 
-export default useLaunchScript
+export { useLaunchScript }

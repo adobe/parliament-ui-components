@@ -9,15 +9,24 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
+import React from 'react'
+import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 
-const OpenApiGrid = styled.div`
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 30px 1fr 30px;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-`
+const OpenApiGrid = ({ children, ...props }) => (
+  <div
+    css={css`
+      display: grid;
+      grid-template-columns: 100%;
+      grid-template-rows: 30px 1fr 30px;
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+    `}
+    {...props}
+  >
+    {children}
+  </div>
+)
 
 const OpenApiGridNav = styled.div`
   grid-area: 1 / 1 / 2 / 1;

@@ -9,12 +9,12 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-export { default as ActionButton } from './ActionButton'
-export { default as ActionButtons } from './ActionButtons'
-export { default as Alert } from './Alert'
+export { ActionButton } from './ActionButton'
+export { ActionButtons } from './ActionButtons'
+export { Alert } from './Alert'
 export { Button } from './Button'
 export { Contributors } from './Contributors'
-export { default as Footer } from './Footer'
+export { Footer } from './Footer'
 export {
   Grid,
   GridContent,
@@ -22,7 +22,7 @@ export {
   GridFooter,
   GridNav
 } from './Grid'
-export { default as Header } from './Header'
+export { Header } from './Header'
 export {
   Heading1,
   Heading2,
@@ -33,8 +33,8 @@ export {
 } from './Heading'
 export { Link } from './Link'
 export { List } from './List'
-export { default as Nav } from './Nav'
-export { default as Next } from './Next'
+export { Nav } from './Nav'
+export { Next } from './Next'
 export {
   OpenApiGrid,
   OpenApiGridContent,
@@ -42,13 +42,20 @@ export {
   OpenApiGridNav
 } from './OpenApiGrid'
 export { Paragraph } from './Paragraph'
-export { default as Prev } from './Prev'
-export { default as SearchField } from './SearchField'
-export { default as SideNav } from './SideNav'
+export { Prev } from './Prev'
+export { SearchField } from './SearchField'
+export { SideNav } from './SideNav'
 export { stripManifestPath, defaultFocus } from './ManifestUtils'
-export { default as TableOfContents } from './TableOfContents'
-export { Table, THead, Th, TBody, Tr, Td } from './SpectrumTable'
+export { TableOfContents } from './TableOfContents'
+export { Table, THead, Th, TBody, Tr, Td } from './Table'
 export { Feedback } from './Feedback'
 export { Hero } from './Hero'
 export { Menu, Item } from './Menu'
-export { default as Popover } from './Popover'
+export { Popover } from './Popover'
+export { Breadcrumbs } from './Breadcrumbs'
+export { DiscoverBlock } from './DiscoverBlock'
+export { GlobalHeader } from './GlobalHeader'
+export { NextPrev } from './NextPrev'
+export { NextSteps } from './NextSteps'
+export { OnThisPage } from './OnThisPage'
+export { Resources } from './Resources'

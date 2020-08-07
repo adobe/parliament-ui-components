@@ -10,15 +10,20 @@
  * governing permissions and limitations under the License.
  */
 
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import React from 'react'
+import { css } from '@emotion/core'
 import PropTypes from 'prop-types'
-import { Flex } from '@react-spectrum/layout'
 import { View } from '@react-spectrum/view'
 import { Button } from '../Button'
 
-const Feedback = ({ onYes, onNo }) => (
-  <Flex alignItems='center'>
+const Feedback = ({ onYes, onNo, ...props }) => (
+  <div
+    css={css`
+      display: flex;
+      align-items: center;
+    `}
+    {...props}
+  >
     <span
       css={css`
         padding-right: var(--spectrum-global-dimension-static-size-200);
@@ -26,7 +31,12 @@ const Feedback = ({ onYes, onNo }) => (
     >
       Was this helpful ?
     </span>
-    <Flex gap='size-200'>
+    <div
+      css={css`
+        display: flex;
+        gap: var(--spectrum-global-dimension-static-size-200);
+      `}
+    >
       <View>
         <Button
           variant='primary'
@@ -47,8 +57,8 @@ const Feedback = ({ onYes, onNo }) => (
           No
         </Button>
       </View>
-    </Flex>
-  </Flex>
+    </div>
+  </div>
 )
 
 Feedback.propTypes = {

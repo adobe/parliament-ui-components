@@ -9,14 +9,14 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-/** @jsx jsx */
-import { jsx } from '@emotion/core'
+
+import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import '@spectrum-css/popover'
 
-const Popover = ({ children, isOpen, style }) => {
+const Popover = ({ children, isOpen, style, ...props }) => {
   return (
     <div
       style={style}
@@ -25,6 +25,7 @@ const Popover = ({ children, isOpen, style }) => {
         'spectrum-Popover--bottom',
         { 'is-open': isOpen }
       ])}
+      {...props}
     >
       {children}
     </div>
@@ -35,4 +36,4 @@ Popover.propTypes = {
   isOpen: PropTypes.bool
 }
 
-export default Popover
+export { Popover }

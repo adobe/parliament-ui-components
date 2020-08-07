@@ -9,19 +9,21 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+
+import React from 'react'
+import { css } from '@emotion/core'
 import { Flex } from '@react-spectrum/layout'
 import { View } from '@react-spectrum/view'
 import { Divider } from '@react-spectrum/divider'
 import '@spectrum-css/typography'
 
-const Footer = () => (
+const Footer = ({ ...props }) => (
   <footer
     className='spectrum-Body--XS'
     css={css`
       margin: 0 var(--spectrum-global-dimension-static-size-400);
     `}
+    {...props}
   >
     <Divider size='M' />
     <Flex justifyContent='space-between' alignItems='center'>
@@ -64,4 +66,4 @@ const Footer = () => (
   </footer>
 )
 
-export default Footer
+export { Footer }

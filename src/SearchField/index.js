@@ -10,9 +10,8 @@
  *  governing permissions and limitations under the License.
  */
 
-/** @jsx jsx */
-import { jsx } from '@emotion/core'
-import { useState } from 'react'
+import React, { useState } from 'react'
+
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
@@ -101,4 +100,4 @@ SearchField.propTypes = {
   value: PropTypes.string
 }
 
-export default SearchField
+export { SearchField }

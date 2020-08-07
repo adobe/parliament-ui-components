@@ -77,8 +77,13 @@ const nav = (items, selectedKeys, disabledKeys, onSelectionChange) => {
   return <ul className={classes.root}>{listItems}</ul>
 }
 
-const SideNav = ({ items = [], selectedKeys = [], disabledKeys = [] }) => {
-  return <nav>{nav(items, selectedKeys, disabledKeys)}</nav>
+const SideNav = ({
+  items = [],
+  selectedKeys = [],
+  disabledKeys = [],
+  ...props
+}) => {
+  return <nav {...props}>{nav(items, selectedKeys, disabledKeys)}</nav>
 }
 
 SideNav.propTypes = {
@@ -87,4 +92,4 @@ SideNav.propTypes = {
   disabledKeys: PropTypes.array
 }
 
-export default SideNav
+export { SideNav }

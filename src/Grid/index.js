@@ -9,25 +9,35 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
+
+import React from 'react'
+import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 
-const Grid = styled.div`
-  display: grid;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  @media screen and (min-width: 1201px) {
-    grid-template-rows: 1fr 30px;
-    grid-template-columns: 256px repeat(11, 1fr);
-  }
-  @media screen and (min-width: 768px) and (max-width: 1200px) {
-    grid-template-rows: 1fr 30px;
-    grid-template-columns: 256px repeat(9, 1fr);
-  }
-  @media screen and (max-width: 767px) {
-    grid-template-rows: 30px 1fr 30px;
-    grid-template-columns: repeat(10, 1fr);
-  }
-`
+const Grid = ({ children, ...props }) => (
+  <div
+    {...props}
+    css={css`
+      display: grid;
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+      @media screen and (min-width: 1201px) {
+        grid-template-rows: 1fr 30px;
+        grid-template-columns: 256px repeat(11, 1fr);
+      }
+      @media screen and (min-width: 768px) and (max-width: 1200px) {
+        grid-template-rows: 1fr 30px;
+        grid-template-columns: 256px repeat(9, 1fr);
+      }
+      @media screen and (max-width: 767px) {
+        grid-template-rows: 30px 1fr 30px;
+        grid-template-columns: repeat(10, 1fr);
+      }
+    `}
+  >
+    {children}
+  </div>
+)
 
 const GridContent = styled.div`
   padding-top: 30px;
