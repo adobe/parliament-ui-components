@@ -13,12 +13,17 @@
 import React from 'react'
 import { css } from '@emotion/core'
 import PropTypes from 'prop-types'
-import { Flex } from '@react-spectrum/layout'
 import { View } from '@react-spectrum/view'
 import { Button } from '../Button'
 
-const Feedback = ({ onYes, onNo }) => (
-  <Flex alignItems='center'>
+const Feedback = ({ onYes, onNo, ...props }) => (
+  <div
+    css={css`
+      display: flex;
+      align-items: center;
+    `}
+    {...props}
+  >
     <span
       css={css`
         padding-right: var(--spectrum-global-dimension-static-size-200);
@@ -53,7 +58,7 @@ const Feedback = ({ onYes, onNo }) => (
         </Button>
       </View>
     </div>
-  </Flex>
+  </div>
 )
 
 Feedback.propTypes = {

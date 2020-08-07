@@ -24,7 +24,7 @@ import '@spectrum-css/dropdown'
 import '@spectrum-css/popover'
 import '@spectrum-css/menu'
 
-const OnThisPage = ({ tableOfContents }) => {
+const OnThisPage = ({ tableOfContents, ...props }) => {
   const [activeHeadingLink, setActiveHeadingLink] = useState('')
   const [isPinned, setIsPinned] = useState(false)
   const outlineRef = useRef(null)
@@ -32,17 +32,19 @@ const OnThisPage = ({ tableOfContents }) => {
   const tableOfContentsItems = tableOfContents?.items?.[0]?.items
 
   useEffect(() => {
-    const observer = new window.IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        setIsPinned(!entry.isIntersecting)
-      }
-    })
+    const observer =
+      window.IntersectionObserver &&
+      new window.IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          setIsPinned(!entry.isIntersecting)
+        }
+      })
 
     if (outlineRef?.current) {
-      observer.observe(outlineRef.current)
+      observer && observer.observe(outlineRef.current)
     }
 
-    return () => observer.disconnect()
+    return () => observer && observer.disconnect()
   }, [])
 
   useEffect(() => {
@@ -263,7 +265,7 @@ const OnThisPage = ({ tableOfContents }) => {
   }
 
   return tableOfContentsItems ? (
-    <>
+    <div {...props}>
       <div ref={outlineRef}>
         {tableOfContentsItems.length <= 10 ? <Outline /> : <OutlinePicker />}
       </div>
@@ -293,7 +295,7 @@ const OnThisPage = ({ tableOfContents }) => {
       >
         <Outline withSubHeading />
       </aside>
-    </>
+    </div>
   ) : null
 }
 

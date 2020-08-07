@@ -50,7 +50,7 @@ const createHeading = (
           className,
           `spectrum-Heading--${headingSizes[level - 1]}`,
           {
-            'spectrum-Heading--XL': isHeading1
+            'spectrum-Heading--light': isHeading1
           }
         )}
         css={css`

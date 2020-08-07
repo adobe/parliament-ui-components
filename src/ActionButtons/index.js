@@ -9,42 +9,38 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-
 import { Text } from '@react-spectrum/text'
-
-import ActionButton from '../ActionButton'
+import { ActionButton } from '../ActionButton'
 
 import Bug from '@spectrum-icons/workflow/Bug'
 import Edit from '@spectrum-icons/workflow/Edit'
 
-const ActionButtons = ({ gitUrl, filePath, branch }) => {
-  return (
-    <Fragment>
-      <ActionButton
-        isQuiet
-        onPress={() => {
-          document.location.href = `${gitUrl}/edit/${branch}/${filePath}`
-        }}
-        aria-label='Edit page'
-      >
-        <Edit size='S' />
-        <Text>Edit this page</Text>
-      </ActionButton>
-      <ActionButton
-        isQuiet
-        onPress={() => {
-          document.location.href = `${gitUrl}/issues/new?body=Issue%20in%20${filePath}`
-        }}
-        aria-label='Log issue'
-      >
-        <Bug size='S' />
-        <Text>Log an issue</Text>
-      </ActionButton>
-    </Fragment>
-  )
-}
+const ActionButtons = ({ gitUrl, filePath, branch, ...props }) => (
+  <div {...props}>
+    <ActionButton
+      isQuiet
+      onPress={() => {
+        document.location.href = `${gitUrl}/edit/${branch}/${filePath}`
+      }}
+      aria-label='Edit page'
+    >
+      <Edit size='S' />
+      <Text>Edit this page</Text>
+    </ActionButton>
+    <ActionButton
+      isQuiet
+      onPress={() => {
+        document.location.href = `${gitUrl}/issues/new?body=Issue%20in%20${filePath}`
+      }}
+      aria-label='Log issue'
+    >
+      <Bug size='S' />
+      <Text>Log an issue</Text>
+    </ActionButton>
+  </div>
+)
 
 ActionButtons.propTypes = {
   branch: PropTypes.string,
@@ -58,4 +54,4 @@ ActionButtons.defaultProps = {
   gitUrl: ''
 }
 
-export default ActionButtons
+export { ActionButtons }

@@ -15,13 +15,14 @@ import { Link } from 'gatsby'
 
 import { Heading } from '@react-spectrum/text'
 
-const Header = ({ siteTitle }) => {
+const Header = ({ siteTitle, ...props }) => {
   return (
     <header
       style={{
         background: '#2f2c2c',
         marginBottom: '1.45rem'
       }}
+      {...props}
     >
       <div
         style={{
@@ -53,4 +54,4 @@ Header.defaultProps = {
   siteTitle: ''
 }
 
-export default Header
+export { Header }

@@ -26,9 +26,9 @@ const centered = css`
   gap: var(--spectrum-global-dimension-static-size-100);
 `
 
-const NextPrev = ({ nextPage, previousPage }) =>
+const NextPrev = ({ nextPage, previousPage, ...props }) =>
   nextPage || previousPage ? (
-    <div className='spectrum-Body--M'>
+    <div className='spectrum-Body--M' {...props}>
       <Flex marginBottom='size-800' marginTop='size-800'>
         <View>
           {previousPage && (

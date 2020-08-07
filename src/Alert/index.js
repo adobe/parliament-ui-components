@@ -17,7 +17,7 @@ import AlertIcon from '@spectrum-icons/workflow/Alert'
 
 import '@spectrum-css/alert'
 
-const Alert = ({ variant, children }) => {
+const Alert = ({ variant, children, ...props }) => {
   let variantClassName = 'spectrum-Alert--info'
   let icon = <Info size='S' UNSAFE_style={{ width: '14px', height: '14px' }} />
   switch (variant) {
@@ -44,7 +44,7 @@ const Alert = ({ variant, children }) => {
       break
   }
   return (
-    <div className={`spectrum-Alert ${variantClassName}`}>
+    <div className={`spectrum-Alert ${variantClassName}`} {...props}>
       <div className='spectrum-Icon spectrum-UIIcon-InfoLarge spectrum-Alert-icon'>
         {icon}
       </div>
@@ -55,4 +55,4 @@ const Alert = ({ variant, children }) => {
   )
 }
 
-export default Alert
+export { Alert }

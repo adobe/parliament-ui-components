@@ -15,7 +15,7 @@ import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { Flex } from '@react-spectrum/layout'
 
-const Contributors = ({ href = '#', contributors = [], date }) => (
+const Contributors = ({ href = '#', contributors = [], date, ...props }) => (
   <a
     href={href}
     target='_blank'
@@ -24,6 +24,7 @@ const Contributors = ({ href = '#', contributors = [], date }) => (
       text-decoration: none;
       color: inherit;
     `}
+    {...props}
   >
     <Flex alignItems='center'>
       <div

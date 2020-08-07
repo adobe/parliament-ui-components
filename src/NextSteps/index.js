@@ -20,9 +20,9 @@ import '@spectrum-css/link'
 import Document from '@spectrum-icons/workflow/Document'
 import PropTypes from 'prop-types'
 
-const NextSteps = ({ pages }) => {
+const NextSteps = ({ pages, ...props }) => {
   return pages.length > 0 ? (
-    <View marginTop='size-800'>
+    <View marginTop='size-800' {...props}>
       <Heading4>Next steps</Heading4>
       <ul
         className='spectrum-Body--M'

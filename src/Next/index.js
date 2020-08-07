@@ -9,8 +9,9 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+
+import React from 'react'
+import { css } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
@@ -18,9 +19,9 @@ import ChevronRight from '@spectrum-icons/workflow/ChevronRight'
 import '@spectrum-css/link'
 import '@spectrum-css/typography'
 
-const Next = ({ url, title }) => {
+const Next = ({ url, title, ...props }) => {
   return (
-    <div className='spectrum-Body spectrum-Body--M'>
+    <div className='spectrum-Body spectrum-Body--M' {...props}>
       <Link
         to={url}
         rel='next'
@@ -55,4 +56,4 @@ Next.defaultProps = {
   title: ''
 }
 
-export default Next
+export { Next }
