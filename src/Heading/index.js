@@ -16,21 +16,8 @@ import React from 'react'
 import classNames from 'classnames'
 import '@spectrum-css/typography'
 import { Divider } from '@react-spectrum/divider'
-import { Link } from '../Link'
-import slugify from 'slugify'
 
 const headingSizes = ['XL', 'L', 'M', 'S', 'XS', 'XXS']
-
-const Anchor = ({ id }) => (
-  <span
-    aria-hidden='true'
-    id={id}
-    css={css`
-      position: relative;
-      top: calc(-1 * var(--spectrum-global-dimension-static-size-800));
-    `}
-  />
-)
 
 const createHeading = (
   level,
@@ -39,16 +26,12 @@ const createHeading = (
   const HeadingTag = `h${level}`
   const isHeading1 = level === 1
   const isHeading2 = level === 2
-  const marginLink = `margin-inline-start: var(--spectrum-global-dimension-static-size-${
-    isHeading2 ? '100' : '50'
-  });`
 
   return (
     <React.Fragment>
-      {!isHeading1 && <Anchor id={id} />}
       <HeadingTag
         {...props}
-        id={slugify(children, { lower: true })}
+        id={`${id}`}
         className={classNames(
           className,
           `spectrum-Heading--${headingSizes[level - 1]}`,
@@ -62,29 +45,12 @@ const createHeading = (
           margin-top: var(--spectrum-global-dimension-static-size-300) !important;
           font-size: var(--spectrum-global-dimension-static-size-225);
         }`
-            : `& a {
-          opacity: 0;
-          transition: opacity var(--spectrum-global-animation-duration-100) ease-in-out;
-        }
-
-        &:hover a {
-          opacity: 1;
-        }`}
+            : ``}
 
           ${styles}
         `}
       >
         {children}
-        {!isHeading1 && (
-          <Link
-            href={`#${id}`}
-            css={css`
-              ${marginLink}
-            `}
-          >
-            #
-          </Link>
-        )}
       </HeadingTag>
       {isHeading2 && <Divider marginBottom='size-300' />}
     </React.Fragment>
