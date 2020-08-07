@@ -34,7 +34,7 @@ const createToC = (tableOfContents, maxDepth, stripH1) => {
 }
 */
 
-const TableOfContents = ({ tableOfContents, depth, stripH1 }) => {
+const TableOfContents = ({ tableOfContents, depth, stripH1, ...props }) => {
   // Removing the H1 from the ToC
   const html = stripH1 ? stripOuterH1(tableOfContents) : tableOfContents
   return (
@@ -44,6 +44,7 @@ const TableOfContents = ({ tableOfContents, depth, stripH1 }) => {
         overflowY: 'auto',
         overflowX: 'hidden'
       }}
+      {...props}
     >
       <Heading level={5}>On this page</Heading>
       <span className='toc' dangerouslySetInnerHTML={{ __html: html }} />
@@ -62,4 +63,4 @@ TableOfContents.defaultProps = {
   depth: 2,
   stripH1: true
 }
-export default TableOfContents
+export { TableOfContents }

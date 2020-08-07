@@ -11,27 +11,26 @@
 
 ## Install
 
+You can install the package using a package manager like [npm](https://docs.npmjs.com/cli/npm) or [yarn](https://classic.yarnpkg.com/lang/en/).
 ```bash
-npm install --save @adobe/parliament-ui-components
+yarn add @adobe/parliament-ui-components
 ```
 
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React from 'react'
 
 import { Header, Footer } from '@adobe/parliament-ui-components'
 
-class Example extends Component {
-  render() {
-    return (
-      <>
-        <Header siteTitle={title} />
-        <div>Hello world!</div>
-        <Footer />
-      </>
-    )
-  }
+function Example {
+  return (
+    <>
+      <Header siteTitle={title} />
+      <div>Hello world!</div>
+      <Footer />
+    </>
+  )
 }
 ```
 
@@ -41,17 +40,27 @@ and don't forget to import the packages styles from `@adobe/parliament-ui-compon
 
 ### Install dependencies
 
-```sh
-npm install
+```bash
+yarn
+```
+
+### Run Tests
+
+```bash
+yarn test
 ```
 
 ### Run Storybook
 
-This project uses [Storybook][] for testing the look and behavior of its UI components.
+This project uses [Storybook][http://storybook.js.org/] for testing the look and behavior of its UI components.
 
-```sh
-npm run storybook
+```bash
+yarn storybook
 ```
+
+## Documentation
+
+TODO
 
 ## Contributing
 

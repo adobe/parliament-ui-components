@@ -10,20 +10,20 @@
  * governing permissions and limitations under the License.
  */
 
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import React from 'react'
+import { css } from '@emotion/core'
 import { Flex } from '@react-spectrum/layout'
 import { View } from '@react-spectrum/view'
 import '@spectrum-css/typography'
 import PropTypes from 'prop-types'
-import cloneElement from '../utils'
 
 const Hero = ({
   background = '#1D7DEE',
   textColor = 'var(--spectrum-global-color-gray-200)',
   heading,
   text,
-  image
+  image,
+  ...props
 }) => {
   return (
     <section
@@ -32,28 +32,31 @@ const Hero = ({
         margin-bottom: var(--spectrum-global-dimension-static-size-400);
         background-color: ${background};
       `}
+      {...props}
     >
       <Flex height='100%' alignItems='center'>
         <View marginStart='size-800'>
-          {cloneElement(heading, {
-            className: 'spectrum-Heading--XL',
-            css: css`
-              margin-bottom: var(--spectrum-global-dimension-static-size-200);
-              color: ${textColor};
-            `
-          })}
+          {heading &&
+            React.cloneElement(heading, {
+              className: 'spectrum-Heading--XL',
+              css: css`
+                margin-bottom: var(--spectrum-global-dimension-static-size-200);
+                color: ${textColor};
+              `
+            })}
 
-          {cloneElement(text, {
-            className: 'spectrum-Body--L',
-            css: css`
-              margin-bottom: var(--spectrum-global-dimension-static-size-200);
-              color: ${textColor};
-            `
-          })}
+          {text &&
+            React.cloneElement(text, {
+              className: 'spectrum-Body--L',
+              css: css`
+                margin-bottom: var(--spectrum-global-dimension-static-size-200);
+                color: ${textColor};
+              `
+            })}
         </View>
         {image && (
           <View>
-            {cloneElement(image, {
+            {React.cloneElement(image, {
               className: '',
               css: css`
                 margin: 0;

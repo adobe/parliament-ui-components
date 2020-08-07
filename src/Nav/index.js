@@ -54,8 +54,12 @@ const nav = (data, gitInfo, defaultFocus) => {
   )
 }
 
-const Nav = ({ data, selected, gitInfo }) => {
-  return <nav>{nav(data, gitInfo, defaultFocus(data, selected, gitInfo))}</nav>
+const Nav = ({ data, selected, gitInfo, ...props }) => {
+  return (
+    <nav {...props}>
+      {nav(data, gitInfo, defaultFocus(data, selected, gitInfo))}
+    </nav>
+  )
 }
 
 Nav.propTypes = {
@@ -70,4 +74,4 @@ Nav.defaultProps = {
   gitInfo: {}
 }
 
-export default Nav
+export { Nav }
