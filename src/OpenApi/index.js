@@ -18,6 +18,7 @@ import { Grid } from '@react-spectrum/layout'
 import { View } from '@react-spectrum/view'
 
 import Info from './Info'
+import Models from './Models'
 import Paths from './Paths'
 import Tag from './Tag'
 
@@ -44,6 +45,7 @@ const OpenApi = ({ spec = {} }) => {
             <Paths tag={tag.name} spec={spec} />
           </React.Fragment>
         ))}
+        <Models spec={spec} />
       </View>
     </Grid>
   )
