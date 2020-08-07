@@ -10,8 +10,8 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import React from 'react'
-import { css } from '@emotion/core'
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
 import { Flex } from '@react-spectrum/layout'
 import { View } from '@react-spectrum/view'
 import { Divider } from '@react-spectrum/divider'

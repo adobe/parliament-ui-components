@@ -11,6 +11,15 @@ governing permissions and limitations under the License.
 */
 
 import { withPrefix } from 'gatsby'
+import { jsx } from '@emotion/core'
+
+export const cloneElement = (element, props) =>
+  jsx(element.type, {
+    key: element.key,
+    ref: element.ref,
+    ...element.props,
+    ...props
+  })
 
 export const layoutColumns = (columns, gutters = []) =>
   `calc(${columns} * var(--spectrum-global-dimension-static-grid-fixed-max-width) / var(--spectrum-global-dimension-static-grid-columns)${

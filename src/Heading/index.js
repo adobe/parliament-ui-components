@@ -10,8 +10,9 @@
  * governing permissions and limitations under the License.
  */
 
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
 import React from 'react'
-import { css } from '@emotion/core'
 import classNames from 'classnames'
 import '@spectrum-css/typography'
 import { Divider } from '@react-spectrum/divider'

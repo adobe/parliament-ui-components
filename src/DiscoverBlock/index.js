@@ -10,9 +10,9 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import { css } from '@emotion/core'
-import { layoutColumns } from '../utils'
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
+import { cloneElement, layoutColumns } from '../utils'
 import '@spectrum-css/typography'
 import PropTypes from 'prop-types'
 
@@ -45,7 +45,7 @@ const DiscoverBlock = ({ width, heading, link, text, image, ...props }) => (
     {...props}
   >
     {image &&
-      React.cloneElement(image, {
+      cloneElement(image, {
         css: css`
           position: absolute;
           top: var(

@@ -10,12 +10,13 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import { css } from '@emotion/core'
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
 import { Flex } from '@react-spectrum/layout'
 import { View } from '@react-spectrum/view'
 import '@spectrum-css/typography'
 import PropTypes from 'prop-types'
+import { cloneElement } from '../utils'
 
 const Hero = ({
   background = '#1D7DEE',
@@ -37,7 +38,7 @@ const Hero = ({
       <Flex height='100%' alignItems='center'>
         <View marginStart='size-800'>
           {heading &&
-            React.cloneElement(heading, {
+            cloneElement(heading, {
               className: 'spectrum-Heading--XL',
               css: css`
                 margin-bottom: var(--spectrum-global-dimension-static-size-200);
@@ -46,7 +47,7 @@ const Hero = ({
             })}
 
           {text &&
-            React.cloneElement(text, {
+            cloneElement(text, {
               className: 'spectrum-Body--L',
               css: css`
                 margin-bottom: var(--spectrum-global-dimension-static-size-200);
@@ -56,7 +57,7 @@ const Hero = ({
         </View>
         {image && (
           <View>
-            {React.cloneElement(image, {
+            {cloneElement(image, {
               className: '',
               css: css`
                 margin: 0;
