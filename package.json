@@ -84,7 +84,8 @@
     "node-html-parser": "^1.2.20",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "slugify": "^1.4.5"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
