@@ -18,21 +18,13 @@ export default {
 }
 
 export const Empty = () => {
-  const props = { tableOfContents: '' }
+  const props = { tableOfContents: {} }
   return <TableOfContents {...props} />
 }
 
 export const WithData = () => {
   const props = {
     tableOfContents: mockData.regular
-  }
-  return <TableOfContents {...props} />
-}
-
-export const WithDataStripH1 = () => {
-  const props = {
-    tableOfContents: mockData.regular,
-    stripH1: true
   }
   return <TableOfContents {...props} />
 }
@@ -44,4 +36,13 @@ export const WithTwoH1s = () => {
   return <TableOfContents {...props} />
 }
 
+export const WithDifferentData = () => {
+  const props = {
+    tableOfContents: mockData.moreTestData
+  }
+  return <TableOfContents {...props} />
+}
+
 WithData.story = { name: 'With Data' }
+WithTwoH1s.story = { name: 'With Two+ H1s' }
+WithDifferentData.story = { name: 'With Different Data' }
