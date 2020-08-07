@@ -42,7 +42,7 @@ const createHeading = (
   });`
 
   return (
-    <>
+    <React.Fragment>
       {!isHeading1 && <Anchor id={id} />}
       <HeadingTag
         {...props}
@@ -84,7 +84,7 @@ const createHeading = (
         )}
       </HeadingTag>
       {isHeading2 && <Divider marginBottom='size-300' />}
-    </>
+    </React.Fragment>
   )
 }
 
