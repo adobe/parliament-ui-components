@@ -47,6 +47,7 @@ const createHeading = (
       {!isHeading1 && <Anchor id={id} />}
       <HeadingTag
         {...props}
+        id={`${id}`}
         className={classNames(
           className,
           `spectrum-Heading--${headingSizes[level - 1]}`,
