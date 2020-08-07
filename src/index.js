@@ -22,7 +22,6 @@ export {
   GridFooter,
   GridNav
 } from './Grid'
-export { Header } from './Header'
 export {
   Heading1,
   Heading2,
