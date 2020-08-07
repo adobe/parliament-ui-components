@@ -18,7 +18,7 @@ import PropTypes from 'prop-types'
 
 const imageWidth = '100px'
 
-const DiscoverBlock = ({ width, heading, link, text, image }) => (
+const DiscoverBlock = ({ width, heading, link, text, image, ...props }) => (
   <div
     className={width === '100%' ? 'is-block' : ''}
     css={css`
@@ -42,6 +42,7 @@ const DiscoverBlock = ({ width, heading, link, text, image }) => (
         vertical-align: bottom;
       }
     `}
+    {...props}
   >
     {image &&
       React.cloneElement(image, {

@@ -33,7 +33,7 @@ const stretched = css`
   height: 100%;
 `
 
-const GlobalHeader = ({ globalNav, pages, docs, location }) => {
+const GlobalHeader = ({ globalNav, pages, docs, location, ...props }) => {
   const nav = useRef(null)
   const selectedTabIndicator = useRef(null)
   const [tabs] = useState([])
@@ -45,10 +45,12 @@ const GlobalHeader = ({ globalNav, pages, docs, location }) => {
 
   const positionSelectedTabIndicator = () => {
     const selectedTab = tabs.filter((tab) => tab.current)[
-      pages.indexOf(findSelectedTopPage(location.pathname, pages))
+      pages?.indexOf(findSelectedTopPage(location?.pathname, pages))
     ]
-    selectedTabIndicator.current.style.transform = `translate(${selectedTab.current.offsetLeft}px, 0px)`
-    selectedTabIndicator.current.style.width = `${selectedTab.current.offsetWidth}px`
+    if (selectedTab) {
+      selectedTabIndicator.current.style.transform = `translate(${selectedTab.current.offsetLeft}px, 0px)`
+      selectedTabIndicator.current.style.width = `${selectedTab.current.offsetWidth}px`
+    }
   }
 
   useEffect(() => {
@@ -56,11 +58,11 @@ const GlobalHeader = ({ globalNav, pages, docs, location }) => {
     positionSelectedTabIndicator()
 
     // Font affects positioning of the Tab indicator
-    document.fonts.ready.then(() => {
+    document?.fonts?.ready?.then(() => {
       positionSelectedTabIndicator()
       setIsAnimated(true)
     })
-  }, [location.pathname])
+  }, [location?.pathname])
 
   useEffect(() => {
     const onClick = (event) => {
@@ -90,6 +92,7 @@ const GlobalHeader = ({ globalNav, pages, docs, location }) => {
         border-bottom: var(--spectrum-global-dimension-static-size-10) solid var(--spectrum-global-color-gray-200);
         box-sizing: border-box;
       `}
+      {...props}
     >
       <nav css={stretched} role='navigation' aria-label='Global'>
         <Grid
@@ -108,13 +111,13 @@ const GlobalHeader = ({ globalNav, pages, docs, location }) => {
             <Flex height='100%' alignItems='center'>
               <View>
                 <a
-                  href={globalNav.home.path}
+                  href={globalNav?.home?.path}
                   css={css`
                     text-decoration: none;
                   `}
                 >
                   <Flex alignItems='center'>
-                    {globalNav.home.logo === 'adobe' ? (
+                    {globalNav?.home?.logo === 'adobe' ? (
                       <Adobe
                         css={css`
                           width: var(
@@ -130,222 +133,226 @@ const GlobalHeader = ({ globalNav, pages, docs, location }) => {
                         `}
                       />
                     ) : (
-                      globalNav.home.logo
+                      globalNav?.home?.logo
                     )}
                     <strong className='spectrum-Heading--XXS'>
-                      {globalNav.home.title}
+                      {globalNav?.home?.title}
                     </strong>
                   </Flex>
                 </a>
               </View>
-              {globalNav.menus.slice(0, 2).map((menu, index) => {
-                const isPrimary = index === 0
-                const id = new Date().getTime()
+              {globalNav?.menus &&
+                globalNav.menus.slice(0, 2).map((menu, index) => {
+                  const isPrimary = index === 0
+                  const id = new Date().getTime()
 
-                return (
-                  menu.title && (
-                    <div
-                      key={index}
-                      css={css`
-                        box-sizing: border-box;
-                        padding: var(
-                            --spectrum-global-dimension-static-size-200
-                          )
-                          var(--spectrum-global-dimension-static-size-300) 0
-                          var(--spectrum-global-dimension-static-size-300);
-                        height: calc(100% + 1px);
-                        border-left: 1px solid transparent;
-                        border-right: 1px solid transparent;
-                        ${isPrimary
-                          ? `
+                  return (
+                    menu.title && (
+                      <div
+                        key={index}
+                        css={css`
+                          box-sizing: border-box;
+                          padding: var(
+                              --spectrum-global-dimension-static-size-200
+                            )
+                            var(--spectrum-global-dimension-static-size-300) 0
+                            var(--spectrum-global-dimension-static-size-300);
+                          height: calc(100% + 1px);
+                          border-left: 1px solid transparent;
+                          border-right: 1px solid transparent;
+                          ${isPrimary
+                            ? `
                         margin-left: var(--spectrum-global-dimension-static-size-300);
                         `
-                          : ''}
-                        ${globalNav.menus.length === 1
-                          ? `
+                            : ''}
+                          ${globalNav.menus.length === 1
+                            ? `
                           border-color: var(--spectrum-global-color-gray-200);
                         `
-                          : ''}
-                      `}
-                    >
-                      <div
-                        className={classNames(
-                          'spectrum-Dropdown',
-                          'spectrum-Dropdown--quiet',
-                          {
-                            'is-open': isPrimary
-                              ? openPrimaryMenu
-                              : openSecondaryMenu
-                          }
-                        )}
+                            : ''}
+                        `}
                       >
-                        <button
+                        <div
                           className={classNames(
-                            'spectrum-FieldButton',
-                            'spectrum-FieldButton--quiet',
-                            'spectrum-Dropdown-trigger',
+                            'spectrum-Dropdown',
+                            'spectrum-Dropdown--quiet',
                             {
-                              'is-selected': isPrimary
+                              'is-open': isPrimary
                                 ? openPrimaryMenu
                                 : openSecondaryMenu
                             }
                           )}
-                          aria-haspopup='listbox'
-                          aria-expanded={
-                            isPrimary ? openPrimaryMenu : openSecondaryMenu
-                          }
-                          aria-controls={id}
-                          onClick={(event) => {
-                            event.stopPropagation()
-                            event.nativeEvent.stopImmediatePropagation()
-
-                            if (isPrimary) {
-                              setOpenPrimaryMenu(!openPrimaryMenu)
-                              setOpenSecondaryMenu(false)
-                            } else {
-                              setOpenSecondaryMenu(!openSecondaryMenu)
-                              setOpenPrimaryMenu(false)
-                            }
-                          }}
                         >
-                          <span className='spectrum-Dropdown-label'>
-                            {menu.title}
-                          </span>
-                          <ChevronDown className='spectrum-Dropdown-icon' />
-                        </button>
-                      </div>
-                      <div
-                        ref={isPrimary ? primaryPopover : secondaryPopover}
-                        id={id}
-                        aria-hidden={
-                          isPrimary ? !openPrimaryMenu : !openSecondaryMenu
-                        }
-                        className={classNames(
-                          'spectrum-Popover',
-                          'spectrum-Popover--bottom',
-                          'spectrum-Dropdown-popover',
-                          'spectrum-Dropdown-popover--quiet',
-                          {
-                            'is-open': isPrimary
-                              ? openPrimaryMenu
-                              : openSecondaryMenu
-                          }
-                        )}
-                        css={css`
-                          display: block;
-                          padding: var(
-                            --spectrum-global-dimension-static-size-300
-                          );
-                          z-index: 2;
-                          max-width: none !important;
-                        `}
-                      >
+                          <button
+                            className={classNames(
+                              'spectrum-FieldButton',
+                              'spectrum-FieldButton--quiet',
+                              'spectrum-Dropdown-trigger',
+                              {
+                                'is-selected': isPrimary
+                                  ? openPrimaryMenu
+                                  : openSecondaryMenu
+                              }
+                            )}
+                            aria-haspopup='listbox'
+                            aria-expanded={
+                              isPrimary ? openPrimaryMenu : openSecondaryMenu
+                            }
+                            aria-controls={id}
+                            onClick={(event) => {
+                              event.stopPropagation()
+                              event.nativeEvent.stopImmediatePropagation()
+
+                              if (isPrimary) {
+                                setOpenPrimaryMenu(!openPrimaryMenu)
+                                setOpenSecondaryMenu(false)
+                              } else {
+                                setOpenSecondaryMenu(!openSecondaryMenu)
+                                setOpenPrimaryMenu(false)
+                              }
+                            }}
+                          >
+                            <span className='spectrum-Dropdown-label'>
+                              {menu.title}
+                            </span>
+                            <ChevronDown className='spectrum-Dropdown-icon' />
+                          </button>
+                        </div>
                         <div
+                          ref={isPrimary ? primaryPopover : secondaryPopover}
+                          id={id}
+                          aria-hidden={
+                            isPrimary ? !openPrimaryMenu : !openSecondaryMenu
+                          }
+                          className={classNames(
+                            'spectrum-Popover',
+                            'spectrum-Popover--bottom',
+                            'spectrum-Dropdown-popover',
+                            'spectrum-Dropdown-popover--quiet',
+                            {
+                              'is-open': isPrimary
+                                ? openPrimaryMenu
+                                : openSecondaryMenu
+                            }
+                          )}
                           css={css`
-                            display: flex;
-                            gap: var(
-                              --spectrum-global-dimension-static-size-200
+                            display: block;
+                            padding: var(
+                              --spectrum-global-dimension-static-size-300
                             );
+                            z-index: 2;
+                            max-width: none !important;
                           `}
                         >
-                          {menu.sections.map((section, i) => (
-                            <React.Fragment key={i}>
-                              <View>
-                                {section.heading && (
-                                  <View
-                                    marginBottom='size-200'
-                                    marginStart='size-200'
-                                  >
-                                    <strong className='spectrum-Heading--XS'>
-                                      {section.heading}
-                                    </strong>
-                                  </View>
-                                )}
-                                <ul className='spectrum-AssetList' role='menu'>
-                                  {section.pages.map((page, k) => (
-                                    <li
-                                      key={k}
-                                      className='spectrum-AssetList-item'
-                                      role='menuitem'
-                                      css={css`
-                                        width: auto !important;
-                                        height: auto !important;
-                                        min-height: var(
-                                          --spectrum-global-dimension-static-size-500
-                                        ) !important;
-                                        ${page.description
-                                          ? 'margin-bottom: var(--spectrum-global-dimension-static-size-200);'
-                                          : ''}
-                                      `}
+                          <div
+                            css={css`
+                              display: flex;
+                              gap: var(
+                                --spectrum-global-dimension-static-size-200
+                              );
+                            `}
+                          >
+                            {menu.sections.map((section, i) => (
+                              <React.Fragment key={i}>
+                                <View>
+                                  {section.heading && (
+                                    <View
+                                      marginBottom='size-200'
+                                      marginStart='size-200'
                                     >
-                                      <a
+                                      <strong className='spectrum-Heading--XS'>
+                                        {section.heading}
+                                      </strong>
+                                    </View>
+                                  )}
+                                  <ul
+                                    className='spectrum-AssetList'
+                                    role='menu'
+                                  >
+                                    {section.pages.map((page, k) => (
+                                      <li
+                                        key={k}
+                                        className='spectrum-AssetList-item'
+                                        role='menuitem'
                                         css={css`
-                                          display: flex;
-                                          z-index: 1;
-                                          height: 100%;
-                                          width: 100%;
-                                          align-items: center;
-                                          color: inherit;
-                                          text-decoration: none;
-                                          padding-top: var(
-                                            --spectrum-global-dimension-static-size-100
-                                          );
-                                          padding-bottom: var(
-                                            --spectrum-global-dimension-static-size-100
-                                          );
+                                          width: auto !important;
+                                          height: auto !important;
+                                          min-height: var(
+                                            --spectrum-global-dimension-static-size-500
+                                          ) !important;
+                                          ${page.description
+                                            ? 'margin-bottom: var(--spectrum-global-dimension-static-size-200);'
+                                            : ''}
                                         `}
-                                        href={page.path}
                                       >
-                                        <Flex direction='column'>
-                                          <View>{page.title}</View>
-                                          {page.description && (
-                                            <View marginTop='size-100'>
-                                              <span
-                                                className='spectrum-Body--XS'
-                                                css={css`
-                                                  color: var(
-                                                    --spectrum-global-color-gray-700
-                                                  );
-                                                `}
-                                              >
-                                                {page.description}
-                                              </span>
-                                            </View>
-                                          )}
-                                        </Flex>
-                                      </a>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </View>
-                              {section.divider && (
-                                <Divider
-                                  orientation='vertical'
-                                  size='S'
-                                  marginTop='size-600'
-                                />
-                              )}
-                            </React.Fragment>
-                          ))}
+                                        <a
+                                          css={css`
+                                            display: flex;
+                                            z-index: 1;
+                                            height: 100%;
+                                            width: 100%;
+                                            align-items: center;
+                                            color: inherit;
+                                            text-decoration: none;
+                                            padding-top: var(
+                                              --spectrum-global-dimension-static-size-100
+                                            );
+                                            padding-bottom: var(
+                                              --spectrum-global-dimension-static-size-100
+                                            );
+                                          `}
+                                          href={page.path}
+                                        >
+                                          <Flex direction='column'>
+                                            <View>{page.title}</View>
+                                            {page.description && (
+                                              <View marginTop='size-100'>
+                                                <span
+                                                  className='spectrum-Body--XS'
+                                                  css={css`
+                                                    color: var(
+                                                      --spectrum-global-color-gray-700
+                                                    );
+                                                  `}
+                                                >
+                                                  {page.description}
+                                                </span>
+                                              </View>
+                                            )}
+                                          </Flex>
+                                        </a>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </View>
+                                {section.divider && (
+                                  <Divider
+                                    orientation='vertical'
+                                    size='S'
+                                    marginTop='size-600'
+                                  />
+                                )}
+                              </React.Fragment>
+                            ))}
+                          </div>
+                          {menu.sections[0].viewAll && (
+                            <View marginTop='size-100' marginStart='size-200'>
+                              <Link
+                                css={css`
+                                  text-decoration: none;
+                                  font-weight: 700;
+                                `}
+                                href={menu.sections[0].viewAll.path}
+                              >
+                                {menu.sections[0].viewAll.title}
+                              </Link>
+                            </View>
+                          )}
                         </div>
-                        {menu.sections[0].viewAll && (
-                          <View marginTop='size-100' marginStart='size-200'>
-                            <Link
-                              css={css`
-                                text-decoration: none;
-                                font-weight: 700;
-                              `}
-                              href={menu.sections[0].viewAll.path}
-                            >
-                              {menu.sections[0].viewAll.title}
-                            </Link>
-                          </View>
-                        )}
                       </div>
-                    </div>
+                    )
                   )
-                )
-              })}
+                })}
             </Flex>
           </View>
           <View gridArea='navigation' marginStart='size-200'>
@@ -354,32 +361,33 @@ const GlobalHeader = ({ globalNav, pages, docs, location }) => {
               className='spectrum-Tabs spectrum-Tabs--quiet spectrum-Tabs--horizontal'
               role='tablist'
             >
-              {pages.slice(0, 4).map((page, index) => {
-                const { title, path } = page
-                const ref = createRef()
-                tabs.push(ref)
+              {pages &&
+                pages.slice(0, 4).map((page, index) => {
+                  const { title, path } = page
+                  const ref = createRef()
+                  tabs.push(ref)
 
-                const isActive = ({ isPartiallyCurrent }) =>
-                  isPartiallyCurrent
-                    ? {
-                        'aria-selected': 'true',
-                        className: 'is-selected spectrum-Tabs-item'
-                      }
-                    : { className: 'spectrum-Tabs-item' }
+                  const isActive = ({ isPartiallyCurrent }) =>
+                    isPartiallyCurrent
+                      ? {
+                          'aria-selected': 'true',
+                          className: 'is-selected spectrum-Tabs-item'
+                        }
+                      : { className: 'spectrum-Tabs-item' }
 
-                return (
-                  <GatsbyLink
-                    role='tab'
-                    getProps={isActive}
-                    key={index}
-                    ref={ref}
-                    to={path}
-                    partiallyActive
-                  >
-                    <span className='spectrum-Tabs-itemLabel'>{title}</span>
-                  </GatsbyLink>
-                )
-              })}
+                  return (
+                    <GatsbyLink
+                      role='tab'
+                      getProps={isActive}
+                      key={index}
+                      ref={ref}
+                      to={path}
+                      partiallyActive
+                    >
+                      <span className='spectrum-Tabs-itemLabel'>{title}</span>
+                    </GatsbyLink>
+                  )
+                })}
               <div
                 ref={selectedTabIndicator}
                 className='spectrum-Tabs-selectionIndicator'
@@ -389,7 +397,7 @@ const GlobalHeader = ({ globalNav, pages, docs, location }) => {
                 `}
               />
               <View marginStart='size-400'>
-                {docs.path && (
+                {docs?.path && (
                   <Button variant='primary' elementType='a' href={docs.path}>
                     View Docs
                   </Button>
@@ -398,7 +406,7 @@ const GlobalHeader = ({ globalNav, pages, docs, location }) => {
             </div>
           </View>
           <View gridArea='console' justifySelf='center'>
-            {globalNav.console && (
+            {globalNav?.console && (
               <Button
                 variant='primary'
                 elementType='a'
@@ -409,7 +417,7 @@ const GlobalHeader = ({ globalNav, pages, docs, location }) => {
             )}
           </View>
           <View gridArea='profile' justifySelf='center'>
-            {globalNav.signIn && (
+            {globalNav?.signIn && (
               <Button
                 isQuiet
                 variant='primary'
