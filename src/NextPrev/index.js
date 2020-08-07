@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import { css } from '@emotion/core'
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { Link as GatsbyLink } from 'gatsby'
 import '@spectrum-css/typography'

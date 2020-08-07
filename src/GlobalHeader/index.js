@@ -10,11 +10,12 @@
  * governing permissions and limitations under the License.
  */
 
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
 import React, { useRef, useEffect, useState, createRef } from 'react'
 import PropTypes from 'prop-types'
 import { Link as GatsbyLink } from 'gatsby'
 import { findSelectedTopPage } from '../utils'
-import { css } from '@emotion/core'
 import { Grid, Flex } from '@react-spectrum/layout'
 import { View } from '@react-spectrum/view'
 import { Divider } from '@react-spectrum/divider'
