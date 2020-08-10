@@ -2243,6 +2243,11 @@
   resolved "https://registry.yarnpkg.com/@spectrum-css/icon/-/icon-2.1.1.tgz#53b371b293833e501898472dda8661a07db09fd8"
   integrity sha512-Ddnjw3YTZiuJC8uVJ9x6i+ufQN+Vp4vibc+YxE7nXn8tWzT8zTRzwv6oHwSG9m+KzonTfnwqPuQx6ZA8vbK9xA==
 
+"@spectrum-css/label@^2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@spectrum-css/label/-/label-2.0.7.tgz#e732d227871088cdffdc797e3ee83b2c07ba5726"
+  integrity sha512-969nykKUg8hFJ42z+78T9NkQG8IR64v7Im4pjfUEHv1WTCwK7PbMYRwa8mA12Hv35MDKKd7+OLJt1ARiIDSBow==
+
 "@spectrum-css/link@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@spectrum-css/link/-/link-3.0.0.tgz#544821b3eafec7e89b86254bb42e3d01024095e4"
@@ -2278,6 +2283,11 @@
   resolved "https://registry.yarnpkg.com/@spectrum-css/tabs/-/tabs-3.0.0-beta.3.tgz#d9dc83cf0c1e310dc39170c1de8dd45cbf36877f"
   integrity sha512-ulLWE56VL+x2fmb0LfCYPknMCSvmreQMYYECjnvOMncxsJjPaLZ1a9v0mb5K+XTVXumHMkIEHDGHciY5fJiF3w==
 
+"@spectrum-css/tags@^3.0.0-beta.3":
+  version "3.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@spectrum-css/tags/-/tags-3.0.0-beta.3.tgz#ba1ea7edcbf3f194d167c2f60a6d1a8062b4001f"
+  integrity sha512-MpwbMw4fsYkTEHg4gUVROXfSzhEYfy0hOg8OHXUwUNwlCU/kaEP/iGlC9HnpaeAfismi8xCoyPu2ZjslH4qHiA==
+
 "@spectrum-css/textfield@^3.0.0-beta.3":
   version "3.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/@spectrum-css/textfield/-/textfield-3.0.0-beta.3.tgz#251763260fedd38e256c8a225809b0ecdc70f68f"
@@ -2292,6 +2302,11 @@
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@spectrum-css/vars/-/vars-2.3.0.tgz#0ce716fb5ee65f4af9e2d2a7aaae55e8ba4d4c8f"
   integrity sha512-k4YwFbv9+7QzBrc3ezvGuHxI3nDTG/6qJsAmhYS1vEyxpxjKmRfiz59P+fqT12PQNjxeNYHyVz1kRgaLA6gw2w==
+
+"@spectrum-css/well@^3.0.0-beta.2":
+  version "3.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@spectrum-css/well/-/well-3.0.0-beta.2.tgz#44571ff8210f86d63c9707a4f2e7151ddef43eba"
+  integrity sha512-M4gBtJepT9Aqw2nBcmjPqgwgNKbL1qpNOPsY+t2PH05vNGsNLnZcvWzID61txc8LEI8zFjV+K7EDeiVhEP88Xw==
 
 "@spectrum-icons/workflow@^3.0.2":
   version "3.1.0"
