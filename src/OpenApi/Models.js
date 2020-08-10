@@ -102,10 +102,12 @@ const ModelTable = ({ data, definitions }) => {
     data.allOf.map((entry) => {
       if (entry.$ref) {
         const path = getObjectName(entry.$ref)
-        properties = [
-          ...properties,
-          ...Object.entries(definitions[path].properties)
-        ]
+        if (definitions[path].properties) {
+          properties = [
+            ...properties,
+            ...Object.entries(definitions[path].properties)
+          ]
+        }
       }
       if (entry.type) {
         properties = [...properties, ...Object.entries(entry.properties)]
