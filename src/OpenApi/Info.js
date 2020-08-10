@@ -14,7 +14,7 @@ import { css, jsx } from '@emotion/core'
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// import ReactMarkdown from 'react-markdown'
+import ReactMarkdown from 'react-markdown'
 
 import '@spectrum-css/typography'
 
@@ -38,7 +38,7 @@ const Info = ({ info = {} }) => {
           margin-bottom: 60px;
         `}
       >
-        {info.description}
+        <ReactMarkdown source={info.description} />
       </p>
     </React.Fragment>
   )
