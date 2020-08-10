@@ -16,7 +16,7 @@ import PropTypes from 'prop-types'
 import { Flex } from '@react-spectrum/layout'
 
 import { Paragraph } from '../Paragraph'
-import { Table, TBody, Tr, Td } from '../SpectrumTable'
+import { Table, TBody, Tr, Td } from '../Table'
 
 import '@spectrum-css/tags'
 import '@spectrum-css/typography'
@@ -130,11 +130,7 @@ const extractType = (value) => {
 const createBodyItems = (bodyParams, definitions) => {
   const bodyItems = []
   if (bodyParams.length > 0) {
-    console.log(bodyParams)
     const definitionName = extractDefinitionName(bodyParams[0])
-    console.log(definitionName)
-    console.log(definitions)
-    // console.log(definitions[definitionName].properties)
     if (definitions[definitionName] && definitions[definitionName].properties) {
       Object.entries(definitions[definitionName].properties).map(
         ([key, value]) => {
@@ -196,4 +192,4 @@ Parameters.propTypes = {
   items: PropTypes.array
 }
 
-export default Parameters
+export { Parameters, ParametersTable }

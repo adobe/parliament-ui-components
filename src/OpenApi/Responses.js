@@ -13,7 +13,7 @@ governing permissions and limitations under the License.
 import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
 
-import { Table, TBody, Tr, Td } from '../SpectrumTable'
+import { Table, TBody, Tr, Td } from '../Table'
 
 import '@spectrum-css/tags'
 import '@spectrum-css/typography'

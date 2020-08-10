@@ -15,46 +15,45 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Divider } from '@react-spectrum/divider'
-import { Grid } from '@react-spectrum/layout'
+import { Grid, Flex } from '@react-spectrum/layout'
 import { View } from '@react-spectrum/view'
 import { Provider } from '@react-spectrum/provider'
 import { theme } from '@react-spectrum/theme-default'
 
+import { Link } from '../Link'
 import { Paragraph } from '../Paragraph'
-import Parameters from '../Parameters'
-import Responses from './Responses'
-import Verb from './Verb'
+import { Table, TBody, Tr, Td } from '../Table'
 
+import '@spectrum-css/tags'
 import '@spectrum-css/typography'
 import '@spectrum-css/well'
 
-const Models = ({ tag = '', spec = {} }) => {
-  const paths = Object.entries(spec.paths).filter(
-    ([url, routes]) =>
-      Object.entries(routes).filter(([verb, obj]) => {
-        // OpenAPI 3.0 has a global parameters object.
-        if (verb === 'parameters') {
-          return false
-        }
-        return obj.tags.includes(tag)
-      }).length > 0
-  )
+// Duplicate code from Parameters
+const buildTag = (label) => (
+  <div className='spectrum-Tags-item' role='listitem'>
+    <span className='spectrum-Tags-itemLabel'>{label}</span>
+  </div>
+)
+
+const Models = ({ spec = {} }) => {
+  const definitions = spec.swagger ? spec.definitions : spec.components.schemas
 
   return (
     <React.Fragment>
-      {paths.map(([path, verbs]) => {
-        return Object.entries(verbs).map(([verb, obj]) => {
-          if (verb !== 'parameters') {
-            return <Model path={path} verb={verb} data={obj} spec={spec} />
-          }
-        })
+      <h1 className='spectrum-Heading spectrum-Heading--L spectrum-Heading--light'>
+        <strong>Models</strong>
+      </h1>
+
+      {Object.entries(definitions).map(([name, data]) => {
+        return (
+          <Model key={name} name={name} data={data} definitions={definitions} />
+        )
       })}
     </React.Fragment>
   )
 }
 
-const Model = ({ path = '', verb = '', data = {}, spec = {} }) => {
-  const definitions = spec.swagger ? spec.definitions : spec.components.schemas
+const Model = ({ key = '', name = '', data = {}, definitions = {} }) => {
   return (
     <Grid
       areas={['reference  code']}
@@ -64,9 +63,11 @@ const Model = ({ path = '', verb = '', data = {}, spec = {} }) => {
       marginBotton='size-400'
     >
       <View gridArea='reference'>
-        <h1 className='spectrum-Heading spectrum-Heading--M spectrum-Heading--light'>
-          <Verb label={verb} />
-          <strong>{data.summary}</strong>
+        <h1
+          id={name}
+          className='spectrum-Heading spectrum-Heading--M spectrum-Heading--light'
+        >
+          <strong>{name}</strong>
         </h1>
         <Divider marginBottom='size-400' />
         <Paragraph
@@ -79,25 +80,92 @@ const Model = ({ path = '', verb = '', data = {}, spec = {} }) => {
         >
           {data.description}
         </Paragraph>
-        <Parameters data={data} definitions={definitions} />
-        <Responses responses={data.responses} />
+        <ModelTable data={data} definitions={definitions} />
       </View>
       <View gridArea='code'>
         <Provider theme={theme} colorScheme='dark'>
-          <span className='spectrum-Well'>
-            <Verb label={verb} />
-            <span
-              css={css`
-                font-weight: 700;
-                color: white;
-              `}
-            >
-              {path}
-            </span>
-          </span>
+          <span className='spectrum-Well'>Code</span>
         </Provider>
       </View>
     </Grid>
+  )
+}
+
+const getObjectName = (path) => {
+  const name = path.split('/')
+  return name[name.length - 1]
+}
+
+const ModelTable = ({ data, definitions }) => {
+  let properties = Object.entries(data.properties || {})
+  if (data.allOf) {
+    data.allOf.map((entry) => {
+      if (entry.$ref) {
+        const path = getObjectName(entry.$ref)
+        properties = [
+          ...properties,
+          ...Object.entries(definitions[path].properties)
+        ]
+      }
+      if (entry.type) {
+        properties = [...properties, ...Object.entries(entry.properties)]
+      }
+    })
+  }
+  return (
+    <Table
+      isQuiet
+      css={css`
+        width: 100%;
+      `}
+    >
+      <TBody>
+        {properties.map(([name, value]) => {
+          return (
+            <Tr key={name}>
+              <Td
+                className='spectrum-Code spectrum-Code--S'
+                css={css`
+                  width: 20%;
+                `}
+              >
+                <Flex direction='column'>
+                  <span
+                    css={css`
+                      font-weight: 700;
+                    `}
+                  >
+                    {value.allOf ? (
+                      <Link href={`#${getObjectName(value.allOf[0].$ref)}`}>
+                        {name}
+                      </Link>
+                    ) : (
+                      name
+                    )}
+                  </span>
+                </Flex>
+              </Td>
+              <Td
+                css={css`
+                  text-transform: uppercase;
+                  width: 10%;
+                `}
+              >
+                {value.type ? buildTag(value.type) : null}
+                {value.allOf ? buildTag('object') : null}
+              </Td>
+              <Td
+                css={css`
+                  width: 70%;
+                `}
+              >
+                {value.description}
+              </Td>
+            </Tr>
+          )
+        })}
+      </TBody>
+    </Table>
   )
 }
 

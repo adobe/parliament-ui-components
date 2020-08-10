@@ -21,7 +21,7 @@ import { Provider } from '@react-spectrum/provider'
 import { theme } from '@react-spectrum/theme-default'
 
 import { Paragraph } from '../Paragraph'
-import Parameters from '../Parameters'
+import { Parameters } from '../Parameters'
 import Responses from './Responses'
 import Verb from './Verb'
 
