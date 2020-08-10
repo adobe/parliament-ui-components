@@ -15,6 +15,7 @@ import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
 
 import '@spectrum-css/label'
+import '@spectrum-css/tags'
 
 const Verb = ({ label = 'get' }) => {
   let color = '--spectrum-global-color-blue-400'
@@ -41,6 +42,29 @@ const Verb = ({ label = 'get' }) => {
   }
 
   return (
+    <div className='spectrum-Tags' role='list' aria-label='list'>
+      <div
+        className='spectrum-Tags-item'
+        role='listitem'
+        css={css`
+          border-color: var(${color});
+        `}
+      >
+        <span
+          className='spectrum-Tags-itemLabel'
+          css={css`
+            text-transform: uppercase;
+            color: var(${color});
+          `}
+        >
+          {label}
+        </span>
+      </div>
+    </div>
+  )
+
+  /*
+  return (
     <strong
       css={css`
         text-transform: uppercase;
@@ -59,6 +83,7 @@ const Verb = ({ label = 'get' }) => {
       {label}
     </strong>
   )
+  */
 }
 
 Verb.propTypes = {
