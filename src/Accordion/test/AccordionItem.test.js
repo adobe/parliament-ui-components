@@ -12,11 +12,11 @@ governing permissions and limitations under the License.
 
 import React from 'react'
 import { render } from 'test-utils'
-import { Accordion } from '../Accordion'
+import { AccordionItem } from '../AccordionItem'
 
-describe('<Accordion />', () => {
+describe('<AccordionItem />', () => {
   test('should render', () => {
-    const { getByTestId } = render(<Accordion data-testid='el' />)
+    const { getByTestId } = render(<AccordionItem data-testid='el' />)
     const el = getByTestId('el')
 
     expect(el).toBeInTheDocument()

@@ -24,7 +24,8 @@ const AccordionItem = ({
   header,
   isOpen = false,
   isDisabled = false,
-  children
+  children,
+  ...props
 }) => {
   const [open, setOpen] = useState(isOpen)
   const onClick = () => {
@@ -38,6 +39,7 @@ const AccordionItem = ({
         { 'is-disabled': isDisabled }
       ])}
       role='presentation'
+      {...props}
     >
       <h3 className='spectrum-Accordion-itemHeading'>
         <button
