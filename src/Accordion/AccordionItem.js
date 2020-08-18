@@ -29,7 +29,9 @@ const AccordionItem = ({
 }) => {
   const [open, setOpen] = useState(isOpen)
   const onClick = () => {
-    setOpen((open) => !open)
+    if (!isDisabled) {
+      setOpen((open) => !open)
+    }
   }
   return (
     <div
