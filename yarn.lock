@@ -2213,6 +2213,11 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@spectrum-css/accordion@^3.0.0-beta.2":
+  version "3.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@spectrum-css/accordion/-/accordion-3.0.0-beta.2.tgz#54b987d0532dcc6b1888431b956c2790ce650227"
+  integrity sha512-nRcsZHnjfrNsB7lPKS3mAS3ZeF8fdjWUBGQXM79rnll65HY5yDl+pFBxYXhZ3h/zxq4pLssFS+GtJN0jynvf+w==
+
 "@spectrum-css/alert@^3.0.0-beta.3":
   version "3.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/@spectrum-css/alert/-/alert-3.0.0-beta.3.tgz#8cb1aba75a1ed55a6ebc81b432c2657d2ba42ecc"

@@ -19,7 +19,7 @@ import { View } from '@react-spectrum/view'
 import '@spectrum-css/typography'
 import '@spectrum-css/link'
 
-const TableOfContents = ({ tableOfContents }) => {
+const TableOfContents = ({ tableOfContents, ...props }) => {
   const index = tableOfContents.items && tableOfContents.items.length - 1
 
   const tableOfContentsItems = {
@@ -32,6 +32,7 @@ const TableOfContents = ({ tableOfContents }) => {
       role='navigation'
       aria-label='Article Outline'
       marginY='size-400'
+      {...props}
     >
       <h4
         className='spectrum-Detail--L'
