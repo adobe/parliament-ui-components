@@ -9,27 +9,17 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
+/** @jsx jsx */
+import { jsx } from '@emotion/core'
 
-import { Accordion } from '../Accordion'
-import { AccordionItem } from '../AccordionItem'
+import '@spectrum-css/accordion'
 
-export default {
-  title: 'components/Accordion'
-}
-
-export const Default = () => {
-  const props = {}
-
+const Accordion = ({ children, ...props }) => {
   return (
-    <Accordion {...props}>
-      <AccordionItem header='Default'>Item 1</AccordionItem>
-      <AccordionItem header='Opened' isOpen>
-        Item 2
-      </AccordionItem>
-      <AccordionItem header='Disabled' isDisabled>
-        Item 3
-      </AccordionItem>
-    </Accordion>
+    <div className='spectrum-Accordion' role='region' {...props}>
+      {children}
+    </div>
   )
 }
+
+export { Accordion }
