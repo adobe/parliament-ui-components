@@ -56,19 +56,21 @@ const Models = ({ spec = {} }) => {
 const Model = ({ key = '', name = '', data = {}, definitions = {} }) => {
   return (
     <Grid
-      areas={['reference  code']}
+      areas={['header header', 'reference  code']}
       columns={['7fr', '5fr']}
-      rows={['auto']}
-      gap='size-400'
+      rows={['auto', 'auto']}
+      columnGap='size-400'
       marginBotton='size-400'
     >
-      <View gridArea='reference'>
+      <View gridArea='header'>
         <h1
           id={name}
           className='spectrum-Heading spectrum-Heading--M spectrum-Heading--light'
         >
           <strong>{name}</strong>
         </h1>
+      </View>
+      <View gridArea='reference'>
         <Divider marginBottom='size-400' />
         <Paragraph
           css={css`
@@ -80,7 +82,7 @@ const Model = ({ key = '', name = '', data = {}, definitions = {} }) => {
         >
           {data.description}
         </Paragraph>
-        <ModelTable data={data} definitions={definitions} />
+        <ModelTable model={name} data={data} definitions={definitions} />
       </View>
       <View gridArea='code'>
         <Provider theme={theme} colorScheme='dark'>
@@ -96,7 +98,7 @@ const getObjectName = (path) => {
   return name[name.length - 1]
 }
 
-const ModelTable = ({ data, definitions }) => {
+const ModelTable = ({ model, data, definitions }) => {
   let properties = Object.entries(data.properties || {})
   if (data.allOf) {
     data.allOf.map((entry) => {

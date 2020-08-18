@@ -57,17 +57,19 @@ const Path = ({ path = '', verb = '', data = {}, spec = {} }) => {
   const definitions = spec.swagger ? spec.definitions : spec.components.schemas
   return (
     <Grid
-      areas={['reference  code']}
+      areas={['header  header', 'reference  code']}
       columns={['7fr', '5fr']}
-      rows={['auto']}
-      gap='size-400'
+      rows={['auto', 'auto']}
+      columnGap='size-400'
       marginBotton='size-400'
     >
-      <View gridArea='reference'>
+      <View gridArea='header'>
         <h1 className='spectrum-Heading spectrum-Heading--M spectrum-Heading--light'>
-          <Verb label={verb} />
+          {false ? <Verb label={verb} /> : null}
           <strong>{data.summary}</strong>
         </h1>
+      </View>
+      <View gridArea='reference'>
         <Divider marginBottom='size-400' />
         <Paragraph
           css={css`
@@ -84,7 +86,7 @@ const Path = ({ path = '', verb = '', data = {}, spec = {} }) => {
       </View>
       <View gridArea='code'>
         <Provider theme={theme} colorScheme='dark'>
-          <span className='spectrum-Well'>
+          <span className='spectrum-Well' style={{ marginTop: '0px' }}>
             <Verb label={verb} />
             <span
               css={css`
