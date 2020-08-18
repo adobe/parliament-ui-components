@@ -11,7 +11,6 @@ governing permissions and limitations under the License.
 */
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
-import PropTypes from 'prop-types'
 
 import '@spectrum-css/accordion'
 
@@ -21,12 +20,6 @@ const Accordion = ({ children, ...props }) => {
       {children}
     </div>
   )
-}
-
-Accordion.propTypes = {
-  onPress: PropTypes.func,
-  isQuiet: PropTypes.bool,
-  isDisabled: PropTypes.bool
 }
 
 export { Accordion }
