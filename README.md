@@ -61,9 +61,13 @@ yarn storybook
 
 ## Concurrent Development
 
-If you want to do concurrent development of this project while it is a dependency of another project follow these steps.
+If you want to do concurrent development of this project while it is a dependency of another project you can accomplish it by using [yarn link](https://classic.yarnpkg.com/en/docs/cli/link/) and following these steps.
 
-### 1. Register this Project
+### Setup
+
+#### 1. Register this Project
+
+This will register `@adobe/parliament-ui-components`, `react` and `react-dom` so they can be used in other local projects. It will also avoid the [invalid hook call](https://reactjs.org/warnings/invalid-hook-call-warning.html) warning.
 
 ```bash
 yarn link
@@ -73,9 +77,7 @@ cd ../react-dom
 yarn link
 ```
 
-This will register `@adobe/parliament-ui-components`, `react` and `react-dom` so they can be used in other local projects.
-
-### 2. Watch for Changes
+#### 2. Watch for Changes
 
 ```bash
 yarn run start
@@ -83,7 +85,7 @@ yarn run start
 
 Now any changes you make in this project will automatically be built.
 
-### 3. Use Sibling Project
+#### 3. Use Sibling Project
 
 Go to the root directory of your sibling project and run the following commands:
 
@@ -93,7 +95,24 @@ yarn link react-dom
 yarn link @adobe/parliament-ui-components
 ```
 
-Now when you run your sibling project it will use the local copy of `@adobe/parliament-ui-components` that you can edit on the fly. It will also avoid the [invalid hook call](https://reactjs.org/warnings/invalid-hook-call-warning.html) warning.
+Now when you run your sibling project it will use the local copy of `@adobe/parliament-ui-components` that you can edit on the fly. Again, avoiding the [invalid hook call](https://reactjs.org/warnings/invalid-hook-call-warning.html) warning.
+
+### Tear Down
+
+When you no longer want to use the local copy of `@adobe/parliament-ui-components` you can revert back to the published package by following these steps.
+
+#### 1. Unlink the Dependencies
+
+In your sibling project run:
+
+```bash
+yarn unlink react
+yarn unlink react-dom
+yarn unlink @adobe/parliament-ui-components
+yarn install --force
+```
+
+This will return your project to the state when you did a `yarn install`.
 
 ## Documentation
 
