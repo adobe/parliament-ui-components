@@ -12,6 +12,7 @@
 ## Install
 
 You can install the package using a package manager like [npm](https://docs.npmjs.com/cli/npm) or [yarn](https://classic.yarnpkg.com/lang/en/).
+
 ```bash
 yarn add @adobe/parliament-ui-components
 ```
@@ -41,7 +42,7 @@ and don't forget to import the packages styles from `@adobe/parliament-ui-compon
 ### Install dependencies
 
 ```bash
-yarn
+yarn install
 ```
 
 ### Run Tests
@@ -57,6 +58,42 @@ This project uses [Storybook][http://storybook.js.org/] for testing the look and
 ```bash
 yarn storybook
 ```
+
+## Concurrent Development
+
+If you want to do concurrent development of this project while it is a dependency of another project follow these steps.
+
+### 1. Register this Project
+
+```bash
+yarn link
+cd node_modules/react
+yarn link
+cd ../react-dom
+yarn link
+```
+
+This will register `@adobe/parliament-ui-components`, `react` and `react-dom` so they can be used in other local projects.
+
+### 2. Watch for Changes
+
+```bash
+yarn run start
+```
+
+Now any changes you make in this project will automatically be built.
+
+### 3. Use Sibling Project
+
+Go to the root directory of your sibling project and run the following commands:
+
+```bash
+yarn link react
+yarn link react-dom
+yarn link @adobe/parliament-ui-components
+```
+
+Now when you run your sibling project it will use the local copy of `@adobe/parliament-ui-components` that you can edit on the fly. It will also avoid the [invalid hook call](https://reactjs.org/warnings/invalid-hook-call-warning.html) warning.
 
 ## Documentation
 
