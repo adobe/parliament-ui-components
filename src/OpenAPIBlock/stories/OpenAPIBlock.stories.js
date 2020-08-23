@@ -11,13 +11,20 @@
  */
 
 import React from 'react'
+import { withKnobs, text } from '@storybook/addon-knobs'
 
 import { OpenAPIBlock } from '../index'
 
 export default {
-  title: 'components/OpenAPIBlock'
+  title: 'components/OpenAPIBlock',
+  decorators: [withKnobs]
 }
 
 export const OpenAPIStory = () => (
-  <OpenAPIBlock specUrl='https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore.json' />
+  <OpenAPIBlock
+    specUrl={text(
+      'Spec URL',
+      'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore.json'
+    )}
+  />
 )
