@@ -19,7 +19,7 @@ export default {
 }
 
 export const OpenPopover = () => {
-  const props = { isOpen: true }
+  const props = { isOpen: true, style: { width: 'auto' } }
   const itemProps = { onAction: (e) => console.log(e) }
 
   return (
@@ -42,7 +42,7 @@ export const OpenPopover = () => {
 export const OpenPopoverItems = () => {
   const props = {
     isOpen: true,
-    style: { position: 'absolute', left: '0px', top: '32px', zIndex: '1000' }
+    style: { position: 'absolute', left: '0px', top: '32px', width: '192px' }
   }
   const menuProps = {
     onAction: (e) => {

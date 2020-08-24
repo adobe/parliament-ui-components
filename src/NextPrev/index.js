@@ -10,8 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Link as GatsbyLink } from 'gatsby'
 import '@spectrum-css/typography'
@@ -20,15 +19,9 @@ import { Flex } from '@react-spectrum/layout'
 import ChevronLeft from '@spectrum-icons/workflow/ChevronLeft'
 import ChevronRight from '@spectrum-icons/workflow/ChevronRight'
 
-const centered = css`
-  display: flex;
-  align-items: center;
-  gap: var(--spectrum-global-dimension-static-size-100);
-`
-
-const NextPrev = ({ nextPage, previousPage, ...props }) =>
+const NextPrev = ({ nextPage, previousPage }) =>
   nextPage || previousPage ? (
-    <div className='spectrum-Body--M' {...props}>
+    <div className='spectrum-Body--M'>
       <Flex marginBottom='size-800' marginTop='size-800'>
         <View>
           {previousPage && (
@@ -37,14 +30,10 @@ const NextPrev = ({ nextPage, previousPage, ...props }) =>
               to={previousPage.path}
               rel='prev'
             >
-              <div
-                css={css`
-                  ${centered}
-                `}
-              >
+              <Flex alignItems='center'>
                 <ChevronLeft size='S' />
-                {previousPage.title}
-              </div>
+                <View marginStart='size-100'>{previousPage.title}</View>
+              </Flex>
             </GatsbyLink>
           )}
         </View>
@@ -55,14 +44,10 @@ const NextPrev = ({ nextPage, previousPage, ...props }) =>
               to={nextPage.path}
               rel='next'
             >
-              <div
-                css={css`
-                  ${centered}
-                `}
-              >
-                {nextPage.title}
+              <Flex alignItems='center'>
+                <View marginEnd='size-100'>{nextPage.title}</View>
                 <ChevronRight size='S' />
-              </div>
+              </Flex>
             </GatsbyLink>
           )}
         </View>

@@ -10,30 +10,42 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
+import '@spectrum-css/popover'
+import { css } from '@emotion/core'
 import classNames from 'classnames'
 
-import '@spectrum-css/popover'
-
-const Popover = ({ children, isOpen, style, ...props }) => {
-  return (
+const Popover = forwardRef(
+  ({ isOpen, children, variant, isQuiet, className, style }, ref) => (
     <div
+      ref={ref}
+      aria-hidden={!isOpen}
       style={style}
-      className={classNames([
+      css={css`
+        min-width: var(--spectrum-global-dimension-static-size-800);
+        width: 100%;
+        z-index: 1;
+        max-height: var(--spectrum-global-dimension-static-size-2400);
+      `}
+      className={classNames(
+        className,
         'spectrum-Popover',
         'spectrum-Popover--bottom',
-        { 'is-open': isOpen }
-      ])}
-      {...props}
+        { 'is-open': isOpen },
+        { 'spectrum-Dropdown-popover': variant === 'picker' },
+        { 'spectrum-Dropdown-popover--quiet': variant === 'picker' && isQuiet }
+      )}
     >
       {children}
     </div>
   )
-}
+)
 
 Popover.propTypes = {
-  isOpen: PropTypes.bool
+  variant: PropTypes.string,
+  isOpen: PropTypes.bool,
+  isQuiet: PropTypes.bool
 }
 
 export { Popover }

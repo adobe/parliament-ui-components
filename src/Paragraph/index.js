@@ -11,11 +11,10 @@
  */
 
 import React from 'react'
-import classNames from 'classnames'
 import '@spectrum-css/typography'
 
 export const Paragraph = ({ children, className, ...props }) => (
-  <p className={classNames(className, 'spectrum-Body--M')} {...props}>
+  <p {...props} className={className ?? 'spectrum-Body--M'}>
     {children}
   </p>
 )

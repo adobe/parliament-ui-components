@@ -83,9 +83,11 @@
     "classnames": "^2.2.6",
     "gatsby": "^2.19.19",
     "node-html-parser": "^1.2.20",
+    "prism-react-renderer": "^1.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-id-generator": "^3.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

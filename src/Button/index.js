@@ -15,18 +15,32 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import '@spectrum-css/button'
 
-const Button = ({ children, variant, isQuiet, className, ...props }) => (
-  <button
-    className={classNames(className, [
-      'spectrum-Button',
-      `spectrum-Button--${variant}`,
-      { 'spectrum-Button--quiet': isQuiet }
-    ])}
-    {...props}
-  >
-    {children}
-  </button>
-)
+const Button = ({
+  children,
+  elementType = 'button',
+  variant = 'primary',
+  isQuiet,
+  className,
+  ...props
+}) => {
+  const Element = elementType
+  if (elementType === 'a') {
+    props.role = 'button'
+  }
+
+  return (
+    <Element
+      className={classNames(className, [
+        'spectrum-Button',
+        `spectrum-Button--${variant}`,
+        { 'spectrum-Button--quiet': isQuiet }
+      ])}
+      {...props}
+    >
+      {children}
+    </Element>
+  )
+}
 
 Button.propTypes = {
   variant: PropTypes.oneOf([

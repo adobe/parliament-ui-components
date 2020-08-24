@@ -10,10 +10,8 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 import React from 'react'
-import { Text } from '@react-spectrum/text'
-
-import { ActionButton } from '../index'
-import Bug from '@spectrum-icons/workflow/Bug'
+import { ActionButton, Text } from '../index'
+import { Edit } from '../../Icons'
 
 export default {
   title: 'components/ActionButton'
@@ -42,7 +40,7 @@ export const DefaultIcon = () => {
 
   return (
     <ActionButton {...props}>
-      <Bug size='S' />
+      <Edit />
       <Text>stable</Text>
     </ActionButton>
   )
@@ -73,7 +71,7 @@ export const QuietIcon = () => {
 
   return (
     <ActionButton {...props}>
-      <Bug size='S' />
+      <Edit />
       <Text>stable</Text>
     </ActionButton>
   )
@@ -104,7 +102,7 @@ export const DisabledIcon = () => {
 
   return (
     <ActionButton {...props}>
-      <Bug size='S' />
+      <Edit />
       <Text>stable</Text>
     </ActionButton>
   )

@@ -16,8 +16,8 @@ import PropTypes from 'prop-types'
 import { Link as GatsbyLink } from 'gatsby'
 import '@spectrum-css/breadcrumb'
 
-const Breadcrumbs = ({ selectedTopPage, selectedSubPages, ...props }) => (
-  <nav aria-label='Breadcrumb' role='navigation' {...props}>
+const Breadcrumbs = ({ selectedTopPage, selectedSubPages }) => (
+  <nav aria-label='Breadcrumb' role='navigation'>
     <ul
       className='spectrum-Breadcrumbs'
       css={css`
@@ -27,9 +27,9 @@ const Breadcrumbs = ({ selectedTopPage, selectedSubPages, ...props }) => (
       <li className='spectrum-Breadcrumbs-item'>
         <GatsbyLink
           className='spectrum-Breadcrumbs-itemLink'
-          to={selectedTopPage?.path}
+          to={selectedTopPage.path}
         >
-          {selectedTopPage?.title}
+          {selectedTopPage.title}
         </GatsbyLink>
         <svg
           className='spectrum-Icon spectrum-UIIcon-ChevronRightSmall spectrum-Breadcrumbs-itemSeparator'
@@ -47,32 +47,28 @@ const Breadcrumbs = ({ selectedTopPage, selectedSubPages, ...props }) => (
           />
         </svg>
       </li>
-      {selectedSubPages &&
-        selectedSubPages.map((page, index) => (
-          <li className='spectrum-Breadcrumbs-item' key={index}>
-            <GatsbyLink
-              className='spectrum-Breadcrumbs-itemLink'
-              to={page.path}
-            >
-              {page.title}
-            </GatsbyLink>
-            <svg
-              className='spectrum-Icon spectrum-UIIcon-ChevronRightSmall spectrum-Breadcrumbs-itemSeparator'
-              focusable='false'
-              role='img'
-              aria-hidden='true'
-            >
-              <path
-                d='M7 5a.747.747 0 00-.22-.53L2.54.23a.75.75 0 10-1.06 1.06L5.19 5 1.48 8.71a.75.75 0 101.06 1.06l4.24-4.24A.747.747 0 007 5z'
-                className='spectrum-UIIcon--large'
-              />
-              <path
-                d='M5.5 4a.747.747 0 00-.22-.53C4.703 2.862 3.242 1.5 2.04.23A.75.75 0 10.98 1.29L3.69 4 .98 6.71a.75.75 0 101.06 1.06l3.24-3.24A.747.747 0 005.5 4z'
-                className='spectrum-UIIcon--medium'
-              />
-            </svg>
-          </li>
-        ))}
+      {selectedSubPages.map((page, index) => (
+        <li className='spectrum-Breadcrumbs-item' key={index}>
+          <GatsbyLink className='spectrum-Breadcrumbs-itemLink' to={page.path}>
+            {page.title}
+          </GatsbyLink>
+          <svg
+            className='spectrum-Icon spectrum-UIIcon-ChevronRightSmall spectrum-Breadcrumbs-itemSeparator'
+            focusable='false'
+            role='img'
+            aria-hidden='true'
+          >
+            <path
+              d='M7 5a.747.747 0 00-.22-.53L2.54.23a.75.75 0 10-1.06 1.06L5.19 5 1.48 8.71a.75.75 0 101.06 1.06l4.24-4.24A.747.747 0 007 5z'
+              className='spectrum-UIIcon--large'
+            />
+            <path
+              d='M5.5 4a.747.747 0 00-.22-.53C4.703 2.862 3.242 1.5 2.04.23A.75.75 0 10.98 1.29L3.69 4 .98 6.71a.75.75 0 101.06 1.06l3.24-3.24A.747.747 0 005.5 4z'
+              className='spectrum-UIIcon--medium'
+            />
+          </svg>
+        </li>
+      ))}
     </ul>
   </nav>
 )

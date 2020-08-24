@@ -11,7 +11,7 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 import React from 'react'
 import '@spectrum-css/typography'
 import PropTypes from 'prop-types'
@@ -19,7 +19,7 @@ import { layoutColumns } from '../utils'
 import { Link } from '../Link'
 import LinkOut from '@spectrum-icons/workflow/LinkOut'
 
-const Resources = ({ heading, links, ...props }) => {
+const Resources = ({ heading, links }) => {
   return (
     <aside
       css={css`
@@ -30,7 +30,6 @@ const Resources = ({ heading, links, ...props }) => {
         margin-left: var(--spectrum-global-dimension-static-size-400);
         margin-top: var(--spectrum-global-dimension-static-size-400);
       `}
-      {...props}
     >
       {heading}
       <ul
@@ -40,42 +39,41 @@ const Resources = ({ heading, links, ...props }) => {
           padding: 0;
         `}
       >
-        {links &&
-          React.Children.toArray(links.props.children).map((item, i) => {
-            const link = React.Children.toArray(item.props.children)[0]
-            const isExternalLink =
-              link.props.href.startsWith('http://') ||
-              link.props.href.startsWith('https://')
-            const externalLinkProps = isExternalLink
-              ? {
-                  target: '_blank',
-                  rel: 'nofollow noopener noreferrer'
-                }
-              : {}
+        {React.Children.toArray(links.props.children).map((item, i) => {
+          const link = React.Children.toArray(item.props.children)[0]
+          const isExternalLink =
+            link.props.href.startsWith('http://') ||
+            link.props.href.startsWith('https://')
+          const externalLinkProps = isExternalLink
+            ? {
+                target: '_blank',
+                rel: 'nofollow noopener noreferrer'
+              }
+            : {}
 
-            return (
-              <li
-                key={i}
-                css={css`
-                  margin-top: var(--spectrum-global-dimension-static-size-200);
-                `}
-              >
-                <Link href={link.props.href} {...externalLinkProps}>
-                  <span
-                    css={css`
-                      display: inline-flex;
-                      margin-right: var(
-                        --spectrum-global-dimension-static-size-100
-                      );
-                    `}
-                  >
-                    {link.props.children}
-                  </span>
-                  {isExternalLink && <LinkOut size='XS' />}
-                </Link>
-              </li>
-            )
-          })}
+          return (
+            <li
+              key={i}
+              css={css`
+                margin-top: var(--spectrum-global-dimension-static-size-200);
+              `}
+            >
+              <Link href={link.props.href} {...externalLinkProps}>
+                <span
+                  css={css`
+                    display: inline-flex;
+                    margin-right: var(
+                      --spectrum-global-dimension-static-size-100
+                    );
+                  `}
+                >
+                  {link.props.children}
+                </span>
+                {isExternalLink && <LinkOut size='XS' />}
+              </Link>
+            </li>
+          )
+        })}
       </ul>
     </aside>
   )

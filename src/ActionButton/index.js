@@ -13,20 +13,23 @@ governing permissions and limitations under the License.
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-
 import '@spectrum-css/button'
 
-import './index.css'
-
 const ActionButton = ({
+  elementType = 'button',
   children,
   onPress,
   isQuiet = false,
   isDisabled = false,
   ...props
 }) => {
+  const Element = elementType
+  if (elementType === 'a') {
+    props.role = 'button'
+  }
+
   return (
-    <button
+    <Element
       className={classNames([
         'spectrum-ActionButton',
         { 'spectrum-ActionButton--quiet': isQuiet },
@@ -38,14 +41,19 @@ const ActionButton = ({
       {...props}
     >
       {children}
-    </button>
+    </Element>
   )
 }
 
+const Text = ({ children }) => (
+  <span className='spectrum-ActionButton-label'>{children}</span>
+)
+
 ActionButton.propTypes = {
+  elementType: 'button',
   onPress: PropTypes.func,
   isQuiet: PropTypes.bool,
   isDisabled: PropTypes.bool
 }
 
-export { ActionButton }
+export { ActionButton, Text }

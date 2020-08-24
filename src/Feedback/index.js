@@ -13,17 +13,12 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
+import { Flex } from '@react-spectrum/layout'
 import { View } from '@react-spectrum/view'
 import { Button } from '../Button'
 
-const Feedback = ({ onYes, onNo, ...props }) => (
-  <div
-    css={css`
-      display: flex;
-      align-items: center;
-    `}
-    {...props}
-  >
+const Feedback = ({ onYes, onNo }) => (
+  <Flex alignItems='center'>
     <span
       css={css`
         padding-right: var(--spectrum-global-dimension-static-size-200);
@@ -31,15 +26,11 @@ const Feedback = ({ onYes, onNo, ...props }) => (
     >
       Was this helpful ?
     </span>
-    <div
-      css={css`
-        display: flex;
-        gap: var(--spectrum-global-dimension-static-size-200);
-      `}
-    >
-      <View>
+    <Flex>
+      <View marginEnd='size-200'>
         <Button
           variant='primary'
+          className='feedback-yes'
           onClick={() => {
             onYes && onYes()
           }}
@@ -49,6 +40,7 @@ const Feedback = ({ onYes, onNo, ...props }) => (
       </View>
       <View>
         <Button
+          className='feedback-no'
           variant='primary'
           onClick={() => {
             onNo && onNo()
@@ -57,8 +49,8 @@ const Feedback = ({ onYes, onNo, ...props }) => (
           No
         </Button>
       </View>
-    </div>
-  </div>
+    </Flex>
+  </Flex>
 )
 
 Feedback.propTypes = {

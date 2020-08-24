@@ -14,17 +14,16 @@
 import { css, jsx } from '@emotion/core'
 import { Flex } from '@react-spectrum/layout'
 import { View } from '@react-spectrum/view'
+import { cloneElement } from '../utils'
 import '@spectrum-css/typography'
 import PropTypes from 'prop-types'
-import { cloneElement } from '../utils'
 
 const Hero = ({
   background = '#1D7DEE',
   textColor = 'var(--spectrum-global-color-gray-200)',
   heading,
   text,
-  image,
-  ...props
+  image
 }) => {
   return (
     <section
@@ -33,27 +32,28 @@ const Hero = ({
         margin-bottom: var(--spectrum-global-dimension-static-size-400);
         background-color: ${background};
       `}
-      {...props}
     >
       <Flex height='100%' alignItems='center'>
         <View marginStart='size-800'>
-          {heading &&
-            cloneElement(heading, {
-              className: 'spectrum-Heading--XL',
-              css: css`
-                margin-bottom: var(--spectrum-global-dimension-static-size-200);
-                color: ${textColor};
-              `
-            })}
+          {cloneElement(heading, {
+            className: 'spectrum-Heading--XL',
+            css: css`
+              font-weight: var(
+                --spectrum-heading-xl-text-font-weight,
+                var(--spectrum-alias-heading-text-font-weight-regular)
+              );
+              margin-bottom: var(--spectrum-global-dimension-static-size-200);
+              color: ${textColor};
+            `
+          })}
 
-          {text &&
-            cloneElement(text, {
-              className: 'spectrum-Body--L',
-              css: css`
-                margin-bottom: var(--spectrum-global-dimension-static-size-200);
-                color: ${textColor};
-              `
-            })}
+          {cloneElement(text, {
+            className: 'spectrum-Body--L',
+            css: css`
+              margin-bottom: var(--spectrum-global-dimension-static-size-200);
+              color: ${textColor};
+            `
+          })}
         </View>
         {image && (
           <View>
@@ -77,7 +77,6 @@ const Hero = ({
 
 Hero.propTypes = {
   background: PropTypes.string,
-  textColor: PropTypes.string,
   heading: PropTypes.element,
   text: PropTypes.element,
   image: PropTypes.element

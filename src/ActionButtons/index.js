@@ -11,11 +11,8 @@ governing permissions and limitations under the License.
 */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Text } from '@react-spectrum/text'
-import { ActionButton } from '../ActionButton'
-
-import Bug from '@spectrum-icons/workflow/Bug'
-import Edit from '@spectrum-icons/workflow/Edit'
+import { ActionButton, Text } from '../ActionButton'
+import { Bug, Edit } from '../Icons'
 
 const ActionButtons = ({ gitUrl, filePath, branch, ...props }) => (
   <div {...props}>
@@ -26,7 +23,7 @@ const ActionButtons = ({ gitUrl, filePath, branch, ...props }) => (
       }}
       aria-label='Edit page'
     >
-      <Edit size='S' />
+      <Edit />
       <Text>Edit this page</Text>
     </ActionButton>
     <ActionButton
@@ -36,7 +33,7 @@ const ActionButtons = ({ gitUrl, filePath, branch, ...props }) => (
       }}
       aria-label='Log issue'
     >
-      <Bug size='S' />
+      <Bug />
       <Text>Log an issue</Text>
     </ActionButton>
   </div>

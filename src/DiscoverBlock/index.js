@@ -12,63 +12,61 @@
 
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
+import React from 'react'
 import { cloneElement, layoutColumns } from '../utils'
-import '@spectrum-css/typography'
 import PropTypes from 'prop-types'
 
-const imageWidth = '100px'
+const imageWidth = 'var(--spectrum-global-dimension-size-1250)'
 
-const DiscoverBlock = ({ width, heading, link, text, image, ...props }) => (
-  <div
-    className={width === '100%' ? 'is-block' : ''}
-    css={css`
-      ${image
-        ? `
+const DiscoverBlock = ({ width, heading, link, text, image }) => (
+  <React.Fragment>
+    {image
+      ? cloneElement(heading, {
+          css: css`
+            margin-left: calc(
+              ${imageWidth} + var(--spectrum-global-dimension-static-size-400)
+            );
+          `
+        })
+      : heading}
+    <div
+      css={css`
+        ${image
+          ? `
       position: relative;
       margin-left: calc(${imageWidth} + var(--spectrum-global-dimension-static-size-400));
       `
-        : ''}
-      display: inline-flex;
-      flex-direction: column;
-      margin-right: var(--spectrum-global-dimension-static-size-200);
-      width: ${width ||
-      layoutColumns(3, [
-        'var(--spectrum-global-dimension-static-size-400)',
-        'var(--spectrum-global-dimension-static-size-400)'
-      ])};
-
-      &:not(.is-block) {
-        height: 176px;
-        vertical-align: bottom;
-      }
-    `}
-    {...props}
-  >
-    {image &&
-      cloneElement(image, {
-        css: css`
-          position: absolute;
-          top: var(
-            --spectrum-heading-m-margin-top,
-            var(--spectrum-alias-heading-m-margin-top)
-          );
-          left: calc(
-            -${imageWidth} - var(--spectrum-global-dimension-static-size-400)
-          );
-          display: flex;
-          align-items: flex-start;
-          height: 100%;
-          width: ${imageWidth};
-        `
-      })}
-    {heading ?? (
-      <div className='spectrum-Heading--M' aria-hidden='true'>
-        &nbsp;
-      </div>
-    )}
-    {link}
-    {text}
-  </div>
+          : ''}
+        display: inline-flex;
+        flex-direction: column;
+        margin-right: var(--spectrum-global-dimension-static-size-200);
+        margin-bottom: var(--spectrum-global-dimension-static-size-100);
+        width: ${width ||
+        layoutColumns(3, [
+          'var(--spectrum-global-dimension-static-size-400)',
+          'var(--spectrum-global-dimension-static-size-400)'
+        ])};
+      `}
+    >
+      {image &&
+        cloneElement(image, {
+          css: css`
+            position: absolute;
+            top: calc(-1 * var(--spectrum-global-dimension-size-350));
+            left: calc(
+              -1 * (${imageWidth} +
+                    var(--spectrum-global-dimension-static-size-400))
+            );
+            display: flex;
+            align-items: flex-start;
+            height: 100%;
+            width: ${imageWidth};
+          `
+        })}
+      {link}
+      {text}
+    </div>
+  </React.Fragment>
 )
 
 DiscoverBlock.propTypes = {

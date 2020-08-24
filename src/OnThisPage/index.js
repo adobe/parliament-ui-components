@@ -11,21 +11,17 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
-import { useEffect, useState, useRef } from 'react'
+import { jsx, css } from '@emotion/core'
+import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { View } from '@react-spectrum/view'
 import classNames from 'classnames'
 import { Link } from '../Link'
+import { Picker } from '../Picker'
 import { layoutColumns } from '../utils'
-import { ChevronDown } from '../Icons'
 import '@spectrum-css/typography'
-import '@spectrum-css/icon'
-import '@spectrum-css/dropdown'
-import '@spectrum-css/popover'
-import '@spectrum-css/menu'
 
-const OnThisPage = ({ tableOfContents, ...props }) => {
+const OnThisPage = ({ tableOfContents }) => {
   const [activeHeadingLink, setActiveHeadingLink] = useState('')
   const [isPinned, setIsPinned] = useState(false)
   const outlineRef = useRef(null)
@@ -33,19 +29,17 @@ const OnThisPage = ({ tableOfContents, ...props }) => {
   const tableOfContentsItems = tableOfContents?.items?.[0]?.items
 
   useEffect(() => {
-    const observer =
-      window.IntersectionObserver &&
-      new window.IntersectionObserver((entries) => {
-        for (const entry of entries) {
-          setIsPinned(!entry.isIntersecting)
-        }
-      })
+    const observer = new window.IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        setIsPinned(!entry.isIntersecting)
+      }
+    })
 
     if (outlineRef?.current) {
-      observer && observer.observe(outlineRef.current)
+      observer.observe(outlineRef.current)
     }
 
-    return () => observer && observer.disconnect()
+    return () => observer.disconnect()
   }, [])
 
   useEffect(() => {
@@ -170,103 +164,29 @@ const OnThisPage = ({ tableOfContents, ...props }) => {
     </View>
   )
 
-  const OutlinePicker = () => {
-    const popover = useRef(null)
-    const [openMenu, setOpenMenu] = useState(false)
-    const id = new Date().getTime()
-
-    useEffect(() => {
-      const onClick = (event) => {
-        if (!popover.current.contains(event.target)) {
-          setOpenMenu(false)
-        }
-      }
-
-      document.addEventListener('click', onClick)
-
-      return () => document.removeEventListener('click', onClick)
-    }, [])
-
-    return (
-      <View marginY='size-400'>
-        <h4
-          className='spectrum-Detail--L'
-          css={css`
-            color: var(--spectrum-global-color-gray-600);
-            margin-bottom: var(--spectrum-global-dimension-static-size-200);
-          `}
-        >
-          On this page
-        </h4>
-        <div
-          className={classNames('spectrum-Dropdown', {
-            'is-open': openMenu
-          })}
-        >
-          <button
-            className={classNames(
-              'spectrum-FieldButton',
-              'spectrum-Dropdown-trigger',
-              { 'is-selected': openMenu }
-            )}
-            aria-haspopup='listbox'
-            aria-expanded={openMenu}
-            aria-controls={id}
-            onClick={(event) => {
-              event.stopPropagation()
-              event.nativeEvent.stopImmediatePropagation()
-              setOpenMenu(!openMenu)
-            }}
-          >
-            <span className='spectrum-Dropdown-label is-placeholder'>
-              Navigate to section
-            </span>
-            <ChevronDown className='spectrum-Dropdown-icon' />
-          </button>
-          <div
-            aria-hidden={!openMenu}
-            css={css`
-              width: 100%;
-              z-index: 1;
-              max-height: var(--spectrum-global-dimension-static-size-2400);
-            `}
-            className={classNames(
-              'spectrum-Popover',
-              'spectrum-Popover--bottom',
-              'spectrum-Dropdown-popover',
-              { 'is-open': openMenu }
-            )}
-            ref={popover}
-          >
-            <ul className='spectrum-Menu' role='listbox'>
-              {tableOfContentsItems.map((section, index) => (
-                <li
-                  key={index}
-                  className='spectrum-Menu-item'
-                  role='option'
-                  tabIndex='0'
-                >
-                  <a
-                    css={css`
-                      text-decoration: none;
-                      color: inherit;
-                    `}
-                    href={section.url}
-                    className='spectrum-Menu-itemLabel'
-                  >
-                    {section.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </View>
-    )
-  }
+  const OutlinePicker = () => (
+    <View marginY='size-400'>
+      <h4
+        className='spectrum-Detail--L'
+        css={css`
+          color: var(--spectrum-global-color-gray-600);
+          margin-bottom: var(--spectrum-global-dimension-static-size-200);
+        `}
+      >
+        On this page
+      </h4>
+      <Picker
+        label='Navigate to section'
+        items={tableOfContentsItems.map((item) => ({
+          title: item.title,
+          path: item.url
+        }))}
+      />
+    </View>
+  )
 
   return tableOfContentsItems ? (
-    <div {...props}>
+    <React.Fragment>
       <div ref={outlineRef}>
         {tableOfContentsItems.length <= 10 ? <Outline /> : <OutlinePicker />}
       </div>
@@ -296,7 +216,7 @@ const OnThisPage = ({ tableOfContents, ...props }) => {
       >
         <Outline withSubHeading />
       </aside>
-    </div>
+    </React.Fragment>
   ) : null
 }
 
