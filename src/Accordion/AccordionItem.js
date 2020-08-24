@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
+import { css, jsx } from '@emotion/core'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
@@ -25,6 +25,7 @@ const AccordionItem = ({
   isOpen = false,
   isDisabled = false,
   children,
+  uppercase = true,
   ...props
 }) => {
   const [open, setOpen] = useState(isOpen)
@@ -49,6 +50,9 @@ const AccordionItem = ({
           type='button'
           aria-expanded={open}
           onClick={onClick}
+          css={css`
+            text-transform: ${uppercase ? 'uppercase' : 'none'};
+          `}
         >
           {header}
         </button>
