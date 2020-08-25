@@ -61,7 +61,7 @@ const DiscoverBlock = ({ width, heading, link, text, image, ...props }) => (
           width: ${imageWidth};
         `
       })}
-    {heading ?? (
+    {heading && (
       <div className='spectrum-Heading--M' aria-hidden='true'>
         &nbsp;
       </div>
