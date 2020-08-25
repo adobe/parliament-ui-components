@@ -69,7 +69,7 @@ const AccordionItem = ({
 }
 
 AccordionItem.propTypes = {
-  header: PropTypes.string,
+  header: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   isOpen: PropTypes.bool,
   isDisabled: PropTypes.bool
 }
