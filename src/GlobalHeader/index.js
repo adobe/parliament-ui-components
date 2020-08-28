@@ -14,58 +14,66 @@
 import { css, jsx } from '@emotion/core'
 import React, { useRef, useEffect, useState, createRef } from 'react'
 import PropTypes from 'prop-types'
+import nextId from 'react-id-generator'
 import { Link as GatsbyLink } from 'gatsby'
-import { findSelectedTopPage } from '../utils'
+import { findSelectedTopPage, rootFix, rootFixPages } from '../utils'
 import { Grid, Flex } from '@react-spectrum/layout'
 import { View } from '@react-spectrum/view'
 import { Divider } from '@react-spectrum/divider'
 import { Button } from '../Button'
 import { Link } from '../Link'
-import { Adobe, ChevronDown } from '../Icons'
-import classNames from 'classnames'
+import { Adobe } from '../Icons'
+import { Picker, PickerButton } from '../Picker'
+import { Popover } from '../Popover'
+import {
+  Tabs,
+  TabsIndicator,
+  positionIndicator,
+  animateIndicator
+} from '../Tabs'
 import '@spectrum-css/typography'
-import '@spectrum-css/tabs'
-import '@spectrum-css/icon'
-import '@spectrum-css/dropdown'
-import '@spectrum-css/popover'
 import '@spectrum-css/assetlist'
 
 const stretched = css`
   height: 100%;
 `
 
-const GlobalHeader = ({ globalNav, pages, docs, location, ...props }) => {
+const GlobalHeader = ({
+  globalNav = {},
+  versions = [],
+  pages = [],
+  docs = {},
+  location = {},
+  ...props
+}) => {
   const nav = useRef(null)
   const selectedTabIndicator = useRef(null)
+  // Don't animate the tab indicator by default
+  const [isAnimated, setIsAnimated] = useState(false)
   const [tabs] = useState([])
   const primaryPopover = useRef(null)
   const secondaryPopover = useRef(null)
   const [openPrimaryMenu, setOpenPrimaryMenu] = useState(false)
   const [openSecondaryMenu, setOpenSecondaryMenu] = useState(false)
-  const [isAnimated, setIsAnimated] = useState(false)
 
   const positionSelectedTabIndicator = () => {
+    const pathWithRootFix = rootFix(location.pathname)
+    const pagesWithRootFix = rootFixPages(pages)
     const selectedTab = tabs.filter((tab) => tab.current)[
-      pages?.indexOf(findSelectedTopPage(location?.pathname, pages))
+      pagesWithRootFix.indexOf(
+        findSelectedTopPage(pathWithRootFix, pagesWithRootFix)
+      )
     ]
-    if (selectedTab) {
-      selectedTabIndicator.current.style.transform = `translate(${selectedTab.current.offsetLeft}px, 0px)`
-      selectedTabIndicator.current.style.width = `${selectedTab.current.offsetWidth}px`
-    }
+    positionIndicator(selectedTabIndicator, selectedTab)
   }
 
   useEffect(() => {
-    selectedTabIndicator.current.style.transition = isAnimated ? '' : 'none'
+    animateIndicator(selectedTabIndicator, isAnimated)
     positionSelectedTabIndicator()
-
-    // Font affects positioning of the Tab indicator
-    document?.fonts?.ready?.then(() => {
-      positionSelectedTabIndicator()
-      setIsAnimated(true)
-    })
-  }, [location?.pathname])
+  }, [location.pathname])
 
   useEffect(() => {
+    // Clicking outside of menu should close menu
     const onClick = (event) => {
       if (globalNav.menus.length) {
         if (!primaryPopover.current.contains(event.target)) {
@@ -87,19 +95,19 @@ const GlobalHeader = ({ globalNav, pages, docs, location, ...props }) => {
 
   return (
     <header
+      {...props}
       role='banner'
       css={css`
         ${stretched}
         border-bottom: var(--spectrum-global-dimension-static-size-10) solid var(--spectrum-global-color-gray-200);
         box-sizing: border-box;
       `}
-      {...props}
     >
       <nav css={stretched} role='navigation' aria-label='Global'>
         <Grid
           areas={['title navigation console profile']}
           columns={[
-            'minmax(256px, max-content)',
+            'minmax(auto, min-content)',
             'auto',
             'size-1200',
             'size-1200'
@@ -112,13 +120,13 @@ const GlobalHeader = ({ globalNav, pages, docs, location, ...props }) => {
             <Flex height='100%' alignItems='center'>
               <View>
                 <a
-                  href={globalNav?.home?.path}
+                  href={globalNav.home.path}
                   css={css`
                     text-decoration: none;
                   `}
                 >
                   <Flex alignItems='center'>
-                    {globalNav?.home?.logo === 'adobe' ? (
+                    {globalNav.home.logo === 'adobe' ? (
                       <Adobe
                         css={css`
                           width: var(
@@ -134,280 +142,267 @@ const GlobalHeader = ({ globalNav, pages, docs, location, ...props }) => {
                         `}
                       />
                     ) : (
-                      globalNav?.home?.logo
+                      globalNav.home.logo
                     )}
                     <strong className='spectrum-Heading--XXS'>
-                      {globalNav?.home?.title}
+                      {globalNav.home.title}
                     </strong>
                   </Flex>
                 </a>
               </View>
-              {globalNav?.menus &&
-                globalNav.menus.slice(0, 2).map((menu, index) => {
-                  const isPrimary = index === 0
-                  const id = new Date().getTime()
+              {globalNav.menus.map((menu, index) => {
+                const isPrimary = index === 0
+                const id = nextId()
 
-                  return (
-                    menu.title && (
-                      <div
-                        key={index}
-                        css={css`
-                          box-sizing: border-box;
-                          padding: var(
-                              --spectrum-global-dimension-static-size-200
-                            )
-                            var(--spectrum-global-dimension-static-size-300) 0
-                            var(--spectrum-global-dimension-static-size-300);
-                          height: calc(100% + 1px);
-                          border-left: 1px solid transparent;
-                          border-right: 1px solid transparent;
-                          ${isPrimary
-                            ? `
+                return (
+                  menu.title && (
+                    <div
+                      key={index}
+                      css={css`
+                        box-sizing: border-box;
+                        padding: var(
+                            --spectrum-global-dimension-static-size-200
+                          )
+                          var(--spectrum-global-dimension-static-size-300) 0
+                          var(--spectrum-global-dimension-static-size-300);
+                        height: calc(100% + 1px);
+                        border-left: 1px solid transparent;
+                        border-right: 1px solid transparent;
+                        ${isPrimary
+                          ? `
                         margin-left: var(--spectrum-global-dimension-static-size-300);
                         `
-                            : ''}
-                          ${globalNav.menus.length === 1
-                            ? `
+                          : ''}
+                        ${globalNav.menus.length === 1
+                          ? `
                           border-color: var(--spectrum-global-color-gray-200);
                         `
-                            : ''}
+                          : ''}
+                      `}
+                    >
+                      <PickerButton
+                        isQuiet
+                        isOpen={isPrimary ? openPrimaryMenu : openSecondaryMenu}
+                        ariaControls={id}
+                        onClick={(event) => {
+                          event.stopPropagation()
+                          event.nativeEvent.stopImmediatePropagation()
+
+                          if (isPrimary) {
+                            setOpenPrimaryMenu(!openPrimaryMenu)
+                            setOpenSecondaryMenu(false)
+                          } else {
+                            setOpenSecondaryMenu(!openSecondaryMenu)
+                            setOpenPrimaryMenu(false)
+                          }
+                        }}
+                      >
+                        {menu.title}
+                      </PickerButton>
+                      <Popover
+                        ref={isPrimary ? primaryPopover : secondaryPopover}
+                        id={id}
+                        variant='picker'
+                        isQuiet
+                        isOpen={isPrimary ? openPrimaryMenu : openSecondaryMenu}
+                        css={css`
+                          display: block;
+                          padding: var(
+                            --spectrum-global-dimension-static-size-300
+                          );
+                          z-index: 2;
+                          max-width: none !important;
+                          max-height: none !important;
+                          width: auto !important;
                         `}
                       >
-                        <div
-                          className={classNames(
-                            'spectrum-Dropdown',
-                            'spectrum-Dropdown--quiet',
-                            {
-                              'is-open': isPrimary
-                                ? openPrimaryMenu
-                                : openSecondaryMenu
-                            }
-                          )}
-                        >
-                          <button
-                            className={classNames(
-                              'spectrum-FieldButton',
-                              'spectrum-FieldButton--quiet',
-                              'spectrum-Dropdown-trigger',
-                              {
-                                'is-selected': isPrimary
-                                  ? openPrimaryMenu
-                                  : openSecondaryMenu
-                              }
-                            )}
-                            aria-haspopup='listbox'
-                            aria-expanded={
-                              isPrimary ? openPrimaryMenu : openSecondaryMenu
-                            }
-                            aria-controls={id}
-                            onClick={(event) => {
-                              event.stopPropagation()
-                              event.nativeEvent.stopImmediatePropagation()
-
-                              if (isPrimary) {
-                                setOpenPrimaryMenu(!openPrimaryMenu)
-                                setOpenSecondaryMenu(false)
-                              } else {
-                                setOpenSecondaryMenu(!openSecondaryMenu)
-                                setOpenPrimaryMenu(false)
-                              }
-                            }}
-                          >
-                            <span className='spectrum-Dropdown-label'>
-                              {menu.title}
-                            </span>
-                            <ChevronDown className='spectrum-Dropdown-icon' />
-                          </button>
-                        </div>
-                        <div
-                          ref={isPrimary ? primaryPopover : secondaryPopover}
-                          id={id}
-                          aria-hidden={
-                            isPrimary ? !openPrimaryMenu : !openSecondaryMenu
-                          }
-                          className={classNames(
-                            'spectrum-Popover',
-                            'spectrum-Popover--bottom',
-                            'spectrum-Dropdown-popover',
-                            'spectrum-Dropdown-popover--quiet',
-                            {
-                              'is-open': isPrimary
-                                ? openPrimaryMenu
-                                : openSecondaryMenu
-                            }
-                          )}
-                          css={css`
-                            display: block;
-                            padding: var(
-                              --spectrum-global-dimension-static-size-300
-                            );
-                            z-index: 2;
-                            max-width: none !important;
-                          `}
-                        >
-                          <div
-                            css={css`
-                              display: flex;
-                              gap: var(
-                                --spectrum-global-dimension-static-size-200
-                              );
-                            `}
-                          >
-                            {menu.sections.map((section, i) => (
-                              <React.Fragment key={i}>
-                                <View>
-                                  {section.heading && (
-                                    <View
-                                      marginBottom='size-200'
-                                      marginStart='size-200'
-                                    >
-                                      <strong className='spectrum-Heading--XS'>
-                                        {section.heading}
-                                      </strong>
-                                    </View>
-                                  )}
-                                  <ul
-                                    className='spectrum-AssetList'
-                                    role='menu'
+                        <Flex>
+                          {menu.sections.map((section, i) => (
+                            <View
+                              key={i}
+                              marginEnd='size-400'
+                              position='relative'
+                            >
+                              <View>
+                                {section.heading && (
+                                  <View
+                                    marginBottom='size-200'
+                                    marginStart='size-200'
                                   >
-                                    {section.pages.map((page, k) => (
-                                      <li
-                                        key={k}
-                                        className='spectrum-AssetList-item'
-                                        role='menuitem'
+                                    <strong className='spectrum-Heading--S'>
+                                      {section.heading}
+                                    </strong>
+                                  </View>
+                                )}
+                                <ul className='spectrum-AssetList' role='menu'>
+                                  {section.pages.map((page, k) => (
+                                    <li
+                                      key={k}
+                                      className='spectrum-AssetList-item'
+                                      role='menuitem'
+                                      css={css`
+                                        width: auto !important;
+                                        height: auto !important;
+                                        min-height: var(
+                                          --spectrum-global-dimension-static-size-500
+                                        ) !important;
+                                        ${page.description
+                                          ? 'margin-bottom: var(--spectrum-global-dimension-static-size-200);'
+                                          : ''}
+                                      `}
+                                    >
+                                      <a
                                         css={css`
-                                          width: auto !important;
-                                          height: auto !important;
-                                          min-height: var(
-                                            --spectrum-global-dimension-static-size-500
-                                          ) !important;
-                                          ${page.description
-                                            ? 'margin-bottom: var(--spectrum-global-dimension-static-size-200);'
-                                            : ''}
+                                          display: flex;
+                                          z-index: 1;
+                                          height: 100%;
+                                          width: 100%;
+                                          align-items: center;
+                                          color: inherit;
+                                          text-decoration: none;
+                                          padding-top: var(
+                                            --spectrum-global-dimension-static-size-100
+                                          );
+                                          padding-bottom: var(
+                                            --spectrum-global-dimension-static-size-100
+                                          );
                                         `}
+                                        href={page.path}
                                       >
-                                        <a
-                                          css={css`
-                                            display: flex;
-                                            z-index: 1;
-                                            height: 100%;
-                                            width: 100%;
-                                            align-items: center;
-                                            color: inherit;
-                                            text-decoration: none;
-                                            padding-top: var(
-                                              --spectrum-global-dimension-static-size-100
-                                            );
-                                            padding-bottom: var(
-                                              --spectrum-global-dimension-static-size-100
-                                            );
-                                          `}
-                                          href={page.path}
-                                        >
-                                          <Flex direction='column'>
-                                            <View>{page.title}</View>
-                                            {page.description && (
-                                              <View marginTop='size-100'>
-                                                <span
-                                                  className='spectrum-Body--XS'
-                                                  css={css`
-                                                    color: var(
-                                                      --spectrum-global-color-gray-700
-                                                    );
-                                                  `}
-                                                >
-                                                  {page.description}
-                                                </span>
-                                              </View>
-                                            )}
-                                          </Flex>
-                                        </a>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </View>
-                                {section.divider && (
+                                        <Flex direction='column'>
+                                          <View>{page.title}</View>
+                                          {page.description && (
+                                            <View marginTop='size-100'>
+                                              <span
+                                                className='spectrum-Body--XS'
+                                                css={css`
+                                                  color: var(
+                                                    --spectrum-global-color-gray-700
+                                                  );
+                                                `}
+                                              >
+                                                {page.description}
+                                              </span>
+                                            </View>
+                                          )}
+                                        </Flex>
+                                      </a>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </View>
+                              {section.divider && (
+                                <div
+                                  css={css`
+                                    position: absolute;
+                                    height: 100%;
+                                    top: 0;
+                                    right: calc(
+                                      -1 * var(--spectrum-global-dimension-static-size-200)
+                                    );
+                                  `}
+                                >
                                   <Divider
                                     orientation='vertical'
-                                    size='S'
-                                    marginTop='size-600'
+                                    marginStart='size-200'
+                                    size='M'
+                                    height='100%'
                                   />
-                                )}
-                              </React.Fragment>
-                            ))}
-                          </div>
-                          {menu.sections[0].viewAll && (
-                            <View marginTop='size-100' marginStart='size-200'>
-                              <Link
-                                css={css`
-                                  text-decoration: none;
-                                  font-weight: 700;
-                                `}
-                                href={menu.sections[0].viewAll.path}
-                              >
-                                {menu.sections[0].viewAll.title}
-                              </Link>
+                                </div>
+                              )}
                             </View>
-                          )}
-                        </div>
-                      </div>
-                    )
+                          ))}
+                        </Flex>
+                        {menu.sections[0].viewAll && (
+                          <View marginTop='size-100' marginStart='size-200'>
+                            <Link href={menu.sections[0].viewAll.path}>
+                              <strong>{menu.sections[0].viewAll.title}</strong>
+                            </Link>
+                          </View>
+                        )}
+                      </Popover>
+                    </div>
                   )
-                })}
+                )
+              })}
             </Flex>
           </View>
-          <View gridArea='navigation' marginStart='size-200'>
-            <div
+          <View
+            gridArea='navigation'
+            marginStart={globalNav.menus.length === 1 ? 'size-200' : 'size-0'}
+          >
+            <Tabs
               ref={nav}
-              className='spectrum-Tabs spectrum-Tabs--quiet spectrum-Tabs--horizontal'
-              role='tablist'
+              onFontsReady={() => {
+                positionSelectedTabIndicator()
+                setIsAnimated(true)
+              }}
             >
-              {pages &&
-                pages.slice(0, 4).map((page, index) => {
-                  const { title, path } = page
-                  const ref = createRef()
-                  tabs.push(ref)
+              {pages.map((page, i) => {
+                const { title, path } = page
+                const ref = createRef()
+                tabs.push(ref)
 
-                  const isActive = ({ isPartiallyCurrent }) =>
-                    isPartiallyCurrent
-                      ? {
-                          'aria-selected': 'true',
-                          className: 'is-selected spectrum-Tabs-item'
-                        }
-                      : { className: 'spectrum-Tabs-item' }
+                const isActive = ({ isPartiallyCurrent }) =>
+                  isPartiallyCurrent
+                    ? {
+                        'aria-selected': 'true',
+                        className: 'is-selected spectrum-Tabs-item'
+                      }
+                    : { className: 'spectrum-Tabs-item' }
 
-                  return (
+                return (
+                  <React.Fragment key={i}>
                     <GatsbyLink
                       role='tab'
                       getProps={isActive}
-                      key={index}
                       ref={ref}
                       to={path}
                       partiallyActive
                     >
                       <span className='spectrum-Tabs-itemLabel'>{title}</span>
                     </GatsbyLink>
-                  )
-                })}
-              <div
+                    {i === 0 && versions[0]?.title && (
+                      <div
+                        css={css`
+                          margin-left: var(
+                            --spectrum-global-dimension-static-size-100
+                          ) !important;
+                          margin-right: var(
+                            --spectrum-global-dimension-static-size-300
+                          );
+                        `}
+                      >
+                        <Picker
+                          isQuiet
+                          items={versions.map((version, k) => ({
+                            title: version.title,
+                            path: version.path,
+                            selected: k === 0
+                          }))}
+                        />
+                      </div>
+                    )}
+                  </React.Fragment>
+                )
+              })}
+              <TabsIndicator
                 ref={selectedTabIndicator}
-                className='spectrum-Tabs-selectionIndicator'
                 css={css`
                   bottom: -10px !important;
-                  transition-property: transform, width;
                 `}
               />
               <View marginStart='size-400'>
-                {docs?.path && (
+                {docs.path && (
                   <Button variant='primary' elementType='a' href={docs.path}>
                     View Docs
                   </Button>
                 )}
               </View>
-            </div>
+            </Tabs>
           </View>
           <View gridArea='console' justifySelf='center'>
-            {globalNav?.console && (
+            {globalNav.console && (
               <Button
                 variant='primary'
                 elementType='a'
@@ -418,7 +413,7 @@ const GlobalHeader = ({ globalNav, pages, docs, location, ...props }) => {
             )}
           </View>
           <View gridArea='profile' justifySelf='center'>
-            {globalNav?.signIn && (
+            {globalNav.signIn && (
               <Button
                 isQuiet
                 variant='primary'
@@ -439,7 +434,8 @@ GlobalHeader.propTypes = {
   globalNav: PropTypes.object,
   pages: PropTypes.array,
   docs: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
+  versions: PropTypes.array
 }
 
 export { GlobalHeader }
