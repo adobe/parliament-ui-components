@@ -9,7 +9,7 @@ import '@adobe/focus-ring-polyfill'
 
 export const Provider = ({ children, ...props }) => (
   <div
-    className='spectrum spectrum--light spectrum--medium spectrum-Typography'
+    className='spectrum spectrum--light spectrum--medium'
     dir='ltr'
     {...props}
   >
