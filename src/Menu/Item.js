@@ -18,7 +18,6 @@ import '@spectrum-css/menu'
 
 const Item = ({
   children,
-  key,
   item,
   onAction,
   isSelected = false,
@@ -26,7 +25,7 @@ const Item = ({
   isDivider = false
 }) =>
   isDivider ? (
-    <li className='spectrum-Menu-divider' role='separator' key={key} />
+    <li className='spectrum-Menu-divider' role='separator' />
   ) : (
     <li
       className={classNames([
@@ -38,7 +37,6 @@ const Item = ({
       aria-selected={isSelected}
       aria-disabled={isDisabled}
       tabIndex='0'
-      key={key}
       onClick={() => {
         onAction && onAction(item || children)
       }}
