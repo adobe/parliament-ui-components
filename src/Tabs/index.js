@@ -45,7 +45,7 @@ const Tabs = forwardRef(
           'spectrum-Tabs--quiet',
           className
         )}
-        role='tabs'
+        role='tablist'
       >
         {children}
       </div>

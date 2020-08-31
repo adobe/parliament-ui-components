@@ -181,7 +181,9 @@ const globalNav = {
         }
       ]
     }
-  ]
+  ],
+  console: false,
+  signIn: false
 }
 
 const pages = [
@@ -243,12 +245,17 @@ export const WithDocs = () => {
 }
 
 export const WithConsoleAndSignIn = () => {
-  globalNav.console = true
-  globalNav.signIn = true
+  const globalNavCopy = { ...globalNav }
+  globalNavCopy.console = true
+  globalNavCopy.signIn = true
 
   return (
     <View position='fixed' height='size-800' left='0' right='0'>
-      <GlobalHeader location={location} pages={pages} globalNav={globalNav} />
+      <GlobalHeader
+        location={location}
+        pages={pages}
+        globalNav={globalNavCopy}
+      />
     </View>
   )
 }

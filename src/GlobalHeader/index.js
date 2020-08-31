@@ -189,10 +189,14 @@ const GlobalHeader = ({
                           event.nativeEvent.stopImmediatePropagation()
 
                           if (isPrimary) {
-                            setOpenPrimaryMenu(!openPrimaryMenu)
+                            setOpenPrimaryMenu(
+                              (openPrimaryMenu) => !openPrimaryMenu
+                            )
                             setOpenSecondaryMenu(false)
                           } else {
-                            setOpenSecondaryMenu(!openSecondaryMenu)
+                            setOpenSecondaryMenu(
+                              (openSecondaryMenu) => !openSecondaryMenu
+                            )
                             setOpenPrimaryMenu(false)
                           }
                         }}
@@ -216,110 +220,117 @@ const GlobalHeader = ({
                           width: auto !important;
                         `}
                       >
-                        <Flex>
-                          {menu.sections.map((section, i) => (
-                            <View
-                              key={i}
-                              marginEnd='size-400'
-                              position='relative'
-                            >
-                              <View>
-                                {section.heading && (
-                                  <View
-                                    marginBottom='size-200'
-                                    marginStart='size-200'
-                                  >
-                                    <strong className='spectrum-Heading--S'>
-                                      {section.heading}
-                                    </strong>
-                                  </View>
-                                )}
-                                <ul className='spectrum-AssetList' role='menu'>
-                                  {section.pages.map((page, k) => (
-                                    <li
-                                      key={k}
-                                      className='spectrum-AssetList-item'
-                                      role='menuitem'
-                                      css={css`
-                                        width: auto !important;
-                                        height: auto !important;
-                                        min-height: var(
-                                          --spectrum-global-dimension-static-size-500
-                                        ) !important;
-                                        ${page.description
-                                          ? 'margin-bottom: var(--spectrum-global-dimension-static-size-200);'
-                                          : ''}
-                                      `}
+                        <nav aria-label='Secondary'>
+                          <Flex>
+                            {menu.sections.map((section, i) => (
+                              <View
+                                key={i}
+                                marginEnd='size-400'
+                                position='relative'
+                              >
+                                <View>
+                                  {section.heading && (
+                                    <View
+                                      marginBottom='size-200'
+                                      marginStart='size-200'
                                     >
-                                      <a
+                                      <strong className='spectrum-Heading--S'>
+                                        {section.heading}
+                                      </strong>
+                                    </View>
+                                  )}
+                                  <ul
+                                    className='spectrum-AssetList'
+                                    role='menu'
+                                  >
+                                    {section.pages.map((page, k) => (
+                                      <li
+                                        key={k}
+                                        className='spectrum-AssetList-item'
+                                        role='menuitem'
                                         css={css`
-                                          display: flex;
-                                          z-index: 1;
-                                          height: 100%;
-                                          width: 100%;
-                                          align-items: center;
-                                          color: inherit;
-                                          text-decoration: none;
-                                          padding-top: var(
-                                            --spectrum-global-dimension-static-size-100
-                                          );
-                                          padding-bottom: var(
-                                            --spectrum-global-dimension-static-size-100
-                                          );
+                                          width: auto !important;
+                                          height: auto !important;
+                                          min-height: var(
+                                            --spectrum-global-dimension-static-size-500
+                                          ) !important;
+                                          ${page.description
+                                            ? 'margin-bottom: var(--spectrum-global-dimension-static-size-200);'
+                                            : ''}
                                         `}
-                                        href={page.path}
                                       >
-                                        <Flex direction='column'>
-                                          <View>{page.title}</View>
-                                          {page.description && (
-                                            <View marginTop='size-100'>
-                                              <span
-                                                className='spectrum-Body--XS'
-                                                css={css`
-                                                  color: var(
-                                                    --spectrum-global-color-gray-700
-                                                  );
-                                                `}
-                                              >
-                                                {page.description}
-                                              </span>
-                                            </View>
-                                          )}
-                                        </Flex>
-                                      </a>
-                                    </li>
-                                  ))}
-                                </ul>
+                                        <a
+                                          css={css`
+                                            display: flex;
+                                            z-index: 1;
+                                            height: 100%;
+                                            width: 100%;
+                                            align-items: center;
+                                            color: inherit;
+                                            text-decoration: none;
+                                            padding-top: var(
+                                              --spectrum-global-dimension-static-size-100
+                                            );
+                                            padding-bottom: var(
+                                              --spectrum-global-dimension-static-size-100
+                                            );
+                                          `}
+                                          href={page.path}
+                                        >
+                                          <Flex direction='column'>
+                                            <View>{page.title}</View>
+                                            {page.description && (
+                                              <View marginTop='size-100'>
+                                                <span
+                                                  className='spectrum-Body--XS'
+                                                  css={css`
+                                                    color: var(
+                                                      --spectrum-global-color-gray-700
+                                                    );
+                                                  `}
+                                                >
+                                                  {page.description}
+                                                </span>
+                                              </View>
+                                            )}
+                                          </Flex>
+                                        </a>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </View>
+                                {section.divider && (
+                                  <div
+                                    css={css`
+                                      position: absolute;
+                                      height: 100%;
+                                      top: 0;
+                                      right: calc(
+                                        -1 * var(--spectrum-global-dimension-static-size-200)
+                                      );
+                                    `}
+                                  >
+                                    <Divider
+                                      orientation='vertical'
+                                      marginStart='size-200'
+                                      size='M'
+                                      height='100%'
+                                    />
+                                  </div>
+                                )}
                               </View>
-                              {section.divider && (
-                                <div
-                                  css={css`
-                                    position: absolute;
-                                    height: 100%;
-                                    top: 0;
-                                    right: calc(
-                                      -1 * var(--spectrum-global-dimension-static-size-200)
-                                    );
-                                  `}
-                                >
-                                  <Divider
-                                    orientation='vertical'
-                                    marginStart='size-200'
-                                    size='M'
-                                    height='100%'
-                                  />
-                                </div>
-                              )}
+                            ))}
+                          </Flex>
+                          {menu.sections[0].viewAll && (
+                            <View marginTop='size-100' marginStart='size-200'>
+                              <Link href={menu.sections[0].viewAll.path}>
+                                <strong>
+                                  {menu.sections[0].viewAll.title}
+                                </strong>
+                              </Link>
                             </View>
-                          ))}
-                        </Flex>
-                        {menu.sections[0].viewAll && (
-                          <View marginTop='size-100' marginStart='size-200'>
-                            <Link href={menu.sections[0].viewAll.path}>
-                              <strong>{menu.sections[0].viewAll.title}</strong>
-                            </Link>
-                          </View>
-                        )}
+                          )}
+                        </nav>
                       </Popover>
                     </div>
                   )
