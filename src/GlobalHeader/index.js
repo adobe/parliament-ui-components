@@ -44,6 +44,8 @@ const GlobalHeader = ({
   pages = [],
   docs = {},
   location = {},
+  console = false,
+  signIn = false,
   ...props
 }) => {
   const nav = useRef(null)
@@ -413,7 +415,7 @@ const GlobalHeader = ({
             </Tabs>
           </View>
           <View gridArea='console' justifySelf='center'>
-            {globalNav.console && (
+            {console && (
               <Button
                 variant='primary'
                 elementType='a'
@@ -424,7 +426,7 @@ const GlobalHeader = ({
             )}
           </View>
           <View gridArea='profile' justifySelf='center'>
-            {globalNav.signIn && (
+            {signIn && (
               <Button
                 isQuiet
                 variant='primary'
@@ -446,7 +448,9 @@ GlobalHeader.propTypes = {
   pages: PropTypes.array,
   docs: PropTypes.object,
   location: PropTypes.object,
-  versions: PropTypes.array
+  versions: PropTypes.array,
+  console: PropTypes.bool,
+  signIn: PropTypes.bool
 }
 
 export { GlobalHeader }
