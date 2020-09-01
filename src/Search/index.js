@@ -26,7 +26,6 @@ import './search.css'
 const Search = ({ searchIndex = {}, ...props }) => {
   const [index] = useState(Index.load(searchIndex))
   const [results, setResults] = useState([])
-  const [items, setItems] = useState([])
   const [isOpen, setIsOpen] = useState(false)
 
   const search = (searchTerm) => {
@@ -37,50 +36,50 @@ const Search = ({ searchIndex = {}, ...props }) => {
       })
 
     setResults(searchResults)
-    const docsResultMenuItems = [
-      <Item key='docs-divider'>
-        <h5>Docs</h5>
-      </Item>
-    ]
-    const apiResultMenuItems = [
-      <Item key='api-divider'>
-        <h5>APIs</h5>
-      </Item>
-    ]
-    for (const result of searchResults) {
-      const item = (
-        <a
-          key={result.id}
-          className='searchMenuLink'
-          onClick={() => {
-            setIsOpen(false)
-            navigate(result.path)
-          }}
-        >
-          <Item>{result.title}</Item>
-        </a>
-      )
-      if (result.type === 'apis') {
-        apiResultMenuItems.push(item)
-      } else {
-        docsResultMenuItems.push(item)
-      }
-    }
-    const topResultMenuItems = []
-    if (docsResultMenuItems.length > 1)
-      topResultMenuItems.push(...docsResultMenuItems)
-    if (apiResultMenuItems.length > 1)
-      topResultMenuItems.push(...apiResultMenuItems)
-    setItems(topResultMenuItems)
     if (searchTerm.length > 0) setIsOpen(true)
   }
+
+  const docsResultMenuItems = [
+    <Item key='docs-divider'>
+      <h5>Docs</h5>
+    </Item>
+  ]
+  const apiResultMenuItems = [
+    <Item key='api-divider'>
+      <h5>APIs</h5>
+    </Item>
+  ]
+
+  for (const result of results) {
+    const item = (
+      <a
+        key={result.id}
+        className='searchMenuLink'
+        onClick={() => {
+          setIsOpen(false)
+          navigate(result.path)
+        }}
+      >
+        <Item>{result.title}</Item>
+      </a>
+    )
+
+    if (result.type === 'apis') {
+      apiResultMenuItems.push(item)
+    } else {
+      docsResultMenuItems.push(item)
+    }
+  }
+
+  const items = []
+  if (docsResultMenuItems.length > 1) items.push(...docsResultMenuItems)
+  if (apiResultMenuItems.length > 1) items.push(...apiResultMenuItems)
 
   return (
     <div style={{ position: 'relative' }} {...props}>
       <SearchField
         onClear={() => {
           setIsOpen(false)
-          setItems([])
         }}
         onChange={(searchTerm) => {
           searchTerm.length > 0 ? search(searchTerm) : setIsOpen(false)
