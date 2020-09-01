@@ -22,18 +22,19 @@ const Item = ({
   onAction,
   isSelected = false,
   isDisabled = false,
-  isDivider = false
+  isDivider = false,
+  isSectionHeading = false
 }) =>
   isDivider ? (
     <li className='spectrum-Menu-divider' role='separator' />
   ) : (
     <li
       className={classNames([
-        'spectrum-Menu-item',
+        { 'spectrum-Menu-item': !isSectionHeading },
         { 'is-selected': isSelected },
         { 'is-disabled': isDisabled }
       ])}
-      role='menuitem'
+      role={!isSectionHeading ? 'menuitem' : 'group'}
       aria-selected={isSelected}
       aria-disabled={isDisabled}
       tabIndex='0'
@@ -41,13 +42,23 @@ const Item = ({
         onAction && onAction(item || children)
       }}
     >
-      <span className='spectrum-Menu-itemLabel'>{children}</span>
+      <span
+        className={
+          isSectionHeading
+            ? 'spectrum-Menu-sectionHeading'
+            : 'spectrum-Menu-itemLabel'
+        }
+      >
+        {children}
+      </span>
     </li>
   )
 
 Item.propTypes = {
   isSelected: PropTypes.bool,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  isDivider: PropTypes.bool,
+  isSectionHeading: PropTypes.bool
 }
 
 export { Item }
