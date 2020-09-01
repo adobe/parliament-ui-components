@@ -40,13 +40,13 @@ const Search = ({ searchIndex = {}, ...props }) => {
   }
 
   const docsResultMenuItems = [
-    <Item key='docs-divider'>
-      <h5>Docs</h5>
+    <Item key='docs-divider' isSectionHeading>
+      Docs
     </Item>
   ]
   const apiResultMenuItems = [
-    <Item key='api-divider'>
-      <h5>APIs</h5>
+    <Item key='api-divider' isSectionHeading>
+      APIs
     </Item>
   ]
 
