@@ -181,9 +181,7 @@ const globalNav = {
         }
       ]
     }
-  ],
-  console: false,
-  signIn: false
+  ]
 }
 
 const pages = [
@@ -245,9 +243,27 @@ export const WithDocs = () => {
 }
 
 export const WithConsoleAndSignIn = () => {
+  return (
+    <View position='fixed' height='size-800' left='0' right='0'>
+      <GlobalHeader
+        location={location}
+        pages={pages}
+        globalNav={globalNav}
+        console
+        signIn
+      />
+    </View>
+  )
+}
+
+export const WithCustomLogo = () => {
   const globalNavCopy = { ...globalNav }
-  globalNavCopy.console = true
-  globalNavCopy.signIn = true
+  globalNavCopy.home.logo = (
+    <img
+      style={{ height: 32, marginRight: 8 }}
+      src='https://www.adobe.com/content/dam/offers-homepage/us/en/homepage/profilepod/cc.png.img.png'
+    />
+  )
 
   return (
     <View position='fixed' height='size-800' left='0' right='0'>
