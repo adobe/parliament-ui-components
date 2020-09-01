@@ -14,7 +14,7 @@
 import { css, jsx } from '@emotion/core'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
-import { navigate, Link } from 'gatsby'
+import { navigate } from 'gatsby'
 import { Index } from 'elasticlunr'
 import { Heading, Text } from '@react-spectrum/text'
 import { Item, Menu } from '../Menu'
@@ -49,9 +49,16 @@ const Search = ({ searchIndex = {}, ...props }) => {
     ]
     for (const result of searchResults) {
       const item = (
-        <Link key={result.id} className='searchMenuLink' to={result.path}>
+        <a
+          key={result.id}
+          className='searchMenuLink'
+          onClick={() => {
+            setIsOpen(false)
+            navigate(result.path)
+          }}
+        >
           <Item>{result.title}</Item>
-        </Link>
+        </a>
       )
       if (result.type === 'apis') {
         apiResultMenuItems.push(item)
