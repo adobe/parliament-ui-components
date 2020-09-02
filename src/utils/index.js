@@ -21,6 +21,27 @@ export const cloneElement = (element, props) =>
     ...props
   })
 
+export const rootFix = (pathname) => {
+  if (pathname === withPrefix('/')) {
+    return withPrefix('/_ROOT_/')
+  }
+
+  return pathname
+}
+
+export const rootFixPages = (pages) => {
+  return pages.map((page) => {
+    if (page.path === '/') {
+      return {
+        title: page.title,
+        path: '/_ROOT_/'
+      }
+    }
+
+    return page
+  })
+}
+
 export const layoutColumns = (columns, gutters = []) =>
   `calc(${columns} * var(--spectrum-global-dimension-static-grid-fixed-max-width) / var(--spectrum-global-dimension-static-grid-columns)${
     gutters.length > 0 ? ` - ${gutters.join(' - ')}` : ''
@@ -33,7 +54,7 @@ export const findSelectedTopPage = (pathname, pages) => {
 export const findSubPages = (pathname, pages, subPages) => {
   const selectedTopPage = findSelectedTopPage(pathname, pages)
   return subPages.filter((page) =>
-    withPrefix(page.path).startsWith(withPrefix(selectedTopPage.path))
+    withPrefix(page.path).startsWith(withPrefix(selectedTopPage?.path))
   )
 }
 

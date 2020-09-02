@@ -16,8 +16,45 @@ import { GlobalHeader } from '../index'
 
 describe('<GlobalHeader />', () => {
   test('should render', () => {
+    const globalNav = {
+      home: {
+        title: 'Developer',
+        path: 'https://adobe.io',
+        logo: 'adobe'
+      },
+      menus: []
+    }
+
+    const pages = [{ title: 'Home', path: '/home/' }]
+
+    const location = {
+      pathname: '/home/'
+    }
+
+    const docs = {
+      path: '/docs/'
+    }
+
+    const versions = [
+      {
+        title: 'v2',
+        path: '/home/'
+      },
+      {
+        title: 'v1',
+        path: '/v1/home/'
+      }
+    ]
+
     const { getByTestId } = render(
-      <GlobalHeader location={{ pathname: 'path' }} data-testid='el' />
+      <GlobalHeader
+        versions={versions}
+        docs={docs}
+        location={location}
+        pages={pages}
+        globalNav={globalNav}
+        data-testid='el'
+      />
     )
     const el = getByTestId('el')
 
