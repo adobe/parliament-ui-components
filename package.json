@@ -89,6 +89,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-id-generator": "^3.0.1",
     "redoc": "^2.0.0-rc.38",
     "styled-components": "^5.1.1"
   },
