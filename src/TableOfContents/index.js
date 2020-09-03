@@ -14,7 +14,7 @@ governing permissions and limitations under the License.
 import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { Link } from '../Link'
-import { View } from '@react-spectrum/view'
+import { View } from '@adobe/react-spectrum'
 
 import '@spectrum-css/typography'
 import '@spectrum-css/link'

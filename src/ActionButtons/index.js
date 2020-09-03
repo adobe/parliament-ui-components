@@ -11,8 +11,7 @@ governing permissions and limitations under the License.
 */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Text } from '@react-spectrum/text'
-import { ActionButton } from '../ActionButton'
+import { ActionButton, Text } from '@adobe/react-spectrum'
 
 import Bug from '@spectrum-icons/workflow/Bug'
 import Edit from '@spectrum-icons/workflow/Edit'

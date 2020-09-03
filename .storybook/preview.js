@@ -16,7 +16,7 @@ import { addDecorator, addParameters } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 import { withKnobs } from '@storybook/addon-knobs'
-import { Provider } from '../src/Provider'
+import { Provider, defaultTheme } from '@adobe/react-spectrum'
 
 // Gatsby Setup
 // ============================================
@@ -47,4 +47,8 @@ addParameters({
 
 // Storybook Decorators
 addDecorator(withKnobs) // add withKnobs
-addDecorator((story) => <Provider>{story()}</Provider>)
+addDecorator((story) => (
+  <Provider theme={defaultTheme} colorScheme='light' scale='medium'>
+    {story()}
+  </Provider>
+))
