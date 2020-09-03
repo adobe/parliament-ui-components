@@ -53,6 +53,7 @@
   ],
   "dependencies": {
     "@adobe/focus-ring-polyfill": "^0.1.5",
+    "@adobe/react-spectrum": "^3.3.0",
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
