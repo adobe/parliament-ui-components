@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 import React from 'react'
-import { Text } from '@react-spectrum/text'
+import { Text } from '@adobe/react-spectrum'
 
 import { ActionButton } from '../index'
 import Bug from '@spectrum-icons/workflow/Bug'

@@ -15,7 +15,7 @@ import { css, jsx } from '@emotion/core'
 import React from 'react'
 import classNames from 'classnames'
 import '@spectrum-css/typography'
-import { Divider } from '@react-spectrum/divider'
+import { Divider } from '@adobe/react-spectrum'
 import { Link } from '../Link'
 
 const headingSizes = ['XL', 'L', 'M', 'S', 'XS', 'XXS']

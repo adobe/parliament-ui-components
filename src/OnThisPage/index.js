@@ -14,7 +14,7 @@
 import { css, jsx } from '@emotion/core'
 import { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { View } from '@react-spectrum/view'
+import { View } from '@adobe/react-spectrum'
 import classNames from 'classnames'
 import { Link } from '../Link'
 import { layoutColumns } from '../utils'
