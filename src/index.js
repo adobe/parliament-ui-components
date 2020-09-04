@@ -41,7 +41,6 @@ export {
 } from './OpenApiGrid'
 export { Paragraph } from './Paragraph'
 export { Prev } from './Prev'
-export { SearchField } from './SearchField'
 export { SideNav } from './SideNav'
 export { stripManifestPath, defaultFocus } from './ManifestUtils'
 export { TableOfContents } from './TableOfContents'
