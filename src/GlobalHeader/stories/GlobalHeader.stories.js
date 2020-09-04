@@ -199,8 +199,10 @@ const location = {
   pathname: '/'
 }
 
+const deepCopy = (obj) => JSON.parse(JSON.stringify(obj))
+
 export const Default = () => {
-  const globalNavCopy = { ...globalNav }
+  const globalNavCopy = deepCopy(globalNav)
   globalNavCopy.menus = [globalNavCopy.menus[1]]
 
   return (
@@ -223,7 +225,7 @@ export const WithMultipleMenus = () => {
 }
 
 export const WithDocs = () => {
-  const globalNavCopy = { ...globalNav }
+  const globalNavCopy = deepCopy(globalNav)
   globalNavCopy.menus = [globalNavCopy.menus[0]]
 
   const docs = {
@@ -257,7 +259,7 @@ export const WithConsoleAndSignIn = () => {
 }
 
 export const WithCustomLogo = () => {
-  const globalNavCopy = { ...globalNav }
+  const globalNavCopy = deepCopy(globalNav)
   globalNavCopy.home.logo = (
     <img
       style={{ height: 32, marginRight: 8 }}
