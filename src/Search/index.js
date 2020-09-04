@@ -16,10 +16,9 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
 import { Index } from 'elasticlunr'
-import { Heading, Text } from '@react-spectrum/text'
+import { Heading, SearchField, Text } from '@adobe/react-spectrum'
 import { Item, Menu } from '../Menu'
 import { Popover } from '../Popover'
-import { SearchField } from '../SearchField'
 
 import './search.css'
 

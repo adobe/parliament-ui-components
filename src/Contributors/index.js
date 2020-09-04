@@ -13,7 +13,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
-import { Flex } from '@react-spectrum/layout'
+import { Flex } from '@adobe/react-spectrum'
 
 const Contributors = ({ href = '#', contributors = [], date, ...props }) => (
   <a

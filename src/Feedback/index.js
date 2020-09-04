@@ -13,8 +13,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
-import { View } from '@react-spectrum/view'
-import { Button } from '../Button'
+import { Button, View } from '@adobe/react-spectrum'
 
 const Feedback = ({ onYes, onNo, ...props }) => (
   <div

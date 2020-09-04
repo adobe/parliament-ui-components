@@ -12,8 +12,7 @@
 
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { Flex } from '@react-spectrum/layout'
-import { View } from '@react-spectrum/view'
+import { Flex, View } from '@adobe/react-spectrum'
 import '@spectrum-css/typography'
 import PropTypes from 'prop-types'
 import { cloneElement } from '../utils'
