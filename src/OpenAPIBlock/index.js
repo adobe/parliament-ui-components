@@ -13,7 +13,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { useState } from 'react'
-import { ProgressCircle } from '@react-spectrum/progress'
+import { ProgressCircle } from '@adobe/react-spectrum'
 import { RedocStandalone } from 'redoc'
 
 export const OpenAPIBlock = ({ specUrl, spec }) => {

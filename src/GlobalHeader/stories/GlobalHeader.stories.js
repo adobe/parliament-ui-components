@@ -11,7 +11,7 @@ governing permissions and limitations under the License.
 */
 import React from 'react'
 import { GlobalHeader } from '../index'
-import { View } from '@react-spectrum/view'
+import { View } from '@adobe/react-spectrum'
 
 export default {
   title: 'components/GlobalHeader'

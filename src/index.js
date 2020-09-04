@@ -9,10 +9,8 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-export { ActionButton } from './ActionButton'
 export { ActionButtons } from './ActionButtons'
 export { Alert } from './Alert'
-export { Button } from './Button'
 export { Contributors } from './Contributors'
 export { Footer } from './Footer'
 export {
@@ -42,7 +40,6 @@ export {
 } from './OpenApiGrid'
 export { Paragraph } from './Paragraph'
 export { Prev } from './Prev'
-export { SearchField } from './SearchField'
 export { SideNav } from './SideNav'
 export { stripManifestPath, defaultFocus } from './ManifestUtils'
 export { TableOfContents } from './TableOfContents'

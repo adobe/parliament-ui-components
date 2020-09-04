@@ -12,7 +12,7 @@ governing permissions and limitations under the License.
 import React from 'react'
 import { Popover } from '../index'
 import { Menu, Item } from '../../Menu'
-import { SearchField } from '../../SearchField'
+import { SearchField } from '@adobe/react-spectrum'
 
 export default {
   title: 'components/Popover'

@@ -12,9 +12,7 @@ governing permissions and limitations under the License.
 
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { Flex } from '@react-spectrum/layout'
-import { View } from '@react-spectrum/view'
-import { Divider } from '@react-spectrum/divider'
+import { Divider, Flex, View } from '@adobe/react-spectrum'
 import '@spectrum-css/typography'
 
 const Footer = ({ ...props }) => (

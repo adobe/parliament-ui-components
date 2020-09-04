@@ -17,6 +17,7 @@ import { css } from '@emotion/core'
 import classNames from 'classnames'
 import { ChevronDown } from '../Icons'
 import { Popover } from '../Popover'
+import '@spectrum-css/button'
 import '@spectrum-css/dropdown'
 import '@spectrum-css/menu'
 
