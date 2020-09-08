@@ -12,7 +12,7 @@
 
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
 import { Index } from 'elasticlunr'
@@ -23,9 +23,23 @@ import { Popover } from '../Popover'
 import './search.css'
 
 const Search = ({ searchIndex = {}, ...props }) => {
+  const searchRef = useRef(null)
   const [index] = useState(Index.load(searchIndex))
   const [results, setResults] = useState([])
   const [isOpen, setIsOpen] = useState(false)
+
+  const handleClickOutside = (event) => {
+    if (searchRef.current && !searchRef.current.contains(event.target)) {
+      setIsOpen(false)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, true)
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true)
+    }
+  })
 
   const search = (searchTerm) => {
     const searchResults = index
@@ -75,7 +89,7 @@ const Search = ({ searchIndex = {}, ...props }) => {
   if (apiResultMenuItems.length > 1) items.push(...apiResultMenuItems)
 
   return (
-    <div style={{ position: 'relative' }} {...props}>
+    <div ref={searchRef} style={{ position: 'relative' }} {...props}>
       <SearchField
         onClear={() => {
           setIsOpen(false)
