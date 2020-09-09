@@ -17,8 +17,45 @@ export default {
   title: 'components/Code'
 }
 
+const code = `{
+  "op": "copy",
+  "target": {
+    "path": "/content/assets/7d391c3c-a3d4-4f66-81ce-40066732db60/target"
+  },
+  "source": {
+    "path": "/content/assets/7d391c3c-a3d4-4f66-81ce-40066732db60/source/test.psd"
+  }
+}
+`
+
 export const Default = () => {
   const props = {}
 
-  return <Code {...props} />
+  return <Code {...props}>{code}</Code>
+}
+
+export const SyntaxHighlighting = () => {
+  const props = {
+    className: `language-json`
+  }
+
+  return <Code {...props}>{code}</Code>
+}
+
+export const NoCopyButton = () => {
+  const props = {
+    className: `language-json`,
+    copyButton: false
+  }
+
+  return <Code {...props}>{code}</Code>
+}
+
+export const NoLineNumbers = () => {
+  const props = {
+    className: `language-json`,
+    lineNumbers: false
+  }
+
+  return <Code {...props}>{code}</Code>
 }

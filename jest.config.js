@@ -10,6 +10,7 @@ const config = {
     // Mock static file imports and assets which Jest can’t handle
     // stylesheets use the package identity-obj-proxy
     '@spectrum-css/.*': 'identity-obj-proxy',
+    '@adobe/prism-adobe': 'identity-obj-proxy',
     '\\.css$': 'identity-obj-proxy',
     // Manual mock other files using file-mock.js
     '.+\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
