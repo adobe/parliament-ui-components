@@ -14,9 +14,20 @@ import React from 'react'
 import { render } from 'test-utils'
 import { Code } from '../index'
 
+const code = `{
+  "op": "copy",
+  "target": {
+    "path": "/content/assets/7d391c3c-a3d4-4f66-81ce-40066732db60/target"
+  },
+  "source": {
+    "path": "/content/assets/7d391c3c-a3d4-4f66-81ce-40066732db60/source/test.psd"
+  }
+}
+`
+
 describe('<Code />', () => {
   test('should render', () => {
-    const { getByTestId } = render(<Code data-testid='el' />)
+    const { getByTestId } = render(<Code data-testid='el'>{code}</Code>)
     const el = getByTestId('el')
 
     expect(el).toBeInTheDocument()
