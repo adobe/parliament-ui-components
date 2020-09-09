@@ -20,8 +20,6 @@ import { Heading, SearchField, Text } from '@adobe/react-spectrum'
 import { Item, Menu } from '../Menu'
 import { Popover } from '../Popover'
 
-import './search.css'
-
 const Search = ({ searchIndex = {}, ...props }) => {
   const searchRef = useRef(null)
   const [index] = useState(Index.load(searchIndex))
@@ -67,7 +65,11 @@ const Search = ({ searchIndex = {}, ...props }) => {
     const item = (
       <a
         key={result.id}
-        className='searchMenuLink'
+        css={css`
+          text-decoration: none;
+          color: inherit;
+          transition: color 0.1s ease, fill 0.1s ease; // You might want to double check the transition
+        `}
         onClick={() => {
           setIsOpen(false)
           navigate(result.path)
