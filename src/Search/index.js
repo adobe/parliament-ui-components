@@ -68,7 +68,8 @@ const Search = ({ searchIndex = {}, ...props }) => {
         css={css`
           text-decoration: none;
           color: inherit;
-          transition: color 0.1s ease, fill 0.1s ease; // You might want to double check the transition
+          transition: color var(--spectrum-global-animation-duration-100)
+            ease-in-out;
         `}
         onClick={() => {
           setIsOpen(false)
