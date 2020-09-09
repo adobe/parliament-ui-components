@@ -36,15 +36,41 @@ const copy = (textarea, document, setIsTooltipOpen) => {
   openTooltip(setIsTooltipOpen)
 }
 
+const parseMetastring = (metastring) => {
+  const matches = metastring.match(/{.*?(?=})}/g)
+  const options = {}
+  if (matches) {
+    for (let i = 0; i < matches.length; i++) {
+      const option = matches[i].slice(1, -1).split(':')
+      const value = option[1].trim()
+      if (value.toLowerCase() === 'true') {
+        options[option[0]] = true
+      } else if (value.toLowerCase() === 'false') {
+        options[option[0]] = false
+      } else {
+        options[option[0]] = value
+      }
+    }
+  }
+  return options
+}
+
 const Code = ({
   children,
   className = '',
   theme = 'dark',
   copyButton = true,
-  lineNumbers = true
+  lineNumbers = true,
+  metastring = '',
+  ...props
 }) => {
   const [isTooltipOpen, setIsTooltipOpen] = useState(false)
   const language = className.replace(/language-/, '')
+
+  const options = parseMetastring(metastring)
+  const isCopyButton = options.copy !== undefined ? options.copy : copyButton
+  const isLineNumbers =
+    options.numberLines !== undefined ? options.numberLines : lineNumbers
 
   return (
     <Provider
@@ -54,6 +80,7 @@ const Code = ({
       UNSAFE_style={{
         borderRadius: 'var(--spectrum-global-dimension-size-50)'
       }}
+      {...props}
     >
       <Highlight {...defaultProps} code={children} language={language}>
         {({ className, tokens, getLineProps, getTokenProps }) => {
@@ -63,7 +90,7 @@ const Code = ({
 
           return (
             <pre className={classNames(className, 'spectrum-Code4')}>
-              {copyButton && (
+              {isCopyButton && (
                 <div
                   css={css`
                     position: relative;
@@ -134,7 +161,7 @@ const Code = ({
                       display: table-row;
                     `}
                   >
-                    {isMultiLine && lineNumbers && (
+                    {isMultiLine && isLineNumbers && (
                       <span
                         css={css`
                           display: table-cell;
