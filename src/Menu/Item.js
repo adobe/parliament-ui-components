@@ -23,10 +23,11 @@ const Item = ({
   isSelected = false,
   isDisabled = false,
   isDivider = false,
-  isSectionHeading = false
+  isSectionHeading = false,
+  ...props
 }) =>
   isDivider ? (
-    <li className='spectrum-Menu-divider' role='separator' />
+    <li className='spectrum-Menu-divider' role='separator' {...props} />
   ) : (
     <li
       className={classNames([
@@ -41,6 +42,7 @@ const Item = ({
       onClick={() => {
         onAction && onAction(item || children)
       }}
+      {...props}
     >
       <span
         className={
@@ -48,6 +50,7 @@ const Item = ({
             ? 'spectrum-Menu-sectionHeading'
             : 'spectrum-Menu-itemLabel'
         }
+        style={isSectionHeading ? { marginTop: '0px' } : {}}
       >
         {children}
       </span>

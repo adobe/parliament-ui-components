@@ -20,7 +20,7 @@ import { Heading, SearchField, Text } from '@adobe/react-spectrum'
 import { Item, Menu } from '../Menu'
 import { Popover } from '../Popover'
 
-const Search = ({ searchIndex = {}, ...props }) => {
+const Search = ({ searchIndex = {}, placeholder = 'Search…', ...props }) => {
   const searchRef = useRef(null)
   const [index] = useState(Index.load(searchIndex))
   const [results, setResults] = useState([])
@@ -57,7 +57,7 @@ const Search = ({ searchIndex = {}, ...props }) => {
   ]
   const apiResultMenuItems = [
     <Item key='api-divider' isSectionHeading>
-      APIs
+      API References
     </Item>
   ]
 
@@ -89,11 +89,23 @@ const Search = ({ searchIndex = {}, ...props }) => {
 
   const items = []
   if (docsResultMenuItems.length > 1) items.push(...docsResultMenuItems)
+  if (docsResultMenuItems.length > 1 && apiResultMenuItems.length > 1)
+    items.push(
+      <Item
+        isDivider
+        style={{
+          height: 'var(--spectrum-alias-border-size-thick)',
+          marginTop: '12px',
+          marginBottom: '16px'
+        }}
+      />
+    )
   if (apiResultMenuItems.length > 1) items.push(...apiResultMenuItems)
 
   return (
     <div ref={searchRef} style={{ position: 'relative' }} {...props}>
       <SearchField
+        placeholder={placeholder}
         onClear={() => {
           setIsOpen(false)
         }}
@@ -113,11 +125,18 @@ const Search = ({ searchIndex = {}, ...props }) => {
           left: '0px',
           top: '32px',
           zIndex: '1000',
-          width: '368px'
+          width: '325px'
         }}
       >
         {results.length > 0 ? (
-          <Menu>{items}</Menu>
+          <Menu
+            style={{
+              marginTop: '12px',
+              marginBottom: '12px'
+            }}
+          >
+            {items}
+          </Menu>
         ) : (
           <div
             css={css`
@@ -129,9 +148,11 @@ const Search = ({ searchIndex = {}, ...props }) => {
               margin-top: 64px;
             `}
           >
-            <Heading level={2}>No Results Found</Heading>
+            <Heading level={2} UNSAFE_style={{ marginBottom: '8px' }}>
+              No Results Found
+            </Heading>
             <Text>
-              <em>Try another search term.</em>
+              <em>Try another search term</em>
             </Text>
           </div>
         )}
