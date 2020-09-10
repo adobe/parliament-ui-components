@@ -42,7 +42,7 @@ const parseMetastring = (metastring) => {
   if (matches) {
     for (let i = 0; i < matches.length; i++) {
       const option = matches[i].slice(1, -1).split(':')
-      const value = option[1].trim()
+      const value = options[1] ? options[1].trim() : ''
       if (value.toLowerCase() === 'true') {
         options[option[0]] = true
       } else if (value.toLowerCase() === 'false') {
@@ -53,6 +53,26 @@ const parseMetastring = (metastring) => {
     }
   }
   return options
+}
+
+const RE = /{([\d,-]+)}/
+
+const calculateLinesToHighlight = (meta) => {
+  if (!RE.test(meta)) {
+    return () => false
+  }
+  const lineNumbers = RE.exec(meta)[1]
+    .split(`,`)
+    .map((v) => v.split(`-`).map((x) => parseInt(x, 10)))
+  console.log(lineNumbers)
+
+  return (index) => {
+    const lineNumber = index + 1
+    const inRange = lineNumbers.some(([start, end]) =>
+      end ? lineNumber >= start && lineNumber <= end : lineNumber === start
+    )
+    return inRange
+  }
 }
 
 const Code = ({
@@ -67,6 +87,7 @@ const Code = ({
   const [isTooltipOpen, setIsTooltipOpen] = useState(false)
   const language = className.replace(/language-/, '')
 
+  const shouldHighlightLine = calculateLinesToHighlight(metastring)
   const options = parseMetastring(metastring)
   const isCopyButton = options.copy !== undefined ? options.copy : copyButton
   const isLineNumbers =
@@ -154,12 +175,17 @@ const Code = ({
                   key: i
                 })
 
+                if (shouldHighlightLine(i)) {
+                  lineProps.className = `${lineProps.className} highlight-line`
+                }
+
                 return (
                   <div
                     key={i}
                     css={css`
-                      display: table-row;
+                      display: flex;
                     `}
+                    {...lineProps}
                   >
                     {isMultiLine && isLineNumbers && (
                       <span
