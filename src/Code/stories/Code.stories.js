@@ -59,3 +59,12 @@ export const NoLineNumbers = () => {
 
   return <Code {...props}>{code}</Code>
 }
+
+export const HighlightLines = () => {
+  const props = {
+    className: `language-json`,
+    metastring: `{1,3-4}`
+  }
+
+  return <Code {...props}>{code}</Code>
+}
