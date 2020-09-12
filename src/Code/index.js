@@ -183,7 +183,7 @@ const Code = ({
                   <div
                     key={i}
                     css={css`
-                      display: flex;
+                      display: table-row;
                     `}
                     {...lineProps}
                   >
