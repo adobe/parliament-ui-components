@@ -11,13 +11,13 @@ governing permissions and limitations under the License.
 */
 import React from 'react'
 
-import { Code } from '../index'
+import { Pre } from '../index'
 
 export default {
-  title: 'components/Code'
+  title: 'components/Pre'
 }
 
-const code = `{
+const pre = `{
   "op": "copy",
   "target": {
     "path": "/content/assets/7d391c3c-a3d4-4f66-81ce-40066732db60/target"
@@ -31,7 +31,7 @@ const code = `{
 export const Default = () => {
   const props = {}
 
-  return <Code {...props}>{code}</Code>
+  return <Pre {...props}>{pre}</Pre>
 }
 
 export const SyntaxHighlighting = () => {
@@ -39,7 +39,7 @@ export const SyntaxHighlighting = () => {
     className: `language-json`
   }
 
-  return <Code {...props}>{code}</Code>
+  return <Pre {...props}>{pre}</Pre>
 }
 
 export const NoCopyButton = () => {
@@ -48,7 +48,7 @@ export const NoCopyButton = () => {
     copyButton: false
   }
 
-  return <Code {...props}>{code}</Code>
+  return <Pre {...props}>{pre}</Pre>
 }
 
 export const NoLineNumbers = () => {
@@ -57,7 +57,7 @@ export const NoLineNumbers = () => {
     lineNumbers: false
   }
 
-  return <Code {...props}>{code}</Code>
+  return <Pre {...props}>{pre}</Pre>
 }
 
 export const HighlightLines = () => {
@@ -66,5 +66,5 @@ export const HighlightLines = () => {
     metastring: `{1,3-4}`
   }
 
-  return <Code {...props}>{code}</Code>
+  return <Pre {...props}>{pre}</Pre>
 }

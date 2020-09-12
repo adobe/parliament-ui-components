@@ -75,23 +75,31 @@ const calculateLinesToHighlight = (meta) => {
   }
 }
 
-const Code = ({
-  children,
-  className = '',
-  theme = 'dark',
-  copyButton = true,
-  lineNumbers = true,
-  metastring = '',
-  ...props
-}) => {
+const deconstructProps = (props) => {
+  if (typeof props.children === 'string') {
+    return props
+  } else {
+    return props.children.props
+  }
+}
+
+const Pre = (props) => {
+  const {
+    children,
+    className = '',
+    theme = 'dark',
+    copyButton = true,
+    lineNumbers = true,
+    metastring = '',
+    ...remainingProps
+  } = deconstructProps(props)
   const [isTooltipOpen, setIsTooltipOpen] = useState(false)
   const language = className.replace(/language-/, '')
 
   const shouldHighlightLine = calculateLinesToHighlight(metastring)
   const options = parseMetastring(metastring)
-  const isCopyButton = options.copy !== undefined ? options.copy : copyButton
-  const isLineNumbers =
-    options.numberLines !== undefined ? options.numberLines : lineNumbers
+  const isCopyButton = options.copy ?? copyButton
+  const isLineNumbers = options.numberLines ?? lineNumbers
 
   return (
     <Provider
@@ -99,9 +107,10 @@ const Code = ({
       colorScheme={theme}
       scale='medium'
       UNSAFE_style={{
-        borderRadius: 'var(--spectrum-global-dimension-size-50)'
+        borderRadius: 'var(--spectrum-global-dimension-size-50)',
+        marginBottom: '1.45rem'
       }}
-      {...props}
+      {...remainingProps}
     >
       <Highlight {...defaultProps} code={children} language={language}>
         {({ className, tokens, getLineProps, getTokenProps }) => {
@@ -130,7 +139,7 @@ const Code = ({
                   />
                   <ActionButton
                     aria-describedby={tooltipId}
-                    onClick={() => {
+                    onPress={() => {
                       copy(textarea, document, setIsTooltipOpen)
                     }}
                     UNSAFE_style={{
@@ -222,8 +231,8 @@ const Code = ({
   )
 }
 
-Code.propTypes = {
+Pre.propTypes = {
   theme: PropTypes.oneOf(['light', 'dark'])
 }
 
-export { Code }
+export { Pre }

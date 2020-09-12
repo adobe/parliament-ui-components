@@ -12,9 +12,9 @@ governing permissions and limitations under the License.
 
 import React from 'react'
 import { render } from 'test-utils'
-import { Code } from '../index'
+import { Pre } from '../index'
 
-const code = `{
+const pre = `{
   "op": "copy",
   "target": {
     "path": "/content/assets/7d391c3c-a3d4-4f66-81ce-40066732db60/target"
@@ -25,9 +25,9 @@ const code = `{
 }
 `
 
-describe('<Code />', () => {
+describe('<Pre />', () => {
   test('should render', () => {
-    const { getByTestId } = render(<Code data-testid='el'>{code}</Code>)
+    const { getByTestId } = render(<Pre data-testid='el'>{pre}</Pre>)
     const el = getByTestId('el')
 
     expect(el).toBeInTheDocument()
