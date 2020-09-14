@@ -94,9 +94,8 @@ const Code = (props) => {
 
   const shouldHighlightLine = calculateLinesToHighlight(metastring)
   const options = parseMetastring(metastring)
-  const isCopyButton = options.copy !== undefined ? options.copy : copyButton
-  const isLineNumbers =
-    options.numberLines !== undefined ? options.numberLines : lineNumbers
+  const isCopyButton = options.copy ?? copyButton
+  const isLineNumbers = options.numberLines ?? lineNumbers
 
   return (
     <Provider
@@ -136,7 +135,7 @@ const Code = (props) => {
                   />
                   <ActionButton
                     aria-describedby={tooltipId}
-                    onClick={() => {
+                    onPress={() => {
                       copy(textarea, document, setIsTooltipOpen)
                     }}
                     UNSAFE_style={{
