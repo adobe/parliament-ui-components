@@ -75,15 +75,20 @@ const calculateLinesToHighlight = (meta) => {
   }
 }
 
-const Code = ({
-  children,
-  className = '',
-  theme = 'dark',
-  copyButton = true,
-  lineNumbers = true,
-  metastring = '',
-  ...props
-}) => {
+const destructureProps = (props) => {
+  return typeof props.children === 'string' ? props : props.children.props
+}
+
+const Code = (props) => {
+  const {
+    children,
+    className = '',
+    theme = 'dark',
+    copyButton = true,
+    lineNumbers = true,
+    metastring = '',
+    ...otherProps
+  } = destructureProps(props)
   const [isTooltipOpen, setIsTooltipOpen] = useState(false)
   const language = className.replace(/language-/, '')
 
@@ -99,9 +104,10 @@ const Code = ({
       colorScheme={theme}
       scale='medium'
       UNSAFE_style={{
-        borderRadius: 'var(--spectrum-global-dimension-size-50)'
+        borderRadius: 'var(--spectrum-global-dimension-size-50)',
+        marginBottom: '1.45rem'
       }}
-      {...props}
+      {...otherProps}
     >
       <Highlight {...defaultProps} code={children} language={language}>
         {({ className, tokens, getLineProps, getTokenProps }) => {
