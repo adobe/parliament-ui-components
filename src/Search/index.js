@@ -11,16 +11,100 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 import { useEffect, useRef, useState } from 'react'
+import { cloneElement } from '../utils'
 import PropTypes from 'prop-types'
-import { navigate } from 'gatsby'
+import { navigate, withPrefix } from 'gatsby'
 import { Index } from 'elasticlunr'
-import { Heading, SearchField, Text } from '@adobe/react-spectrum'
-import { Item, Menu } from '../Menu'
+import { SearchField, View, Flex } from '@adobe/react-spectrum'
+import { Item, Menu, Section } from '../Menu'
 import { Popover } from '../Popover'
 
-const Search = ({ searchIndex = {}, placeholder = 'Search…', ...props }) => {
+const SearchResults = ({ results, setIsOpen }) => {
+  const docsResultMenuItems = []
+  const apiResultMenuItems = []
+
+  results.forEach((result) => {
+    const item = (
+      <Item
+        key={result.id}
+        href={withPrefix(result.path)}
+        onKeyPress={(event) => {
+          if (event.key === 'enter') {
+            setIsOpen(false)
+          }
+        }}
+        onClick={() => {
+          setIsOpen(false)
+        }}
+      >
+        {result.title}
+      </Item>
+    )
+
+    if (result.type === 'apis') {
+      apiResultMenuItems.push(item)
+    } else {
+      docsResultMenuItems.push(item)
+    }
+  })
+
+  const hasDocResults = docsResultMenuItems.length > 0
+  const hasOpenAPIResults = apiResultMenuItems.length > 0
+
+  if (hasDocResults || hasOpenAPIResults) {
+    return (
+      <Menu>
+        {hasDocResults && (
+          <Section title='docs'>
+            {cloneElement(docsResultMenuItems[0], {
+              isHighlighted: true
+            })}
+
+            {docsResultMenuItems.slice(1)}
+          </Section>
+        )}
+
+        {hasDocResults && hasOpenAPIResults && <Item isDivider />}
+
+        {hasOpenAPIResults && (
+          <Section title='API References'>
+            {hasDocResults ? (
+              apiResultMenuItems
+            ) : (
+              <>
+                {cloneElement(apiResultMenuItems[0], {
+                  isHighlighted: true
+                })}
+
+                {apiResultMenuItems.slice(1)}
+              </>
+            )}
+          </Section>
+        )}
+      </Menu>
+    )
+  }
+
+  return (
+    <View marginTop='size-800' marginBottom='size-800'>
+      <Flex direction='column' alignItems='center' justifyContent='center'>
+        <h3
+          className='spectrum-Heading--M'
+          css={css`
+            margin-bottom: var(--spectrum-global-dimension-size-200);
+          `}
+        >
+          No Results Found
+        </h3>
+        <em>Try another search term</em>
+      </Flex>
+    </View>
+  )
+}
+
+const Search = ({ searchIndex = {}, placeholder = 'Search', ...props }) => {
   const searchRef = useRef(null)
   const [index] = useState(Index.load(searchIndex))
   const [results, setResults] = useState([])
@@ -37,74 +121,29 @@ const Search = ({ searchIndex = {}, placeholder = 'Search…', ...props }) => {
     return () => {
       document.removeEventListener('click', handleClickOutside, true)
     }
-  })
+  }, [])
 
   const search = (searchTerm) => {
     const searchResults = index
       .search(searchTerm, { expand: true })
-      .map(({ ref }) => {
-        return index.documentStore.getDoc(ref)
-      })
+      .map(({ ref }) => index.documentStore.getDoc(ref))
 
     setResults(searchResults)
-    if (searchTerm.length > 0) setIsOpen(true)
-  }
-
-  const docsResultMenuItems = [
-    <Item key='docs-divider' isSectionHeading>
-      Docs
-    </Item>
-  ]
-  const apiResultMenuItems = [
-    <Item key='api-divider' isSectionHeading>
-      API References
-    </Item>
-  ]
-
-  for (const result of results) {
-    const item = (
-      <a
-        key={result.id}
-        css={css`
-          text-decoration: none;
-          color: inherit;
-          transition: color var(--spectrum-global-animation-duration-100)
-            ease-in-out;
-        `}
-        onClick={() => {
-          setIsOpen(false)
-          navigate(result.path)
-        }}
-      >
-        <Item>{result.title}</Item>
-      </a>
-    )
-
-    if (result.type === 'apis') {
-      apiResultMenuItems.push(item)
-    } else {
-      docsResultMenuItems.push(item)
+    if (searchTerm.length > 0) {
+      setIsOpen(true)
     }
   }
 
-  const items = []
-  if (docsResultMenuItems.length > 1) items.push(...docsResultMenuItems)
-  if (docsResultMenuItems.length > 1 && apiResultMenuItems.length > 1)
-    items.push(
-      <Item
-        isDivider
-        style={{
-          height: 'var(--spectrum-alias-border-size-thick)',
-          marginTop: '12px',
-          marginBottom: '16px'
-        }}
-      />
-    )
-  if (apiResultMenuItems.length > 1) items.push(...apiResultMenuItems)
-
   return (
-    <div ref={searchRef} style={{ position: 'relative' }} {...props}>
+    <div
+      ref={searchRef}
+      css={css`
+        position: relative;
+      `}
+      {...props}
+    >
       <SearchField
+        aria-label='Search'
         placeholder={placeholder}
         onClear={() => {
           setIsOpen(false)
@@ -114,48 +153,20 @@ const Search = ({ searchIndex = {}, placeholder = 'Search…', ...props }) => {
         }}
         onSubmit={() => {
           if (results.length > 0) {
-            navigate(results[0].path)
+            navigate(withPrefix(results[0].path))
           }
         }}
+        autoComplete='off'
       />
       <Popover
         isOpen={isOpen}
-        style={{
-          position: 'absolute',
-          left: '0px',
-          top: '32px',
-          zIndex: '1000',
-          width: '325px'
-        }}
+        css={css`
+          position: absolute;
+          top: var(--spectrum-global-dimension-size-800);
+          width: var(--spectrum-global-dimension-size-4600);
+        `}
       >
-        {results.length > 0 ? (
-          <Menu
-            style={{
-              marginTop: '12px',
-              marginBottom: '12px'
-            }}
-          >
-            {items}
-          </Menu>
-        ) : (
-          <div
-            css={css`
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              margin-bottom: 64px;
-              margin-top: 64px;
-            `}
-          >
-            <Heading level={2} UNSAFE_style={{ marginBottom: '8px' }}>
-              No Results Found
-            </Heading>
-            <Text>
-              <em>Try another search term</em>
-            </Text>
-          </div>
-        )}
+        <SearchResults results={results} setIsOpen={setIsOpen} />
       </Popover>
     </div>
   )

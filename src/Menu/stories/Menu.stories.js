@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 import React from 'react'
-import { Menu, Item } from '../index'
+import { Menu, Item, Section } from '../index'
 
 export default {
   title: 'components/Menu'
@@ -46,4 +46,32 @@ export const MenuItems = () => {
   }
 
   return <Menu {...props} />
+}
+
+export const MenuAnchorLinks = () => {
+  return (
+    <Menu>
+      <Item href='#Ballard'>Ballard</Item>
+      <Item href='#Fremont'>Fremont</Item>
+      <Item href='#Greenwood'>Greenwood</Item>
+    </Menu>
+  )
+}
+
+export const MenuWithSections = () => {
+  return (
+    <Menu>
+      <Section title='Title 1'>
+        <Item>Ballard</Item>
+        <Item>Fremont</Item>
+        <Item>Greenwood</Item>
+      </Section>
+      <Item isDivider />
+      <Section title='Title 2'>
+        <Item>Ballard</Item>
+        <Item>Fremont</Item>
+        <Item>Greenwood</Item>
+      </Section>
+    </Menu>
+  )
 }

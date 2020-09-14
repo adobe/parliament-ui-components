@@ -10,11 +10,10 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import React from 'react'
-import PropTypes from 'prop-types'
-
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
 import { Item } from './Item'
-
+import PropTypes from 'prop-types'
 import '@spectrum-css/menu'
 
 const Menu = ({
@@ -26,7 +25,14 @@ const Menu = ({
   ...props
 }) => {
   return (
-    <ul className='spectrum-Menu' role='menu' {...props}>
+    <ul
+      className='spectrum-Menu'
+      role='menu'
+      css={css`
+        display: block;
+      `}
+      {...props}
+    >
       {items.map((item, index) => (
         <Item
           key={index}

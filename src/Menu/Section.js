@@ -10,6 +10,28 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-export { Menu } from './Menu'
-export { Item } from './Item'
-export { Section } from './Section'
+import React from 'react'
+import PropTypes from 'prop-types'
+import nextId from 'react-id-generator'
+import '@spectrum-css/menu'
+
+const Section = ({ children, title }) => {
+  const id = nextId()
+
+  return (
+    <li role='presentation'>
+      <span className='spectrum-Menu-sectionHeading' id={id} aria-hidden='true'>
+        {title}
+      </span>
+      <ul className='spectrum-Menu' role='group' aria-labelledby={id}>
+        {children}
+      </ul>
+    </li>
+  )
+}
+
+Section.propTypes = {
+  title: PropTypes.string
+}
+
+export { Section }

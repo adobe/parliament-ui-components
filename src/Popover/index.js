@@ -10,23 +10,25 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { forwardRef } from 'react'
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
+import { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import '@spectrum-css/popover'
-import { css } from '@emotion/core'
 import classNames from 'classnames'
 
 const Popover = forwardRef(
   ({ isOpen, children, variant, isQuiet, className, ...props }, ref) => (
     <div
-      {...props}
       ref={ref}
       aria-hidden={!isOpen}
       css={css`
-        min-width: var(--spectrum-global-dimension-static-size-800);
-        width: 100%;
-        z-index: 1;
-        max-height: var(--spectrum-global-dimension-static-size-2400);
+        display: flex;
+        min-width: var(--spectrum-global-dimension-size-800);
+        width: auto;
+        z-index: 100;
+        max-height: calc(100vh - var(--spectrum-global-dimension-size-2400));
+        overflow: auto;
       `}
       className={classNames(
         className,
@@ -36,6 +38,7 @@ const Popover = forwardRef(
         { 'spectrum-Dropdown-popover': variant === 'picker' },
         { 'spectrum-Dropdown-popover--quiet': variant === 'picker' && isQuiet }
       )}
+      {...props}
     >
       {children}
     </div>

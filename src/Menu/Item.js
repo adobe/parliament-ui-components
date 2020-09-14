@@ -13,55 +13,53 @@ governing permissions and limitations under the License.
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-
 import '@spectrum-css/menu'
+import { CheckMarkMedium } from '../Icons'
 
 const Item = ({
   children,
   item,
   onAction,
-  isSelected = false,
-  isDisabled = false,
   isDivider = false,
-  isSectionHeading = false,
+  isHighlighted,
+  isSelected,
+  isDisabled,
+  href,
   ...props
-}) =>
-  isDivider ? (
-    <li className='spectrum-Menu-divider' role='separator' {...props} />
+}) => {
+  const Element = href ? 'a' : 'li'
+
+  return isDivider ? (
+    <li className='spectrum-Menu-divider' role='separator' />
   ) : (
-    <li
-      className={classNames([
-        { 'spectrum-Menu-item': !isSectionHeading },
+    <Element
+      className={classNames(
+        'spectrum-Menu-item',
+        { 'is-open': isHighlighted },
         { 'is-selected': isSelected },
         { 'is-disabled': isDisabled }
-      ])}
-      role={!isSectionHeading ? 'menuitem' : 'group'}
-      aria-selected={isSelected}
-      aria-disabled={isDisabled}
+      )}
+      href={href}
+      role='menuitem'
       tabIndex='0'
       onClick={() => {
         onAction && onAction(item || children)
       }}
       {...props}
     >
-      <span
-        className={
-          isSectionHeading
-            ? 'spectrum-Menu-sectionHeading'
-            : 'spectrum-Menu-itemLabel'
-        }
-        style={isSectionHeading ? { marginTop: '0px' } : {}}
-      >
-        {children}
-      </span>
-    </li>
+      <span className='spectrum-Menu-itemLabel'>{children}</span>
+      <CheckMarkMedium className='spectrum-Icon spectrum-Menu-checkmark spectrum-Menu-itemIcon' />
+    </Element>
   )
+}
 
 Item.propTypes = {
+  item: PropTypes.object,
+  isHighlighted: PropTypes.bool,
   isSelected: PropTypes.bool,
   isDisabled: PropTypes.bool,
   isDivider: PropTypes.bool,
-  isSectionHeading: PropTypes.bool
+  href: PropTypes.string
 }
 
 export { Item }
