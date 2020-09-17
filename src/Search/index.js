@@ -106,6 +106,7 @@ const Search = ({ searchIndex = {}, placeholder = 'Search…', ...props }) => {
     <div ref={searchRef} style={{ position: 'relative' }} {...props}>
       <SearchField
         placeholder={placeholder}
+        aria-label='Search'
         onClear={() => {
           setIsOpen(false)
         }}
