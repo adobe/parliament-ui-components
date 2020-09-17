@@ -22,12 +22,12 @@ yarn add @adobe/parliament-ui-components
 ```jsx
 import React from 'react'
 
-import { Header, Footer } from '@adobe/parliament-ui-components'
+import { Heading1, Footer } from '@adobe/parliament-ui-components'
 
-function Example {
+const Example = ({ title }) => {
   return (
     <>
-      <Header siteTitle={title} />
+      <Heading1>{title}</Heading1>
       <div>Hello world!</div>
       <Footer />
     </>
