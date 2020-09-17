@@ -124,6 +124,7 @@ const Code = (props) => {
                   <textarea
                     readOnly
                     aria-hidden='true'
+                    tabIndex='-1'
                     css={css`
                       position: fixed;
                       left: -999px;
