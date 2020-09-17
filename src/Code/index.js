@@ -21,8 +21,6 @@ import '@adobe/prism-adobe'
 import { ActionButton, defaultTheme, Provider } from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
 
-const tooltipId = nextId()
-
 const openTooltip = (setIsTooltipOpen) => {
   setIsTooltipOpen(true)
   setTimeout(() => {
@@ -89,6 +87,7 @@ const Code = (props) => {
     metastring = '',
     ...otherProps
   } = destructureProps(props)
+  const tooltipId = nextId()
   const [isTooltipOpen, setIsTooltipOpen] = useState(false)
   const language = className.replace(/language-/, '')
 
