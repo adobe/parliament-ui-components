@@ -56,7 +56,7 @@ const nav = (data, gitInfo, defaultFocus) => {
 
 const Nav = ({ data, selected, gitInfo, ...props }) => {
   return (
-    <nav {...props}>
+    <nav aria-label='Side Navigation' {...props}>
       {nav(data, gitInfo, defaultFocus(data, selected, gitInfo))}
     </nav>
   )
