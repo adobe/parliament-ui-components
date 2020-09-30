@@ -18,8 +18,6 @@ import { Adobe } from '../Icons'
 import { ActionButton, Divider, Flex, View } from '@adobe/react-spectrum'
 import { cloneElement } from '../utils'
 
-// import SiteMenu from './SiteMenu'
-
 import Menu from '@spectrum-icons/workflow/ShowMenu'
 
 import { useMediaQuery } from 'react-responsive'
