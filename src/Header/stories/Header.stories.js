@@ -50,3 +50,11 @@ export const DifferentIcon = () => {
 
   return <Header {...props} />
 }
+
+export const NoMenu = () => {
+  const props = {
+    siteTitle: 'My Test Site'
+  }
+
+  return <Header {...props} />
+}
