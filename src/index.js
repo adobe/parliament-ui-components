@@ -15,10 +15,11 @@ export { Contributors } from './Contributors'
 export { Footer } from './Footer'
 export {
   Grid,
+  GridHeader,
   GridContent,
-  GridContentInner,
   GridFooter,
-  GridNav
+  GridNav,
+  GridRightRail
 } from './Grid'
 export {
   Heading1,
@@ -36,7 +37,8 @@ export {
   OpenApiGrid,
   OpenApiGridContent,
   OpenApiGridFooter,
-  OpenApiGridNav
+  OpenApiGridNav,
+  OpenApiGridHeader
 } from './OpenApiGrid'
 export { Paragraph } from './Paragraph'
 export { Prev } from './Prev'
