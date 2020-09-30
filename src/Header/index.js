@@ -73,7 +73,7 @@ const Header = ({
       <nav css={stretched} role='navigation' aria-label='Global'>
         <View height='100%' paddingStart='size-300' paddingEnd='size-300'>
           <Flex alignItems='center' height='100%'>
-            {isMobile || forceMobile ? (
+            {(isMobile || forceMobile) && menu ? (
               <ActionButton
                 isQuiet
                 onPress={() => {
