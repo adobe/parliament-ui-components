@@ -73,7 +73,7 @@ const Search = ({ searchIndex = {}, placeholder = 'Search…', ...props }) => {
         `}
         onClick={() => {
           setIsOpen(false)
-          navigate(result.path)
+          navigate(`/${result.path}`)
         }}
       >
         <Item>{result.title}</Item>
@@ -115,7 +115,7 @@ const Search = ({ searchIndex = {}, placeholder = 'Search…', ...props }) => {
         }}
         onSubmit={() => {
           if (results.length > 0) {
-            navigate(results[0].path)
+            navigate(`/${results[0].path}`)
           }
         }}
       />
