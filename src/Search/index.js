@@ -118,6 +118,7 @@ const Search = ({ searchIndex = {}, placeholder = 'Search…', ...props }) => {
             navigate(`/${results[0].path}`)
           }
         }}
+        autoComplete='off'
       />
       <Popover
         isOpen={isOpen}
