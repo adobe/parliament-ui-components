@@ -25,7 +25,7 @@ export const Adobe = (props) => (
     {...props}
     {...commonProps}
     viewBox='0 0 30 26'
-    fill='#E1251B'
+    fill='#FA0F00'
     aria-label='Adobe'
   >
     <polygon points='19,0 30,0 30,26' />
