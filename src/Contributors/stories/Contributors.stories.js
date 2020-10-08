@@ -16,9 +16,42 @@ export default {
   title: 'components/Contributors'
 }
 
+const contributors = [
+  {
+    name: 'Stephan Ringel',
+    login: 'icaraps',
+    avatarUrl: 'https://avatars0.githubusercontent.com/u/6012307'
+  },
+  {
+    name: 'Simon MacDonald',
+    login: 'macdonst',
+    avatarUrl: 'https://avatars3.githubusercontent.com/u/353180'
+  },
+  {
+    name: 'James Calcaben',
+    login: 'jcalcaben',
+    avatarUrl: 'https://avatars2.githubusercontent.com/u/4692281'
+  },
+  {
+    name: 'Shazron Abdullah',
+    login: 'shazron',
+    avatarUrl: 'https://avatars2.githubusercontent.com/u/36107'
+  },
+  {
+    name: 'Simon Wex',
+    login: 'simonwex',
+    avatarUrl: 'https://avatars1.githubusercontent.com/u/25260'
+  },
+  {
+    name: 'Hiren Shah',
+    login: 'hirenoble',
+    avatarUrl: 'https://avatars1.githubusercontent.com/u/3747836'
+  }
+]
+
 export const OneCommitter = () => {
   const props = {
-    contributors: ['https://github.com/icaraps'],
+    contributors: contributors.slice(0, 1),
     date: 'May 20, 2020',
     href: ''
   }
@@ -28,11 +61,7 @@ export const OneCommitter = () => {
 
 export const ThreeCommitters = () => {
   const props = {
-    contributors: [
-      'https://github.com/icaraps',
-      'https://github.com/macdonst',
-      'https://github.com/jcalcaben'
-    ],
+    contributors: contributors.slice(0, 3),
     date: 'May 20, 2020',
     href: ''
   }
@@ -42,13 +71,7 @@ export const ThreeCommitters = () => {
 
 export const FiveCommitters = () => {
   const props = {
-    contributors: [
-      'https://github.com/icaraps',
-      'https://github.com/macdonst',
-      'https://github.com/jcalcaben',
-      'https://github.com/shazron',
-      'https://github.com/simonwex'
-    ],
+    contributors: contributors.slice(0, 5),
     date: 'May 20, 2020',
     href: ''
   }
@@ -58,14 +81,7 @@ export const FiveCommitters = () => {
 
 export const DontShowSixCommitter = () => {
   const props = {
-    contributors: [
-      'https://github.com/icaraps',
-      'https://github.com/macdonst',
-      'https://github.com/jcalcaben',
-      'https://github.com/shazron',
-      'https://github.com/simonwex',
-      'https://github.com/hirenoble'
-    ],
+    contributors: contributors,
     date: 'May 20, 2020',
     href: ''
   }
