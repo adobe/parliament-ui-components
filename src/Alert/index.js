@@ -9,7 +9,8 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
 
 import Info from '@spectrum-icons/workflow/Info'
 import Help from '@spectrum-icons/workflow/Help'
@@ -18,34 +19,35 @@ import AlertIcon from '@spectrum-icons/workflow/Alert'
 import '@spectrum-css/alert'
 
 const Alert = ({ variant, children, ...props }) => {
-  let variantClassName = 'spectrum-Alert--info'
-  let icon = <Info size='S' UNSAFE_style={{ width: '14px', height: '14px' }} />
+  const styles = {
+    width: 'var(--spectrum-global-dimension-size-175)',
+    height: 'var(--spectrum-global-dimension-size-175)',
+    float: 'right'
+  }
+  let icon = <Info UNSAFE_style={styles} />
   switch (variant) {
     case 'help':
-      variantClassName = 'spectrum-Alert--help'
-      icon = <Help size='S' UNSAFE_style={{ width: '14px', height: '14px' }} />
+      icon = <Help UNSAFE_style={styles} />
       break
     case 'error':
-      variantClassName = 'spectrum-Alert--error'
-      icon = (
-        <AlertIcon size='S' UNSAFE_style={{ width: '14px', height: '14px' }} />
-      )
+      icon = <AlertIcon UNSAFE_style={styles} />
       break
     case 'warning':
-      variantClassName = 'spectrum-Alert--warning'
-      icon = (
-        <AlertIcon size='S' UNSAFE_style={{ width: '14px', height: '14px' }} />
-      )
+      icon = <AlertIcon UNSAFE_style={styles} />
       break
     case 'info':
     default:
-      variantClassName = 'spectrum-Alert--info'
-      icon = <Info size='S' UNSAFE_style={{ width: '14px', height: '14px' }} />
       break
   }
   return (
-    <div className={`spectrum-Alert ${variantClassName}`} {...props}>
-      <div className='spectrum-Icon spectrum-UIIcon-InfoLarge spectrum-Alert-icon'>
+    <div className={`spectrum-Alert spectrum-Alert--${variant}`} {...props}>
+      <div
+        className='spectrum-Icon spectrum-UIIcon-InfoLarge spectrum-Alert-icon'
+        css={css`
+          display: inline;
+          position: unset;
+        `}
+      >
         {icon}
       </div>
       <div className='spectrum-Alert-content' style={{ margin: '0' }}>
