@@ -73,7 +73,10 @@ const Search = ({ searchIndex = {}, placeholder = 'Search…', ...props }) => {
         `}
         onClick={() => {
           setIsOpen(false)
-          navigate(`/${result.path}`)
+          const path = result.path.startsWith('/')
+            ? result.path
+            : `/${result.path}`
+          navigate(path)
         }}
       >
         <Item>{result.title}</Item>
