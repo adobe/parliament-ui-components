@@ -14,16 +14,16 @@
 import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { Flex } from '@adobe/react-spectrum'
+import { Img } from 'react-image'
 import '@spectrum-css/tooltip'
 
 const Contributors = ({ href = '#', contributors = [], date, ...props }) => {
   const getAvatarUrl = function (contributor) {
-    if (contributor.avatarUrl.startsWith('https://git.corp.adobe.com/')) {
-      if (contributor.login) {
-        return `https://s7d2.scene7.com/is/image/IMGDIR/${contributor.login}`
-      } else {
-        return `https://github.com/images/gravatars/gravatar-user-420.png`
-      }
+    if (
+      contributor.avatarUrl.startsWith('https://git.corp.adobe.com/') &&
+      contributor.login
+    ) {
+      return `https://s7d2.scene7.com/is/image/IMGDIR/${contributor.login}`
     }
     return contributor.avatarUrl
   }
@@ -76,9 +76,12 @@ const Contributors = ({ href = '#', contributors = [], date, ...props }) => {
                     background: var(--spectrum-global-color-gray-50);
                   `}
                 >
-                  <img
+                  <Img
                     alt={name}
-                    src={imgUrl}
+                    src={[
+                      imgUrl,
+                      `https://github.com/images/gravatars/gravatar-user-420.png`
+                    ]}
                     css={css`
                       width: calc(
                         var(--spectrum-global-dimension-static-size-400) +

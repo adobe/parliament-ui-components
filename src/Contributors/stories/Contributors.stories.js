@@ -88,3 +88,20 @@ export const DontShowSixCommitter = () => {
 
   return <Contributors {...props} />
 }
+
+export const InvalidImage = () => {
+  const props = {
+    contributors: [
+      {
+        name: 'Guy Incognito',
+        login: 'incognito',
+        avatarUrl: 'https://localhost:8000/nope'
+      },
+      ...contributors
+    ],
+    date: 'May 20, 2020',
+    href: ''
+  }
+
+  return <Contributors {...props} />
+}
