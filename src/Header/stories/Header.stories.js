@@ -58,3 +58,15 @@ export const NoMenu = () => {
 
   return <Header {...props} />
 }
+
+export const WithTabs = () => {
+  const props = {
+    siteTitle: 'My Test Site',
+    tabs: [
+      { title: 'Docs', path: '/' },
+      { title: 'Blog', path: '/blog' }
+    ]
+  }
+
+  return <Header {...props} />
+}
