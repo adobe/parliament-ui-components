@@ -12,11 +12,17 @@
 
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { useEffect, useRef, useState } from 'react'
-import { Link } from 'gatsby'
+import { createRef, useEffect, useRef, useState } from 'react'
+import { Link, withPrefix } from 'gatsby'
 import { Adobe } from '../Icons'
 import { ActionButton, Divider, Flex, View } from '@adobe/react-spectrum'
 import { cloneElement } from '../utils'
+import {
+  Tabs,
+  TabsIndicator,
+  positionIndicator,
+  animateIndicator
+} from '../Tabs'
 
 import Menu from '@spectrum-icons/workflow/ShowMenu'
 
@@ -33,11 +39,32 @@ const Header = ({
   forceMobile,
   icon,
   menu,
+  tabs = [],
   ...props
 }) => {
   const isMobile = useMediaQuery({ maxWidth: 767 })
   const [isPopoverOpen, setPopoverOpen] = useState(false)
-  const node = useRef()
+  const node = useRef(null)
+  const nav = useRef(null)
+  const selectedTabIndicator = useRef(null)
+  const [tabRefs] = useState([])
+
+  const positionSelectedTabIndicator = () => {
+    const currentPath = withPrefix(window.location.pathname)
+    const selectedTab =
+      tabRefs.find(
+        (tab) =>
+          tab.current?.pathname !== withPrefix('/') &&
+          currentPath.startsWith(tab.current?.pathname)
+      ) || tabRefs[0]
+
+    positionIndicator(selectedTabIndicator, selectedTab)
+  }
+
+  useEffect(() => {
+    animateIndicator(selectedTabIndicator, false)
+    positionSelectedTabIndicator()
+  }, [window.location.pathname])
 
   const handleClickOutside = (e) => {
     if (node.current.contains(e.target)) {
@@ -125,6 +152,58 @@ const Header = ({
                 </span>
               </View>
             </Link>
+            <View gridArea='navigation' height='100%'>
+              <Flex alignItems='center' height='100%'>
+                {siteTitle && (
+                  <Divider
+                    orientation='vertical'
+                    marginStart='size-300'
+                    marginEnd='size-300'
+                    size='M'
+                    height='100%'
+                  />
+                )}
+                <Tabs
+                  ref={nav}
+                  onFontsReady={() => {
+                    // positionSelectedTabIndicator()
+                    // setIsAnimated(true)
+                  }}
+                >
+                  {tabs.map((tab, i) => {
+                    const { title, path } = tab
+                    const ref = createRef()
+                    tabRefs.push(ref)
+
+                    const isActive = ({ isPartiallyCurrent }) =>
+                      isPartiallyCurrent
+                        ? {
+                            'aria-selected': 'true',
+                            className: 'is-selected spectrum-Tabs-item'
+                          }
+                        : { className: 'spectrum-Tabs-item' }
+
+                    return (
+                      <Link
+                        key={i}
+                        to={path}
+                        ref={ref}
+                        partiallyActive
+                        getProps={isActive}
+                      >
+                        <span className='spectrum-Tabs-itemLabel'>{title}</span>
+                      </Link>
+                    )
+                  })}
+                  <TabsIndicator
+                    ref={selectedTabIndicator}
+                    css={css`
+                      bottom: -10px !important;
+                    `}
+                  />
+                </Tabs>
+              </Flex>
+            </View>
           </Flex>
         </View>
       </nav>
