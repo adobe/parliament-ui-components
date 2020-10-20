@@ -39,6 +39,7 @@ const Header = ({
   forceMobile,
   icon,
   menu,
+  location = {},
   tabs = [],
   ...props
 }) => {
@@ -50,7 +51,7 @@ const Header = ({
   const [tabRefs] = useState([])
 
   const positionSelectedTabIndicator = () => {
-    const currentPath = withPrefix(window.location.pathname)
+    const currentPath = withPrefix(location.pathname)
     const selectedTab =
       tabRefs.find(
         (tab) =>
@@ -64,7 +65,7 @@ const Header = ({
   useEffect(() => {
     animateIndicator(selectedTabIndicator, false)
     positionSelectedTabIndicator()
-  }, [window.location.pathname])
+  }, [location.pathname])
 
   const handleClickOutside = (e) => {
     if (node.current.contains(e.target)) {
