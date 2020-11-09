@@ -56,6 +56,7 @@ const Header = ({
       tabRefs.find(
         (tab) =>
           tab.current?.pathname !== withPrefix('/') &&
+          currentPath &&
           currentPath.startsWith(tab.current?.pathname)
       ) || tabRefs[0]
 
