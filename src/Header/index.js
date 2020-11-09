@@ -27,6 +27,7 @@ import {
 import Menu from '@spectrum-icons/workflow/ShowMenu'
 
 import { useMediaQuery } from 'react-responsive'
+import isExternal from 'is-url-external'
 
 const stretched = css`
   height: 100%;
@@ -185,7 +186,15 @@ const Header = ({
                           }
                         : { className: 'spectrum-Tabs-item' }
 
-                    return (
+                    const label = (
+                      <span className='spectrum-Tabs-itemLabel'>{title}</span>
+                    )
+
+                    return isExternal(path) ? (
+                      <a href={path} className='spectrum-Tabs-item'>
+                        {label}
+                      </a>
+                    ) : (
                       <Link
                         key={i}
                         to={path}
@@ -193,7 +202,7 @@ const Header = ({
                         partiallyActive
                         getProps={isActive}
                       >
-                        <span className='spectrum-Tabs-itemLabel'>{title}</span>
+                        {label}
                       </Link>
                     )
                   })}
