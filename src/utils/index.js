@@ -140,3 +140,5 @@ export const findSelectedPageSiblings = (pathname, pages) => {
 
   return siblings
 }
+
+export const isExternal = (url) => /^https?:\/\//.test(url)

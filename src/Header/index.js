@@ -16,7 +16,7 @@ import { createRef, useEffect, useRef, useState } from 'react'
 import { Link, withPrefix } from 'gatsby'
 import { Adobe } from '../Icons'
 import { ActionButton, Divider, Flex, View } from '@adobe/react-spectrum'
-import { cloneElement } from '../utils'
+import { cloneElement, isExternal } from '../utils'
 import {
   Tabs,
   TabsIndicator,
@@ -27,7 +27,6 @@ import {
 import Menu from '@spectrum-icons/workflow/ShowMenu'
 
 import { useMediaQuery } from 'react-responsive'
-import isExternal from 'is-url-external'
 
 const stretched = css`
   height: 100%;
