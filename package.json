@@ -1,6 +1,6 @@
 {
   "name": "@adobe/parliament-ui-components",
-  "version": "2.6.12",
+  "version": "2.6.13",
   "description": "UI Components for Parliament projects",
   "author": {
     "name": "Simon Mac Donald",
@@ -40,6 +40,7 @@
     "stripcsscomments": "cp dist/index.css dist/temp.css && strip-css-comments dist/temp.css > dist/index.css && rm dist/temp.css",
     "lint": "eslint .",
     "format": "eslint . --fix",
+    "prepare": "yarn run build",
     "storybook": "gatsby build && start-storybook",
     "test": "jest",
     "test:coverage": "jest --coverage",
