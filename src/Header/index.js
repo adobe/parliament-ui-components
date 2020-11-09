@@ -51,14 +51,14 @@ const Header = ({
   const [tabRefs] = useState([])
 
   const positionSelectedTabIndicator = () => {
-    const currentPath = withPrefix(location.pathname)
+    const currentPath = location.pathname
     const localTabs = tabRefs.filter(
       (tab) => tab.current?.hostname === location.hostname
     )
     const selectedTab =
       localTabs.find((tab) => {
         return (
-          tab.current?.pathname !== '/' &&
+          tab.current?.pathname !== withPrefix('/') &&
           currentPath &&
           currentPath.startsWith(tab.current?.pathname)
         )
