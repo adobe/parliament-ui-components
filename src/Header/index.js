@@ -52,13 +52,17 @@ const Header = ({
 
   const positionSelectedTabIndicator = () => {
     const currentPath = withPrefix(location.pathname)
+    const localTabs = tabRefs.filter(
+      (tab) => tab.current?.hostname === location.hostname
+    )
     const selectedTab =
-      tabRefs.find(
-        (tab) =>
-          tab.current?.pathname !== withPrefix('/') &&
+      localTabs.find((tab) => {
+        return (
+          tab.current?.pathname !== '/' &&
           currentPath &&
           currentPath.startsWith(tab.current?.pathname)
-      ) || tabRefs[0]
+        )
+      }) || localTabs[0]
 
     positionIndicator(selectedTabIndicator, selectedTab)
   }
@@ -190,7 +194,12 @@ const Header = ({
                     )
 
                     return isExternal(path) ? (
-                      <a href={path} className='spectrum-Tabs-item'>
+                      <a
+                        key={i}
+                        href={path}
+                        ref={ref}
+                        className='spectrum-Tabs-item'
+                      >
                         {label}
                       </a>
                     ) : (
