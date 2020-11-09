@@ -70,3 +70,15 @@ export const WithTabs = () => {
 
   return <Header {...props} />
 }
+
+export const WithRemoteTabs = () => {
+  const props = {
+    siteTitle: 'My Test Site',
+    tabs: [
+      { title: 'Docs', path: '/' },
+      { title: 'Remote', path: 'https://adobe.com' }
+    ]
+  }
+
+  return <Header {...props} />
+}
