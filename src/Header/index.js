@@ -52,17 +52,13 @@ const Header = ({
 
   const positionSelectedTabIndicator = () => {
     const currentPath = location.pathname
-    const localTabs = tabRefs.filter(
-      (tab) => tab.current?.hostname === location.hostname
-    )
+
     const selectedTab =
-      localTabs.find((tab) => {
-        return (
-          tab.current?.pathname !== withPrefix('/') &&
-          currentPath &&
-          currentPath.startsWith(tab.current?.pathname)
-        )
-      }) || localTabs[0]
+      tabRefs
+        .filter((tab) => currentPath.startsWith(tab.current?.pathname))
+        .sort(
+          (a, b) => b.current?.pathname.length - a.current?.pathname.length
+        )[0] || tabRefs[0]
 
     positionIndicator(selectedTabIndicator, selectedTab)
   }
