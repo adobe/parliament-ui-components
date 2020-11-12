@@ -61,6 +61,7 @@ export const NoMenu = () => {
 
 export const WithTabs = () => {
   const props = {
+    location: { pathname: '/' },
     siteTitle: 'My Test Site',
     tabs: [
       { title: 'Docs', path: '/' },
@@ -73,6 +74,7 @@ export const WithTabs = () => {
 
 export const WithRemoteTabs = () => {
   const props = {
+    location: { pathname: '/' },
     siteTitle: 'My Test Site',
     tabs: [
       { title: 'Docs', path: '/' },
