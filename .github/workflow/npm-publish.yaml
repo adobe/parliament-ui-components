@@ -4,7 +4,7 @@ name: npm-publish
 on:
   push:
     tags:
-    - '*'
+      - '*'
 
 jobs:
   npm-publish:
