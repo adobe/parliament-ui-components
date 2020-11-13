@@ -84,3 +84,17 @@ export const WithRemoteTabs = () => {
 
   return <Header {...props} />
 }
+
+export const WithSearch = () => {
+  const props = {
+    location: { pathname: '/' },
+    siteTitle: 'My Test Site',
+    search: <div>Search…</div>,
+    tabs: [
+      { title: 'Docs', path: '/' },
+      { title: 'Remote', path: 'https://adobe.com' }
+    ]
+  }
+
+  return <Header {...props} />
+}

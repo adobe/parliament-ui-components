@@ -13,7 +13,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { createRef, useEffect, useRef, useState } from 'react'
-import { Link, withPrefix } from 'gatsby'
+import { Link } from 'gatsby'
 import { Adobe } from '../Icons'
 import { ActionButton, Divider, Flex, View } from '@adobe/react-spectrum'
 import { cloneElement, isExternal } from '../utils'
@@ -41,6 +41,7 @@ const Header = ({
   menu,
   location = {},
   tabs = [],
+  search,
   ...props
 }) => {
   const isMobile = useMediaQuery({ maxWidth: 767 })
@@ -154,7 +155,7 @@ const Header = ({
                 </span>
               </View>
             </Link>
-            <View gridArea='navigation' height='100%'>
+            <View gridArea='navigation' height='100%' width='100%'>
               <Flex alignItems='center' height='100%'>
                 {siteTitle && (
                   <Divider
@@ -219,6 +220,9 @@ const Header = ({
                 </Tabs>
               </Flex>
             </View>
+            <Flex direction='row' alignItems='end'>
+              <View>{search}</View>
+            </Flex>
           </Flex>
         </View>
       </nav>
