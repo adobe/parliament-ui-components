@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-
 jobs:
   npm-publish:
     name: npm-publish
@@ -14,15 +13,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@master
         with:
-          node-version: 12
-      - name: Install yarn
-        run: npm install -g yarn
-      - name: Clean install
-        run: yarn install
-      - name: Build package
-        run: yarn run build
-      - name: Run tests
-        run: yarn run test
+          node-version: 10.0.0
       - name: Publish if version has been updated
         uses: mkiki/npm-publish-action@c4315ef5790b7bcec2cbb75b34e37681a409d78d
         with: # All of theses inputs are optional
