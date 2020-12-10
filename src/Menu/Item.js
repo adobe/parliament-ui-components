@@ -20,6 +20,7 @@ const Item = ({
   children,
   item,
   onAction,
+  onKeyPress,
   isSelected = false,
   isDisabled = false,
   isDivider = false,
@@ -27,7 +28,16 @@ const Item = ({
   ...props
 }) =>
   isDivider ? (
-    <li className='spectrum-Menu-divider' role='separator' {...props} />
+    <li
+      className='spectrum-Menu-divider'
+      role='separator'
+      {...props}
+      style={{
+        height: 'var(--spectrum-alias-border-size-thick)',
+        marginTop: '12px',
+        marginBottom: '16px'
+      }}
+    />
   ) : (
     <li
       className={classNames([
@@ -41,6 +51,9 @@ const Item = ({
       tabIndex='0'
       onClick={() => {
         onAction && onAction(item || children)
+      }}
+      onKeyUp={(e) => {
+        onKeyPress && onKeyPress(e.key, item || children)
       }}
       {...props}
     >

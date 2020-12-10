@@ -20,11 +20,13 @@ import '@spectrum-css/menu'
 const Menu = ({
   children,
   onAction,
+  onKeyPress,
   items = [],
   selectedKeys = [],
   disabledKeys = [],
   ...props
 }) => {
+  console.log(selectedKeys)
   return (
     <ul className='spectrum-Menu' role='menu' {...props}>
       {items.map((item, index) => (
@@ -32,8 +34,11 @@ const Menu = ({
           key={index}
           item={item}
           onAction={onAction}
+          onKeyPress={onKeyPress}
           isSelected={selectedKeys.includes(item.name)}
           isDisabled={disabledKeys.includes(item.name)}
+          isSectionHeading={item.heading}
+          isDivider={item.divider}
         >
           {item.name}
         </Item>
