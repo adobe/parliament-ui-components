@@ -13,22 +13,27 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { useEffect, useRef, useState } from 'react'
-import PropTypes from 'prop-types'
-import { navigate } from 'gatsby'
-import { Index } from 'elasticlunr'
 import { Heading, SearchField, Text } from '@adobe/react-spectrum'
-import { Item, Menu } from '../Menu'
+import { Menu } from '../Menu'
 import { Popover } from '../Popover'
+import { navigate } from 'gatsby'
 
-const Search = ({ searchIndex = {}, placeholder = 'Search…', ...props }) => {
+const Search = ({
+  sections,
+  searchCallback,
+  placeholder = 'Search…',
+  width = 'size-4600'
+}) => {
   const searchRef = useRef(null)
-  const [index] = useState(Index.load(searchIndex))
+  const searchField = useRef(null)
   const [results, setResults] = useState([])
   const [isOpen, setIsOpen] = useState(false)
+  const [query, setQuery] = useState('')
 
   const handleClickOutside = (event) => {
     if (searchRef.current && !searchRef.current.contains(event.target)) {
       setIsOpen(false)
+      setQuery('')
     }
   }
 
@@ -38,6 +43,12 @@ const Search = ({ searchIndex = {}, placeholder = 'Search…', ...props }) => {
       document.removeEventListener('click', handleClickOutside, true)
     }
   })
+
+  useEffect(() => {
+    search(query)
+  }, [query])
+
+  /*
 
   const search = (searchTerm) => {
     const searchResults = index
@@ -49,72 +60,61 @@ const Search = ({ searchIndex = {}, placeholder = 'Search…', ...props }) => {
     setResults(searchResults)
     if (searchTerm.length > 0) setIsOpen(true)
   }
+*/
 
-  const docsResultMenuItems = [
-    <Item key='docs-divider' isSectionHeading>
-      Docs
-    </Item>
-  ]
-  const apiResultMenuItems = [
-    <Item key='api-divider' isSectionHeading>
-      API References
-    </Item>
-  ]
+  const search = async (searchTerm) => {
+    if (searchTerm.length > 0) {
+      const searchResults = await searchCallback(searchTerm)
+      const results = sections
+        .map((section) => {
+          const acc = searchResults
+            .filter((result) => result !== null && result.type === section.key)
+            .map((result) => {
+              return { name: result.title, ...result }
+            })
+          return acc.length > 0
+            ? [{ heading: true, name: section.name }, ...acc]
+            : acc
+        })
+        .filter((section) => section.length > 0)
 
-  for (const result of results) {
-    const item = (
-      <a
-        key={result.id}
-        css={css`
-          text-decoration: none;
-          color: inherit;
-          transition: color var(--spectrum-global-animation-duration-100)
-            ease-in-out;
-        `}
-        onClick={() => {
-          setIsOpen(false)
-          const path = result.path.startsWith('/')
-            ? result.path
-            : `/${result.path}`
-          navigate(path)
-        }}
-      >
-        <Item>{result.title}</Item>
-      </a>
-    )
+      for (let i = 1; i < results.length; i++) {
+        if (results[i - 1].length > 0) {
+          results[i].unshift({ divider: true })
+        }
+      }
 
-    if (result.type === 'apis') {
-      apiResultMenuItems.push(item)
+      setResults(results.flat())
+      setIsOpen(true)
     } else {
-      docsResultMenuItems.push(item)
+      setIsOpen(false)
     }
   }
 
-  const items = []
-  if (docsResultMenuItems.length > 1) items.push(...docsResultMenuItems)
-  if (docsResultMenuItems.length > 1 && apiResultMenuItems.length > 1)
-    items.push(
-      <Item
-        isDivider
-        style={{
-          height: 'var(--spectrum-alias-border-size-thick)',
-          marginTop: '12px',
-          marginBottom: '16px'
-        }}
-      />
-    )
-  if (apiResultMenuItems.length > 1) items.push(...apiResultMenuItems)
+  const loadResult = (item) => {
+    setIsOpen(false)
+    const path = item.path.startsWith('/') ? item.path : `/${item.path}`
+    navigate(path)
+  }
 
   return (
-    <div ref={searchRef} style={{ position: 'relative' }} {...props}>
+    <div
+      ref={searchRef}
+      style={{
+        position: 'relative'
+      }}
+    >
       <SearchField
+        ref={searchField}
         placeholder={placeholder}
         aria-label='Search'
+        width={width}
+        value={query}
         onClear={() => {
           setIsOpen(false)
         }}
         onChange={(searchTerm) => {
-          searchTerm.length > 0 ? search(searchTerm) : setIsOpen(false)
+          setQuery(searchTerm)
         }}
         onSubmit={() => {
           if (results.length > 0) {
@@ -125,13 +125,13 @@ const Search = ({ searchIndex = {}, placeholder = 'Search…', ...props }) => {
       />
       <Popover
         isOpen={isOpen}
-        style={{
-          position: 'absolute',
-          left: '0px',
-          top: '32px',
-          zIndex: '1000',
-          width: '325px'
-        }}
+        css={css`
+          position: absolute;
+          left: 0px;
+          top: 32px;
+          z-index: 2000;
+          width: var(--spectrum-global-dimension-size-4600);
+        `}
       >
         {results.length > 0 ? (
           <Menu
@@ -139,9 +139,18 @@ const Search = ({ searchIndex = {}, placeholder = 'Search…', ...props }) => {
               marginTop: '12px',
               marginBottom: '12px'
             }}
-          >
-            {items}
-          </Menu>
+            items={results}
+            onAction={loadResult}
+            onKeyPress={(key, item) => {
+              if (key === 'Enter') {
+                loadResult(item)
+              } else if (key === 'Escape') {
+                setQuery('')
+                searchField.current.focus()
+                setIsOpen(false)
+              }
+            }}
+          />
         ) : (
           <div
             css={css`
@@ -164,10 +173,6 @@ const Search = ({ searchIndex = {}, placeholder = 'Search…', ...props }) => {
       </Popover>
     </div>
   )
-}
-
-Search.propTypes = {
-  searchIndex: PropTypes.object
 }
 
 export { Search }
