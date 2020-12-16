@@ -22,7 +22,8 @@ const Search = ({
   sections,
   searchCallback,
   placeholder = 'Search…',
-  width = 'size-4600'
+  width = 'size-4600',
+  ...props
 }) => {
   const searchRef = useRef(null)
   const searchField = useRef(null)
@@ -47,20 +48,6 @@ const Search = ({
   useEffect(() => {
     search(query)
   }, [query])
-
-  /*
-
-  const search = (searchTerm) => {
-    const searchResults = index
-      .search(searchTerm, { expand: true })
-      .map(({ ref }) => {
-        return index.documentStore.getDoc(ref)
-      })
-
-    setResults(searchResults)
-    if (searchTerm.length > 0) setIsOpen(true)
-  }
-*/
 
   const search = async (searchTerm) => {
     if (searchTerm.length > 0) {
@@ -103,6 +90,7 @@ const Search = ({
       style={{
         position: 'relative'
       }}
+      {...props}
     >
       <SearchField
         ref={searchField}

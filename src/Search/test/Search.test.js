@@ -14,15 +14,9 @@ import React from 'react'
 import { render } from 'test-utils'
 import { Search } from '../index'
 
-const elasticlunr = require(`elasticlunr`)
-
-const index = elasticlunr()
-
 describe('<Search />', () => {
   test('should render', () => {
-    const { getByTestId } = render(
-      <Search searchIndex={index.toJSON()} data-testid='el' />
-    )
+    const { getByTestId } = render(<Search data-testid='el' />)
     const el = getByTestId('el')
 
     expect(el).toBeInTheDocument()
