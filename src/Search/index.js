@@ -11,7 +11,7 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { css, jsx } from '@emotion/react'
 import { useEffect, useRef, useState } from 'react'
 import { Heading, SearchField, Text } from '@adobe/react-spectrum'
 import { Menu } from '../Menu'

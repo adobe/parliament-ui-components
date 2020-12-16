@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { css, jsx } from '@emotion/react'
 import { createRef, useState } from 'react'
 import nextId from 'react-id-generator'
 import classNames from 'classnames'

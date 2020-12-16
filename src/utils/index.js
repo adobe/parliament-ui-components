@@ -11,7 +11,7 @@ governing permissions and limitations under the License.
 */
 
 import { withPrefix } from 'gatsby'
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/react'
 
 export const cloneElement = (element, props) =>
   jsx(element.type, {

@@ -11,7 +11,7 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { css, jsx } from '@emotion/react'
 import { Flex, View } from '@adobe/react-spectrum'
 import '@spectrum-css/typography'
 import PropTypes from 'prop-types'

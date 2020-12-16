@@ -13,7 +13,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import nextId from 'react-id-generator'
-import { css } from '@emotion/core'
+import { css } from '@emotion/react'
 import classNames from 'classnames'
 import { ChevronDown } from '../Icons'
 import { Popover } from '../Popover'

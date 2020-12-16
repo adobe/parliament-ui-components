@@ -11,7 +11,7 @@ governing permissions and limitations under the License.
 */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { css, jsx } from '@emotion/react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 

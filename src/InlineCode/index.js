@@ -11,7 +11,7 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { css, jsx } from '@emotion/react'
 import classNames from 'classnames'
 import '@spectrum-css/typography'
 

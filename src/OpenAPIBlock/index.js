@@ -11,7 +11,7 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { css, jsx } from '@emotion/react'
 import { useState } from 'react'
 import { ProgressCircle } from '@adobe/react-spectrum'
 import { RedocStandalone } from 'redoc'

@@ -11,7 +11,7 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { css, jsx } from '@emotion/react'
 import { Link as GatsbyLink } from 'gatsby'
 import { Heading4 } from '../Heading'
 import { View } from '@adobe/react-spectrum'

@@ -11,7 +11,7 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { css, jsx } from '@emotion/react'
 import { createRef, useEffect, useRef, useState } from 'react'
 import { Link } from 'gatsby'
 import { Adobe } from '../Icons'

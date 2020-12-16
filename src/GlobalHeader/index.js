@@ -11,7 +11,7 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { css, jsx } from '@emotion/react'
 import React, { useRef, useEffect, useState, createRef } from 'react'
 import PropTypes from 'prop-types'
 import nextId from 'react-id-generator'
