@@ -10,7 +10,8 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import React from 'react'
+/** @jsx jsx */
+import { css, jsx } from '@emotion/react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
@@ -45,6 +46,13 @@ const Item = ({
         { 'is-selected': isSelected },
         { 'is-disabled': isDisabled }
       ])}
+      css={css`
+        padding: var(--spectrum-global-dimension-size-85)
+          var(--spectrum-listitem-padding-right)
+          var(--spectrum-global-dimension-size-85)
+          var(--spectrum-listitem-padding-right);
+        margin-bottom: 0px;
+      `}
       role={!isSectionHeading ? 'menuitem' : 'group'}
       aria-selected={isSelected}
       aria-disabled={isDisabled}
@@ -63,7 +71,7 @@ const Item = ({
             ? 'spectrum-Menu-sectionHeading'
             : 'spectrum-Menu-itemLabel'
         }
-        style={isSectionHeading ? { marginTop: '0px' } : {}}
+        style={isSectionHeading ? { marginTop: '0px', padding: '0px' } : {}}
       >
         {children}
       </span>
