@@ -13,12 +13,35 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react'
 import { useState } from 'react'
-import { ProgressCircle } from '@adobe/react-spectrum'
+import { Flex, ProgressCircle, Switch } from '@adobe/react-spectrum'
 import { RedocStandalone } from 'redoc'
+
+const hideInternalRoutes = (spec) => {
+  const specCopy = JSON.parse(JSON.stringify(spec))
+  if (typeof specCopy === 'object' && specCopy !== null && specCopy.spec) {
+    const paths = specCopy.spec.paths
+    for (const path in paths) {
+      for (const route in paths[path]) {
+        if (paths[path][route]['x-internal']) {
+          delete paths[path][route]
+        }
+      }
+    }
+  }
+  return specCopy
+}
 
 export const OpenAPIBlock = ({ specUrl, spec }) => {
   const [showProgress, setShowProgress] = useState(true)
-  const input = specUrl ? { specUrl } : { spec }
+  const [hideInternal, setHideInternal] = useState(false)
+  const [input, setInput] = useState(specUrl ? { specUrl } : { spec })
+  const [internal] = useState(specUrl ? { specUrl } : { spec })
+  const [external] = useState(hideInternalRoutes(internal))
+
+  const toggleInternal = (hide) => {
+    hide ? setInput(external) : setInput(internal)
+    setHideInternal(hide)
+  }
 
   return (
     <div
@@ -26,6 +49,14 @@ export const OpenAPIBlock = ({ specUrl, spec }) => {
         height: calc(100% - 64px);
       `}
     >
+      <Flex direction='column' gap='size-100' alignItems='flex-end'>
+        <div>
+          <Switch isSelected={hideInternal} onChange={toggleInternal}>
+            Hide Internal Routes
+          </Switch>
+        </div>
+      </Flex>
+
       <div
         css={css`
           position: fixed;
