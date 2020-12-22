@@ -18,13 +18,11 @@ import { RedocStandalone } from 'redoc'
 
 const hideInternalRoutes = (spec) => {
   const specCopy = JSON.parse(JSON.stringify(spec))
-  if (typeof specCopy === 'object' && specCopy !== null) {
-    const { paths } = specCopy
-    for (const path in paths) {
-      for (const route in paths[path]) {
-        if (paths[path][route]['x-internal']) {
-          delete paths[path][route]
-        }
+  const { paths } = specCopy
+  for (const path in paths) {
+    for (const route in paths[path]) {
+      if (paths[path][route]['x-internal']) {
+        delete paths[path][route]
       }
     }
   }
@@ -40,10 +38,7 @@ export const OpenAPIBlock = ({ specUrl, spec }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let data = spec
-      if (specUrl) {
-        data = await (await fetch(specUrl)).json()
-      }
+      const data = specUrl ? await (await fetch(specUrl)).json() : spec
       setInternal(data)
       setExternal(hideInternalRoutes(data))
       setLoadingData(false)
