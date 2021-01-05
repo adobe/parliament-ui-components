@@ -24,6 +24,7 @@ const Search = ({
   searchCallback,
   placeholder = 'Search…',
   width = 'size-4600',
+  debounceTime = 200,
   ...props
 }) => {
   const searchRef = useRef(null)
@@ -47,7 +48,12 @@ const Search = ({
   })
 
   useEffect(() => {
-    search(query)
+    const handler = setTimeout(() => {
+      search(query)
+    }, debounceTime)
+    return () => {
+      clearTimeout(handler)
+    }
   }, [query])
 
   const search = async (searchTerm) => {
