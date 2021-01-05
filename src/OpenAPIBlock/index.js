@@ -38,7 +38,10 @@ export const OpenAPIBlock = ({ specUrl, spec }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = specUrl ? await (await fetch(specUrl)).json() : spec
+      let data = spec
+      if (specUrl) {
+        data = await (await fetch(specUrl)).json()
+      }
       setInternal(data)
       setExternal(hideInternalRoutes(data))
       setLoadingData(false)
