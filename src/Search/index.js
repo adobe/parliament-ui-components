@@ -17,6 +17,7 @@ import { Heading, SearchField, Text } from '@adobe/react-spectrum'
 import { Menu } from '../Menu'
 import { Popover } from '../Popover'
 import { navigate } from 'gatsby'
+import { isExternal } from '../utils'
 
 const Search = ({
   sections,
@@ -80,8 +81,12 @@ const Search = ({
 
   const loadResult = (item) => {
     setIsOpen(false)
-    const path = item.path.startsWith('/') ? item.path : `/${item.path}`
-    navigate(path)
+    if (isExternal(item.path)) {
+      document.location.href = item.path
+    } else {
+      const path = item.path.startsWith('/') ? item.path : `/${item.path}`
+      navigate(path)
+    }
   }
 
   return (
