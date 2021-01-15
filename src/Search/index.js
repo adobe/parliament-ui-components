@@ -116,8 +116,8 @@ const Search = ({
           setQuery(searchTerm)
         }}
         onSubmit={() => {
-          if (results.length > 0) {
-            navigate(`/${results[0].path}`)
+          if (results.length > 1) {
+            loadResult(results[1])
           }
         }}
         autoComplete='off'
