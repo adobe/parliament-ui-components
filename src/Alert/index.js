@@ -40,7 +40,13 @@ const Alert = ({ variant, children, ...props }) => {
       break
   }
   return (
-    <div className={`spectrum-Alert spectrum-Alert--${variant}`} {...props}>
+    <div
+      className={`spectrum-Alert spectrum-Alert--${variant}`}
+      css={css`
+        display: flow-root;
+      `}
+      {...props}
+    >
       <div
         className='spectrum-Icon spectrum-UIIcon-InfoLarge spectrum-Alert-icon'
         css={css`
