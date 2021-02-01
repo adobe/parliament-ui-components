@@ -108,7 +108,7 @@
     "babel-plugin-remove-graphql-queries": "^2.7.23",
     "babel-preset-gatsby": "^0.2.29",
     "babel-preset-react-app": "^9.1.1",
-    "eslint": "^7.6.0",
+    "eslint": "^7.19.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-config-standard-react": "^9.2.0",
