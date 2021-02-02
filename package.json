@@ -123,7 +123,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.2.2",
     "jest-emotion": "^10.0.32",
-    "jest-localstorage-mock": "^2.4.3",
+    "jest-localstorage-mock": "^2.4.6",
     "microbundle-crl": "^0.13.11",
     "npm-run-all": "^4.1.5",
     "strip-css-comments-cli": "^2.0.2"
