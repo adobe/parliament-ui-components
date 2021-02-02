@@ -101,7 +101,7 @@
     "@storybook/addon-viewport": "^5.3.13",
     "@storybook/react": "^5.3.13",
     "@testing-library/jest-dom": "^5.11.2",
-    "@testing-library/react": "^10.4.8",
+    "@testing-library/react": "^11.2.5",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-jsx-remove-data-test-id": "^2.1.3",
