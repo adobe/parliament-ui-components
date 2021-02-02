@@ -40,7 +40,10 @@ const Grid = ({ children, ...props }) => (
 
 const GridHeader = styled.div`
   height: var(--spectrum-global-dimension-size-800);
-  width: auto;
+  width: 100%;
+  position: fixed;
+  background-color: white;
+  z-index: 2;
 
   @media screen and (min-width: 1201px) {
     grid-area: 1 / 1 / 2 / 14;
@@ -60,13 +63,11 @@ const GridContent = styled.main`
 
   @media screen and (min-width: 1201px) {
     grid-area: 2 / 2 / 2 / 11;
-    height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
   }
   @media screen and (min-width: 768px) and (max-width: 1200px) {
     grid-area: 2 / 2 / 2 / 13;
-    height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -101,6 +102,10 @@ const GridFooter = styled.div`
 
 const GridNav = styled.div`
   background-color: var(--spectrum-global-color-gray-75);
+  position: fixed;
+  margin-top: var(--spectrum-global-dimension-size-800);
+  height: 100%;
+
   @media screen and (min-width: 768px) {
     grid-area: 2 / 1 / 4 / 2;
   }
