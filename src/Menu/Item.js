@@ -48,9 +48,9 @@ const Item = ({
       ])}
       css={css`
         padding: var(--spectrum-global-dimension-size-85)
-          var(--spectrum-listitem-padding-right)
+          var(--spectrum-global-dimension-size-150)
           var(--spectrum-global-dimension-size-85)
-          var(--spectrum-listitem-padding-right);
+          var(--spectrum-global-dimension-size-150);
         margin-bottom: 0px;
       `}
       role={!isSectionHeading ? 'menuitem' : 'group'}
