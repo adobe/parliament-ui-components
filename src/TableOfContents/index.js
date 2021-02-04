@@ -19,7 +19,11 @@ import { View } from '@adobe/react-spectrum'
 import '@spectrum-css/typography'
 import '@spectrum-css/link'
 
-const TableOfContents = ({ tableOfContents, ...props }) => {
+const TableOfContents = ({
+  tableOfContents,
+  title = 'On this page',
+  ...props
+}) => {
   const index = tableOfContents.items && tableOfContents.items.length - 1
 
   const tableOfContentsItems = {
@@ -40,7 +44,7 @@ const TableOfContents = ({ tableOfContents, ...props }) => {
           color: var(--spectrum-global-color-gray-600);
         `}
       >
-        On this page
+        {title}
       </span>
       <span
         css={css`

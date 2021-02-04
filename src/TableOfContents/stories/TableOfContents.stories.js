@@ -43,6 +43,15 @@ export const WithDifferentData = () => {
   return <TableOfContents {...props} />
 }
 
+export const WithCustomTitle = () => {
+  const props = {
+    title: 'In this Update',
+    tableOfContents: mockData.moreTestData
+  }
+  return <TableOfContents {...props} />
+}
+
 WithData.story = { name: 'With Data' }
 WithTwoH1s.story = { name: 'With Two+ H1s' }
 WithDifferentData.story = { name: 'With Different Data' }
+WithCustomTitle.story = { name: 'With Custom Title' }
