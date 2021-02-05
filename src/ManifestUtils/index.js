@@ -29,14 +29,11 @@ function stripManifestPath(path, { org = '', name = '', branch = '' } = {}) {
   // Normal case with org/name/branch
   const location = path.toLowerCase().indexOf(urlPrefix.toLowerCase())
   if (location > -1) {
-    return path.substring(location + urlPrefix.length)
-  } else if (path.toLowerCase().indexOf(name.toLowerCase() > -1)) {
-    // Exception case with only name in url
-    return path.substring(
-      path.toLowerCase().indexOf(name.toLowerCase()) + name.length
-    )
+    return path.substring(location + urlPrefix.length);
+  } else if (!path.startsWith('/')) {
+    return '/'+path;
   } else {
-    return path
+    return path;
   }
 }
 
