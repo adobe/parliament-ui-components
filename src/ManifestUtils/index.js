@@ -13,28 +13,23 @@ function stripManifestPath(path, { org = '', name = '', branch = '' } = {}) {
   if (!path) {
     return ''
   }
-  if (path.startsWith('http://') || path.startsWith('https://')) {
+  if (
+    path.startsWith('http://') ||
+    path.startsWith('https://') ||
+    (org === '' && name === '' && branch === '')
+  ) {
     return path
   }
-  let urlPrefix = ''
-  if (org) {
-    urlPrefix += org
-  }
-  if (name) {
-    urlPrefix += urlPrefix !== '' ? '/' + name : name
-  }
-  if (branch) {
-    urlPrefix += urlPrefix !== '' ? '/' + branch : branch
-  }
-  // Normal case with org/name/branch
-  const location = path.toLowerCase().indexOf(urlPrefix.toLowerCase())
-  if (location > -1) {
-    return path.substring(location + urlPrefix.length);
-  } else if (!path.startsWith('/')) {
-    return '/'+path;
-  } else {
-    return path;
-  }
+  const prefix = [org, name, branch]
+  const splitPath = path.split('/').filter((item) => item !== '')
+
+  prefix.map((item) => {
+    if (item.toLocaleLowerCase() === splitPath[0].toLocaleLowerCase()) {
+      splitPath.shift()
+    }
+  })
+
+  return '/' + splitPath.join('/')
 }
 
 function defaultFocus(theObject, selected, urlPrefix) {
