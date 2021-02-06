@@ -248,6 +248,15 @@ describe('stripManifestPath', () => {
       })
     ).toEqual('/docs/01-getting-started.md')
   })
+  it('path does not include org, name or branch', () => {
+    expect(
+      stripManifestPath('/docs/01-getting-started.md', {
+        org: 'adobe',
+        name: 'stock-api-docs',
+        branch: 'master'
+      })
+    ).toEqual('/docs/01-getting-started.md')
+  })
   it('remote link with org in url', () => {
     expect(
       stripManifestPath('https://adobe.io/authentication', {
