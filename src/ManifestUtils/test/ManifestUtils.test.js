@@ -307,6 +307,33 @@ describe('stripManifestPath', () => {
       })
     ).toEqual('https://adobe.io/authentication')
   })
+  it('local reference path without org, repo and branch', () => {
+    expect(
+      stripManifestPath('README.md', {
+        org: 'adobedocs',
+        name: 'stock-api-docs',
+        branch: 'master'
+      })
+    ).toEqual('/README.md')
+  })
+  it('complex local reference path without org, repo and branch', () => {
+    expect(
+      stripManifestPath('docs/reference/openapi.json', {
+        org: 'adobedocs',
+        name: 'stock-api-docs',
+        branch: 'master'
+      })
+    ).toEqual('/docs/reference/openapi.json')
+  })
+  it('complex local reference path leading /', () => {
+    expect(
+      stripManifestPath('/onboarding.md', {
+        org: 'adobedocs',
+        name: 'stock-api-docs',
+        branch: 'master'
+      })
+    ).toEqual('/onboarding.md')
+  })
 })
 
 describe('defaultFocus', () => {
