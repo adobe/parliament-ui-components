@@ -56,7 +56,7 @@
     "@adobe/focus-ring-polyfill": "^0.1.5",
     "@adobe/prism-adobe": "^1.0.3",
     "@adobe/react-spectrum": "3.6",
-    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@emotion/babel-preset-css-prop": "^11.2.0",
     "@emotion/react": "^11.1.2",
     "@emotion/styled": "^11.0.0",
     "@spectrum-css/accordion": "^3.0.0-beta.2",

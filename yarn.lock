@@ -917,7 +917,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.10.4"
 
-"@babel/plugin-transform-react-jsx-development@^7.12.1", "@babel/plugin-transform-react-jsx-development@^7.12.7", "@babel/plugin-transform-react-jsx-development@^7.9.0":
+"@babel/plugin-transform-react-jsx-development@^7.12.7", "@babel/plugin-transform-react-jsx-development@^7.9.0":
   version "7.12.11"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx-development/-/plugin-transform-react-jsx-development-7.12.11.tgz#078aa7e1f5f75a68ee9598ebed90000fcb11092f"
   integrity sha512-5MvsGschXeXJsbzQGR/BH89ATMzCsM7rx95n+R7/852cGoK2JgMbacDw/A9Pmrfex4tArdMab0L5SBV4SB/Nxg==
@@ -1333,10 +1333,10 @@
   dependencies:
     "@babel/plugin-syntax-jsx" "^7.2.0"
 
-"@emotion/babel-plugin@^11.0.0":
-  version "11.1.2"
-  resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.1.2.tgz#68fe1aa3130099161036858c64ee92056c6730b7"
-  integrity sha512-Nz1k7b11dWw8Nw4Z1R99A9mlB6C6rRsCtZnwNUOj4NsoZdrO2f2A/83ST7htJORD5zpOiLKY59aJN23092949w==
+"@emotion/babel-plugin@^11.0.0", "@emotion/babel-plugin@^11.2.0":
+  version "11.2.0"
+  resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.2.0.tgz#f25c6df8ec045dad5ae6ca63df0791673b98c920"
+  integrity sha512-lsnQBnl3l4wu/FJoyHnYRpHJeIPNkOBMbtDUIXcO8luulwRKZXPvA10zd2eXVN6dABIWNX4E34en/jkejIg/yA==
   dependencies:
     "@babel/helper-module-imports" "^7.7.0"
     "@babel/plugin-syntax-jsx" "^7.12.1"
@@ -1351,16 +1351,15 @@
     source-map "^0.5.7"
     stylis "^4.0.3"
 
-"@emotion/babel-preset-css-prop@^10.0.27":
-  version "10.2.1"
-  resolved "https://registry.yarnpkg.com/@emotion/babel-preset-css-prop/-/babel-preset-css-prop-10.2.1.tgz#fb331355c1819367a6e5dd171879ae4957aa701a"
-  integrity sha512-4hudLJCfIrbpJZek5n69cwzu7GgCamza/whh/RgqXaI5ZWT8pFj1rR2KjQntzFFzTU7l9o+jdVPSpgCbrVG+VQ==
+"@emotion/babel-preset-css-prop@^11.2.0":
+  version "11.2.0"
+  resolved "https://registry.yarnpkg.com/@emotion/babel-preset-css-prop/-/babel-preset-css-prop-11.2.0.tgz#c7e945f56b2610b438f0dc8ae5253fc55488de0e"
+  integrity sha512-9XLQm2eLPYTho+Cx1LQTDA1rATjoAaB4O+ds55XDvoAa+Z16Hhg8y5Vihj3C8E6+ilDM8SV5A9Z6z+yj0YIRBg==
   dependencies:
     "@babel/plugin-transform-react-jsx" "^7.12.1"
-    "@babel/plugin-transform-react-jsx-development" "^7.12.1"
-    "@babel/runtime" "^7.5.5"
+    "@babel/runtime" "^7.7.2"
+    "@emotion/babel-plugin" "^11.2.0"
     "@emotion/babel-plugin-jsx-pragmatic" "^0.1.5"
-    babel-plugin-emotion "^10.0.27"
 
 "@emotion/babel-utils@^0.6.4":
   version "0.6.10"
