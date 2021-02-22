@@ -83,7 +83,7 @@
     "elasticlunr": "^0.9.5",
     "gatsby": "^2.29.0",
     "mobx": "^5.15.6",
-    "node-html-parser": "^1.2.20",
+    "node-html-parser": "^2.2.0",
     "prism-react-renderer": "^1.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
