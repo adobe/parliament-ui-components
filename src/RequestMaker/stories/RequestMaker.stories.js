@@ -10,14 +10,22 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 import React from 'react'
-import { RequestMaker } from '../index'
+import { RequestMaker, Body, HeaderParameters, QueryParameters } from '../index'
 
 export default {
   title: 'components/RequestMaker'
 }
 
 export const RequestMakerDefault = () => {
-  const props = {}
+  const props = { method: 'GET', url: 'https://adobe.io/test' }
 
-  return <RequestMaker {...props}>Test</RequestMaker>
+  return (
+    <RequestMaker {...props}>
+      <HeaderParameters name='one'>header one</HeaderParameters>
+      <HeaderParameters name='two'>header two</HeaderParameters>
+      <QueryParameters name='one'>query one</QueryParameters>
+      <QueryParameters name='two'>query two</QueryParameters>
+      <Body>This is my body</Body>
+    </RequestMaker>
+  )
 }

@@ -64,4 +64,9 @@ export { Code } from './Code'
 export { InlineCode } from './InlineCode'
 export { Header } from './Header'
 export { Tags } from './Tags'
-export { RequestMaker } from './RequestMaker'
+export {
+  RequestMaker,
+  Body,
+  QueryParameters,
+  HeaderParameters
+} from './RequestMaker'
