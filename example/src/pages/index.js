@@ -11,7 +11,8 @@ governing permissions and limitations under the License.
 */
 import React from "react"
 import PropTypes from "prop-types"
-import Provider from "@react/react-spectrum/Provider"
+
+import { defaultTheme, Provider, SSRProvider } from "@adobe/react-spectrum"
 import { Header, Footer, Feedback, Nav } from "parliament-ui-components"
 
 const data = {
@@ -146,21 +147,32 @@ const data = {
 const index = ({ location }) => {
   const title = "Test Title"
   return (
-    <Provider theme="lightest">
-      <Header siteTitle={title} />
-      <div>Hello world!</div>
-      <Nav
-        data={data.pages}
-        selected="test/path/test.md"
-        gitInfo={{ org: "adobedocs", name: "adobeio-events", branch: "master" }}
-      />
-      <Feedback
-        gitUrl="https://git.corp.adobe.com/devrel/parliament-client-template"
-        filePath="README.md"
-        branch="master"
-      />
-      <Footer />
-    </Provider>
+    <SSRProvider>
+      <Provider
+        theme={defaultTheme}
+        colorScheme="light"
+        scale="medium"
+        UNSAFE_className="spectrum spectrum--light spectrum--medium"
+      >
+        <Header siteTitle={title} />
+        <div>Hello world!</div>
+        <Nav
+          data={data.pages}
+          selected="test/path/test.md"
+          gitInfo={{
+            org: "adobedocs",
+            name: "adobeio-events",
+            branch: "master"
+          }}
+        />
+        <Feedback
+          gitUrl="https://git.corp.adobe.com/devrel/parliament-client-template"
+          filePath="README.md"
+          branch="master"
+        />
+        <Footer />
+      </Provider>
+    </SSRProvider>
   )
 }
 
