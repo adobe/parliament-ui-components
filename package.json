@@ -59,6 +59,7 @@
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/react": "^11.1.2",
     "@emotion/styled": "^11.0.0",
+    "@react-spectrum/tabs": "^3.0.0-alpha.4",
     "@spectrum-css/accordion": "^3.0.0-beta.2",
     "@spectrum-css/alert": "^3.0.0-beta.3",
     "@spectrum-css/assetlist": "^3.0.0-beta.3",
