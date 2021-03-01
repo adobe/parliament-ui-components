@@ -11,11 +11,15 @@
  */
 
 import React from 'react'
-import { Text } from '@adobe/react-spectrum'
+import { TextArea, Flex } from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
 
 const Body = ({ children }) => {
-  return <Text>{children}</Text>
+  return (
+    <Flex direction='row' gap='size-100' width='100%'>
+      <TextArea defaultValue={children} width='75%' />
+    </Flex>
+  )
 }
 
 Body.propTypes = {

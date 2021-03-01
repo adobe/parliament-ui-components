@@ -11,14 +11,15 @@
  */
 
 import React from 'react'
-import { Text } from '@adobe/react-spectrum'
+import { TextField, Flex } from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
 
 const QueryParameters = ({ name, children }) => {
   return (
-    <Text>
-      {name} : {children}
-    </Text>
+    <Flex direction='row' gap='size-100' width='50%'>
+      <TextField defaultValue={name} width='50%' />
+      <TextField defaultValue={children} width='50%' />
+    </Flex>
   )
 }
 
