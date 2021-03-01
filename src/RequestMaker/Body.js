@@ -10,15 +10,53 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import { TextArea, Flex } from '@adobe/react-spectrum'
+import React, { useState } from 'react'
+import { RadioGroup, Radio, Text, TextArea, View } from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
 
-const Body = ({ children }) => {
+const Body = ({ type = 'none', children }) => {
+  const [selected, setSelected] = useState(type)
+
+  const renderByType = (type) => {
+    switch (type) {
+      case 'form-data':
+        break
+      case 'urlencoded':
+        break
+      case 'raw':
+        return <TextArea minWidth='100%' minHeight='size-2000' />
+      case 'binary':
+        break
+      case 'none':
+      default:
+        return <Text>The request does not have a body</Text>
+    }
+  }
+
   return (
-    <Flex direction='row' gap='size-100' width='100%'>
-      <TextArea defaultValue={children} width='75%' />
-    </Flex>
+    <View>
+      <RadioGroup
+        value={selected}
+        orientation='horizontal'
+        onChange={setSelected}
+      >
+        <Radio value='none'>none</Radio>
+        <Radio value='form-data'>form-data</Radio>
+        <Radio value='urlencoded'>x-www-form-urlencoded</Radio>
+        <Radio value='raw'>raw</Radio>
+        <Radio value='binary'>binary</Radio>
+      </RadioGroup>
+      <View
+        borderWidth='thin'
+        borderRadius='medium'
+        borderColor='dark'
+        padding='size-250'
+        backgroundColor='gray-75'
+        minHeight='size-2400'
+      >
+        {renderByType(selected)}
+      </View>
+    </View>
   )
 }
 
