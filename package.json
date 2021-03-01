@@ -41,7 +41,8 @@
     "lint": "eslint .",
     "format": "eslint . --fix",
     "prepare": "yarn run build",
-    "storybook": "gatsby build && start-storybook",
+    "build:example": "cd example && gatsby build",
+    "storybook": "yarn run build:example && start-storybook",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"
