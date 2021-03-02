@@ -13,6 +13,7 @@
 import React, { useEffect, useState } from 'react'
 import { Tabs, Item } from '@react-spectrum/tabs'
 import { Content, View } from '@adobe/react-spectrum'
+import { ParameterTable } from './ParameterTable'
 
 const ResponsePanel = ({ response }) => {
   const [headers, setHeaders] = useState(null)
@@ -24,7 +25,16 @@ const ResponsePanel = ({ response }) => {
       // const contentType = response.headers.get('content-type')
       const responseBody = await response.text()
       setBody(responseBody)
-      setHeaders(Array.from(response.headers.entries()))
+      setHeaders(
+        Array.from(response.headers.entries()).map((header) => {
+          return {
+            enabled: false,
+            key: header[0],
+            value: header[1],
+            deletable: false
+          }
+        })
+      )
     }
   }
 
@@ -42,7 +52,7 @@ const ResponsePanel = ({ response }) => {
         </Item>
         <Item title='Response Headers' key='responseHeaderTab'>
           <Content marginTop='size-250' marginStart='size-125'>
-            {headers}
+            <ParameterTable readonly items={headers} />
           </Content>
         </Item>
         <Item title='Original Request' key='requestTab'>
