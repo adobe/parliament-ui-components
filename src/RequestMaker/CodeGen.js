@@ -12,17 +12,34 @@
 
 import React, { useState } from 'react'
 import { Text, View, Picker, Item } from '@adobe/react-spectrum'
-import PropTypes from 'prop-types'
+import HTTPSnippet from 'httpsnippet'
+import { Code } from '../Code'
 
-const CodeGen = ({ CodeGen = 'cURL', children }) => {
+const CodeGen = ({ CodeGen = 'shell_curl', children }) => {
   const options = [
     {
       name:'cURL',
       id: 'shell_curl'
     },
     {
-      name: 'Node.js',
+      name: 'Node.js (fetch)',
+      id: 'node_fetch'
+    },
+    {
+      name: 'Node.js (request)',
       id: 'node_request'
+    },
+    {
+      name: 'Javascript (fetch)',
+      id: 'javascript_fetch'
+    },
+    {
+      name: 'Javascript (axios)',
+      id: 'javascript_axios'
+    },
+    {
+      name: 'Javascript (jQuery)',
+      id: 'javascript_jquery'
     },
     {
       name: 'PHP',
@@ -33,12 +50,20 @@ const CodeGen = ({ CodeGen = 'cURL', children }) => {
       id: 'java_unirest'
     },
     {
+      name: 'C',
+      id: 'c'
+    },
+    {
+      name: 'R',
+      id: 'r'
+    },
+    {
       name: 'Go',
       id: 'go_native'
     },
     {
       name: 'python',
-      id: 'python_python3'
+      id: 'python'
     },
     {
       name: 'C#',
@@ -51,39 +76,35 @@ const CodeGen = ({ CodeGen = 'cURL', children }) => {
   ]
   const [selected, setSelected] = useState(CodeGen)
 
-  const renderByType = (type) => {
-    return <Text>{type} selected!</Text>
+  const renderByCode = (lang) => {
+    const snippet = new HTTPSnippet({
+      method: 'GET',
+      url: 'https://jsonplaceholder.typicode.com/todos/1'
+    });
+    const langs = lang.split('_')
+    const code=snippet.convert(langs[0],langs[1])+'\n'
+    const props = {
+      className: `js`
+    }
+    return (
+      <Code {...props}>{code}</Code>
+    )
   }
 
   return (
     <View>
       <Picker
         width='size-1250'
+        marginBottom='size-100'
         items={options}
         selectedKey={selected}
         onSelectionChange={(selected) => setSelected(selected)}
       >
-        {(item) => <Item key={item.name}>{item.name}</Item>}
+        {(item) => <Item key={item.id}>{item.name}</Item>}
       </Picker>
-      <br />
-      <View
-        borderWidth='thin'
-        borderRadius='medium'
-        borderColor='dark'
-        padding='size-250'
-        marginTop='size-100'
-        mar
-        backgroundColor='gray-75'
-        minHeight='size-2400'
-      >
-        {renderByType(selected)}
-      </View>
+        {renderByCode(selected)}
     </View>
   )
-}
-
-CodeGen.propTypes = {
-  children: PropTypes.element.isRequired
 }
 
 export { CodeGen }
