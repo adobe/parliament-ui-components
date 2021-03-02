@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
+import React, { useState } from 'react'
 import {
   ActionButton,
   Flex,
@@ -24,27 +24,40 @@ import Send from '@spectrum-icons/workflow/Send'
 
 import { MethodPicker } from './MethodPicker'
 import { RequestParameters } from './RequestParameters'
+import { ResponsePanel } from './ResponsePanel'
 
-const RequestMaker = ({ method, url, children, ...props }) => (
-  <div {...props}>
-    <Well>
-      <Flex direction='column' gap='size-100'>
-        <Flex direction='row' gap='size-100' width='100%'>
-          <MethodPicker method={method} />
-          <TextField defaultValue={url} width='100%' />
+const RequestMaker = ({ method, url, children, ...props }) => {
+  const [response, setResponse] = useState(null)
+  return (
+    <div {...props}>
+      <Well>
+        <Flex direction='column' gap='size-100'>
+          <Flex direction='row' gap='size-100' width='100%'>
+            <MethodPicker method={method} />
+            <TextField defaultValue={url} width='100%' />
+          </Flex>
+          <RequestParameters>{children}</RequestParameters>
+          <View>
+            <ActionButton
+              onPress={async () => {
+                try {
+                  const response = await fetch(url, { method })
+                  setResponse(response)
+                } catch (e) {
+                  console.log(e)
+                }
+              }}
+            >
+              <Send />
+              <Text>Send</Text>
+            </ActionButton>
+          </View>
+          <ResponsePanel response={response} />
         </Flex>
-        <RequestParameters>{children}</RequestParameters>
-        <View>
-          <ActionButton>
-            <Send />
-            <Text>Send</Text>
-          </ActionButton>
-        </View>
-      </Flex>
-    </Well>
-  </div>
-)
-
+      </Well>
+    </div>
+  )
+}
 RequestMaker.propTypes = {}
 
 export { RequestMaker }
