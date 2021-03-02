@@ -15,7 +15,7 @@ import { Text, View, Picker, Item } from '@adobe/react-spectrum'
 import HTTPSnippet from 'httpsnippet'
 import { Code } from '../Code'
 
-const CodeGen = ({ CodeGen = 'shell_curl', children }) => {
+const CodeGen = ({ CodeGen = 'shell_curl', method, url, children, ...props }) => {
   const options = [
     {
       name:'cURL',
@@ -78,8 +78,8 @@ const CodeGen = ({ CodeGen = 'shell_curl', children }) => {
 
   const renderByCode = (lang) => {
     const snippet = new HTTPSnippet({
-      method: 'GET',
-      url: 'https://jsonplaceholder.typicode.com/todos/1'
+      method: method,
+      url: url
     });
     const langs = lang.split('_')
     const code=snippet.convert(langs[0],langs[1])+'\n'
