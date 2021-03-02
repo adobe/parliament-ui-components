@@ -14,7 +14,7 @@ import React, { useState } from 'react'
 import { Text, View, Picker, Item } from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
 
-const Code = ({ code = 'cURL', children }) => {
+const CodeGen = ({ CodeGen = 'cURL', children }) => {
   const options = [
     {
       name:'cURL',
@@ -49,7 +49,7 @@ const Code = ({ code = 'cURL', children }) => {
       id: 'ruby_native'
     }
   ]
-  const [selected, setSelected] = useState(code)
+  const [selected, setSelected] = useState(CodeGen)
 
   const renderByType = (type) => {
     return <Text>{type} selected!</Text>
@@ -82,8 +82,8 @@ const Code = ({ code = 'cURL', children }) => {
   )
 }
 
-Code.propTypes = {
+CodeGen.propTypes = {
   children: PropTypes.element.isRequired
 }
 
-export { Code }
+export { CodeGen }

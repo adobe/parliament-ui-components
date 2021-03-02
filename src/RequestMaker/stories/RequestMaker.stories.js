@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 import React from 'react'
-import { RequestMaker, Body, HeaderParameters, QueryParameters, Code } from '../index'
+import { RequestMaker, Body, HeaderParameters, QueryParameters, CodeGen } from '../index'
 
 export default {
   title: 'components/RequestMaker'
@@ -29,7 +29,7 @@ export const RequestMakerDefault = () => {
       <QueryParameters name='one'>query one</QueryParameters>
       <QueryParameters name='two'>query two</QueryParameters>
       <Body>This is my body</Body>
-      <Code {...props}></Code>
+      <CodeGen {...props}></CodeGen>
     </RequestMaker>
   )
 }
