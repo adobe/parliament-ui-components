@@ -11,7 +11,7 @@
  */
 
 import React from 'react'
-import { TextField, Flex, Label } from '@adobe/react-spectrum'
+import { TextField, Flex } from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
 
 const QueryParameters = ({ name, children }) => {
