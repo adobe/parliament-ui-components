@@ -17,8 +17,8 @@ import PropTypes from 'prop-types'
 const HeaderParameters = ({ name, children }) => {
   return (
     <Flex direction='row' gap='size-100' width='50%'>
-      <TextField defaultValue={name} width='50%' />
-      <TextField defaultValue={children} width='50%' />
+      key <TextField defaultValue={name} width='50%' />
+      value <TextField defaultValue={children} width='50%' />
     </Flex>
   )
 }
