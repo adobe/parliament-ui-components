@@ -17,7 +17,10 @@ export default {
 }
 
 export const RequestMakerDefault = () => {
-  const props = { method: 'GET', url: 'https://adobe.io/test' }
+  const props = {
+    method: 'GET',
+    url: 'https://jsonplaceholder.typicode.com/todos/1'
+  }
 
   return (
     <RequestMaker {...props}>
