@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { useState } from 'react'
+import React, { useState, useReducer } from 'react'
 import {
   ActionButton,
   Flex,
@@ -26,28 +26,45 @@ import { MethodPicker } from './MethodPicker'
 import { RequestParameters } from './RequestParameters'
 import { ResponsePanel } from './ResponsePanel'
 
+const ACTION_TYPES = {
+  SET_METHOD: 'setMethod'
+}
+
+function reducer(state, action) {
+  console.log(action)
+  switch (action.type) {
+    case 'setMethod':
+      console.log({ ...state, method: action.method })
+      return { ...state, method: action.method }
+    default:
+      throw new Error()
+  }
+}
+
 const RequestMaker = ({ method, url, children, ...props }) => {
+  const [requestOptions, dispatch] = useReducer(reducer, { method })
   const [response, setResponse] = useState(null)
+  const sendRequest = async () => {
+    try {
+      console.log(requestOptions)
+      const response = await fetch(url, requestOptions)
+      setResponse(response)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   return (
     <div {...props}>
       <Well>
         <Flex direction='column' gap='size-100'>
           <Flex direction='row' gap='size-100' width='100%'>
-            <MethodPicker method={method} />
+            <MethodPicker method={method} dispatch={dispatch} />
             <TextField defaultValue={url} width='100%' />
           </Flex>
           <RequestParameters>{children}</RequestParameters>
           <View>
-            <ActionButton
-              onPress={async () => {
-                try {
-                  const response = await fetch(url, { method })
-                  setResponse(response)
-                } catch (e) {
-                  console.log(e)
-                }
-              }}
-            >
+            <ActionButton onPress={sendRequest}>
               <Send />
               <Text>Send</Text>
             </ActionButton>
@@ -59,5 +76,6 @@ const RequestMaker = ({ method, url, children, ...props }) => {
   )
 }
 RequestMaker.propTypes = {}
+RequestMaker.ACTION_TYPES = ACTION_TYPES
 
 export { RequestMaker }

@@ -11,14 +11,20 @@
  */
 
 import React, { useState } from 'react'
-import { Text, View, Picker, Item } from '@adobe/react-spectrum'
+import { View, Picker, Item } from '@adobe/react-spectrum'
 import HTTPSnippet from 'httpsnippet'
 import { Code } from '../Code'
 
-const CodeGen = ({ CodeGen = 'shell_curl', method, url, children, ...props }) => {
+const CodeGen = ({
+  CodeGen = 'shell_curl',
+  method,
+  url,
+  children,
+  ...props
+}) => {
   const options = [
     {
-      name:'cURL',
+      name: 'cURL',
       id: 'shell_curl'
     },
     {
@@ -80,15 +86,13 @@ const CodeGen = ({ CodeGen = 'shell_curl', method, url, children, ...props }) =>
     const snippet = new HTTPSnippet({
       method: method,
       url: url
-    });
+    })
     const langs = lang.split('_')
-    const code=snippet.convert(langs[0],langs[1])+'\n'
+    const code = snippet.convert(langs[0], langs[1]) + '\n'
     const props = {
       className: `js`
     }
-    return (
-      <Code {...props}>{code}</Code>
-    )
+    return <Code {...props}>{code}</Code>
   }
 
   return (
@@ -102,7 +106,7 @@ const CodeGen = ({ CodeGen = 'shell_curl', method, url, children, ...props }) =>
       >
         {(item) => <Item key={item.id}>{item.name}</Item>}
       </Picker>
-        {renderByCode(selected)}
+      {renderByCode(selected)}
     </View>
   )
 }
