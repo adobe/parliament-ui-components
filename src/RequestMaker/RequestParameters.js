@@ -23,6 +23,7 @@ const RequestParameters = ({ children }) => {
     (child) => child.type.name === 'HeaderParameters'
   )
   const bodyArray = childrenArray.filter((child) => child.type.name === 'Body')
+  const codeArray = childrenArray.filter((child) => child.type.name === 'Code')
   return (
     <View>
       <Tabs aria-label='Request Parameters'>
@@ -39,6 +40,11 @@ const RequestParameters = ({ children }) => {
         <Item title='Body' key='bodyTab'>
           <Content marginTop='size-250' marginStart='size-125'>
             {bodyArray}
+          </Content>
+        </Item>
+        <Item title='Code Generation' key='codeTab'>
+          <Content marginTop='size-250' marginStart='size-125'>
+            {codeArray}
           </Content>
         </Item>
       </Tabs>
