@@ -23,7 +23,7 @@ const RequestParameters = ({ children }) => {
     (child) => child.type.name === 'HeaderParameters'
   )
   const bodyArray = childrenArray.filter((child) => child.type.name === 'Body')
-  const codeArray = childrenArray.filter((child) => child.type.name === 'Code')
+  const codeArray = childrenArray.filter((child) => child.type.name === 'CodeGen')
   return (
     <View>
       <Tabs aria-label='Request Parameters'>
