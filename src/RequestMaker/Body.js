@@ -13,6 +13,7 @@
 import React, { useState } from 'react'
 import { RadioGroup, Radio, Text, TextArea, View } from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
+import { ParameterTable } from './ParameterTable'
 
 const Body = ({ type = 'none', children }) => {
   const [selected, setSelected] = useState(type)
@@ -20,9 +21,9 @@ const Body = ({ type = 'none', children }) => {
   const renderByType = (type) => {
     switch (type) {
       case 'form-data':
-        break
+        return <ParameterTable items={[]} />
       case 'urlencoded':
-        break
+        return <ParameterTable items={[]} />
       case 'raw':
         return <TextArea minWidth='100%' minHeight='size-2000' />
       case 'binary':
