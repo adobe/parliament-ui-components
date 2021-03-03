@@ -10,9 +10,16 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import { Grid, TextField, View } from '@adobe/react-spectrum'
+import React, { useState } from 'react'
+import {
+  ActionButton,
+  Checkbox,
+  Grid,
+  TextField,
+  View
+} from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
+import Delete from '@spectrum-icons/workflow/DeleteOutline'
 
 const TableCell = ({ head = false, children }) => (
   <View
@@ -26,35 +33,110 @@ const TableCell = ({ head = false, children }) => (
 
 const TableCellHead = ({ children }) => <TableCell head>{children}</TableCell>
 
+const TableRow = ({ keyItem, value }) => (
+  <>
+    <TableCell />
+    <TableCell>{keyItem}</TableCell>
+    <TableCell>{value}</TableCell>
+    <TableCell />
+  </>
+)
+
+const TableRowEditable = ({
+  keyItem = '',
+  value = '',
+  index,
+  onDelete,
+  onUpdate
+}) => {
+  console.log(index)
+  return (
+    <>
+      <TableCell>
+        <Checkbox />
+      </TableCell>
+      <TableCell>
+        <TextField
+          isQuiet
+          value={keyItem}
+          width='100%'
+          placeholder='key'
+          onChange={(value) => onUpdate && onUpdate(index, { key: value })}
+        />
+      </TableCell>
+      <TableCell>
+        <TextField
+          isQuiet
+          value={value}
+          width='100%'
+          placeholder='value'
+          onChange={(value) => onUpdate && onUpdate(index, { value: value })}
+        />
+      </TableCell>
+      <TableCell>
+        <ActionButton
+          isQuiet
+          isDisabled={keyItem === '' && value === ''}
+          onPress={() => onDelete && onDelete(index)}
+        >
+          <Delete size='S' />
+        </ActionButton>
+      </TableCell>
+    </>
+  )
+}
+
+const EmptyRow = {
+  enabled: false,
+  key: '',
+  value: '',
+  deletable: true
+}
+
 const ParameterTable = ({ readonly = false, items }) => {
   console.log(items)
+  const [tableItems, setTableItems] = useState([
+    ...items,
+    {
+      ...EmptyRow
+    }
+  ])
 
-  const rows = items.map(({ key, value }) =>
-    readonly ? (
-      <>
-        <TableCell />
-        <TableCell>{key}</TableCell>
-        <TableCell>{value}</TableCell>
-        <TableCell />
-      </>
+  const rows = tableItems.map(({ key, value }, index) => {
+    console.log(index)
+    return readonly ? (
+      <TableRow key={index} keyItem={key} value={value} />
     ) : (
-      <>
-        <TableCell />
-        <TableCell>
-          <TextField isQuiet value={key} />
-        </TableCell>
-        <TableCell>
-          <TextField isQuiet value={value} />
-        </TableCell>
-        <TableCell />
-      </>
+      <TableRowEditable
+        index={index}
+        keyItem={key}
+        value={value}
+        onDelete={(key) => {
+          console.log(key)
+          const copyOfTableItems = [...tableItems]
+          copyOfTableItems.splice(index, 1)
+          setTableItems(copyOfTableItems)
+        }}
+        onUpdate={(index, update) => {
+          const copyOfTableItems = [...tableItems]
+          copyOfTableItems[index] = { ...copyOfTableItems[index], ...update }
+          if (
+            copyOfTableItems.filter(
+              (item) => item.key === '' && item.value === ''
+            ).length < 1
+          ) {
+            copyOfTableItems.push({ ...EmptyRow })
+          }
+          setTableItems(copyOfTableItems)
+        }}
+      />
     )
-  )
+  })
 
   return (
     <Grid
       columns={['size-500', '1fr', '1fr', 'size-500']}
-      autoRows='size-500'
+      autoRows='size-675'
       UNSAFE_className='spectrum-Table'
     >
       <TableCellHead />
