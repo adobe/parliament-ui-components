@@ -96,7 +96,7 @@ const EmptyRow = {
   deletable: true
 }
 
-const ParameterTable = ({ readonly = false, items }) => {
+const ParameterTable = ({ readonly = false, items, callback }) => {
   const [tableItems, setTableItems] = useState([
     ...items,
     {
@@ -117,6 +117,7 @@ const ParameterTable = ({ readonly = false, items }) => {
           const copyOfTableItems = [...tableItems]
           copyOfTableItems.splice(index, 1)
           setTableItems(copyOfTableItems)
+          callback && callback(copyOfTableItems)
         }}
         onUpdate={(index, update) => {
           const copyOfTableItems = [...tableItems]
@@ -129,6 +130,7 @@ const ParameterTable = ({ readonly = false, items }) => {
             copyOfTableItems.push({ ...EmptyRow })
           }
           setTableItems(copyOfTableItems)
+          callback && callback(copyOfTableItems)
         }}
       />
     )

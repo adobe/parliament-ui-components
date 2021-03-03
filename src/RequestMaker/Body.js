@@ -14,18 +14,93 @@ import React, { useState } from 'react'
 import { RadioGroup, Radio, Text, TextArea, View } from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
 import { ParameterTable } from './ParameterTable'
+import { RequestMaker } from './RequestMaker'
 
-const Body = ({ type = 'none', children }) => {
+const Body = ({ type = 'none', dispatch, children }) => {
   const [selected, setSelected] = useState(type)
+  const [body, setBody] = useState(null)
+
+  console.log(dispatch)
+  console.log(children)
+
+  const updateBody = (type, data) => {
+    console.log(type)
+    let contentType = ''
+    switch (type) {
+      case 'form-data': {
+        // TODO call dispatcher for content-type
+        contentType = 'multipart/form-data'
+        const formData = new FormData()
+        data
+          .filter((item) => item.enabled && item.key !== '')
+          .map((item) => formData.append(item.key, item.value))
+        setBody(formData)
+        dispatch({
+          type: RequestMaker.ACTION_TYPES.SET_BODY,
+          body: formData
+        })
+        break
+      }
+      case 'urlencoded': {
+        // TODO call dispatcher for content-type
+        contentType = 'application/x-www-form-urlencoded'
+        const urlFormData = new URLSearchParams()
+        data
+          .filter((item) => item.enabled && item.key !== '')
+          .map((item) => urlFormData.append(item.key, item.value))
+        setBody(urlFormData)
+        dispatch({
+          type: RequestMaker.ACTION_TYPES.SET_BODY,
+          body: urlFormData
+        })
+        break
+      }
+      case 'raw': {
+        // TODO set content type
+        // TODO call dispatcher for content-type
+        setBody(data)
+        dispatch({
+          type: RequestMaker.ACTION_TYPES.SET_BODY,
+          body: data
+        })
+        break
+      }
+      case 'binary': {
+        setBody(data)
+        break
+      }
+      case 'none':
+      default: {
+        setBody(null)
+        break
+      }
+    }
+  }
 
   const renderByType = (type) => {
     switch (type) {
       case 'form-data':
-        return <ParameterTable items={[]} />
+        return (
+          <ParameterTable
+            items={[]}
+            callback={(data) => updateBody('form-data', data)}
+          />
+        )
       case 'urlencoded':
-        return <ParameterTable items={[]} />
+        return (
+          <ParameterTable
+            items={[]}
+            callback={(data) => updateBody('urlencoded', data)}
+          />
+        )
       case 'raw':
-        return <TextArea minWidth='100%' minHeight='size-2000' />
+        return (
+          <TextArea
+            minWidth='100%'
+            minHeight='size-2000'
+            onChange={(data) => updateBody('raw', data)}
+          />
+        )
       case 'binary':
         break
       case 'none':

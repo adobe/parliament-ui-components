@@ -27,15 +27,19 @@ import { RequestParameters } from './RequestParameters'
 import { ResponsePanel } from './ResponsePanel'
 
 const ACTION_TYPES = {
-  SET_METHOD: 'setMethod'
+  SET_METHOD: 'setMethod',
+  SET_BODY: 'setBody'
 }
 
 function reducer(state, action) {
   console.log(action)
   switch (action.type) {
-    case 'setMethod':
+    case ACTION_TYPES.SET_METHOD:
       console.log({ ...state, method: action.method })
       return { ...state, method: action.method }
+    case ACTION_TYPES.SET_BODY:
+      console.log({ ...state, body: action.body })
+      return { ...state, body: action.body }
     default:
       throw new Error()
   }
@@ -62,7 +66,7 @@ const RequestMaker = ({ method, url, children, ...props }) => {
             <MethodPicker method={method} dispatch={dispatch} />
             <TextField defaultValue={url} width='100%' />
           </Flex>
-          <RequestParameters>{children}</RequestParameters>
+          <RequestParameters dispatch={dispatch}>{children}</RequestParameters>
           <View>
             <ActionButton onPress={sendRequest}>
               <Send />
