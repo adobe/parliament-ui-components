@@ -43,17 +43,20 @@ const TableRow = ({ keyItem, value }) => (
 )
 
 const TableRowEditable = ({
+  enabled = true,
   keyItem = '',
   value = '',
   index,
   onDelete,
   onUpdate
 }) => {
-  console.log(index)
   return (
     <>
       <TableCell>
-        <Checkbox />
+        <Checkbox
+          isSelected={enabled && keyItem !== ''}
+          onChange={(value) => onUpdate && onUpdate(index, { enabled: value })}
+        />
       </TableCell>
       <TableCell>
         <TextField
@@ -87,14 +90,13 @@ const TableRowEditable = ({
 }
 
 const EmptyRow = {
-  enabled: false,
+  enabled: true,
   key: '',
   value: '',
   deletable: true
 }
 
 const ParameterTable = ({ readonly = false, items }) => {
-  console.log(items)
   const [tableItems, setTableItems] = useState([
     ...items,
     {
@@ -102,17 +104,16 @@ const ParameterTable = ({ readonly = false, items }) => {
     }
   ])
 
-  const rows = tableItems.map(({ key, value }, index) => {
-    console.log(index)
+  const rows = tableItems.map(({ enabled, key, value }, index) => {
     return readonly ? (
       <TableRow key={index} keyItem={key} value={value} />
     ) : (
       <TableRowEditable
         index={index}
+        enabled={enabled}
         keyItem={key}
         value={value}
         onDelete={(key) => {
-          console.log(key)
           const copyOfTableItems = [...tableItems]
           copyOfTableItems.splice(index, 1)
           setTableItems(copyOfTableItems)
