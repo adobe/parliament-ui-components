@@ -14,7 +14,7 @@ import React from 'react'
 import { Content, View } from '@adobe/react-spectrum'
 import { Tabs, Item } from '@react-spectrum/tabs'
 
-const RequestParameters = ({ children }) => {
+const RequestParameters = ({ children, dispatch }) => {
   const childrenArray = React.Children.toArray(children)
   const queryArray = childrenArray.filter(
     (child) => child.type.name === 'QueryParameters'
@@ -22,10 +22,13 @@ const RequestParameters = ({ children }) => {
   const headerArray = childrenArray.filter(
     (child) => child.type.name === 'HeaderParameters'
   )
-  const bodyArray = childrenArray.filter((child) => child.type.name === 'Body')
+  const bodyArray = childrenArray
+    .filter((child) => child.type.name === 'Body')
+    .map((child) => React.cloneElement(child, { dispatch }))
   const codeArray = childrenArray.filter(
     (child) => child.type.name === 'CodeGen'
   )
+  console.log(bodyArray)
   return (
     <View>
       <Tabs aria-label='Request Parameters'>
