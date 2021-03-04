@@ -14,12 +14,20 @@ import React from 'react'
 import { Content, View } from '@adobe/react-spectrum'
 import { Tabs, Item } from '@react-spectrum/tabs'
 import { HeaderParameters } from './HeaderParameters'
+import { QueryParameters } from './QueryParameters'
 
 const RequestParameters = ({ children, dispatch }) => {
   const childrenArray = React.Children.toArray(children)
-  const queryArray = childrenArray.filter(
-    (child) => child.type.name === 'QueryParameters'
-  )
+  const queryArray = childrenArray
+    .filter((child) => child.type.name === 'QueryParameters')
+    .map((child) => {
+      return {
+        enabled: true,
+        key: child.props.name,
+        value: child.props.children,
+        deletable: true
+      }
+    })
   const headerArray = childrenArray
     .filter((child) => child.type.name === 'HeaderParameters')
     .map((child) => {
@@ -42,7 +50,7 @@ const RequestParameters = ({ children, dispatch }) => {
       <Tabs aria-label='Request Parameters'>
         <Item title='Query' key='queryTab'>
           <Content marginTop='size-250' marginStart='size-125'>
-            {queryArray}
+            <QueryParameters items={queryArray} dispatch={dispatch} />
           </Content>
         </Item>
         <Item title='Headers' key='headerTab'>
