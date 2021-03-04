@@ -17,12 +17,10 @@ import { Code } from '../Code'
 
 const CodeGen = ({
   CodeGen = 'shell_curl',
-  method,
   url,
-  children,
-  ...props
+  options
 }) => {
-  const options = [
+  const codeOptions = [
     {
       name: 'cURL',
       id: 'shell_curl'
@@ -84,8 +82,8 @@ const CodeGen = ({
 
   const renderByCode = (lang) => {
     const snippet = new HTTPSnippet({
-      method: method,
-      url: url
+      method: options.method,
+      url: url + encodeURI(options.query)
     })
     const langs = lang.split('_')
     const code = snippet.convert(langs[0], langs[1]) + '\n'
@@ -100,7 +98,7 @@ const CodeGen = ({
       <Picker
         width='size-1250'
         marginBottom='size-100'
-        items={options}
+        items={codeOptions}
         selectedKey={selected}
         onSelectionChange={(selected) => setSelected(selected)}
       >
