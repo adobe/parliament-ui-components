@@ -11,20 +11,41 @@
  */
 
 import React from 'react'
-import { TextField, Flex } from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
+import { View } from '@adobe/react-spectrum'
+import { ParameterTable } from './ParameterTable'
+import { RequestMaker } from './RequestMaker'
 
-const HeaderParameters = ({ name, children }) => {
+const HeaderParameters = ({ items, dispatch }) => {
   return (
-    <Flex direction='row' gap='size-100' width='50%'>
-      key <TextField defaultValue={name} width='50%' />
-      value <TextField defaultValue={children} width='50%' />
-    </Flex>
+    <View
+      borderWidth='thin'
+      borderRadius='medium'
+      borderColor='dark'
+      padding='size-250'
+      backgroundColor='gray-75'
+      minHeight='size-2400'
+    >
+      <ParameterTable
+        items={items}
+        callback={(data) => {
+          const headers = new Headers()
+          data
+            .filter((item) => item.enabled && item.key !== '')
+            .map((item) => headers.append(item.key, item.value))
+          dispatch({
+            type: RequestMaker.ACTION_TYPES.SET_HEADERS,
+            headers: headers
+          })
+        }}
+      />
+    </View>
   )
 }
 
 HeaderParameters.propTypes = {
-  name: PropTypes.string.isRequired
+  items: PropTypes.array.isRequired,
+  dispatch: PropTypes.func
 }
 
 export { HeaderParameters }
