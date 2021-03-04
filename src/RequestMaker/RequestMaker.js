@@ -44,18 +44,21 @@ function reducer(state, action) {
     case ACTION_TYPES.SET_HEADERS:
       console.log({ ...state, headers: action.headers })
       return { ...state, headers: action.headers }
+    case ACTION_TYPES.SET_QUERY_PARAMS:
+      console.log({ ...state, query: action.query })
+      return { ...state, query: action.query }
     default:
       throw new Error()
   }
 }
 
 const RequestMaker = ({ method, url, children, ...props }) => {
-  const [requestOptions, dispatch] = useReducer(reducer, { method })
+  const [requestOptions, dispatch] = useReducer(reducer, { method, query: '' })
   const [response, setResponse] = useState(null)
   const sendRequest = async () => {
     try {
       console.log(requestOptions)
-      const response = await fetch(url, requestOptions)
+      const response = await fetch(url + requestOptions.query, requestOptions)
       setResponse(response)
     } catch (e) {
       console.log(e)
@@ -68,7 +71,7 @@ const RequestMaker = ({ method, url, children, ...props }) => {
         <Flex direction='column' gap='size-100'>
           <Flex direction='row' gap='size-100' width='100%'>
             <MethodPicker method={method} dispatch={dispatch} />
-            <TextField defaultValue={url} width='100%' />
+            <TextField value={url + requestOptions.query} width='100%' />
           </Flex>
           <RequestParameters dispatch={dispatch}>{children}</RequestParameters>
           <View>

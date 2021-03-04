@@ -10,21 +10,48 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import { TextField, Flex } from '@adobe/react-spectrum'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { View } from '@adobe/react-spectrum'
+import { ParameterTable } from './ParameterTable'
+import { RequestMaker } from './RequestMaker'
 
-const QueryParameters = ({ name, children }) => {
+const QueryParameters = ({ items, dispatch }) => {
+  const updateParams = (data) => {
+    const queryParams = data
+      .filter((item) => item.enabled && item.key !== '')
+      .reduce((prevVal, currVal, idx) => {
+        return idx === 0
+          ? `?${currVal.key}=${currVal.value}`
+          : prevVal + '&' + `${currVal.key}=${currVal.value}`
+      }, '')
+    dispatch({
+      type: RequestMaker.ACTION_TYPES.SET_QUERY_PARAMS,
+      query: queryParams
+    })
+  }
+
+  useEffect(() => {
+    updateParams(items)
+  }, [])
+
   return (
-    <Flex direction='row' gap='size-100' width='50%'>
-      key <TextField defaultValue={name} width='50%' />
-      value <TextField defaultValue={children} width='50%' />
-    </Flex>
+    <View
+      borderWidth='thin'
+      borderRadius='medium'
+      borderColor='dark'
+      padding='size-250'
+      backgroundColor='gray-75'
+      minHeight='size-2400'
+    >
+      <ParameterTable items={items} callback={updateParams} />
+    </View>
   )
 }
 
 QueryParameters.propTypes = {
-  name: PropTypes.string.isRequired
+  items: PropTypes.array.isRequired,
+  dispatch: PropTypes.func
 }
 
 export { QueryParameters }
