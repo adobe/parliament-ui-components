@@ -73,7 +73,7 @@ const RequestMaker = ({ method, url, children, ...props }) => {
             <MethodPicker method={method} dispatch={dispatch} />
             <TextField value={url + requestOptions.query} width='100%' />
           </Flex>
-          <RequestParameters dispatch={dispatch}>{children}</RequestParameters>
+          <RequestParameters dispatch={dispatch} url={url} options={requestOptions}>{children}</RequestParameters>
           <View>
             <ActionButton onPress={sendRequest}>
               <Send />
