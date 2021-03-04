@@ -28,7 +28,8 @@ import { ResponsePanel } from './ResponsePanel'
 
 const ACTION_TYPES = {
   SET_METHOD: 'setMethod',
-  SET_BODY: 'setBody'
+  SET_BODY: 'setBody',
+  SET_HEADERS: 'setHeaders'
 }
 
 function reducer(state, action) {
@@ -40,6 +41,9 @@ function reducer(state, action) {
     case ACTION_TYPES.SET_BODY:
       console.log({ ...state, body: action.body })
       return { ...state, body: action.body }
+    case ACTION_TYPES.SET_HEADERS:
+      console.log({ ...state, headers: action.headers })
+      return { ...state, headers: action.headers }
     default:
       throw new Error()
   }

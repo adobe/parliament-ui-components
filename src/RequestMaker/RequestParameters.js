@@ -13,15 +13,23 @@
 import React from 'react'
 import { Content, View } from '@adobe/react-spectrum'
 import { Tabs, Item } from '@react-spectrum/tabs'
+import { HeaderParameters } from './HeaderParameters'
 
 const RequestParameters = ({ children, dispatch }) => {
   const childrenArray = React.Children.toArray(children)
   const queryArray = childrenArray.filter(
     (child) => child.type.name === 'QueryParameters'
   )
-  const headerArray = childrenArray.filter(
-    (child) => child.type.name === 'HeaderParameters'
-  )
+  const headerArray = childrenArray
+    .filter((child) => child.type.name === 'HeaderParameters')
+    .map((child) => {
+      return {
+        enabled: true,
+        key: child.props.name,
+        value: child.props.children,
+        deletable: true
+      }
+    })
   const bodyArray = childrenArray
     .filter((child) => child.type.name === 'Body')
     .map((child) => React.cloneElement(child, { dispatch }))
@@ -39,7 +47,7 @@ const RequestParameters = ({ children, dispatch }) => {
         </Item>
         <Item title='Headers' key='headerTab'>
           <Content marginTop='size-250' marginStart='size-125'>
-            {headerArray}
+            <HeaderParameters items={headerArray} dispatch={dispatch} />
           </Content>
         </Item>
         <Item title='Body' key='bodyTab'>
