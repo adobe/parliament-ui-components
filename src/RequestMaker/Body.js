@@ -20,9 +20,6 @@ const Body = ({ type = 'none', dispatch, children }) => {
   const [selected, setSelected] = useState(type)
   const [body, setBody] = useState(null)
 
-  console.log(dispatch)
-  console.log(children)
-
   const updateBody = (type, data) => {
     console.log(type)
     let contentType = ''
