@@ -29,7 +29,8 @@ import { ResponsePanel } from './ResponsePanel'
 const ACTION_TYPES = {
   SET_METHOD: 'setMethod',
   SET_BODY: 'setBody',
-  SET_HEADERS: 'setHeaders'
+  SET_HEADERS: 'setHeaders',
+  SET_QUERY_PARAMS: 'setQueryParams'
 }
 
 function reducer(state, action) {
@@ -73,7 +74,13 @@ const RequestMaker = ({ method, url, children, ...props }) => {
             <MethodPicker method={method} dispatch={dispatch} />
             <TextField value={url + requestOptions.query} width='100%' />
           </Flex>
-          <RequestParameters dispatch={dispatch} url={url} options={requestOptions}>{children}</RequestParameters>
+          <RequestParameters
+            dispatch={dispatch}
+            url={url}
+            options={requestOptions}
+          >
+            {children}
+          </RequestParameters>
           <View>
             <ActionButton onPress={sendRequest}>
               <Send />
