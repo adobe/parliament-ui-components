@@ -30,7 +30,8 @@ const ACTION_TYPES = {
   SET_METHOD: 'setMethod',
   SET_BODY: 'setBody',
   SET_HEADERS: 'setHeaders',
-  SET_QUERY_PARAMS: 'setQueryParams'
+  SET_QUERY_PARAMS: 'setQueryParams',
+  UPDATE_CONTENT_TYPE: 'updateContentType'
 }
 
 function reducer(state, action) {
@@ -43,23 +44,63 @@ function reducer(state, action) {
       console.log({ ...state, body: action.body })
       return { ...state, body: action.body }
     case ACTION_TYPES.SET_HEADERS:
+      console.log('did I get called')
       console.log({ ...state, headers: action.headers })
       return { ...state, headers: action.headers }
     case ACTION_TYPES.SET_QUERY_PARAMS:
       console.log({ ...state, query: action.query })
       return { ...state, query: action.query }
+    case ACTION_TYPES.UPDATE_CONTENT_TYPE:
+      state.headers.set('Content-Type', action.contentType)
+      console.log(state)
+      return { ...state }
     default:
       throw new Error()
   }
 }
 
 const RequestMaker = ({ method, url, children, ...props }) => {
-  const [requestOptions, dispatch] = useReducer(reducer, { method, query: '' })
+  const childrenArray = React.Children.toArray(children)
+
+  const headers = new Headers()
+  childrenArray
+    .filter((child) => child.type.name === 'HeaderParameters')
+    .map((child) => {
+      headers.append(child.props.name, child.props.children)
+    })
+
+  const queryParams = {}
+  childrenArray
+    .filter((child) => child.type.name === 'QueryParameters')
+    .map((child) => {
+      queryParams[child.props.name] = child.props.children
+    })
+
+  const [requestOptions, dispatch] = useReducer(reducer, {
+    method,
+    query: queryParams,
+    headers
+  })
   const [response, setResponse] = useState(null)
+
+  const queryString = (obj) => {
+    return Object.keys(obj).length > 0
+      ? '&' +
+          encodeURI(
+            Object.keys(obj)
+              .map((key) => key + '=' + obj[key])
+              .join('&')
+          )
+      : ''
+  }
+
   const sendRequest = async () => {
     try {
       console.log(requestOptions)
-      const response = await fetch(url + requestOptions.query, requestOptions)
+      const response = await fetch(
+        url + queryString(requestOptions.query),
+        requestOptions
+      )
       setResponse(response)
     } catch (e) {
       console.log(e)
@@ -72,11 +113,14 @@ const RequestMaker = ({ method, url, children, ...props }) => {
         <Flex direction='column' gap='size-100'>
           <Flex direction='row' gap='size-100' width='100%'>
             <MethodPicker method={method} dispatch={dispatch} />
-            <TextField value={url + requestOptions.query} width='100%' />
+            <TextField
+              value={url + queryString(requestOptions.query)}
+              width='100%'
+            />
           </Flex>
           <RequestParameters
             dispatch={dispatch}
-            url={url}
+            url={url + queryString(requestOptions.query)}
             options={requestOptions}
           >
             {children}
