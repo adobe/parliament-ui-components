@@ -15,11 +15,7 @@ import { View, Picker, Item } from '@adobe/react-spectrum'
 import HTTPSnippet from 'httpsnippet'
 import { Code } from '../Code'
 
-const CodeGen = ({
-  CodeGen = 'shell_curl',
-  url,
-  options
-}) => {
+const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
   const codeOptions = [
     {
       name: 'cURL',

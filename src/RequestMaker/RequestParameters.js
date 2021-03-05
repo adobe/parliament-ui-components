@@ -17,28 +17,22 @@ import { HeaderParameters } from './HeaderParameters'
 import { QueryParameters } from './QueryParameters'
 import { CodeGen } from './CodeGen'
 
-const RequestParameters = ({ children, dispatch, url, options}) => {
+const RequestParameters = ({ children, dispatch, url, options }) => {
   const childrenArray = React.Children.toArray(children)
-  const queryArray = childrenArray
-    .filter((child) => child.type.name === 'QueryParameters')
-    .map((child) => {
-      return {
-        enabled: true,
-        key: child.props.name,
-        value: child.props.children,
-        deletable: true
-      }
-    })
-  const headerArray = childrenArray
-    .filter((child) => child.type.name === 'HeaderParameters')
-    .map((child) => {
-      return {
-        enabled: true,
-        key: child.props.name,
-        value: child.props.children,
-        deletable: true
-      }
-    })
+  const filterChildren = (childrenArray, type) => {
+    return childrenArray
+      .filter((child) => child.type.name === type)
+      .map((child) => {
+        return {
+          enabled: true,
+          key: child.props.name,
+          value: child.props.children,
+          deletable: true
+        }
+      })
+  }
+  const queryArray = filterChildren(childrenArray, 'QueryParameters')
+  const headerArray = filterChildren(childrenArray, 'HeaderParameters')
   const bodyArray = childrenArray
     .filter((child) => child.type.name === 'Body')
     .map((child) => React.cloneElement(child, { dispatch }))
