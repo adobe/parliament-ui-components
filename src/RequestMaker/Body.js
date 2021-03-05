@@ -16,9 +16,9 @@ import PropTypes from 'prop-types'
 import { ParameterTable } from './ParameterTable'
 import { RequestMaker } from './RequestMaker'
 
-const Body = ({ type = 'none', dispatch, children }) => {
+const Body = ({ type = 'raw', dispatch, children }) => {
   const [selected, setSelected] = useState(type)
-  const [body, setBody] = useState(null)
+  const [body, setBody] = useState(children)
 
   const updateBody = (type, data) => {
     console.log(type)
@@ -64,6 +64,10 @@ const Body = ({ type = 'none', dispatch, children }) => {
       case 'none':
       default: {
         setBody(null)
+        dispatch({
+          type: RequestMaker.ACTION_TYPES.SET_BODY,
+          body: ''
+        })
         break
       }
     }
@@ -106,7 +110,7 @@ const Body = ({ type = 'none', dispatch, children }) => {
     }
   }
 
-  const renderByType = (type) => {
+  const renderByType = (type, children) => {
     switch (type) {
       case 'form-data':
         return (
@@ -128,6 +132,7 @@ const Body = ({ type = 'none', dispatch, children }) => {
             minWidth='100%'
             minHeight='size-2000'
             onChange={(data) => updateBody('raw', data)}
+            defaultValue={body}
           />
         )
       case 'binary':
@@ -159,7 +164,7 @@ const Body = ({ type = 'none', dispatch, children }) => {
         backgroundColor='gray-75'
         minHeight='size-2400'
       >
-        {renderByType(selected)}
+        {renderByType(selected, children)}
       </View>
     </View>
   )
