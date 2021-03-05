@@ -43,7 +43,7 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
     },
     {
       name: 'PHP',
-      id: 'php_http1'
+      id: 'php_http2'
     },
     {
       name: 'Java',
@@ -52,6 +52,14 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
     {
       name: 'C',
       id: 'c'
+    },
+    {
+      name: 'Objective-C',
+      id: 'objc'
+    },
+    {
+      name: 'Swift',
+      id: 'swift'
     },
     {
       name: 'R',
@@ -63,7 +71,7 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
     },
     {
       name: 'python',
-      id: 'python'
+      id: 'python_requests'
     },
     {
       name: 'C#',
@@ -72,6 +80,10 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
     {
       name: 'Ruby',
       id: 'ruby_native'
+    },
+    {
+      name: 'Kotlin',
+      id: 'kotlin'
     }
   ]
   const [selected, setSelected] = useState(CodeGen)
