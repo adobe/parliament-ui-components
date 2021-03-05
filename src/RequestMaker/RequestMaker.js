@@ -103,7 +103,7 @@ const RequestMaker = ({ method, url, children, ...props }) => {
 
   const queryString = (obj) => {
     return Object.keys(obj).length > 0
-      ? '&' +
+      ? '?' +
           encodeURI(
             Object.keys(obj)
               .map((key) => key + '=' + obj[key])
