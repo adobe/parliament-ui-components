@@ -31,6 +31,8 @@ const ACTION_TYPES = {
   SET_BODY: 'setBody',
   SET_HEADERS: 'setHeaders',
   SET_QUERY_PARAMS: 'setQueryParams',
+  REMOVE_CONTENT_TYPE: 'removeContentType',
+  REMOVE_FORM_CONTENT_TYPE: 'removeFormContentType',
   UPDATE_CONTENT_TYPE: 'updateContentType'
 }
 
@@ -50,6 +52,22 @@ function reducer(state, action) {
     case ACTION_TYPES.SET_QUERY_PARAMS:
       console.log({ ...state, query: action.query })
       return { ...state, query: action.query }
+    case ACTION_TYPES.REMOVE_CONTENT_TYPE:
+      if (state.headers.has('Content-Type')) {
+        state.headers.delete('Content-Type')
+      }
+      console.log(state)
+      return { ...state }
+    case ACTION_TYPES.REMOVE_FORM_CONTENT_TYPE:
+      if (
+        state.headers.get('Content-Type') === 'multipart/form-data' ||
+        state.headers.get('Content-Type') ===
+          'application/x-www-form-urlencoded'
+      ) {
+        state.headers.delete('Content-Type')
+      }
+      console.log(state)
+      return { ...state }
     case ACTION_TYPES.UPDATE_CONTENT_TYPE:
       state.headers.set('Content-Type', action.contentType)
       console.log(state)
