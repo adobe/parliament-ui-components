@@ -87,21 +87,11 @@ const Body = ({ type = 'none', dispatch, children }) => {
         })
         break
       }
-      case 'raw': {
-        // TODO set content type
-        // TODO call dispatcher for content-type
-        /*
-        dispatch({
-          type: RequestMaker.ACTION_TYPES.UPDATE_CONTENT_TYPE,
-          contentType: '???'
-        })
-        */
-        break
-      }
+      case 'raw':
       case 'binary': {
         // set your own content type
         dispatch({
-          type: RequestMaker.ACTION_TYPES.SET_BODY,
+          type: RequestMaker.ACTION_TYPES.REMOVE_FORM_CONTENT_TYPE,
           body: null
         })
         break
@@ -109,8 +99,7 @@ const Body = ({ type = 'none', dispatch, children }) => {
       case 'none':
       default: {
         dispatch({
-          type: RequestMaker.ACTION_TYPES.SET_BODY,
-          body: null
+          type: RequestMaker.ACTION_TYPES.REMOVE_CONTENT_TYPE
         })
         break
       }
