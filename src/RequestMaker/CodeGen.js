@@ -38,8 +38,8 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
       id: 'javascript_axios'
     },
     {
-      name: 'Javascript (jQuery)',
-      id: 'javascript_jquery'
+      name: 'python',
+      id: 'python_requests'
     },
     {
       name: 'PHP',
@@ -50,12 +50,12 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
       id: 'java_unirest'
     },
     {
-      name: 'C',
-      id: 'c'
+      name: 'Ruby',
+      id: 'ruby_native'
     },
     {
-      name: 'Objective-C',
-      id: 'objc'
+      name: 'Kotlin',
+      id: 'kotlin'
     },
     {
       name: 'Swift',
@@ -70,20 +70,12 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
       id: 'go_native'
     },
     {
-      name: 'python',
-      id: 'python_requests'
+      name: 'C',
+      id: 'c'
     },
     {
       name: 'C#',
       id: 'csharp_restsharp'
-    },
-    {
-      name: 'Ruby',
-      id: 'ruby_native'
-    },
-    {
-      name: 'Kotlin',
-      id: 'kotlin'
     }
   ]
   const [selected, setSelected] = useState(CodeGen)
