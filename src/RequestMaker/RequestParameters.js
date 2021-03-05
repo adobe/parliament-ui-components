@@ -16,10 +16,9 @@ import { Tabs, Item } from '@react-spectrum/tabs'
 import { HeaderParameters } from './HeaderParameters'
 import { QueryParameters } from './QueryParameters'
 import { CodeGen } from './CodeGen'
+import { Body } from './Body'
 
 const RequestParameters = ({ children, dispatch, url, options }) => {
-  const childrenArray = React.Children.toArray(children)
-
   const queryArray = Object.keys(options.query).map((key) => {
     return {
       enabled: true,
@@ -38,10 +37,6 @@ const RequestParameters = ({ children, dispatch, url, options }) => {
     })
   }
 
-  const bodyArray = childrenArray
-    .filter((child) => child.type.name === 'Body')
-    .map((child) => React.cloneElement(child, { dispatch }))
-
   return (
     <View>
       <Tabs aria-label='Request Parameters'>
@@ -57,7 +52,9 @@ const RequestParameters = ({ children, dispatch, url, options }) => {
         </Item>
         <Item title='Body' key='bodyTab'>
           <Content marginTop='size-250' marginStart='size-125'>
-            {bodyArray}
+            <Body type={options.bodyType} dispatch={dispatch}>
+              {options.body}
+            </Body>
           </Content>
         </Item>
         <Item title='Code Generation' key='codeTab'>

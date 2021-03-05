@@ -94,10 +94,22 @@ const RequestMaker = ({ method, url, children, ...props }) => {
       queryParams[child.props.name] = child.props.children
     })
 
+  const bodyArray = childrenArray.filter((child) => child.type.name === 'Body')
+  let body = null
+  let bodyType = 'none'
+  if (bodyArray.length === 1) {
+    body = bodyArray[0].props.children
+    bodyType = bodyArray[0].props.type
+  } else if (bodyArray.length > 1) {
+    throw new Error('Too many body tags')
+  }
+
   const [requestOptions, dispatch] = useReducer(reducer, {
     method,
     query: queryParams,
-    headers
+    headers,
+    body,
+    bodyType
   })
   const [response, setResponse] = useState(null)
 
