@@ -10,13 +10,28 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { View } from '@adobe/react-spectrum'
 import { ParameterTable } from './ParameterTable'
 import { RequestMaker } from './RequestMaker'
 
 const HeaderParameters = ({ items, dispatch }) => {
+  const updateHeaders = (data) => {
+    const headers = new Headers()
+    data
+      .filter((item) => item.enabled && item.key !== '')
+      .map((item) => headers.append(item.key, item.value))
+    dispatch({
+      type: RequestMaker.ACTION_TYPES.SET_HEADERS,
+      headers: headers
+    })
+  }
+
+  useEffect(() => {
+    updateHeaders(items)
+  }, [])
+
   return (
     <View
       borderWidth='thin'
@@ -26,19 +41,7 @@ const HeaderParameters = ({ items, dispatch }) => {
       backgroundColor='gray-75'
       minHeight='size-2400'
     >
-      <ParameterTable
-        items={items}
-        callback={(data) => {
-          const headers = new Headers()
-          data
-            .filter((item) => item.enabled && item.key !== '')
-            .map((item) => headers.append(item.key, item.value))
-          dispatch({
-            type: RequestMaker.ACTION_TYPES.SET_HEADERS,
-            headers: headers
-          })
-        }}
-      />
+      <ParameterTable items={items} callback={updateHeaders} />
     </View>
   )
 }

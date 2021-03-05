@@ -22,11 +22,8 @@ const Body = ({ type = 'none', dispatch, children }) => {
 
   const updateBody = (type, data) => {
     console.log(type)
-    let contentType = ''
     switch (type) {
       case 'form-data': {
-        // TODO call dispatcher for content-type
-        contentType = 'multipart/form-data'
         const formData = new FormData()
         data
           .filter((item) => item.enabled && item.key !== '')
@@ -39,8 +36,6 @@ const Body = ({ type = 'none', dispatch, children }) => {
         break
       }
       case 'urlencoded': {
-        // TODO call dispatcher for content-type
-        contentType = 'application/x-www-form-urlencoded'
         const urlFormData = new URLSearchParams()
         data
           .filter((item) => item.enabled && item.key !== '')
@@ -69,6 +64,54 @@ const Body = ({ type = 'none', dispatch, children }) => {
       case 'none':
       default: {
         setBody(null)
+        break
+      }
+    }
+  }
+
+  const updateBodyType = (type) => {
+    setSelected(type)
+    console.log(type)
+    switch (type) {
+      case 'form-data': {
+        dispatch({
+          type: RequestMaker.ACTION_TYPES.UPDATE_CONTENT_TYPE,
+          contentType: 'multipart/form-data'
+        })
+        break
+      }
+      case 'urlencoded': {
+        dispatch({
+          type: RequestMaker.ACTION_TYPES.UPDATE_CONTENT_TYPE,
+          contentType: 'application/x-www-form-urlencoded'
+        })
+        break
+      }
+      case 'raw': {
+        // TODO set content type
+        // TODO call dispatcher for content-type
+        /*
+        dispatch({
+          type: RequestMaker.ACTION_TYPES.UPDATE_CONTENT_TYPE,
+          contentType: '???'
+        })
+        */
+        break
+      }
+      case 'binary': {
+        // set your own content type
+        dispatch({
+          type: RequestMaker.ACTION_TYPES.SET_BODY,
+          body: null
+        })
+        break
+      }
+      case 'none':
+      default: {
+        dispatch({
+          type: RequestMaker.ACTION_TYPES.SET_BODY,
+          body: null
+        })
         break
       }
     }
@@ -111,7 +154,7 @@ const Body = ({ type = 'none', dispatch, children }) => {
       <RadioGroup
         value={selected}
         orientation='horizontal'
-        onChange={setSelected}
+        onChange={updateBodyType}
       >
         <Radio value='none'>none</Radio>
         <Radio value='form-data'>form-data</Radio>

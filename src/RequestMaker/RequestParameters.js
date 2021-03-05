@@ -19,25 +19,29 @@ import { CodeGen } from './CodeGen'
 
 const RequestParameters = ({ children, dispatch, url, options }) => {
   const childrenArray = React.Children.toArray(children)
-  const filterChildren = (childrenArray, type) => {
-    return childrenArray
-      .filter((child) => child.type.name === type)
-      .map((child) => {
-        return {
-          enabled: true,
-          key: child.props.name,
-          value: child.props.children,
-          deletable: true
-        }
-      })
+
+  const queryArray = Object.keys(options.query).map((key) => {
+    return {
+      enabled: true,
+      key: key,
+      value: options.query[key],
+      deletable: true
+    }
+  })
+  const headerArray = []
+  for (var pair of options.headers.entries()) {
+    headerArray.push({
+      enabled: true,
+      key: pair[0],
+      value: pair[1],
+      deletable: true
+    })
   }
-  const queryArray = filterChildren(childrenArray, 'QueryParameters')
-  const headerArray = filterChildren(childrenArray, 'HeaderParameters')
+
   const bodyArray = childrenArray
     .filter((child) => child.type.name === 'Body')
     .map((child) => React.cloneElement(child, { dispatch }))
 
-  console.log(bodyArray)
   return (
     <View>
       <Tabs aria-label='Request Parameters'>
