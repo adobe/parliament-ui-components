@@ -20,11 +20,7 @@ const QueryParameters = ({ items, dispatch }) => {
   const updateParams = (data) => {
     const queryParams = data
       .filter((item) => item.enabled && item.key !== '')
-      .reduce((prevVal, currVal, idx) => {
-        return idx === 0
-          ? `?${currVal.key}=${currVal.value}`
-          : prevVal + '&' + `${currVal.key}=${currVal.value}`
-      }, '')
+      .reduce((acc, curr) => ((acc[curr.key] = curr.value), acc), {})
     dispatch({
       type: RequestMaker.ACTION_TYPES.SET_QUERY_PARAMS,
       query: queryParams
