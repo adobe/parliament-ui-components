@@ -79,18 +79,14 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
   const [response, setResponse] = useState(null)
 
   const queryString = (obj) => {
-    if (obj) {
-      return Object.keys(obj).length > 0
-        ? '?' +
-            encodeURI(
-              Object.keys(obj)
-                .map((key) => key + '=' + obj[key])
-                .join('&')
-            )
-        : ''
-    } else {
-      return ''
-    }
+    return obj && Object.keys(obj).length > 0
+      ? '?' +
+          encodeURI(
+            Object.keys(obj)
+              .map((key) => key + '=' + obj[key])
+              .join('&')
+          )
+      : ''
   }
 
   const sendRequest = async () => {
@@ -111,19 +107,13 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
       <Well>
         <Flex direction='column' gap='size-100'>
           <Flex direction='row' gap='size-100' width='100%'>
-            <MethodPicker method={method} dispatch={dispatch} />
+            <MethodPicker method={method} />
             <TextField
               value={url + queryString(requestOptions.query)}
               width='100%'
             />
           </Flex>
-          <RequestParameters
-            dispatch={dispatch}
-            url={url + queryString(requestOptions.query)}
-            options={requestOptions}
-          >
-            {children}
-          </RequestParameters>
+          <RequestParameters url={url + queryString(requestOptions.query)} />
           <View>
             <ActionButton onPress={sendRequest}>
               <Send />
