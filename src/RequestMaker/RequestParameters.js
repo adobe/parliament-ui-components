@@ -14,23 +14,14 @@ import React from 'react'
 import { Content, View } from '@adobe/react-spectrum'
 import { Tabs, Item } from '@react-spectrum/tabs'
 import { HeaderParameters } from './HeaderParameters'
-import { QueryParameters } from './QueryParameters'
 import { CodeGen } from './CodeGen'
 import { Body } from './Body'
 import { useRequest } from './RequestContext'
+import { ParameterTable } from './ParameterTable'
+import { RequestMakerUI } from './RequestMakerUI'
 
 const RequestParameters = ({ url }) => {
   const [options, dispatch] = useRequest()
-  const queryArray = options.query
-    ? Object.keys(options.query).map((key) => {
-        return {
-          enabled: true,
-          key: key,
-          value: options.query[key],
-          deletable: true
-        }
-      })
-    : []
   const headerArray = []
   if (options.headers) {
     for (var pair of options.headers.entries()) {
@@ -48,7 +39,15 @@ const RequestParameters = ({ url }) => {
       <Tabs aria-label='Request Parameters'>
         <Item title='Query' key='queryTab'>
           <Content marginTop='size-250' marginStart='size-125'>
-            <QueryParameters items={queryArray} dispatch={dispatch} />
+            <ParameterTable
+              items={options.query}
+              callback={(data) => {
+                dispatch({
+                  type: RequestMakerUI.ACTION_TYPES.SET_QUERY_PARAMS,
+                  query: data
+                })
+              }}
+            />
           </Content>
         </Item>
         <Item title='Headers' key='headerTab'>

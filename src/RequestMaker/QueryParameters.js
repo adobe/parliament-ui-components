@@ -10,44 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
-import { View } from '@adobe/react-spectrum'
-import { ParameterTable } from './ParameterTable'
-import { RequestMakerUI } from './RequestMakerUI'
+import React from 'react'
 
-const QueryParameters = ({ items, dispatch }) => {
-  const updateParams = (data) => {
-    const queryParams = data
-      .filter((item) => item.enabled && item.key !== '')
-      .reduce((acc, curr) => ((acc[curr.key] = curr.value), acc), {})
-    dispatch({
-      type: RequestMakerUI.ACTION_TYPES.SET_QUERY_PARAMS,
-      query: queryParams
-    })
-  }
-
-  useEffect(() => {
-    updateParams(items)
-  }, [])
-
-  return (
-    <View
-      borderWidth='thin'
-      borderRadius='medium'
-      borderColor='dark'
-      padding='size-250'
-      backgroundColor='gray-75'
-      minHeight='size-2400'
-    >
-      <ParameterTable items={items} callback={updateParams} />
-    </View>
-  )
-}
-
-QueryParameters.propTypes = {
-  items: PropTypes.array.isRequired,
-  dispatch: PropTypes.func
+const QueryParameters = ({ name }) => {
+  return <div>{name}</div>
 }
 
 export { QueryParameters }
