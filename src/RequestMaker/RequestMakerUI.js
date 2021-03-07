@@ -40,6 +40,8 @@ const ACTION_TYPES = {
 const RequestMakerUI = ({ method, url, children, ...props }) => {
   const childrenArray = React.Children.toArray(children)
 
+  console.log(children)
+
   const headers = new Headers()
   childrenArray
     .filter((child) => child.type.name === 'HeaderParameters')
@@ -47,12 +49,18 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
       headers.append(child.props.name, child.props.children)
     })
 
-  const queryParams = {}
-  childrenArray
+  const queryParams = childrenArray
     .filter((child) => child.type.name === 'QueryParameters')
     .map((child) => {
-      queryParams[child.props.name] = child.props.children
+      return {
+        enabled: true,
+        key: child.props.name,
+        value: child.props.children,
+        deletable: true
+      }
     })
+
+  console.log('query: ' + queryParams)
 
   const bodyArray = childrenArray.filter((child) => child.type.name === 'Body')
   let body = null
@@ -79,11 +87,12 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
   const [response, setResponse] = useState(null)
 
   const queryString = (obj) => {
-    return obj && Object.keys(obj).length > 0
+    return obj && obj.length > 0
       ? '?' +
           encodeURI(
-            Object.keys(obj)
-              .map((key) => key + '=' + obj[key])
+            obj
+              .filter((item) => item.enabled && item.key !== '')
+              .map((item) => item.key + '=' + item.value)
               .join('&')
           )
       : ''
