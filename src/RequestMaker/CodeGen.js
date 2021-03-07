@@ -80,14 +80,9 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
   ]
   const [selected, setSelected] = useState(CodeGen)
   const getHeaders = (headers) => {
-    let resHeaders=[]
-    for(let pair of headers.entries()) {
-      let header = {
-        'name' : pair[0],
-        'value' : pair[1] 
-      }
-      resHeaders.push(header)
-    }
+    const resHeaders = headers.map((header) => {
+      return { name: header.key, value: header.value }
+    })
     return resHeaders
   }
   const renderByCode = (lang) => {
@@ -96,13 +91,13 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
       url: url,
       headers: getHeaders(options.headers)
     })
-    
+
     const langs = lang.split('_')
     const code = snippet.convert(langs[0], langs[1]) + '\n'
     const props = {
       className: `js`
     }
-    return <Code {...props}>{ code }</Code>
+    return <Code {...props}>{code}</Code>
   }
 
   return (
