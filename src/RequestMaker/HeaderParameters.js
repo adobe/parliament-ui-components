@@ -10,45 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
-import { View } from '@adobe/react-spectrum'
-import { ParameterTable } from './ParameterTable'
-import { RequestMakerUI } from './RequestMakerUI'
+import React from 'react'
 
-const HeaderParameters = ({ items, dispatch }) => {
-  const updateHeaders = (data) => {
-    const headers = new Headers()
-    data
-      .filter((item) => item.enabled && item.key !== '')
-      .map((item) => headers.append(item.key, item.value))
-    dispatch({
-      type: RequestMakerUI.ACTION_TYPES.SET_HEADERS,
-      headers: headers
-    })
-  }
-
-  useEffect(() => {
-    updateHeaders(items)
-  }, [])
-
-  return (
-    <View
-      borderWidth='thin'
-      borderRadius='medium'
-      borderColor='dark'
-      padding='size-250'
-      backgroundColor='gray-75'
-      minHeight='size-2400'
-    >
-      <ParameterTable items={items} callback={updateHeaders} />
-    </View>
-  )
-}
-
-HeaderParameters.propTypes = {
-  items: PropTypes.array.isRequired,
-  dispatch: PropTypes.func
+const HeaderParameters = ({ name }) => {
+  return <div>{name}</div>
 }
 
 export { HeaderParameters }

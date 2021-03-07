@@ -42,11 +42,24 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
 
   console.log(children)
 
+  /*
   const headers = new Headers()
   childrenArray
     .filter((child) => child.type.name === 'HeaderParameters')
     .map((child) => {
       headers.append(child.props.name, child.props.children)
+    })
+*/
+
+  const headers = childrenArray
+    .filter((child) => child.type.name === 'HeaderParameters')
+    .map((child) => {
+      return {
+        enabled: true,
+        key: child.props.name,
+        value: child.props.children,
+        deletable: true
+      }
     })
 
   const queryParams = childrenArray

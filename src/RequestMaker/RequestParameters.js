@@ -13,7 +13,6 @@
 import React from 'react'
 import { Content, View } from '@adobe/react-spectrum'
 import { Tabs, Item } from '@react-spectrum/tabs'
-import { HeaderParameters } from './HeaderParameters'
 import { CodeGen } from './CodeGen'
 import { Body } from './Body'
 import { useRequest } from './RequestContext'
@@ -22,17 +21,6 @@ import { RequestMakerUI } from './RequestMakerUI'
 
 const RequestParameters = ({ url }) => {
   const [options, dispatch] = useRequest()
-  const headerArray = []
-  if (options.headers) {
-    for (var pair of options.headers.entries()) {
-      headerArray.push({
-        enabled: true,
-        key: pair[0],
-        value: pair[1],
-        deletable: true
-      })
-    }
-  }
 
   return (
     <View>
@@ -52,7 +40,15 @@ const RequestParameters = ({ url }) => {
         </Item>
         <Item title='Headers' key='headerTab'>
           <Content marginTop='size-250' marginStart='size-125'>
-            <HeaderParameters items={headerArray} dispatch={dispatch} />
+            <ParameterTable
+              items={options.headers}
+              callback={(data) => {
+                dispatch({
+                  type: RequestMakerUI.ACTION_TYPES.SET_HEADERS,
+                  headers: data
+                })
+              }}
+            />
           </Content>
         </Item>
         <Item title='Body' key='bodyTab'>
