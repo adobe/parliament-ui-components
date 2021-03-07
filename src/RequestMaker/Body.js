@@ -14,7 +14,7 @@ import React, { useState } from 'react'
 import { RadioGroup, Radio, Text, TextArea, View } from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
 import { ParameterTable } from './ParameterTable'
-import { RequestMaker } from './RequestMaker'
+import { RequestMakerUI } from './RequestMakerUI'
 
 const Body = ({ type = 'raw', dispatch, children }) => {
   const [selected, setSelected] = useState(type)
@@ -30,7 +30,7 @@ const Body = ({ type = 'raw', dispatch, children }) => {
           .map((item) => formData.append(item.key, item.value))
         setBody(formData)
         dispatch({
-          type: RequestMaker.ACTION_TYPES.SET_BODY,
+          type: RequestMakerUI.ACTION_TYPES.SET_BODY,
           body: formData
         })
         break
@@ -42,7 +42,7 @@ const Body = ({ type = 'raw', dispatch, children }) => {
           .map((item) => urlFormData.append(item.key, item.value))
         setBody(urlFormData)
         dispatch({
-          type: RequestMaker.ACTION_TYPES.SET_BODY,
+          type: RequestMakerUI.ACTION_TYPES.SET_BODY,
           body: urlFormData
         })
         break
@@ -52,7 +52,7 @@ const Body = ({ type = 'raw', dispatch, children }) => {
         // TODO call dispatcher for content-type
         setBody(data)
         dispatch({
-          type: RequestMaker.ACTION_TYPES.SET_BODY,
+          type: RequestMakerUI.ACTION_TYPES.SET_BODY,
           body: data
         })
         break
@@ -65,7 +65,7 @@ const Body = ({ type = 'raw', dispatch, children }) => {
       default: {
         setBody(null)
         dispatch({
-          type: RequestMaker.ACTION_TYPES.SET_BODY,
+          type: RequestMakerUI.ACTION_TYPES.SET_BODY,
           body: ''
         })
         break
@@ -79,14 +79,14 @@ const Body = ({ type = 'raw', dispatch, children }) => {
     switch (type) {
       case 'form-data': {
         dispatch({
-          type: RequestMaker.ACTION_TYPES.UPDATE_CONTENT_TYPE,
+          type: RequestMakerUI.ACTION_TYPES.UPDATE_CONTENT_TYPE,
           contentType: 'multipart/form-data'
         })
         break
       }
       case 'urlencoded': {
         dispatch({
-          type: RequestMaker.ACTION_TYPES.UPDATE_CONTENT_TYPE,
+          type: RequestMakerUI.ACTION_TYPES.UPDATE_CONTENT_TYPE,
           contentType: 'application/x-www-form-urlencoded'
         })
         break
@@ -95,7 +95,7 @@ const Body = ({ type = 'raw', dispatch, children }) => {
       case 'binary': {
         // set your own content type
         dispatch({
-          type: RequestMaker.ACTION_TYPES.REMOVE_FORM_CONTENT_TYPE,
+          type: RequestMakerUI.ACTION_TYPES.REMOVE_FORM_CONTENT_TYPE,
           body: null
         })
         break
@@ -103,7 +103,7 @@ const Body = ({ type = 'raw', dispatch, children }) => {
       case 'none':
       default: {
         dispatch({
-          type: RequestMaker.ACTION_TYPES.REMOVE_CONTENT_TYPE
+          type: RequestMakerUI.ACTION_TYPES.REMOVE_CONTENT_TYPE
         })
         break
       }
