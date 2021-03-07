@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { useState, useReducer } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   ActionButton,
   Flex,
@@ -25,6 +25,7 @@ import Send from '@spectrum-icons/workflow/Send'
 import { MethodPicker } from './MethodPicker'
 import { RequestParameters } from './RequestParameters'
 import { ResponsePanel } from './ResponsePanel'
+import { useRequest } from './RequestContext'
 
 const ACTION_TYPES = {
   SET_METHOD: 'setMethod',
@@ -34,47 +35,6 @@ const ACTION_TYPES = {
   REMOVE_CONTENT_TYPE: 'removeContentType',
   REMOVE_FORM_CONTENT_TYPE: 'removeFormContentType',
   UPDATE_CONTENT_TYPE: 'updateContentType'
-}
-
-function reducer(state, action) {
-  console.log(action)
-  switch (action.type) {
-    case ACTION_TYPES.SET_METHOD:
-      console.log({ ...state, method: action.method })
-      return { ...state, method: action.method }
-    case ACTION_TYPES.SET_BODY:
-      console.log({ ...state, body: action.body })
-      return { ...state, body: action.body }
-    case ACTION_TYPES.SET_HEADERS:
-      console.log('did I get called')
-      console.log({ ...state, headers: action.headers })
-      return { ...state, headers: action.headers }
-    case ACTION_TYPES.SET_QUERY_PARAMS:
-      console.log({ ...state, query: action.query })
-      return { ...state, query: action.query }
-    case ACTION_TYPES.REMOVE_CONTENT_TYPE:
-      if (state.headers.has('Content-Type')) {
-        state.headers.delete('Content-Type')
-      }
-      console.log(state)
-      return { ...state }
-    case ACTION_TYPES.REMOVE_FORM_CONTENT_TYPE:
-      if (
-        state.headers.get('Content-Type') === 'multipart/form-data' ||
-        state.headers.get('Content-Type') ===
-          'application/x-www-form-urlencoded'
-      ) {
-        state.headers.delete('Content-Type')
-      }
-      console.log(state)
-      return { ...state }
-    case ACTION_TYPES.UPDATE_CONTENT_TYPE:
-      state.headers.set('Content-Type', action.contentType)
-      console.log(state)
-      return { ...state }
-    default:
-      throw new Error()
-  }
 }
 
 const RequestMakerUI = ({ method, url, children, ...props }) => {
@@ -104,24 +64,33 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
     throw new Error('Too many body tags')
   }
 
-  const [requestOptions, dispatch] = useReducer(reducer, {
-    method,
-    query: queryParams,
-    headers,
-    body,
-    bodyType
-  })
+  const [requestOptions, dispatch] = useRequest()
+  useEffect(() => {
+    dispatch({
+      type: 'init',
+      method,
+      query: queryParams,
+      headers,
+      body,
+      bodyType
+    })
+  }, [])
+
   const [response, setResponse] = useState(null)
 
   const queryString = (obj) => {
-    return Object.keys(obj).length > 0
-      ? '?' +
-          encodeURI(
-            Object.keys(obj)
-              .map((key) => key + '=' + obj[key])
-              .join('&')
-          )
-      : ''
+    if (obj) {
+      return Object.keys(obj).length > 0
+        ? '?' +
+            encodeURI(
+              Object.keys(obj)
+                .map((key) => key + '=' + obj[key])
+                .join('&')
+            )
+        : ''
+    } else {
+      return ''
+    }
   }
 
   const sendRequest = async () => {
