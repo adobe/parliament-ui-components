@@ -14,7 +14,7 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { View } from '@adobe/react-spectrum'
 import { ParameterTable } from './ParameterTable'
-import { RequestMaker } from './RequestMaker'
+import { RequestMakerUI } from './RequestMakerUI'
 
 const QueryParameters = ({ items, dispatch }) => {
   const updateParams = (data) => {
@@ -22,7 +22,7 @@ const QueryParameters = ({ items, dispatch }) => {
       .filter((item) => item.enabled && item.key !== '')
       .reduce((acc, curr) => ((acc[curr.key] = curr.value), acc), {})
     dispatch({
-      type: RequestMaker.ACTION_TYPES.SET_QUERY_PARAMS,
+      type: RequestMakerUI.ACTION_TYPES.SET_QUERY_PARAMS,
       query: queryParams
     })
   }

@@ -12,7 +12,7 @@
 
 import React, { useState } from 'react'
 import { Picker, Item } from '@adobe/react-spectrum'
-import { RequestMaker } from './RequestMaker'
+import { RequestMakerUI } from './RequestMakerUI'
 
 const MethodPicker = ({ method, dispatch }) => {
   const options = [
@@ -33,7 +33,7 @@ const MethodPicker = ({ method, dispatch }) => {
       onSelectionChange={(selected) => {
         setSelected(selected)
         dispatch({
-          type: RequestMaker.ACTION_TYPES.SET_METHOD,
+          type: RequestMakerUI.ACTION_TYPES.SET_METHOD,
           method: selected
         })
       }}
