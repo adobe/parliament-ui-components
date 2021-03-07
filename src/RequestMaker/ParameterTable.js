@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { useState } from 'react'
+import React from 'react'
 import {
   ActionButton,
   Checkbox,
@@ -97,12 +97,12 @@ const EmptyRow = {
 }
 
 const ParameterTable = ({ readonly = false, items, callback }) => {
-  const [tableItems, setTableItems] = useState([
-    ...items,
-    {
-      ...EmptyRow
-    }
-  ])
+  const tableItems = [...items]
+  if (
+    tableItems.filter((item) => item.key === '' && item.value === '').length < 1
+  ) {
+    tableItems.push({ ...EmptyRow })
+  }
 
   const rows = tableItems.map(({ enabled, key, value }, index) => {
     return readonly ? (
@@ -116,7 +116,6 @@ const ParameterTable = ({ readonly = false, items, callback }) => {
         onDelete={(key) => {
           const copyOfTableItems = [...tableItems]
           copyOfTableItems.splice(index, 1)
-          setTableItems(copyOfTableItems)
           callback && callback(copyOfTableItems)
         }}
         onUpdate={(index, update) => {
@@ -129,7 +128,6 @@ const ParameterTable = ({ readonly = false, items, callback }) => {
           ) {
             copyOfTableItems.push({ ...EmptyRow })
           }
-          setTableItems(copyOfTableItems)
           callback && callback(copyOfTableItems)
         }}
       />
