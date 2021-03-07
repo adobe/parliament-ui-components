@@ -27,6 +27,9 @@ const ACTION_TYPES = {
 const reducer = (state, action) => {
   console.log(action)
   switch (action.type) {
+    case 'init':
+      console.log(action)
+      return action
     case ACTION_TYPES.SET_METHOD:
       console.log({ ...state, method: action.method })
       return { ...state, method: action.method }
