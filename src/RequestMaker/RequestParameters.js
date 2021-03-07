@@ -19,22 +19,26 @@ import { CodeGen } from './CodeGen'
 import { Body } from './Body'
 
 const RequestParameters = ({ children, dispatch, url, options }) => {
-  const queryArray = Object.keys(options.query).map((key) => {
-    return {
-      enabled: true,
-      key: key,
-      value: options.query[key],
-      deletable: true
-    }
-  })
+  const queryArray = options.query
+    ? Object.keys(options.query).map((key) => {
+        return {
+          enabled: true,
+          key: key,
+          value: options.query[key],
+          deletable: true
+        }
+      })
+    : []
   const headerArray = []
-  for (var pair of options.headers.entries()) {
-    headerArray.push({
-      enabled: true,
-      key: pair[0],
-      value: pair[1],
-      deletable: true
-    })
+  if (options.headers) {
+    for (var pair of options.headers.entries()) {
+      headerArray.push({
+        enabled: true,
+        key: pair[0],
+        value: pair[1],
+        deletable: true
+      })
+    }
   }
 
   return (
