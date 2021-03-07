@@ -137,17 +137,26 @@ const ParameterTable = ({ readonly = false, items, callback }) => {
   })
 
   return (
-    <Grid
-      columns={['size-500', '1fr', '1fr', 'size-500']}
-      autoRows='size-675'
-      UNSAFE_className='spectrum-Table'
+    <View
+      borderWidth='thin'
+      borderRadius='medium'
+      borderColor='dark'
+      padding='size-250'
+      backgroundColor='gray-75'
+      minHeight='size-2400'
     >
-      <TableCellHead />
-      <TableCellHead>Key</TableCellHead>
-      <TableCellHead>Value</TableCellHead>
-      <TableCellHead />
-      {rows}
-    </Grid>
+      <Grid
+        columns={['size-500', '1fr', '1fr', 'size-500']}
+        autoRows='size-675'
+        UNSAFE_className='spectrum-Table'
+      >
+        <TableCellHead />
+        <TableCellHead>Key</TableCellHead>
+        <TableCellHead>Value</TableCellHead>
+        <TableCellHead />
+        {rows}
+      </Grid>
+    </View>
   )
 }
 
