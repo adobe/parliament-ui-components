@@ -17,8 +17,10 @@ import { HeaderParameters } from './HeaderParameters'
 import { QueryParameters } from './QueryParameters'
 import { CodeGen } from './CodeGen'
 import { Body } from './Body'
+import { useRequest } from './RequestContext'
 
-const RequestParameters = ({ children, dispatch, url, options }) => {
+const RequestParameters = ({ url }) => {
+  const [options, dispatch] = useRequest()
   const queryArray = options.query
     ? Object.keys(options.query).map((key) => {
         return {
