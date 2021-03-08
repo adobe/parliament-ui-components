@@ -70,7 +70,7 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
     throw new Error('Too many body tags')
   }
 
-  const [requestOptions, dispatch] = useRequest()
+  const [state, dispatch] = useRequest()
   useEffect(() => {
     dispatch({
       type: 'init',
@@ -96,11 +96,28 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
       : ''
   }
 
+  const getHeaders = (headerArray) => {
+    return headerArray.reduce((obj, item) => {
+      return {
+        ...obj,
+        [item.key]: item.value
+      }
+    }, {})
+  }
+
   const sendRequest = async () => {
     try {
+      console.log(state)
+      const requestOptions = {
+        method: state.method,
+        headers: getHeaders(state.headers)
+      }
+      if (state.method !== 'GET' && state.body !== null) {
+        requestOptions.body = state.body
+      }
       console.log(requestOptions)
       const response = await fetch(
-        url + queryString(requestOptions.query),
+        url + queryString(state.query),
         requestOptions
       )
       setResponse(response)
@@ -115,12 +132,9 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
         <Flex direction='column' gap='size-100'>
           <Flex direction='row' gap='size-100' width='100%'>
             <MethodPicker method={method} />
-            <TextField
-              value={url + queryString(requestOptions.query)}
-              width='100%'
-            />
+            <TextField value={url + queryString(state.query)} width='100%' />
           </Flex>
-          <RequestParameters url={url + queryString(requestOptions.query)} />
+          <RequestParameters url={url + queryString(state.query)} />
           <View>
             <ActionButton onPress={sendRequest}>
               <Send />
