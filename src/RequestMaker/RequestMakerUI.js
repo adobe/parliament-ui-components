@@ -37,41 +37,26 @@ const ACTION_TYPES = {
   UPDATE_CONTENT_TYPE: 'updateContentType'
 }
 
+const filterChildren = (childrenArray, type) => {
+  return childrenArray
+    .filter((child) => child.type.name === type)
+    .map((child) => {
+      return {
+        enabled: true,
+        key: child.props.name,
+        value: child.props.children,
+        deletable: true
+      }
+    })
+}
+
 const RequestMakerUI = ({ method, url, children, ...props }) => {
   const childrenArray = React.Children.toArray(children)
 
   console.log(children)
 
-  /*
-  const headers = new Headers()
-  childrenArray
-    .filter((child) => child.type.name === 'HeaderParameters')
-    .map((child) => {
-      headers.append(child.props.name, child.props.children)
-    })
-*/
-
-  const headers = childrenArray
-    .filter((child) => child.type.name === 'HeaderParameters')
-    .map((child) => {
-      return {
-        enabled: true,
-        key: child.props.name,
-        value: child.props.children,
-        deletable: true
-      }
-    })
-
-  const queryParams = childrenArray
-    .filter((child) => child.type.name === 'QueryParameters')
-    .map((child) => {
-      return {
-        enabled: true,
-        key: child.props.name,
-        value: child.props.children,
-        deletable: true
-      }
-    })
+  const headers = filterChildren(childrenArray, 'HeaderParameters')
+  const queryParams = filterChildren(childrenArray, 'QueryParameters')
 
   console.log('query: ' + queryParams)
 
