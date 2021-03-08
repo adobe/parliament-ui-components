@@ -15,57 +15,51 @@ import { RadioGroup, Radio, Text, TextArea, View } from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
 import { ParameterTable } from './ParameterTable'
 import { RequestMakerUI } from './RequestMakerUI'
+import { useRequestDispatch } from './RequestContext'
 
-const Body = ({ type = 'raw', dispatch, children }) => {
+const Body = ({ type = 'raw', items }) => {
   const [selected, setSelected] = useState(type)
-  const [body, setBody] = useState(children)
+  const dispatch = useRequestDispatch()
 
   const updateBody = (type, data) => {
     console.log(type)
     switch (type) {
       case 'form-data': {
-        const formData = new FormData()
-        data
-          .filter((item) => item.enabled && item.key !== '')
-          .map((item) => formData.append(item.key, item.value))
-        setBody(formData)
+        data.filter((item) => item.enabled && item.key !== '')
         dispatch({
           type: RequestMakerUI.ACTION_TYPES.SET_BODY,
-          body: formData
+          bodyType: type,
+          body: data
         })
         break
       }
       case 'urlencoded': {
-        const urlFormData = new URLSearchParams()
-        data
-          .filter((item) => item.enabled && item.key !== '')
-          .map((item) => urlFormData.append(item.key, item.value))
-        setBody(urlFormData)
+        data.filter((item) => item.enabled && item.key !== '')
         dispatch({
           type: RequestMakerUI.ACTION_TYPES.SET_BODY,
-          body: urlFormData
+          bodyType: type,
+          body: data
         })
         break
       }
       case 'raw': {
         // TODO set content type
         // TODO call dispatcher for content-type
-        setBody(data)
         dispatch({
           type: RequestMakerUI.ACTION_TYPES.SET_BODY,
+          bodyType: type,
           body: data
         })
         break
       }
       case 'binary': {
-        setBody(data)
         break
       }
       case 'none':
       default: {
-        setBody(null)
         dispatch({
           type: RequestMakerUI.ACTION_TYPES.SET_BODY,
+          bodyType: type,
           body: ''
         })
         break
@@ -80,6 +74,7 @@ const Body = ({ type = 'raw', dispatch, children }) => {
       case 'form-data': {
         dispatch({
           type: RequestMakerUI.ACTION_TYPES.UPDATE_CONTENT_TYPE,
+          bodyType: type,
           contentType: 'multipart/form-data'
         })
         break
@@ -87,6 +82,7 @@ const Body = ({ type = 'raw', dispatch, children }) => {
       case 'urlencoded': {
         dispatch({
           type: RequestMakerUI.ACTION_TYPES.UPDATE_CONTENT_TYPE,
+          bodyType: type,
           contentType: 'application/x-www-form-urlencoded'
         })
         break
@@ -96,6 +92,7 @@ const Body = ({ type = 'raw', dispatch, children }) => {
         // set your own content type
         dispatch({
           type: RequestMakerUI.ACTION_TYPES.REMOVE_FORM_CONTENT_TYPE,
+          bodyType: type,
           body: null
         })
         break
@@ -103,26 +100,28 @@ const Body = ({ type = 'raw', dispatch, children }) => {
       case 'none':
       default: {
         dispatch({
-          type: RequestMakerUI.ACTION_TYPES.REMOVE_CONTENT_TYPE
+          type: RequestMakerUI.ACTION_TYPES.REMOVE_CONTENT_TYPE,
+          bodyType: type
         })
         break
       }
     }
   }
 
-  const renderByType = (type, children) => {
+  const renderByType = (type, items) => {
+    console.log(items)
     switch (type) {
       case 'form-data':
         return (
           <ParameterTable
-            items={[]}
+            items={Array.isArray(items) ? items : []}
             callback={(data) => updateBody('form-data', data)}
           />
         )
       case 'urlencoded':
         return (
           <ParameterTable
-            items={[]}
+            items={Array.isArray(items) ? items : []}
             callback={(data) => updateBody('urlencoded', data)}
           />
         )
@@ -132,7 +131,7 @@ const Body = ({ type = 'raw', dispatch, children }) => {
             minWidth='100%'
             minHeight='size-2000'
             onChange={(data) => updateBody('raw', data)}
-            defaultValue={body}
+            defaultValue={items}
           />
         )
       case 'binary':
@@ -164,7 +163,7 @@ const Body = ({ type = 'raw', dispatch, children }) => {
         backgroundColor='gray-75'
         minHeight='size-2400'
       >
-        {renderByType(selected, children)}
+        {renderByType(selected, items)}
       </View>
     </View>
   )
