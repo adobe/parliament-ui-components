@@ -43,26 +43,47 @@ const reducer = (state, action) => {
     case ACTION_TYPES.SET_QUERY_PARAMS:
       console.log({ ...state, query: action.query })
       return { ...state, query: action.query }
-    case ACTION_TYPES.REMOVE_CONTENT_TYPE:
-      if (state.headers.has('Content-Type')) {
-        state.headers.delete('Content-Type')
+    case ACTION_TYPES.REMOVE_CONTENT_TYPE: {
+      const index = state.headers.findIndex(
+        (header) => header.key === 'Content-Type'
+      )
+      if (index > -1) {
+        state.headers.slice(index, 1)
       }
       console.log(state)
       return { ...state }
-    case ACTION_TYPES.REMOVE_FORM_CONTENT_TYPE:
+    }
+    case ACTION_TYPES.REMOVE_FORM_CONTENT_TYPE: {
+      const index = state.headers.findIndex(
+        (header) => header.key === 'Content-Type'
+      )
       if (
-        state.headers.get('Content-Type') === 'multipart/form-data' ||
-        state.headers.get('Content-Type') ===
-          'application/x-www-form-urlencoded'
+        index > -1 &&
+        (state.headers[index].value === 'multipart/form-data' ||
+          state.headers[index].value === 'application/x-www-form-urlencoded')
       ) {
-        state.headers.delete('Content-Type')
+        state.headers.slice(index, 1)
       }
       console.log(state)
       return { ...state }
-    case ACTION_TYPES.UPDATE_CONTENT_TYPE:
-      state.headers.set('Content-Type', action.contentType)
+    }
+    case ACTION_TYPES.UPDATE_CONTENT_TYPE: {
+      const index = state.headers.findIndex(
+        (header) => header.key === 'Content-Type'
+      )
+      if (index > -1) {
+        state.headers[index].value = action.contentType
+      } else {
+        state.headers.push({
+          enabled: true,
+          key: 'Content-Type',
+          value: action.contentType,
+          deletable: true
+        })
+      }
       console.log(state)
       return { ...state }
+    }
     default:
       throw new Error()
   }
