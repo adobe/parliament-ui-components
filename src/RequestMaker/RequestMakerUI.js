@@ -52,14 +52,8 @@ const filterChildren = (childrenArray, type) => {
 
 const RequestMakerUI = ({ method, url, children, ...props }) => {
   const childrenArray = React.Children.toArray(children)
-
-  console.log(children)
-
   const headers = filterChildren(childrenArray, 'HeaderParameters')
   const queryParams = filterChildren(childrenArray, 'QueryParameters')
-
-  console.log('query: ' + queryParams)
-
   const bodyArray = childrenArray.filter((child) => child.type.name === 'Body')
   let body = null
   let bodyType = 'none'

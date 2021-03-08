@@ -53,9 +53,7 @@ const RequestParameters = ({ url }) => {
         </Item>
         <Item title='Body' key='bodyTab'>
           <Content marginTop='size-250' marginStart='size-125'>
-            <Body type={options.bodyType} dispatch={dispatch}>
-              {options.body}
-            </Body>
+            <Body type={options.bodyType} items={options.body} />
           </Content>
         </Item>
         <Item title='Code Generation' key='codeTab'>

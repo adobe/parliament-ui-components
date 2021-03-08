@@ -27,17 +27,18 @@ const ACTION_TYPES = {
 const reducer = (state, action) => {
   console.log(action)
   switch (action.type) {
-    case 'init':
+    case 'init': {
       console.log(action)
-      return action
+      const { body, bodyType, method, headers, query } = action
+      return { body, bodyType, method, headers, query }
+    }
     case ACTION_TYPES.SET_METHOD:
       console.log({ ...state, method: action.method })
       return { ...state, method: action.method }
     case ACTION_TYPES.SET_BODY:
       console.log({ ...state, body: action.body })
-      return { ...state, body: action.body }
+      return { ...state, body: action.body, bodyType: action.bodyType }
     case ACTION_TYPES.SET_HEADERS:
-      console.log('did I get called')
       console.log({ ...state, headers: action.headers })
       return { ...state, headers: action.headers }
     case ACTION_TYPES.SET_QUERY_PARAMS:
@@ -51,7 +52,7 @@ const reducer = (state, action) => {
         state.headers.slice(index, 1)
       }
       console.log(state)
-      return { ...state }
+      return { ...state, bodyType: action.bodyType }
     }
     case ACTION_TYPES.REMOVE_FORM_CONTENT_TYPE: {
       const index = state.headers.findIndex(
@@ -65,7 +66,7 @@ const reducer = (state, action) => {
         state.headers.slice(index, 1)
       }
       console.log(state)
-      return { ...state }
+      return { ...state, bodyType: action.bodyType, body: action.body }
     }
     case ACTION_TYPES.UPDATE_CONTENT_TYPE: {
       const index = state.headers.findIndex(
@@ -81,8 +82,8 @@ const reducer = (state, action) => {
           deletable: true
         })
       }
-      console.log(state)
-      return { ...state }
+      console.log({ ...state, bodyType: action.bodyType })
+      return { ...state, bodyType: action.bodyType }
     }
     default:
       throw new Error()
