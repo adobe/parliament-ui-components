@@ -80,10 +80,11 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
   ]
   const [selected, setSelected] = useState(CodeGen)
   const getHeaders = (headers) => {
-    const resHeaders = headers.map((header) => {
-      return { name: header.key, value: header.value }
-    })
-    return resHeaders
+    return headers
+      .filter((header) => header.enabled && header.key !== '')
+      .map((header) => {
+        return { name: header.key, value: header.value }
+      })
   }
   const renderByCode = (lang) => {
     const snippet = new HTTPSnippet({
