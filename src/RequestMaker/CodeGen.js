@@ -98,10 +98,10 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
         postData.text = options.body
       } else if (options.bodyType === 'form-data') {
         postData.mimeType = 'multipart/form-data'
-        postData.params = getNameValArray(options.body)
+        postData.params = options.body ? getNameValArray(options.body) : []
       } else if (options.bodyType === 'urlencoded') {
         postData.mimeType = 'application/x-www-form-urlencoded'
-        postData.params = getNameValArray(options.body)
+        postData.params = options.body ? getNameValArray(options.body) : []
       }
     }
     return postData
