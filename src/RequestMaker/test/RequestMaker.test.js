@@ -22,3 +22,4 @@ describe('<RequestMaker />', () => {
     expect(el).toBeInTheDocument()
   })
 })
+
