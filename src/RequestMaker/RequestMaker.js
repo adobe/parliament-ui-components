@@ -10,54 +10,14 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { useState } from 'react'
-import {
-  ActionButton,
-  Flex,
-  Text,
-  View,
-  Well,
-  TextField
-} from '@adobe/react-spectrum'
+import React from 'react'
+import { RequestProvider } from './RequestContext'
+import { RequestMakerUI } from './RequestMakerUI'
 
-import Send from '@spectrum-icons/workflow/Send'
-
-import { MethodPicker } from './MethodPicker'
-import { RequestParameters } from './RequestParameters'
-import { ResponsePanel } from './ResponsePanel'
-
-const RequestMaker = ({ method, url, children, ...props }) => {
-  const [response, setResponse] = useState(null)
-  return (
-    <div {...props}>
-      <Well>
-        <Flex direction='column' gap='size-100'>
-          <Flex direction='row' gap='size-100' width='100%'>
-            <MethodPicker method={method} />
-            <TextField defaultValue={url} width='100%' />
-          </Flex>
-          <RequestParameters>{children}</RequestParameters>
-          <View>
-            <ActionButton
-              onPress={async () => {
-                try {
-                  const response = await fetch(url, { method })
-                  setResponse(response)
-                } catch (e) {
-                  console.log(e)
-                }
-              }}
-            >
-              <Send />
-              <Text>Send</Text>
-            </ActionButton>
-          </View>
-          <ResponsePanel response={response} />
-        </Flex>
-      </Well>
-    </div>
-  )
-}
-RequestMaker.propTypes = {}
+const RequestMaker = ({ children, ...props }) => (
+  <RequestProvider>
+    <RequestMakerUI {...props}>{children}</RequestMakerUI>
+  </RequestProvider>
+)
 
 export { RequestMaker }

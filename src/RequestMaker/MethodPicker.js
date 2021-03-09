@@ -12,8 +12,10 @@
 
 import React, { useState } from 'react'
 import { Picker, Item } from '@adobe/react-spectrum'
+import { RequestMakerUI } from './RequestMakerUI'
+import { useRequestDispatch } from './RequestContext'
 
-const MethodPicker = ({ method }, ref) => {
+const MethodPicker = ({ method }) => {
   const options = [
     { id: 'get', name: 'GET' },
     { id: 'put', name: 'PUT' },
@@ -23,13 +25,20 @@ const MethodPicker = ({ method }, ref) => {
     { id: 'head', name: 'HEAD' },
     { id: 'patch', name: 'PATCH' }
   ]
+  const dispatch = useRequestDispatch()
   const [selected, setSelected] = useState(method)
   return (
     <Picker
       width='size-1250'
       items={options}
       selectedKey={selected}
-      onSelectionChange={(selected) => setSelected(selected)}
+      onSelectionChange={(selected) => {
+        setSelected(selected)
+        dispatch({
+          type: RequestMakerUI.ACTION_TYPES.SET_METHOD,
+          method: selected
+        })
+      }}
     >
       {(item) => <Item key={item.name}>{item.name}</Item>}
     </Picker>

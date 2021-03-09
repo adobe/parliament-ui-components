@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 import React from 'react'
-import { RequestMaker, Body, HeaderParameters, QueryParameters, CodeGen } from '../index'
+import { RequestMaker, Body, HeaderParameters, QueryParameters } from '../index'
 
 export default {
   title: 'components/RequestMaker'
@@ -28,8 +28,23 @@ export const RequestMakerDefault = () => {
       <HeaderParameters name='two'>header two</HeaderParameters>
       <QueryParameters name='one'>query one</QueryParameters>
       <QueryParameters name='two'>query two</QueryParameters>
-      <Body>This is my body</Body>
-      <CodeGen {...props}></CodeGen>
+      <Body type='raw'>This is my body</Body>
+    </RequestMaker>
+  )
+}
+
+export const RequestMakerNoBody = () => {
+  const props = {
+    method: 'GET',
+    url: 'https://jsonplaceholder.typicode.com/todos/1'
+  }
+
+  return (
+    <RequestMaker {...props}>
+      <HeaderParameters name='one'>header one</HeaderParameters>
+      <HeaderParameters name='two'>header two</HeaderParameters>
+      <QueryParameters name='one'>query one</QueryParameters>
+      <QueryParameters name='two'>query two</QueryParameters>
     </RequestMaker>
   )
 }

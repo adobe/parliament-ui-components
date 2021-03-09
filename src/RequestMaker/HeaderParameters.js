@@ -11,20 +11,9 @@
  */
 
 import React from 'react'
-import { TextField, Flex } from '@adobe/react-spectrum'
-import PropTypes from 'prop-types'
 
-const HeaderParameters = ({ name, children }) => {
-  return (
-    <Flex direction='row' gap='size-100' width='50%'>
-      key <TextField defaultValue={name} width='50%' />
-      value <TextField defaultValue={children} width='50%' />
-    </Flex>
-  )
-}
-
-HeaderParameters.propTypes = {
-  name: PropTypes.string.isRequired
+const HeaderParameters = ({ name }) => {
+  return <div>{name}</div>
 }
 
 export { HeaderParameters }

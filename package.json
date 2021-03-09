@@ -84,7 +84,7 @@
     "classnames": "^2.2.6",
     "elasticlunr": "^0.9.5",
     "gatsby": "^2.29.0",
-    "httpsnippet": "^1.24.0",
+    "httpsnippet": "^1.25.0",
     "mobx": "^5.15.6",
     "node-html-parser": "^1.2.20",
     "prism-react-renderer": "^1.1.1",

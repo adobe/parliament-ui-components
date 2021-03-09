@@ -11,20 +11,9 @@
  */
 
 import React from 'react'
-import { TextField, Flex, Label } from '@adobe/react-spectrum'
-import PropTypes from 'prop-types'
 
-const QueryParameters = ({ name, children }) => {
-  return (
-    <Flex direction='row' gap='size-100' width='50%'>
-      key <TextField defaultValue={name} width='50%' />
-      value <TextField defaultValue={children} width='50%' />
-    </Flex>
-  )
-}
-
-QueryParameters.propTypes = {
-  name: PropTypes.string.isRequired
+const QueryParameters = ({ name }) => {
+  return <div>{name}</div>
 }
 
 export { QueryParameters }
