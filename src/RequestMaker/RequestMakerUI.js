@@ -77,6 +77,7 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
   }, [])
 
   const [response, setResponse] = useState(null)
+  const [requestTime, setRequestTime] = useState(0)
 
   const queryString = (obj) => {
     return obj && obj.length > 0
@@ -138,10 +139,14 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
         }
       }
       console.log(requestOptions)
+      const t0 = performance.now()
       const response = await fetch(
         url + queryString(state.query),
         requestOptions
       )
+      const t1 = performance.now()
+      console.log('Time: ' + (t1 - t0))
+      setRequestTime(t1 - t0)
       setResponse(response)
     } catch (e) {
       console.log(e)
@@ -163,7 +168,7 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
               <Text>Send</Text>
             </ActionButton>
           </View>
-          <ResponsePanel response={response} />
+          <ResponsePanel response={response} requestTime={requestTime} />
         </Flex>
       </Well>
     </div>
