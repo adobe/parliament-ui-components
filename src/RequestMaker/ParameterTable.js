@@ -101,7 +101,9 @@ const ParameterTable = ({ readonly = false, items, callback }) => {
   if (
     tableItems.filter((item) => item.key === '' && item.value === '').length < 1
   ) {
-    tableItems.push({ ...EmptyRow })
+    if (!readonly) {
+      tableItems.push({ ...EmptyRow })
+    }
   }
 
   const rows = tableItems.map(({ enabled, key, value }, index) => {
