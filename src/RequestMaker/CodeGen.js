@@ -80,6 +80,7 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
   ]
   const [selected, setSelected] = useState(CodeGen)
   const getNameValArray = (items) => {
+    items = Array.isArray(items) ? items : []
     return items
       .filter((item) => item.enabled && item.key !== '')
       .map((item) => {
