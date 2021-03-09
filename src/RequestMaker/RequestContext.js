@@ -49,7 +49,7 @@ const reducer = (state, action) => {
         (header) => header.key === 'Content-Type'
       )
       if (index > -1) {
-        state.headers.slice(index, 1)
+        state.headers.splice(index, 1)
       }
       console.log(state)
       return { ...state, bodyType: action.bodyType }
@@ -63,7 +63,7 @@ const reducer = (state, action) => {
         (state.headers[index].value === 'multipart/form-data' ||
           state.headers[index].value === 'application/x-www-form-urlencoded')
       ) {
-        state.headers.slice(index, 1)
+        state.headers.splice(index, 1)
       }
       console.log(state)
       return { ...state, bodyType: action.bodyType, body: action.body }
