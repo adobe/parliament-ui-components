@@ -13,18 +13,127 @@
 import React, { useState } from 'react'
 import { RadioGroup, Radio, Text, TextArea, View } from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
+import { ParameterTable } from './ParameterTable'
+import { RequestMakerUI } from './RequestMakerUI'
+import { useRequestDispatch } from './RequestContext'
 
-const Body = ({ type = 'none', children }) => {
+const Body = ({ type = 'raw', items }) => {
   const [selected, setSelected] = useState(type)
+  const dispatch = useRequestDispatch()
 
-  const renderByType = (type) => {
+  const updateBody = (type, data) => {
+    console.log(type)
+    switch (type) {
+      case 'form-data': {
+        data.filter((item) => item.enabled && item.key !== '')
+        dispatch({
+          type: RequestMakerUI.ACTION_TYPES.SET_BODY,
+          bodyType: type,
+          body: data
+        })
+        break
+      }
+      case 'urlencoded': {
+        data.filter((item) => item.enabled && item.key !== '')
+        dispatch({
+          type: RequestMakerUI.ACTION_TYPES.SET_BODY,
+          bodyType: type,
+          body: data
+        })
+        break
+      }
+      case 'raw': {
+        // TODO set content type
+        // TODO call dispatcher for content-type
+        dispatch({
+          type: RequestMakerUI.ACTION_TYPES.SET_BODY,
+          bodyType: type,
+          body: data
+        })
+        break
+      }
+      case 'binary': {
+        break
+      }
+      case 'none':
+      default: {
+        dispatch({
+          type: RequestMakerUI.ACTION_TYPES.SET_BODY,
+          bodyType: type,
+          body: ''
+        })
+        break
+      }
+    }
+  }
+
+  const updateBodyType = (type) => {
+    setSelected(type)
+    console.log(type)
+    switch (type) {
+      case 'form-data': {
+        dispatch({
+          type: RequestMakerUI.ACTION_TYPES.UPDATE_CONTENT_TYPE,
+          bodyType: type,
+          contentType: 'multipart/form-data'
+        })
+        break
+      }
+      case 'urlencoded': {
+        dispatch({
+          type: RequestMakerUI.ACTION_TYPES.UPDATE_CONTENT_TYPE,
+          bodyType: type,
+          contentType: 'application/x-www-form-urlencoded'
+        })
+        break
+      }
+      case 'raw':
+      case 'binary': {
+        // set your own content type
+        dispatch({
+          type: RequestMakerUI.ACTION_TYPES.REMOVE_FORM_CONTENT_TYPE,
+          bodyType: type,
+          body: null
+        })
+        break
+      }
+      case 'none':
+      default: {
+        dispatch({
+          type: RequestMakerUI.ACTION_TYPES.REMOVE_CONTENT_TYPE,
+          bodyType: type
+        })
+        break
+      }
+    }
+  }
+
+  const renderByType = (type, items) => {
+    console.log(items)
     switch (type) {
       case 'form-data':
-        break
+        return (
+          <ParameterTable
+            items={Array.isArray(items) ? items : []}
+            callback={(data) => updateBody('form-data', data)}
+          />
+        )
       case 'urlencoded':
-        break
+        return (
+          <ParameterTable
+            items={Array.isArray(items) ? items : []}
+            callback={(data) => updateBody('urlencoded', data)}
+          />
+        )
       case 'raw':
-        return <TextArea minWidth='100%' minHeight='size-2000' />
+        return (
+          <TextArea
+            minWidth='100%'
+            minHeight='size-2000'
+            onChange={(data) => updateBody('raw', data)}
+            defaultValue={items}
+          />
+        )
       case 'binary':
         break
       case 'none':
@@ -38,7 +147,7 @@ const Body = ({ type = 'none', children }) => {
       <RadioGroup
         value={selected}
         orientation='horizontal'
-        onChange={setSelected}
+        onChange={updateBodyType}
       >
         <Radio value='none'>none</Radio>
         <Radio value='form-data'>form-data</Radio>
@@ -54,7 +163,7 @@ const Body = ({ type = 'none', children }) => {
         backgroundColor='gray-75'
         minHeight='size-2400'
       >
-        {renderByType(selected)}
+        {renderByType(selected, items)}
       </View>
     </View>
   )

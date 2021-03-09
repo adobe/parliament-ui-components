@@ -11052,10 +11052,10 @@ https-browserify@^1.0.0:
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
 
-httpsnippet@^1.24.0:
-  version "1.24.0"
-  resolved "https://registry.yarnpkg.com/httpsnippet/-/httpsnippet-1.24.0.tgz#2983e15a43b7b160e8e31ac792076060a65f1de3"
-  integrity sha512-W2GRlKXPm+alFdkYvts7zS54Y8sjOGN1H4dMfLCcNZZrG2Rg9jY57aN/Fyiov4/Z0paFxCS1vKDbugNYfAhUBg==
+httpsnippet@^1.25.0:
+  version "1.25.0"
+  resolved "https://registry.yarnpkg.com/httpsnippet/-/httpsnippet-1.25.0.tgz#c7efaef9e3b980c6ba03652a45efcb0b8480a1d0"
+  integrity sha512-jobE6S923cLuf5BPG6Jf+oLBRkPzv2RPp0dwOHcWwj/t9FwV/t9hyZ46kpT3Q5DHn9iFNmGhrcmmFUBqyjoTQg==
   dependencies:
     chalk "^1.1.1"
     commander "^2.9.0"

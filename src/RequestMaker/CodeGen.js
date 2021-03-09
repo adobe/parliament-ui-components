@@ -11,14 +11,14 @@
  */
 
 import React, { useState } from 'react'
-import { Text, View, Picker, Item } from '@adobe/react-spectrum'
+import { View, Picker, Item } from '@adobe/react-spectrum'
 import HTTPSnippet from 'httpsnippet'
 import { Code } from '../Code'
 
-const CodeGen = ({ CodeGen = 'shell_curl', method, url, children, ...props }) => {
-  const options = [
+const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
+  const codeOptions = [
     {
-      name:'cURL',
+      name: 'cURL',
       id: 'shell_curl'
     },
     {
@@ -38,20 +38,28 @@ const CodeGen = ({ CodeGen = 'shell_curl', method, url, children, ...props }) =>
       id: 'javascript_axios'
     },
     {
-      name: 'Javascript (jQuery)',
-      id: 'javascript_jquery'
+      name: 'python',
+      id: 'python_requests'
     },
     {
       name: 'PHP',
-      id: 'php_http1'
+      id: 'php_http2'
     },
     {
       name: 'Java',
       id: 'java_unirest'
     },
     {
-      name: 'C',
-      id: 'c'
+      name: 'Ruby',
+      id: 'ruby_native'
+    },
+    {
+      name: 'Kotlin',
+      id: 'kotlin'
+    },
+    {
+      name: 'Swift',
+      id: 'swift'
     },
     {
       name: 'R',
@@ -62,33 +70,56 @@ const CodeGen = ({ CodeGen = 'shell_curl', method, url, children, ...props }) =>
       id: 'go_native'
     },
     {
-      name: 'python',
-      id: 'python'
+      name: 'C',
+      id: 'c'
     },
     {
       name: 'C#',
       id: 'csharp_restsharp'
-    },
-    {
-      name: 'Ruby',
-      id: 'ruby_native'
     }
   ]
   const [selected, setSelected] = useState(CodeGen)
-
+  const getNameValArray = (items) => {
+    return items
+      .filter((item) => item.enabled && item.key !== '')
+      .map((item) => {
+        return { name: item.key, value: item.value }
+      })
+  }
+  const getPostData = (options) => {
+    let postData = {}
+    if (
+      options.method !== 'GET' &&
+      options.method !== 'HEAD' &&
+      options.method !== 'OPTIONS'
+    ) {
+      if (options.bodyType === 'raw') {
+        postData.mimeType = 'text/plain'
+        postData.text = options.body
+      } else if (options.bodyType === 'form-data') {
+        postData.mimeType = 'multipart/form-data'
+        postData.params = options.body ? getNameValArray(options.body) : []
+      } else if (options.bodyType === 'urlencoded') {
+        postData.mimeType = 'application/x-www-form-urlencoded'
+        postData.params = options.body ? getNameValArray(options.body) : []
+      }
+    }
+    return postData
+  }
   const renderByCode = (lang) => {
     const snippet = new HTTPSnippet({
-      method: method,
-      url: url
-    });
+      method: options.method,
+      url: url,
+      headers: getNameValArray(options.headers),
+      postData: getPostData(options)
+    })
+
     const langs = lang.split('_')
-    const code=snippet.convert(langs[0],langs[1])+'\n'
+    const code = snippet.convert(langs[0], langs[1]) + '\n'
     const props = {
       className: `js`
     }
-    return (
-      <Code {...props}>{code}</Code>
-    )
+    return <Code {...props}>{code}</Code>
   }
 
   return (
@@ -96,13 +127,13 @@ const CodeGen = ({ CodeGen = 'shell_curl', method, url, children, ...props }) =>
       <Picker
         width='size-1250'
         marginBottom='size-100'
-        items={options}
+        items={codeOptions}
         selectedKey={selected}
         onSelectionChange={(selected) => setSelected(selected)}
       >
         {(item) => <Item key={item.id}>{item.name}</Item>}
       </Picker>
-        {renderByCode(selected)}
+      {renderByCode(selected)}
     </View>
   )
 }

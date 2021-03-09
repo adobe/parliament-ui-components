@@ -13,38 +13,52 @@
 import React from 'react'
 import { Content, View } from '@adobe/react-spectrum'
 import { Tabs, Item } from '@react-spectrum/tabs'
+import { CodeGen } from './CodeGen'
+import { Body } from './Body'
+import { useRequest } from './RequestContext'
+import { ParameterTable } from './ParameterTable'
+import { RequestMakerUI } from './RequestMakerUI'
 
-const RequestParameters = ({ children }) => {
-  const childrenArray = React.Children.toArray(children)
-  const queryArray = childrenArray.filter(
-    (child) => child.type.name === 'QueryParameters'
-  )
-  const headerArray = childrenArray.filter(
-    (child) => child.type.name === 'HeaderParameters'
-  )
-  const bodyArray = childrenArray.filter((child) => child.type.name === 'Body')
-  const codeArray = childrenArray.filter((child) => child.type.name === 'CodeGen')
+const RequestParameters = ({ url }) => {
+  const [options, dispatch] = useRequest()
+
   return (
     <View>
       <Tabs aria-label='Request Parameters'>
         <Item title='Query' key='queryTab'>
           <Content marginTop='size-250' marginStart='size-125'>
-            {queryArray}
+            <ParameterTable
+              items={options.query}
+              callback={(data) => {
+                dispatch({
+                  type: RequestMakerUI.ACTION_TYPES.SET_QUERY_PARAMS,
+                  query: data
+                })
+              }}
+            />
           </Content>
         </Item>
         <Item title='Headers' key='headerTab'>
           <Content marginTop='size-250' marginStart='size-125'>
-            {headerArray}
+            <ParameterTable
+              items={options.headers}
+              callback={(data) => {
+                dispatch({
+                  type: RequestMakerUI.ACTION_TYPES.SET_HEADERS,
+                  headers: data
+                })
+              }}
+            />
           </Content>
         </Item>
         <Item title='Body' key='bodyTab'>
           <Content marginTop='size-250' marginStart='size-125'>
-            {bodyArray}
+            <Body type={options.bodyType} items={options.body} />
           </Content>
         </Item>
         <Item title='Code Generation' key='codeTab'>
           <Content marginTop='size-250' marginStart='size-125'>
-            {codeArray}
+            <CodeGen url={url} options={options} />
           </Content>
         </Item>
       </Tabs>

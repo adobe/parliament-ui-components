@@ -13,18 +13,35 @@
 import React, { useEffect, useState } from 'react'
 import { Tabs, Item } from '@react-spectrum/tabs'
 import { Content, View } from '@adobe/react-spectrum'
+import { ParameterTable } from './ParameterTable'
+import { Code } from '../Code'
 
 const ResponsePanel = ({ response }) => {
   const [headers, setHeaders] = useState(null)
-  const [body, setBody] = useState(null)
+  const [body, setBody] = useState('')
+  const [language, setLanguage] = useState('text')
 
   const parseResponse = async (response) => {
     if (response) {
       // TODO: sus out text, json, binary, etc responses
-      // const contentType = response.headers.get('content-type')
+      const contentType = response.headers.get('content-type')
+      if (contentType.indexOf('application/json') > -1) {
+        setLanguage('json')
+      } else {
+        setLanguage('text')
+      }
       const responseBody = await response.text()
-      setBody(responseBody)
-      setHeaders(Array.from(response.headers.entries()))
+      setBody(`${responseBody}\n`)
+      setHeaders(
+        Array.from(response.headers.entries()).map((header) => {
+          return {
+            enabled: false,
+            key: header[0],
+            value: header[1],
+            deletable: false
+          }
+        })
+      )
     }
   }
 
@@ -37,12 +54,12 @@ const ResponsePanel = ({ response }) => {
       <Tabs aria-label='Response'>
         <Item title='Response Body' key='responseBodyTab'>
           <Content marginTop='size-250' marginStart='size-125'>
-            {body}
+            <Code className={language}>{body}</Code>
           </Content>
         </Item>
         <Item title='Response Headers' key='responseHeaderTab'>
           <Content marginTop='size-250' marginStart='size-125'>
-            {headers}
+            <ParameterTable readonly items={headers} />
           </Content>
         </Item>
         <Item title='Original Request' key='requestTab'>
