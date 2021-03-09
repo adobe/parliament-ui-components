@@ -79,18 +79,39 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
     }
   ]
   const [selected, setSelected] = useState(CodeGen)
-  const getHeaders = (headers) => {
-    return headers
-      .filter((header) => header.enabled && header.key !== '')
-      .map((header) => {
-        return { name: header.key, value: header.value }
+  const getNameValArray = (items) => {
+    return items
+      .filter((item) => item.enabled && item.key !== '')
+      .map((item) => {
+        return { name: item.key, value: item.value }
       })
+  }
+  const getPostData = (options) => {
+    let postData = {}
+    if (
+      options.method !== 'GET' &&
+      options.method !== 'HEAD' &&
+      options.method !== 'OPTIONS'
+    ) {
+      if (options.bodyType === 'raw') {
+        postData.mimeType = 'text/plain'
+        postData.text = options.body
+      } else if (options.bodyType === 'form-data') {
+        postData.mimeType = 'multipart/form-data'
+        postData.params = getNameValArray(options.body)
+      } else if (options.bodyType === 'urlencoded') {
+        postData.mimeType = 'application/x-www-form-urlencoded'
+        postData.params = getNameValArray(options.body)
+      }
+    }
+    return postData
   }
   const renderByCode = (lang) => {
     const snippet = new HTTPSnippet({
       method: options.method,
       url: url,
-      headers: getHeaders(options.headers)
+      headers: getNameValArray(options.headers),
+      postData: getPostData(options)
     })
 
     const langs = lang.split('_')
