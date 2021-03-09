@@ -12,11 +12,14 @@
 
 import React, { useEffect, useState } from 'react'
 import { Tabs, Item } from '@react-spectrum/tabs'
-import { Content, View } from '@adobe/react-spectrum'
+import { Content, Flex, View } from '@adobe/react-spectrum'
+import GlobeGrid from '@spectrum-icons/workflow/GlobeGrid'
 import { ParameterTable } from './ParameterTable'
 import { Code } from '../Code'
+import prettyBytes from 'pretty-bytes'
+import prettyMilliseconds from 'pretty-ms'
 
-const ResponsePanel = ({ response }) => {
+const ResponsePanel = ({ response, requestTime }) => {
   const [headers, setHeaders] = useState(null)
   const [body, setBody] = useState('')
   const [language, setLanguage] = useState('text')
@@ -49,8 +52,24 @@ const ResponsePanel = ({ response }) => {
     parseResponse(response)
   }, [response])
 
+  console.log(response)
+
   return response ? (
     <View>
+      <Flex
+        direction='row'
+        gap='size-100'
+        justifyContent='flex-end'
+        position='relative'
+        top='size-450'
+      >
+        <View>
+          <GlobeGrid size='S' />
+        </View>
+        <View>Status: {response.status}</View>
+        <View>Time: {prettyMilliseconds(requestTime)}</View>
+        <View>Size: {prettyBytes(body ? body.length : 0)}</View>
+      </Flex>
       <Tabs aria-label='Response'>
         <Item title='Response Body' key='responseBodyTab'>
           <Content marginTop='size-250' marginStart='size-125'>
