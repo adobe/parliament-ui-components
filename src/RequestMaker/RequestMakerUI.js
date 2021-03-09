@@ -107,7 +107,35 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
         headers: getHeaders(state.headers)
       }
       if (state.method !== 'GET' && state.body !== null) {
-        requestOptions.body = state.body
+        switch (state.bodyType) {
+          case 'form-data': {
+            const formData = new FormData()
+            state.body
+              .filter((item) => item.enabled && item.key)
+              .map((item) => formData.append(item.key, item.value))
+            requestOptions.body = formData
+            break
+          }
+          case 'urlencoded': {
+            const formData = new URLSearchParams()
+            state.body
+              .filter((item) => item.enabled && item.key)
+              .map((item) => formData.append(item.key, item.value))
+            requestOptions.body = formData
+            break
+          }
+          case 'raw': {
+            requestOptions.body = state.body
+            break
+          }
+          case 'binary': {
+            break
+          }
+          case 'none':
+          default: {
+            break
+          }
+        }
       }
       console.log(requestOptions)
       const response = await fetch(
