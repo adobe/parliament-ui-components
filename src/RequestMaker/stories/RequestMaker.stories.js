@@ -19,7 +19,7 @@ export default {
 export const RequestMakerDefault = () => {
   const props = {
     method: 'GET',
-    url: 'https://jsonplaceholder.typicode.com/todos/1'
+    url: 'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
 
   return (
@@ -36,7 +36,7 @@ export const RequestMakerDefault = () => {
 export const RequestMakerNoBody = () => {
   const props = {
     method: 'GET',
-    url: 'https://jsonplaceholder.typicode.com/todos/1'
+    url: 'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
 
   return (
