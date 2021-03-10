@@ -17,7 +17,7 @@ import { ParameterTable } from './ParameterTable'
 import { RequestMakerUI } from './RequestMakerUI'
 import { useRequestDispatch } from './RequestContext'
 
-const Body = ({ type = 'raw', items }) => {
+const RequestBody = ({ type = 'raw', items }) => {
   const [selected, setSelected] = useState(type)
   const dispatch = useRequestDispatch()
 
@@ -169,8 +169,8 @@ const Body = ({ type = 'raw', items }) => {
   )
 }
 
-Body.propTypes = {
+RequestBody.propTypes = {
   children: PropTypes.element.isRequired
 }
 
-export { Body }
+export { RequestBody }
