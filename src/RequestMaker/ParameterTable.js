@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
+import React, { Fragment } from 'react'
 import {
   ActionButton,
   Checkbox,
