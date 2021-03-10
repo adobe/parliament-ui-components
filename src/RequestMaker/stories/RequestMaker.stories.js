@@ -10,7 +10,12 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 import React from 'react'
-import { RequestMaker, Body, HeaderParameters, QueryParameters } from '../index'
+import {
+  RequestMaker,
+  RequestBody,
+  HeaderParameters,
+  QueryParameters
+} from '../index'
 
 export default {
   title: 'components/RequestMaker'
@@ -19,7 +24,8 @@ export default {
 export const RequestMakerDefault = () => {
   const props = {
     method: 'GET',
-    url: 'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+    url:
+      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
 
   return (
@@ -28,7 +34,7 @@ export const RequestMakerDefault = () => {
       <HeaderParameters name='two'>header two</HeaderParameters>
       <QueryParameters name='one'>query one</QueryParameters>
       <QueryParameters name='two'>query two</QueryParameters>
-      <Body type='raw'>This is my body</Body>
+      <RequestBody type='raw'>This is my body</RequestBody>
     </RequestMaker>
   )
 }
@@ -36,7 +42,8 @@ export const RequestMakerDefault = () => {
 export const RequestMakerNoBody = () => {
   const props = {
     method: 'GET',
-    url: 'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+    url:
+      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
 
   return (

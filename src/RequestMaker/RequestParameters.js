@@ -14,7 +14,7 @@ import React from 'react'
 import { Content, View } from '@adobe/react-spectrum'
 import { Tabs, Item } from '@react-spectrum/tabs'
 import { CodeGen } from './CodeGen'
-import { Body } from './Body'
+import { RequestBody } from './RequestBody'
 import { useRequest } from './RequestContext'
 import { ParameterTable } from './ParameterTable'
 import { RequestMakerUI } from './RequestMakerUI'
@@ -53,7 +53,7 @@ const RequestParameters = ({ url }) => {
         </Item>
         <Item title='Body' key='bodyTab'>
           <Content marginTop='size-250' marginStart='size-125'>
-            <Body type={options.bodyType} items={options.body} />
+            <RequestBody type={options.bodyType} items={options.body} />
           </Content>
         </Item>
         <Item title='Code Generation' key='codeTab'>
