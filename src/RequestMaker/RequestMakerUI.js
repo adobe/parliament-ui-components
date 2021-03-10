@@ -12,7 +12,7 @@
 
 import React, { useEffect, useState } from 'react'
 import {
-  ActionButton,
+  Button,
   Flex,
   Text,
   View,
@@ -164,10 +164,10 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
           </Flex>
           <RequestParameters url={url + queryString(state.query)} />
           <View>
-            <ActionButton onPress={sendRequest}>
+            <Button variant='cta' onPress={sendRequest}>
               <Send />
               <Text>Send</Text>
-            </ActionButton>
+            </Button>
           </View>
           <ResponsePanel response={response} requestTime={requestTime} />
         </Flex>
