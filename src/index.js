@@ -66,7 +66,8 @@ export { Header } from './Header'
 export { Tags } from './Tags'
 export {
   RequestMaker,
-  Body,
+  RequestBody,
   QueryParameters,
   HeaderParameters
 } from './RequestMaker'
+export { Provider } from './Provider'
