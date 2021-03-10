@@ -39,7 +39,10 @@ const ACTION_TYPES = {
 
 const filterChildren = (childrenArray, type) => {
   return childrenArray
-    .filter((child) => child.type.name === type)
+    .filter(
+      (child) =>
+        child.type.name === type || child.props.mdxType === type.toLowerCase()
+    )
     .map((child) => {
       return {
         enabled: true,
@@ -54,7 +57,11 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
   const childrenArray = React.Children.toArray(children)
   const headers = filterChildren(childrenArray, 'HeaderParameters')
   const queryParams = filterChildren(childrenArray, 'QueryParameters')
-  const bodyArray = childrenArray.filter((child) => child.type.name === 'Body')
+  const bodyArray = childrenArray.filter(
+    (child) =>
+      child.type.name === 'RequestBody' || child.props.mdxType === 'requestbody'
+  )
+
   let body = null
   let bodyType = 'none'
   if (bodyArray.length === 1) {
