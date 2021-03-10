@@ -115,34 +115,27 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
         headers: getHeaders(state.headers)
       }
       if (state.method !== 'GET' && state.body !== null) {
-        switch (state.bodyType) {
-          case 'form-data': {
-            const formData = new FormData()
-            state.body
-              .filter((item) => item.enabled && item.key)
-              .map((item) => formData.append(item.key, item.value))
-            requestOptions.body = formData
-            break
-          }
-          case 'urlencoded': {
-            const formData = new URLSearchParams()
-            state.body
-              .filter((item) => item.enabled && item.key)
-              .map((item) => formData.append(item.key, item.value))
-            requestOptions.body = formData
-            break
-          }
-          case 'raw': {
-            requestOptions.body = state.body
-            break
-          }
-          case 'binary': {
-            break
-          }
-          case 'none':
-          default: {
-            break
-          }
+        if (state.bodyType === 'form-data') {
+          const formData = new FormData()
+          state.body
+            .filter((item) => item.enabled && item.key !== '')
+            .map((item) => formData.append(item.key, item.value))
+          requestOptions.body = formData
+        } else if (state.bodyType === 'urlencoded') {
+          const formData = new URLSearchParams()
+          state.body
+            .filter((item) => item.enabled && item.key !== '')
+            .map((item) => formData.append(item.key, item.value))
+          requestOptions.body = formData
+        } else if (state.bodyType === 'raw') {
+          requestOptions.body = state.body
+          console.log('about to call break in raw')
+        } else if (state.bodyType === 'binary') {
+          // to do
+        } else if (state.bodyType === 'none') {
+          // to do
+        } else {
+          // to do
         }
       }
       console.log(requestOptions)
@@ -152,7 +145,6 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
         requestOptions
       )
       const t1 = performance.now()
-      console.log('Time: ' + (t1 - t0))
       setRequestTime(t1 - t0)
       setResponse(response)
     } catch (e) {
