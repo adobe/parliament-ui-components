@@ -81,11 +81,6 @@ const ResponsePanel = ({ response, requestTime }) => {
             <ParameterTable readonly items={headers} />
           </Content>
         </Item>
-        <Item title='Original Request' key='requestTab'>
-          <Content marginTop='size-250' marginStart='size-125'>
-            TBD
-          </Content>
-        </Item>
       </Tabs>
     </View>
   ) : (
