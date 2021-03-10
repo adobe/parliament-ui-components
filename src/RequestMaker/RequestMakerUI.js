@@ -99,12 +99,14 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
   }
 
   const getHeaders = (headerArray) => {
-    return headerArray.reduce((obj, item) => {
-      return {
-        ...obj,
-        [item.key]: item.value
-      }
-    }, {})
+    return headerArray
+      .filter((item) => item.enabled && item.key !== '')
+      .reduce((obj, item) => {
+        return {
+          ...obj,
+          [item.key]: item.value
+        }
+      }, {})
   }
 
   const sendRequest = async () => {
