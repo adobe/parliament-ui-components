@@ -1,6 +1,6 @@
 export { RequestMaker } from './RequestMaker'
 export { RequestMakerUI } from './RequestMakerUI'
-export { Body } from './Body'
+export { RequestBody } from './RequestBody'
 export { HeaderParameters } from './HeaderParameters'
 export { QueryParameters } from './QueryParameters'
 export { CodeGen } from './CodeGen'
