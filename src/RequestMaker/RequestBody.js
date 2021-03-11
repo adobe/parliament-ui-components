@@ -129,16 +129,36 @@ const RequestBody = ({ type = 'raw', items }) => {
         return (
           <TextArea
             minWidth='100%'
-            minHeight='size-2000'
+            minHeight='size-2400'
             onChange={(data) => updateBody('raw', data)}
             defaultValue={items}
           />
         )
       case 'binary':
-        break
+        return (
+          <View
+            borderWidth='thin'
+            borderRadius='medium'
+            borderColor='dark'
+            padding='size-250'
+            backgroundColor='gray-50'
+            minHeight='size-2400'
+          />
+        )
       case 'none':
       default:
-        return <Text>The request does not have a body</Text>
+        return (
+          <View
+            borderWidth='thin'
+            borderRadius='medium'
+            borderColor='dark'
+            padding='size-250'
+            backgroundColor='gray-50'
+            minHeight='size-2400'
+          >
+            <Text>The request does not have a body</Text>
+          </View>
+        )
     }
   }
 
@@ -155,16 +175,7 @@ const RequestBody = ({ type = 'raw', items }) => {
         <Radio value='raw'>raw</Radio>
         <Radio value='binary'>binary</Radio>
       </RadioGroup>
-      <View
-        borderWidth='thin'
-        borderRadius='medium'
-        borderColor='dark'
-        padding='size-250'
-        backgroundColor='gray-75'
-        minHeight='size-2400'
-      >
-        {renderByType(selected, items)}
-      </View>
+      {renderByType(selected, items)}
     </View>
   )
 }
