@@ -142,7 +142,7 @@ const ParameterTable = ({ readonly = false, items, callback }) => {
       borderRadius='medium'
       borderColor='dark'
       padding='size-250'
-      backgroundColor='gray-75'
+      backgroundColor='gray-50'
       minHeight='size-2400'
     >
       <Grid
