@@ -11,14 +11,7 @@
  */
 
 import React, { useEffect, useState } from 'react'
-import {
-  Button,
-  Flex,
-  Text,
-  View,
-  Well,
-  TextField
-} from '@adobe/react-spectrum'
+import { Button, Flex, Text, View, TextField } from '@adobe/react-spectrum'
 
 import Send from '@spectrum-icons/workflow/Send'
 
@@ -26,16 +19,6 @@ import { MethodPicker } from './MethodPicker'
 import { RequestParameters } from './RequestParameters'
 import { ResponsePanel } from './ResponsePanel'
 import { useRequest } from './RequestContext'
-
-const ACTION_TYPES = {
-  SET_METHOD: 'setMethod',
-  SET_BODY: 'setBody',
-  SET_HEADERS: 'setHeaders',
-  SET_QUERY_PARAMS: 'setQueryParams',
-  REMOVE_CONTENT_TYPE: 'removeContentType',
-  REMOVE_FORM_CONTENT_TYPE: 'removeFormContentType',
-  UPDATE_CONTENT_TYPE: 'updateContentType'
-}
 
 const filterChildren = (childrenArray, type) => {
   return childrenArray
@@ -188,6 +171,5 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
   )
 }
 RequestMakerUI.propTypes = {}
-RequestMakerUI.ACTION_TYPES = ACTION_TYPES
 
 export { RequestMakerUI }

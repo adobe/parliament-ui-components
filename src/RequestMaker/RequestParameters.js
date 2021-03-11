@@ -15,9 +15,8 @@ import { Content, View } from '@adobe/react-spectrum'
 import { Tabs, Item } from '@react-spectrum/tabs'
 import { CodeGen } from './CodeGen'
 import { RequestBody } from './RequestBody'
-import { useRequest } from './RequestContext'
+import { RequestProvider, useRequest } from './RequestContext'
 import { ParameterTable } from './ParameterTable'
-import { RequestMakerUI } from './RequestMakerUI'
 
 const RequestParameters = ({ url }) => {
   const [options, dispatch] = useRequest()
@@ -31,7 +30,7 @@ const RequestParameters = ({ url }) => {
               items={options.query}
               callback={(data) => {
                 dispatch({
-                  type: RequestMakerUI.ACTION_TYPES.SET_QUERY_PARAMS,
+                  type: RequestProvider.ACTION_TYPES.SET_QUERY_PARAMS,
                   query: data
                 })
               }}
@@ -44,7 +43,7 @@ const RequestParameters = ({ url }) => {
               items={options.headers}
               callback={(data) => {
                 dispatch({
-                  type: RequestMakerUI.ACTION_TYPES.SET_HEADERS,
+                  type: RequestProvider.ACTION_TYPES.SET_HEADERS,
                   headers: data
                 })
               }}
