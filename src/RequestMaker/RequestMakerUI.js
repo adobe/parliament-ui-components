@@ -155,8 +155,20 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
   }
 
   return (
-    <div {...props}>
-      <Well>
+    <div
+      style={{
+        margin:
+          'var(--spectrum-global-dimension-size-200) 0 var(--spectrum-global-dimension-size-200) 0'
+      }}
+      {...props}
+    >
+      <View
+        borderWidth='thick'
+        borderRadius='medium'
+        borderColor='dark'
+        padding='size-250'
+        backgroundColor='gray-75'
+      >
         <Flex direction='column' gap='size-100'>
           <Flex direction='row' gap='size-100' width='100%'>
             <MethodPicker method={method} />
@@ -171,7 +183,7 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
           </View>
           <ResponsePanel response={response} requestTime={requestTime} />
         </Flex>
-      </Well>
+      </View>
     </div>
   )
 }
