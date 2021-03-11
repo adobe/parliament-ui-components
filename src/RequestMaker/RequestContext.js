@@ -119,4 +119,6 @@ const useRequest = () => {
   return [useRequestState(), useRequestDispatch()]
 }
 
+RequestProvider.ACTION_TYPES = ACTION_TYPES
+
 export { RequestProvider, useRequestState, useRequestDispatch, useRequest }
