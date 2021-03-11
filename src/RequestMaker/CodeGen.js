@@ -88,7 +88,7 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
       })
   }
   const getPostData = (options) => {
-    let postData = {}
+    const postData = {}
     if (
       options.method !== 'GET' &&
       options.method !== 'HEAD' &&
