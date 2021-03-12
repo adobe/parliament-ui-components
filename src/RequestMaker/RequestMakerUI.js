@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Flex, View, TextField } from '@adobe/react-spectrum'
 
 import { queryString } from './utils'
@@ -18,54 +18,11 @@ import { queryString } from './utils'
 import { MethodPicker } from './MethodPicker'
 import { RequestParameters } from './RequestParameters'
 import { ResponsePanel } from './ResponsePanel'
-import { useRequest } from './RequestContext'
+import { useRequestState } from './RequestContext'
 import { SendRequestButton } from './SendRequestButton'
 
-const filterChildren = (childrenArray, type) => {
-  return childrenArray
-    .filter(
-      (child) =>
-        child.type.name === type || child.props.mdxType === type.toLowerCase()
-    )
-    .map((child) => {
-      return {
-        enabled: true,
-        key: child.props.name,
-        value: child.props.children,
-        deletable: true
-      }
-    })
-}
-
 const RequestMakerUI = ({ method, url, children, ...props }) => {
-  const childrenArray = React.Children.toArray(children)
-  const headers = filterChildren(childrenArray, 'HeaderParameters')
-  const queryParams = filterChildren(childrenArray, 'QueryParameters')
-  const bodyArray = childrenArray.filter(
-    (child) =>
-      child.type.name === 'RequestBody' || child.props.mdxType === 'requestbody'
-  )
-
-  let body = null
-  let bodyType = 'none'
-  if (bodyArray.length === 1) {
-    body = bodyArray[0].props.children
-    bodyType = bodyArray[0].props.type
-  } else if (bodyArray.length > 1) {
-    throw new Error('Too many body tags')
-  }
-
-  const [state, dispatch] = useRequest()
-  useEffect(() => {
-    dispatch({
-      type: 'init',
-      method,
-      query: queryParams,
-      headers,
-      body,
-      bodyType
-    })
-  }, [])
+  const state = useRequestState()
 
   return (
     <div
@@ -87,7 +44,9 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
             <MethodPicker method={method} />
             <TextField value={url + queryString(state.query)} width='100%' />
           </Flex>
-          <RequestParameters url={url + queryString(state.query)} />
+          <RequestParameters url={url + queryString(state.query)}>
+            {children}
+          </RequestParameters>
           <SendRequestButton url={url} />
           <ResponsePanel />
         </Flex>
