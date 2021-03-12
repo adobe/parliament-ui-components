@@ -19,6 +19,7 @@ const ACTION_TYPES = {
   SET_BODY: 'setBody',
   SET_HEADERS: 'setHeaders',
   SET_QUERY_PARAMS: 'setQueryParams',
+  SET_RESPONSE: 'setResponse',
   REMOVE_CONTENT_TYPE: 'removeContentType',
   REMOVE_FORM_CONTENT_TYPE: 'removeFormContentType',
   UPDATE_CONTENT_TYPE: 'updateContentType'
@@ -35,6 +36,17 @@ const reducer = (state, action) => {
     case ACTION_TYPES.SET_METHOD:
       console.log({ ...state, method: action.method })
       return { ...state, method: action.method }
+    case ACTION_TYPES.SET_RESPONSE:
+      console.log({
+        ...state,
+        response: action.response,
+        responseTime: action.requestTime
+      })
+      return {
+        ...state,
+        response: action.response,
+        requestTime: action.requestTime
+      }
     case ACTION_TYPES.SET_BODY:
       console.log({ ...state, body: action.body })
       return { ...state, body: action.body, bodyType: action.bodyType }

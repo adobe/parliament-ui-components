@@ -10,15 +10,16 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { useEffect, useState } from 'react'
-import { Button, Flex, Text, View, TextField } from '@adobe/react-spectrum'
+import React, { useEffect } from 'react'
+import { Flex, View, TextField } from '@adobe/react-spectrum'
 
-import Send from '@spectrum-icons/workflow/Send'
+import { queryString } from './utils'
 
 import { MethodPicker } from './MethodPicker'
 import { RequestParameters } from './RequestParameters'
 import { ResponsePanel } from './ResponsePanel'
 import { useRequest } from './RequestContext'
+import { SendRequestButton } from './SendRequestButton'
 
 const filterChildren = (childrenArray, type) => {
   return childrenArray
@@ -66,77 +67,6 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
     })
   }, [])
 
-  const [response, setResponse] = useState(null)
-  const [requestTime, setRequestTime] = useState(0)
-
-  const queryString = (obj) => {
-    return obj && obj.length > 0
-      ? '?' +
-          encodeURI(
-            obj
-              .filter((item) => item.enabled && item.key !== '')
-              .map((item) => item.key + '=' + item.value)
-              .join('&')
-          )
-      : ''
-  }
-
-  const getHeaders = (headerArray) => {
-    return headerArray
-      .filter((item) => item.enabled && item.key !== '')
-      .reduce((obj, item) => {
-        return {
-          ...obj,
-          [item.key]: item.value
-        }
-      }, {})
-  }
-
-  const sendRequest = async () => {
-    try {
-      console.log(state)
-      const requestOptions = {
-        method: state.method,
-        headers: getHeaders(state.headers)
-      }
-      if (state.method !== 'GET' && state.body !== null) {
-        if (state.bodyType === 'form-data') {
-          const formData = new FormData()
-          state.body
-            .filter((item) => item.enabled && item.key !== '')
-            .map((item) => formData.append(item.key, item.value))
-          requestOptions.body = formData
-        } else if (state.bodyType === 'urlencoded') {
-          const formData = new URLSearchParams()
-          state.body
-            .filter((item) => item.enabled && item.key !== '')
-            .map((item) => formData.append(item.key, item.value))
-          requestOptions.body = formData
-        } else if (state.bodyType === 'raw') {
-          requestOptions.body = state.body
-          console.log('about to call break in raw')
-        } else if (state.bodyType === 'binary') {
-          // to do
-        } else if (state.bodyType === 'none') {
-          // to do
-        } else {
-          // to do
-        }
-      }
-      console.log(requestOptions)
-      const t0 = performance.now()
-      const response = await fetch(
-        url + queryString(state.query),
-        requestOptions
-      )
-      const t1 = performance.now()
-      setRequestTime(t1 - t0)
-      setResponse(response)
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
   return (
     <div
       style={{
@@ -158,13 +88,8 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
             <TextField value={url + queryString(state.query)} width='100%' />
           </Flex>
           <RequestParameters url={url + queryString(state.query)} />
-          <View>
-            <Button variant='cta' onPress={sendRequest}>
-              <Send />
-              <Text>Send</Text>
-            </Button>
-          </View>
-          <ResponsePanel response={response} requestTime={requestTime} />
+          <SendRequestButton url={url} />
+          <ResponsePanel />
         </Flex>
       </View>
     </div>
