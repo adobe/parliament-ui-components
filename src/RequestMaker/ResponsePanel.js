@@ -16,13 +16,15 @@ import { Content, Flex, View } from '@adobe/react-spectrum'
 import GlobeGrid from '@spectrum-icons/workflow/GlobeGrid'
 import { ParameterTable } from './ParameterTable'
 import { Code } from '../Code'
+import { useRequestState } from './RequestContext'
 import prettyBytes from 'pretty-bytes'
 import prettyMilliseconds from 'pretty-ms'
 
-const ResponsePanel = ({ response, requestTime }) => {
+const ResponsePanel = (props) => {
   const [headers, setHeaders] = useState(null)
   const [body, setBody] = useState('')
   const [language, setLanguage] = useState('text')
+  const state = useRequestState()
 
   const parseResponse = async (response) => {
     if (response) {
@@ -49,12 +51,12 @@ const ResponsePanel = ({ response, requestTime }) => {
   }
 
   useEffect(() => {
-    parseResponse(response)
-  }, [response])
+    parseResponse(state.response)
+  }, [state.response])
 
-  console.log(response)
+  console.log(state.response)
 
-  return response ? (
+  return state.response ? (
     <View>
       <Flex
         direction='row'
@@ -66,8 +68,8 @@ const ResponsePanel = ({ response, requestTime }) => {
         <View>
           <GlobeGrid size='S' />
         </View>
-        <View>Status: {response.status}</View>
-        <View>Time: {prettyMilliseconds(requestTime)}</View>
+        <View>Status: {state.response.status}</View>
+        <View>Time: {prettyMilliseconds(state.requestTime)}</View>
         <View>Size: {prettyBytes(body ? body.length : 0)}</View>
       </Flex>
       <Tabs aria-label='Response'>
