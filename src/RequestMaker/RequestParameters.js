@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Content, View } from '@adobe/react-spectrum'
 import { Tabs, Item } from '@react-spectrum/tabs'
 import { CodeGen } from './CodeGen'
@@ -18,8 +18,51 @@ import { RequestBody } from './RequestBody'
 import { RequestProvider, useRequest } from './RequestContext'
 import { ParameterTable } from './ParameterTable'
 
-const RequestParameters = ({ url }) => {
+const filterChildren = (childrenArray, type) => {
+  return childrenArray
+    .filter(
+      (child) =>
+        child.type.name === type || child.props.mdxType === type.toLowerCase()
+    )
+    .map((child) => {
+      return {
+        enabled: true,
+        key: child.props.name,
+        value: child.props.children,
+        deletable: true
+      }
+    })
+}
+
+const RequestParameters = ({ url, children }) => {
   const [options, dispatch] = useRequest()
+
+  const childrenArray = React.Children.toArray(children)
+  const headers = filterChildren(childrenArray, 'HeaderParameters')
+  const queryParams = filterChildren(childrenArray, 'QueryParameters')
+  const bodyArray = childrenArray.filter(
+    (child) =>
+      child.type.name === 'RequestBody' || child.props.mdxType === 'requestbody'
+  )
+
+  let body = null
+  let bodyType = 'none'
+  if (bodyArray.length === 1) {
+    body = bodyArray[0].props.children
+    bodyType = bodyArray[0].props.type
+  } else if (bodyArray.length > 1) {
+    throw new Error('Too many body tags')
+  }
+
+  useEffect(() => {
+    dispatch({
+      type: RequestProvider.ACTION_TYPES.INIT,
+      query: queryParams,
+      headers,
+      body,
+      bodyType
+    })
+  }, [])
 
   return (
     <View>
