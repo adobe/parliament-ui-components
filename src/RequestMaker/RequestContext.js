@@ -15,6 +15,7 @@ const RequestStateContext = React.createContext()
 const RequestDispatchContext = React.createContext()
 
 const ACTION_TYPES = {
+  INIT: 'init',
   SET_METHOD: 'setMethod',
   SET_BODY: 'setBody',
   SET_HEADERS: 'setHeaders',
@@ -28,7 +29,7 @@ const ACTION_TYPES = {
 const reducer = (state, action) => {
   console.log(action)
   switch (action.type) {
-    case 'init': {
+    case ACTION_TYPES.INIT: {
       console.log(action)
       const { body, bodyType, method, headers, query } = action
       return { body, bodyType, method, headers, query }

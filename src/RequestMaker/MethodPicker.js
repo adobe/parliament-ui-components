@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Picker, Item } from '@adobe/react-spectrum'
 import { RequestProvider, useRequestDispatch } from './RequestContext'
 
@@ -26,18 +26,25 @@ const MethodPicker = ({ method }) => {
   ]
   const dispatch = useRequestDispatch()
   const [selected, setSelected] = useState(method)
+
+  const updateState = (method) => {
+    setSelected(method)
+    dispatch({
+      type: RequestProvider.ACTION_TYPES.SET_METHOD,
+      method
+    })
+  }
+
+  useEffect(() => {
+    updateState(method)
+  }, [])
+
   return (
     <Picker
       width='size-1250'
       items={options}
       selectedKey={selected}
-      onSelectionChange={(selected) => {
-        setSelected(selected)
-        dispatch({
-          type: RequestProvider.ACTION_TYPES.SET_METHOD,
-          method: selected
-        })
-      }}
+      onSelectionChange={updateState}
     >
       {(item) => <Item key={item.name}>{item.name}</Item>}
     </Picker>
