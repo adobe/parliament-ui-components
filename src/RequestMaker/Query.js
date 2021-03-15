@@ -12,7 +12,7 @@
 
 import React from 'react'
 
-const Query = ({ children }) => {
+const Query = ({ parameters, children }) => {
   return <div>{children}</div>
 }
 

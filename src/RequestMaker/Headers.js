@@ -12,7 +12,7 @@
 
 import React from 'react'
 
-const Headers = ({ children }) => {
+const Headers = ({ parameters, children }) => {
   return <div>{children}</div>
 }
 

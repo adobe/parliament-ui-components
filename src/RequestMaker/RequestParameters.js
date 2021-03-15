@@ -27,14 +27,24 @@ const findChild = (childrenArray, type) => {
 }
 
 const filterChildren = (item) => {
-  return item.props.children.map((child) => {
-    return {
-      enabled: true,
-      key: child.props.name,
-      value: child.props.children,
-      deletable: true
-    }
-  })
+  return item.props.children ? item.props.children.map(makeParameter) : []
+}
+
+const makeParameter = (param) => {
+  return {
+    enabled: true,
+    key: param?.props?.name || param.key,
+    value: param?.props?.children || param.value,
+    deletable: true
+  }
+}
+
+const createParametersArray = (childrenArray, type) => {
+  const element = findChild(childrenArray, type)
+  return [
+    ...(element?.props?.parameters?.map(makeParameter) || []),
+    ...filterChildren(element)
+  ]
 }
 
 const RequestParameters = ({ url, children }) => {
@@ -44,8 +54,9 @@ const RequestParameters = ({ url, children }) => {
   const bodyArray = findChild(childrenArray, 'RequestBody')
   const body = bodyArray?.props?.children || null
   const bodyType = bodyArray?.props?.type || 'none'
-  const headers = filterChildren(findChild(childrenArray, 'Headers'))
-  const queryParams = filterChildren(findChild(childrenArray, 'Query'))
+
+  const headers = createParametersArray(childrenArray, 'Headers')
+  const queryParams = createParametersArray(childrenArray, 'Query')
 
   useEffect(() => {
     dispatch({
