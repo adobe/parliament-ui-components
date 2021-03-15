@@ -19,27 +19,33 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
   const codeOptions = [
     {
       name: 'cURL',
-      id: 'shell_curl'
+      id: 'shell_curl',
+      lang: 'shell'
     },
     {
       name: 'Node.js (fetch)',
-      id: 'node_fetch'
+      id: 'node_fetch',
+      lang: 'js'
     },
     {
       name: 'Node.js (request)',
-      id: 'node_request'
+      id: 'node_request',
+      lang: 'js'
     },
     {
       name: 'Javascript (fetch)',
-      id: 'javascript_fetch'
+      id: 'javascript_fetch',
+      lang: 'js'
     },
     {
       name: 'Javascript (axios)',
-      id: 'javascript_axios'
+      id: 'javascript_axios',
+      lang: 'js'
     },
     {
       name: 'python',
-      id: 'python_requests'
+      id: 'python_requests',
+      lang: 'python'
     },
     {
       name: 'PHP',
@@ -67,11 +73,13 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
     },
     {
       name: 'Go',
-      id: 'go_native'
+      id: 'go_native',
+      lang: 'go'
     },
     {
       name: 'C',
-      id: 'c'
+      id: 'c',
+      lang: 'c'
     },
     {
       name: 'C#',
@@ -90,6 +98,7 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
   const getPostData = (options) => {
     const postData = {}
     if (
+      options.method &&
       options.method !== 'GET' &&
       options.method !== 'HEAD' &&
       options.method !== 'OPTIONS'
@@ -107,18 +116,18 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
     }
     return postData
   }
-  const renderByCode = (lang) => {
+  const renderByCode = (id) => {
     const snippet = new HTTPSnippet({
-      method: options.method,
+      method: options.method || 'GET',
       url: url,
       headers: getNameValArray(options.headers),
       postData: getPostData(options)
     })
 
-    const langs = lang.split('_')
+    const langs = id.split('_')
     const code = snippet.convert(langs[0], langs[1]) + '\n'
     const props = {
-      className: `js`
+      className: codeOptions.find((item) => item.id === id).lang || 'js'
     }
     return <Code {...props}>{code}</Code>
   }
