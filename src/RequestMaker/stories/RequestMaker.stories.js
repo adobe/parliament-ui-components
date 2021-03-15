@@ -10,12 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 import React from 'react'
-import {
-  RequestMaker,
-  RequestBody,
-  HeaderParameters,
-  QueryParameters
-} from '../index'
+import { RequestMaker, RequestBody, Parameter, Headers, Query } from '../index'
 
 export default {
   title: 'components/RequestMaker'
@@ -30,10 +25,14 @@ export const RequestMakerDefault = () => {
 
   return (
     <RequestMaker {...props}>
-      <HeaderParameters name='one'>header one</HeaderParameters>
-      <HeaderParameters name='two'>header two</HeaderParameters>
-      <QueryParameters name='one'>query one</QueryParameters>
-      <QueryParameters name='two'>query two</QueryParameters>
+      <Headers>
+        <Parameter name='one'>header one</Parameter>
+        <Parameter name='two'>header two</Parameter>
+      </Headers>
+      <Query>
+        <Parameter name='one'>query one</Parameter>
+        <Parameter name='two'>query two</Parameter>
+      </Query>
       <RequestBody type='raw'>This is my body</RequestBody>
     </RequestMaker>
   )
@@ -48,10 +47,14 @@ export const RequestMakerNoBody = () => {
 
   return (
     <RequestMaker {...props}>
-      <HeaderParameters name='one'>header one</HeaderParameters>
-      <HeaderParameters name='two'>header two</HeaderParameters>
-      <QueryParameters name='one'>query one</QueryParameters>
-      <QueryParameters name='two'>query two</QueryParameters>
+      <Headers>
+        <Parameter name='one'>header one</Parameter>
+        <Parameter name='two'>header two</Parameter>
+      </Headers>
+      <Query>
+        <Parameter name='one'>query one</Parameter>
+        <Parameter name='two'>query two</Parameter>
+      </Query>
     </RequestMaker>
   )
 }
