@@ -18,41 +18,34 @@ import { RequestBody } from './RequestBody'
 import { RequestProvider, useRequest } from './RequestContext'
 import { ParameterTable } from './ParameterTable'
 
-const filterChildren = (childrenArray, type) => {
-  return childrenArray
-    .filter(
-      (child) =>
-        child.type.name === type || child.props.mdxType === type.toLowerCase()
-    )
-    .map((child) => {
-      return {
-        enabled: true,
-        key: child.props.name,
-        value: child.props.children,
-        deletable: true
-      }
-    })
+const findChild = (childrenArray, type) => {
+  const child = childrenArray.filter(
+    (child) =>
+      child.type.name === type || child.props.mdxType === type.toLowerCase()
+  )
+  return child.length === 1 ? child[0] : {}
+}
+
+const filterChildren = (item) => {
+  return item.props.children.map((child) => {
+    return {
+      enabled: true,
+      key: child.props.name,
+      value: child.props.children,
+      deletable: true
+    }
+  })
 }
 
 const RequestParameters = ({ url, children }) => {
   const [options, dispatch] = useRequest()
 
   const childrenArray = React.Children.toArray(children)
-  const headers = filterChildren(childrenArray, 'HeaderParameters')
-  const queryParams = filterChildren(childrenArray, 'QueryParameters')
-  const bodyArray = childrenArray.filter(
-    (child) =>
-      child.type.name === 'RequestBody' || child.props.mdxType === 'requestbody'
-  )
-
-  let body = null
-  let bodyType = 'none'
-  if (bodyArray.length === 1) {
-    body = bodyArray[0].props.children
-    bodyType = bodyArray[0].props.type
-  } else if (bodyArray.length > 1) {
-    throw new Error('Too many body tags')
-  }
+  const bodyArray = findChild(childrenArray, 'RequestBody')
+  const body = bodyArray?.props?.children || null
+  const bodyType = bodyArray?.props?.type || 'none'
+  const headers = filterChildren(findChild(childrenArray, 'Headers'))
+  const queryParams = filterChildren(findChild(childrenArray, 'Query'))
 
   useEffect(() => {
     dispatch({

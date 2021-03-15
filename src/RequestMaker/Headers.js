@@ -12,8 +12,8 @@
 
 import React from 'react'
 
-const QueryParameters = ({ name }) => {
-  return <div>{name}</div>
+const Headers = ({ children }) => {
+  return <div>{children}</div>
 }
 
-export { QueryParameters }
+export { Headers }
