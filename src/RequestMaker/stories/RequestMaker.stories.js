@@ -58,3 +58,101 @@ export const RequestMakerNoBody = () => {
     </RequestMaker>
   )
 }
+
+export const RequestMakerPropParameters = () => {
+  const props = {
+    method: 'GET',
+    url:
+      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+  }
+
+  const headers = [
+    {
+      enabled: true,
+      key: 'one',
+      value: 'header one',
+      deletable: true
+    },
+    {
+      enabled: true,
+      key: 'two',
+      value: 'header two',
+      deletable: true
+    }
+  ]
+
+  const query = [
+    {
+      enabled: true,
+      key: 'one',
+      value: 'query one',
+      deletable: true
+    },
+    {
+      enabled: true,
+      key: 'two',
+      value: 'query two',
+      deletable: true
+    }
+  ]
+
+  return (
+    <RequestMaker {...props}>
+      <Headers parameters={headers} />
+      <Query parameters={query} />
+      <RequestBody type='raw'>This is my body</RequestBody>
+    </RequestMaker>
+  )
+}
+
+export const RequestMakerPropAndNamedParameters = () => {
+  const props = {
+    method: 'GET',
+    url:
+      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+  }
+
+  const headers = [
+    {
+      enabled: true,
+      key: 'one',
+      value: 'header one',
+      deletable: true
+    },
+    {
+      enabled: true,
+      key: 'two',
+      value: 'header two',
+      deletable: true
+    }
+  ]
+
+  const query = [
+    {
+      enabled: true,
+      key: 'one',
+      value: 'query one',
+      deletable: true
+    },
+    {
+      enabled: true,
+      key: 'two',
+      value: 'query two',
+      deletable: true
+    }
+  ]
+
+  return (
+    <RequestMaker {...props}>
+      <Headers parameters={headers}>
+        <Parameter name='three'>header three</Parameter>
+        <Parameter name='four'>header four</Parameter>
+      </Headers>
+      <Query parameters={query}>
+        <Parameter name='three'>query three</Parameter>
+        <Parameter name='four'>query four</Parameter>
+      </Query>
+      <RequestBody type='raw'>This is my body</RequestBody>
+    </RequestMaker>
+  )
+}
