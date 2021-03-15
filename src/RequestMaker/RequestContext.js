@@ -31,8 +31,8 @@ const reducer = (state, action) => {
   switch (action.type) {
     case ACTION_TYPES.INIT: {
       console.log(action)
-      const { body, bodyType, method, headers, query } = action
-      return { body, bodyType, method, headers, query }
+      const { body, bodyType, headers, query } = action
+      return { ...state, body, bodyType, headers, query }
     }
     case ACTION_TYPES.SET_METHOD:
       console.log({ ...state, method: action.method })
