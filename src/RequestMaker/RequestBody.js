@@ -11,12 +11,21 @@
  */
 
 import React, { useState } from 'react'
-import { RadioGroup, Radio, Text, TextArea, View } from '@adobe/react-spectrum'
+import {
+  Flex,
+  Item,
+  Picker,
+  RadioGroup,
+  Radio,
+  Text,
+  TextArea,
+  View
+} from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
 import { ParameterTable } from './ParameterTable'
 import { RequestProvider, useRequestDispatch } from './RequestContext'
 
-const RequestBody = ({ type = 'raw', items }) => {
+const RequestBody = ({ type = 'raw', contentType = 'text/plain', items }) => {
   const [selected, setSelected] = useState(type)
   const dispatch = useRequestDispatch()
 
@@ -42,8 +51,16 @@ const RequestBody = ({ type = 'raw', items }) => {
         break
       }
       case 'raw': {
-        // TODO set content type
-        // TODO call dispatcher for content-type
+        try {
+          JSON.parse(data)
+          dispatch({
+            type: RequestProvider.ACTION_TYPES.UPDATE_CONTENT_TYPE,
+            bodyType: type,
+            contentType: 'application/json'
+          })
+        } catch (e) {
+          console.log('not json')
+        }
         dispatch({
           type: RequestProvider.ACTION_TYPES.SET_BODY,
           bodyType: type,
@@ -86,7 +103,14 @@ const RequestBody = ({ type = 'raw', items }) => {
         })
         break
       }
-      case 'raw':
+      case 'raw': {
+        dispatch({
+          type: RequestProvider.ACTION_TYPES.UPDATE_CONTENT_TYPE,
+          bodyType: type,
+          contentType: contentType
+        })
+        break
+      }
       case 'binary': {
         // set your own content type
         dispatch({
@@ -163,17 +187,40 @@ const RequestBody = ({ type = 'raw', items }) => {
 
   return (
     <View>
-      <RadioGroup
-        value={selected}
-        orientation='horizontal'
-        onChange={updateBodyType}
-      >
-        <Radio value='none'>none</Radio>
-        <Radio value='form-data'>form-data</Radio>
-        <Radio value='urlencoded'>x-www-form-urlencoded</Radio>
-        <Radio value='raw'>raw</Radio>
-        <Radio value='binary'>binary</Radio>
-      </RadioGroup>
+      <Flex>
+        <RadioGroup
+          value={selected}
+          orientation='horizontal'
+          onChange={updateBodyType}
+        >
+          <Radio value='none'>none</Radio>
+          <Radio value='form-data'>form-data</Radio>
+          <Radio value='urlencoded'>x-www-form-urlencoded</Radio>
+          <Radio value='raw'>raw</Radio>
+          <Radio value='binary'>binary</Radio>
+        </RadioGroup>
+        {type === 'raw' ? (
+          <Picker
+            selectedKey={contentType}
+            onSelectionChange={(selected) => {
+              dispatch({
+                type: RequestProvider.ACTION_TYPES.UPDATE_CONTENT_TYPE,
+                bodyType: type,
+                contentType: selected
+              })
+            }}
+            isQuiet
+          >
+            <Item key='text/plain'>Text</Item>
+            <Item key='application/javascript'>JavaScript</Item>
+            <Item key='application/json'>JSON</Item>
+            <Item key='text/html'>HTML</Item>
+            <Item key='application/xml'>XML</Item>
+          </Picker>
+        ) : (
+          ''
+        )}{' '}
+      </Flex>
       {renderByType(selected, items)}
     </View>
   )

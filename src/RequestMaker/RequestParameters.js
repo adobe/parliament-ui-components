@@ -68,6 +68,10 @@ const RequestParameters = ({ url, children }) => {
     })
   }, [])
 
+  const contentType =
+    options?.headers?.find((header) => header.key === 'Content-Type')?.value ||
+    'text/plain'
+
   return (
     <View>
       <Tabs aria-label='Request Parameters'>
@@ -99,7 +103,11 @@ const RequestParameters = ({ url, children }) => {
         </Item>
         <Item title='Body' key='bodyTab'>
           <Content marginTop='size-250' marginStart='size-125'>
-            <RequestBody type={options.bodyType} items={options.body} />
+            <RequestBody
+              type={options.bodyType}
+              contentType={contentType}
+              items={options.body}
+            />
           </Content>
         </Item>
         <Item title='Code Generation' key='codeTab'>
