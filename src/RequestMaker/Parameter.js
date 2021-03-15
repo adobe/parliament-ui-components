@@ -12,8 +12,12 @@
 
 import React from 'react'
 
-const HeaderParameters = ({ name }) => {
-  return <div>{name}</div>
+const Parameter = ({ key, children }) => {
+  return (
+    <div>
+      {key}: {children}
+    </div>
+  )
 }
 
-export { HeaderParameters }
+export { Parameter }
