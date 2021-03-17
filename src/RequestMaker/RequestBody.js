@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import {
   Flex,
   Item,
@@ -28,6 +28,19 @@ import { RequestProvider, useRequestDispatch } from './RequestContext'
 const RequestBody = ({ type = 'raw', contentType = 'text/plain', items }) => {
   const [selected, setSelected] = useState(type)
   const dispatch = useRequestDispatch()
+  const fileRef = useRef()
+
+  const onChangeHandler = (event) => {
+    dispatch({
+      type: RequestProvider.ACTION_TYPES.SET_BODY,
+      body: event.target.files[0],
+      bodyType: 'binary'
+    })
+    dispatch({
+      type: RequestProvider.ACTION_TYPES.UPDATE_CONTENT_TYPE,
+      contentType: event.target.files[0].type
+    })
+  }
 
   const updateBody = (type, data) => {
     console.log(type)
@@ -69,6 +82,10 @@ const RequestBody = ({ type = 'raw', contentType = 'text/plain', items }) => {
         break
       }
       case 'binary': {
+        dispatch({
+          type: RequestProvider.ACTION_TYPES.SET_BODY,
+          bodyType: type
+        })
         break
       }
       case 'none':
@@ -166,7 +183,14 @@ const RequestBody = ({ type = 'raw', contentType = 'text/plain', items }) => {
             padding='size-250'
             backgroundColor='gray-50'
             minHeight='size-2400'
-          />
+          >
+            <input
+              ref={fileRef}
+              type='file'
+              name='uploadFile'
+              onChange={onChangeHandler}
+            />
+          </View>
         )
       case 'none':
       default:

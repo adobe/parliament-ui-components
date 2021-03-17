@@ -28,9 +28,8 @@ const ResponsePanel = (props) => {
 
   const parseResponse = async (response) => {
     if (response) {
-      // TODO: sus out text, json, binary, etc responses
       const contentType = response.headers.get('content-type')
-      if (contentType.indexOf('application/json') > -1) {
+      if (contentType?.indexOf('application/json') > -1) {
         setLanguage('json')
       } else {
         setLanguage('text')

@@ -45,7 +45,8 @@ const SendRequestButton = ({ url }) => {
           requestOptions.body = state.body
           console.log('about to call break in raw')
         } else if (state.bodyType === 'binary') {
-          // to do
+          requestOptions.body = state.body
+          console.log('about to call break in binary')
         } else if (state.bodyType === 'none') {
           // to do
         } else {

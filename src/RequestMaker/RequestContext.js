@@ -49,7 +49,7 @@ const reducer = (state, action) => {
         requestTime: action.requestTime
       }
     case ACTION_TYPES.SET_BODY:
-      console.log({ ...state, body: action.body })
+      console.log({ ...state, body: action.body, bodyType: action.bodyType })
       return { ...state, body: action.body, bodyType: action.bodyType }
     case ACTION_TYPES.SET_HEADERS:
       console.log({ ...state, headers: action.headers })
@@ -95,8 +95,8 @@ const reducer = (state, action) => {
           deletable: true
         })
       }
-      console.log({ ...state, bodyType: action.bodyType })
-      return { ...state, bodyType: action.bodyType }
+      console.log({ ...state })
+      return { ...state }
     }
     default:
       throw new Error()
