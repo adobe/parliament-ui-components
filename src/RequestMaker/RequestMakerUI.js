@@ -21,7 +21,13 @@ import { ResponsePanel } from './ResponsePanel'
 import { useRequestState } from './RequestContext'
 import { SendRequestButton } from './SendRequestButton'
 
-const RequestMakerUI = ({ method, url, children, ...props }) => {
+const RequestMakerUI = ({
+  methods,
+  defaultMethod,
+  url,
+  children,
+  ...props
+}) => {
   const state = useRequestState()
 
   return (
@@ -41,7 +47,7 @@ const RequestMakerUI = ({ method, url, children, ...props }) => {
       >
         <Flex direction='column' gap='size-100'>
           <Flex direction='row' gap='size-100' width='100%'>
-            <MethodPicker method={method} />
+            <MethodPicker defaultMethod={defaultMethod} methods={methods} />
             <TextField value={url + queryString(state.query)} width='100%' />
           </Flex>
           <RequestParameters url={url + queryString(state.query)}>
