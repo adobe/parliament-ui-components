@@ -20,6 +20,7 @@ import {
 } from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
 import Delete from '@spectrum-icons/workflow/DeleteOutline'
+import { AutoHeader } from '../AutoHeader'
 
 const TableCell = ({ head = false, children }) => (
   <View
@@ -47,6 +48,7 @@ const TableRowEditable = ({
   keyItem = '',
   value = '',
   index,
+  type,
   onDelete,
   onUpdate
 }) => {
@@ -59,13 +61,22 @@ const TableRowEditable = ({
         />
       </TableCell>
       <TableCell>
-        <TextField
-          isQuiet
-          value={keyItem}
-          width='100%'
-          placeholder='key'
-          onChange={(value) => onUpdate && onUpdate(index, { key: value })}
-        />
+        {type && type==='header' ? (
+          <AutoHeader 
+            value={keyItem}
+            index={index}
+            onUpdate={onUpdate}
+          />
+        ) : (
+          <TextField
+            isQuiet
+            value={keyItem}
+            width='100%'
+            placeholder='key'
+            onChange={(value) => onUpdate && onUpdate(index, { key: value })}
+          />
+        )
+        }
       </TableCell>
       <TableCell>
         <TextField
@@ -96,7 +107,7 @@ const EmptyRow = {
   deletable: true
 }
 
-const ParameterTable = ({ readonly = false, items, callback }) => {
+const ParameterTable = ({ readonly = false, items, type, callback }) => {
   const tableItems = [...items]
   if (
     tableItems.filter((item) => item.key === '' && item.value === '').length < 1
@@ -115,6 +126,7 @@ const ParameterTable = ({ readonly = false, items, callback }) => {
         enabled={enabled}
         keyItem={key}
         value={value}
+        type={type}
         onDelete={(key) => {
           const copyOfTableItems = [...tableItems]
           copyOfTableItems.splice(index, 1)
