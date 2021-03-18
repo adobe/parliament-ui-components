@@ -18,7 +18,6 @@ export default {
 
 export const RequestMakerDefault = () => {
   const props = {
-    method: 'GET',
     url:
       'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
@@ -40,7 +39,6 @@ export const RequestMakerDefault = () => {
 
 export const RequestMakerNoBody = () => {
   const props = {
-    method: 'GET',
     url:
       'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
@@ -61,7 +59,6 @@ export const RequestMakerNoBody = () => {
 
 export const RequestMakerPropParameters = () => {
   const props = {
-    method: 'GET',
     url:
       'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
@@ -107,7 +104,6 @@ export const RequestMakerPropParameters = () => {
 
 export const RequestMakerPropAndNamedParameters = () => {
   const props = {
-    method: 'GET',
     url:
       'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
@@ -151,6 +147,117 @@ export const RequestMakerPropAndNamedParameters = () => {
       <Query parameters={query}>
         <Parameter name='three'>query three</Parameter>
         <Parameter name='four'>query four</Parameter>
+      </Query>
+      <RequestBody type='raw'>This is my body</RequestBody>
+    </RequestMaker>
+  )
+}
+
+export const RequestMakerDefaultMethod = () => {
+  const props = {
+    defaultMethod: 'POST',
+    url:
+      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+  }
+
+  return (
+    <RequestMaker {...props}>
+      <Headers>
+        <Parameter name='one'>header one</Parameter>
+        <Parameter name='two'>header two</Parameter>
+      </Headers>
+      <Query>
+        <Parameter name='one'>query one</Parameter>
+        <Parameter name='two'>query two</Parameter>
+      </Query>
+      <RequestBody type='raw'>This is my body</RequestBody>
+    </RequestMaker>
+  )
+}
+
+export const RequestMakerMethodsString = () => {
+  const props = {
+    methods: 'OPTIONS',
+    url:
+      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+  }
+
+  return (
+    <RequestMaker {...props}>
+      <Headers>
+        <Parameter name='one'>header one</Parameter>
+        <Parameter name='two'>header two</Parameter>
+      </Headers>
+      <Query>
+        <Parameter name='one'>query one</Parameter>
+        <Parameter name='two'>query two</Parameter>
+      </Query>
+      <RequestBody type='raw'>This is my body</RequestBody>
+    </RequestMaker>
+  )
+}
+
+export const RequestMakerMethodsStringArray = () => {
+  const props = {
+    methods: 'OPTIONS, GET, DELETE',
+    url:
+      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+  }
+
+  return (
+    <RequestMaker {...props}>
+      <Headers>
+        <Parameter name='one'>header one</Parameter>
+        <Parameter name='two'>header two</Parameter>
+      </Headers>
+      <Query>
+        <Parameter name='one'>query one</Parameter>
+        <Parameter name='two'>query two</Parameter>
+      </Query>
+      <RequestBody type='raw'>This is my body</RequestBody>
+    </RequestMaker>
+  )
+}
+
+export const RequestMakerMethodsArray = () => {
+  const props = {
+    methods: ['HEAD', 'PATCH', 'DELETE'],
+    url:
+      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+  }
+
+  return (
+    <RequestMaker {...props}>
+      <Headers>
+        <Parameter name='one'>header one</Parameter>
+        <Parameter name='two'>header two</Parameter>
+      </Headers>
+      <Query>
+        <Parameter name='one'>query one</Parameter>
+        <Parameter name='two'>query two</Parameter>
+      </Query>
+      <RequestBody type='raw'>This is my body</RequestBody>
+    </RequestMaker>
+  )
+}
+
+export const RequestMakerMethodsArrayWithDefault = () => {
+  const props = {
+    defaultMethod: 'PATCH',
+    methods: ['HEAD', 'PATCH', 'DELETE'],
+    url:
+      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+  }
+
+  return (
+    <RequestMaker {...props}>
+      <Headers>
+        <Parameter name='one'>header one</Parameter>
+        <Parameter name='two'>header two</Parameter>
+      </Headers>
+      <Query>
+        <Parameter name='one'>query one</Parameter>
+        <Parameter name='two'>query two</Parameter>
       </Query>
       <RequestBody type='raw'>This is my body</RequestBody>
     </RequestMaker>
