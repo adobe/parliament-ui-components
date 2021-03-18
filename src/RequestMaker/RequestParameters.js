@@ -91,6 +91,7 @@ const RequestParameters = ({ url, children }) => {
         <Item title='Headers' key='headerTab'>
           <Content marginTop='size-250' marginStart='size-125'>
             <ParameterTable
+              type='header'
               items={options.headers}
               callback={(data) => {
                 dispatch({
