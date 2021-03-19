@@ -46,6 +46,50 @@ const createParametersArray = (childrenArray, type) => {
     ...filterChildren(element)
   ]
 }
+const defaultMenuItems = [
+  { name: 'Accept' },
+  { name: 'Accept-Charset' },
+  { name: 'Accept-Encoding' },
+  { name: 'Accept-Language' },
+  { name: 'Access-Control-Request-Headers' },
+  { name: 'Access-Control-Request-Method' },
+  { name: 'Authorization' },
+  { name: 'Cache-Control' },
+  { name: 'Content-MD5' },
+  { name: 'Content-Length' },
+  { name: 'Content-Transfer-Encoding' },
+  { name: 'Content-Type' },
+  { name: 'Cookie' },
+  { name: 'Cookie 2' },
+  { name: 'Date' },
+  { name: 'Expect' },
+  { name: 'From' },
+  { name: 'Host' },
+  { name: 'If-Match' },
+  { name: 'If-Modified-Since' },
+  { name: 'If-None-Match' },
+  { name: 'If-Range' },
+  { name: 'If-Unmodified-Since' },
+  { name: 'Keep-Alive' },
+  { name: 'Max-Forwards' },
+  { name: 'Origin' },
+  { name: 'Pragma' },
+  { name: 'Proxy-Authorization' },
+  { name: 'Range' },
+  { name: 'Referer' },
+  { name: 'TE' },
+  { name: 'Trailer' },
+  { name: 'Transfer-Encoding' },
+  { name: 'Upgrade' },
+  { name: 'User-Agent' },
+  { name: 'Via' },
+  { name: 'Warning' },
+  { name: 'X-Requested-With' },
+  { name: 'X-Do-Not-Track' },
+  { name: 'DNT' },
+  { name: 'x-api-key' },
+  { name: 'Connection' }
+]
 
 const RequestParameters = ({ url, children }) => {
   const [options, dispatch] = useRequest()
@@ -91,8 +135,8 @@ const RequestParameters = ({ url, children }) => {
         <Item title='Headers' key='headerTab'>
           <Content marginTop='size-250' marginStart='size-125'>
             <ParameterTable
-              type='header'
               items={options.headers}
+              defaultMenuItems={defaultMenuItems}
               callback={(data) => {
                 dispatch({
                   type: RequestProvider.ACTION_TYPES.SET_HEADERS,
