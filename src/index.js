@@ -11,6 +11,7 @@ governing permissions and limitations under the License.
 */
 export { ActionButtons } from './ActionButtons'
 export { Alert } from './Alert'
+export { AutoComplete } from './AutoComplete'
 export { Contributors } from './Contributors'
 export { Footer } from './Footer'
 export {
