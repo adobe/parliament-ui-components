@@ -1,5 +1,5 @@
 /**
- *  Copyright 2020 Adobe. All rights reserved.
+ *  Copyright 2021 Adobe. All rights reserved.
  *  This file is licensed to you under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License. You may obtain a copy
  *  of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -16,56 +16,12 @@ import { TextField } from '@adobe/react-spectrum'
 import { Menu } from '../Menu'
 import { Popover } from '../Popover'
 
-const AutoHeader = ({ value, index, onUpdate }) => {
-  const defaultMenuItems = [
-    { name: 'Accept' },
-    { name: 'Accept-Charset' },
-    { name: 'Accept-Encoding' },
-    { name: 'Accept-Language' },
-    { name: 'Access-Control-Request-Headers' },
-    { name: 'Access-Control-Request-Method' },
-    { name: 'Authorization' },
-    { name: 'Cache-Control' },
-    { name: 'Content-MD5' },
-    { name: 'Content-Length' },
-    { name: 'Content-Transfer-Encoding' },
-    { name: 'Content-Type' },
-    { name: 'Cookie' },
-    { name: 'Cookie 2' },
-    { name: 'Date' },
-    { name: 'Expect' },
-    { name: 'From' },
-    { name: 'Host' },
-    { name: 'If-Match' },
-    { name: 'If-Modified-Since' },
-    { name: 'If-None-Match' },
-    { name: 'If-Range' },
-    { name: 'If-Unmodified-Since' },
-    { name: 'Keep-Alive' },
-    { name: 'Max-Forwards' },
-    { name: 'Origin' },
-    { name: 'Pragma' },
-    { name: 'Proxy-Authorization' },
-    { name: 'Range' },
-    { name: 'Referer' },
-    { name: 'TE' },
-    { name: 'Trailer' },
-    { name: 'Transfer-Encoding' },
-    { name: 'Upgrade' },
-    { name: 'User-Agent' },
-    { name: 'Via' },
-    { name: 'Warning' },
-    { name: 'X-Requested-With' },
-    { name: 'X-Do-Not-Track' },
-    { name: 'DNT' },
-    { name: 'x-api-key' },
-    { name: 'Connection' }
-  ]
+const AutoComplete = ({ value='', index, width='100%', placeholder='', onUpdate, defaultMenuItems, ...props }) => {
   const textRef = useRef(null)
   const [isOpen, setIsOpen] = useState(false)
   const [val, setVal] = useState(value)
   const [menuItems, setMenuItems] = useState(defaultMenuItems)
-  const props = {
+  const popProps = {
     isOpen: isOpen,
     style: {
       position: 'absolute',
@@ -77,14 +33,14 @@ const AutoHeader = ({ value, index, onUpdate }) => {
       'min-width': '150px'
     }
   }
-  const loadHeader = (item) => {
+  const loadCompletion = (item) => {
     setIsOpen(false)
     setVal(item.name)
-    onUpdate(index, { key: item.name })
+    onUpdate && onUpdate(index, { key: item.name })
   }
   const handleChange = (value) => {
     setVal(value)
-    onUpdate(index, { key: value })
+    onUpdate && onUpdate(index, { key: value })
     let menu = defaultMenuItems.filter(
       (menuItem) =>
         menuItem.name.toLowerCase().indexOf(value.toLowerCase()) > -1
@@ -115,26 +71,26 @@ const AutoHeader = ({ value, index, onUpdate }) => {
       <TextField
         isQuiet
         value={val}
-        width='100%'
-        placeholder='key'
+        width={width}
+        placeholder={placeholder}
         onChange={handleChange}
         autoComplete='off'
       />
-      <Popover {...props}>
+      { defaultMenuItems && <Popover {...popProps}>
         <Menu
-          onAction={loadHeader}
+          onAction={loadCompletion}
           items={menuItems}
           onKeyPress={(key, item) => {
             if (key === 'Enter') {
-              loadHeader(item)
+              loadCompletion(item)
             } else if (key === 'Escape') {
               setIsOpen(false)
             }
           }}
         />
-      </Popover>
+      </Popover> }
     </div>
   )
 }
 
-export { AutoHeader }
+export { AutoComplete }
