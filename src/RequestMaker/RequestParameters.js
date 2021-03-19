@@ -28,7 +28,7 @@ const findChild = (childrenArray, type) => {
 }
 
 const filterChildren = (item) => {
-  return item.props.children ? item.props.children.map(makeParameter) : []
+  return item.props?.children ? item.props.children.map(makeParameter) : []
 }
 
 const makeParameter = (param) => {
