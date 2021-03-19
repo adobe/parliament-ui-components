@@ -20,7 +20,52 @@ import {
 } from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
 import Delete from '@spectrum-icons/workflow/DeleteOutline'
-import { AutoHeader } from '../AutoHeader'
+import { AutoComplete } from '../AutoComplete'
+
+const defaultMenuItems = [
+  { name: 'Accept' },
+  { name: 'Accept-Charset' },
+  { name: 'Accept-Encoding' },
+  { name: 'Accept-Language' },
+  { name: 'Access-Control-Request-Headers' },
+  { name: 'Access-Control-Request-Method' },
+  { name: 'Authorization' },
+  { name: 'Cache-Control' },
+  { name: 'Content-MD5' },
+  { name: 'Content-Length' },
+  { name: 'Content-Transfer-Encoding' },
+  { name: 'Content-Type' },
+  { name: 'Cookie' },
+  { name: 'Cookie 2' },
+  { name: 'Date' },
+  { name: 'Expect' },
+  { name: 'From' },
+  { name: 'Host' },
+  { name: 'If-Match' },
+  { name: 'If-Modified-Since' },
+  { name: 'If-None-Match' },
+  { name: 'If-Range' },
+  { name: 'If-Unmodified-Since' },
+  { name: 'Keep-Alive' },
+  { name: 'Max-Forwards' },
+  { name: 'Origin' },
+  { name: 'Pragma' },
+  { name: 'Proxy-Authorization' },
+  { name: 'Range' },
+  { name: 'Referer' },
+  { name: 'TE' },
+  { name: 'Trailer' },
+  { name: 'Transfer-Encoding' },
+  { name: 'Upgrade' },
+  { name: 'User-Agent' },
+  { name: 'Via' },
+  { name: 'Warning' },
+  { name: 'X-Requested-With' },
+  { name: 'X-Do-Not-Track' },
+  { name: 'DNT' },
+  { name: 'x-api-key' },
+  { name: 'Connection' }
+]
 
 const TableCell = ({ head = false, children }) => (
   <View
@@ -62,10 +107,12 @@ const TableRowEditable = ({
       </TableCell>
       <TableCell>
         {type && type==='header' ? (
-          <AutoHeader 
+          <AutoComplete 
             value={keyItem}
             index={index}
+            placeholder='key'
             onUpdate={onUpdate}
+            defaultMenuItems={defaultMenuItems}
           />
         ) : (
           <TextField
