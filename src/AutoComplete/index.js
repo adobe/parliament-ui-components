@@ -16,11 +16,19 @@ import { TextField } from '@adobe/react-spectrum'
 import { Menu } from '../Menu'
 import { Popover } from '../Popover'
 
-const AutoComplete = ({ value='', index, width='100%', placeholder='', onUpdate, defaultMenuItems, ...props }) => {
+const AutoComplete = ({
+  value = '',
+  index,
+  width = '100%',
+  placeholder = '',
+  onUpdate,
+  completions,
+  ...props
+}) => {
   const textRef = useRef(null)
   const [isOpen, setIsOpen] = useState(false)
   const [val, setVal] = useState(value)
-  const [menuItems, setMenuItems] = useState(defaultMenuItems)
+  const [menuItems, setMenuItems] = useState(completions)
   const popProps = {
     isOpen: isOpen,
     style: {
@@ -41,7 +49,7 @@ const AutoComplete = ({ value='', index, width='100%', placeholder='', onUpdate,
   const handleChange = (value) => {
     setVal(value)
     onUpdate && onUpdate(index, { key: value })
-    let menu = defaultMenuItems.filter(
+    const menu = completions.filter(
       (menuItem) =>
         menuItem.name.toLowerCase().indexOf(value.toLowerCase()) > -1
     )
@@ -49,7 +57,7 @@ const AutoComplete = ({ value='', index, width='100%', placeholder='', onUpdate,
       setMenuItems(menu)
       setIsOpen(true)
     } else {
-      setMenuItems(defaultMenuItems)
+      setMenuItems(completions)
       setIsOpen(false)
     }
   }
@@ -67,7 +75,7 @@ const AutoComplete = ({ value='', index, width='100%', placeholder='', onUpdate,
   })
 
   return (
-    <div ref={textRef}>
+    <div ref={textRef} {...props}>
       <TextField
         isQuiet
         value={val}
@@ -76,19 +84,21 @@ const AutoComplete = ({ value='', index, width='100%', placeholder='', onUpdate,
         onChange={handleChange}
         autoComplete='off'
       />
-      { defaultMenuItems && <Popover {...popProps}>
-        <Menu
-          onAction={loadCompletion}
-          items={menuItems}
-          onKeyPress={(key, item) => {
-            if (key === 'Enter') {
-              loadCompletion(item)
-            } else if (key === 'Escape') {
-              setIsOpen(false)
-            }
-          }}
-        />
-      </Popover> }
+      {completions && (
+        <Popover {...popProps}>
+          <Menu
+            onAction={loadCompletion}
+            items={menuItems}
+            onKeyPress={(key, item) => {
+              if (key === 'Enter') {
+                loadCompletion(item)
+              } else if (key === 'Escape') {
+                setIsOpen(false)
+              }
+            }}
+          />
+        </Popover>
+      )}
     </div>
   )
 }

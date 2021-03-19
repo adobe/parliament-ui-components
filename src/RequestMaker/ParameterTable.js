@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Adobe. All rights reserved.
+ * Copyright 2021 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -21,7 +21,6 @@ import {
 import PropTypes from 'prop-types'
 import Delete from '@spectrum-icons/workflow/DeleteOutline'
 import { AutoComplete } from '../AutoComplete'
-
 
 const TableCell = ({ head = false, children }) => (
   <View
@@ -49,7 +48,7 @@ const TableRowEditable = ({
   keyItem = '',
   value = '',
   index,
-  defaultMenuItems,
+  completions,
   onDelete,
   onUpdate
 }) => {
@@ -62,12 +61,12 @@ const TableRowEditable = ({
         />
       </TableCell>
       <TableCell>
-        <AutoComplete 
+        <AutoComplete
           value={keyItem}
           index={index}
           placeholder='key'
           onUpdate={onUpdate}
-          defaultMenuItems={defaultMenuItems}
+          completions={completions}
         />
       </TableCell>
       <TableCell>
@@ -99,7 +98,7 @@ const EmptyRow = {
   deletable: true
 }
 
-const ParameterTable = ({ readonly = false, items, defaultMenuItems, callback }) => {
+const ParameterTable = ({ readonly = false, items, completions, callback }) => {
   const tableItems = [...items]
   if (
     tableItems.filter((item) => item.key === '' && item.value === '').length < 1
@@ -118,7 +117,7 @@ const ParameterTable = ({ readonly = false, items, defaultMenuItems, callback })
         enabled={enabled}
         keyItem={key}
         value={value}
-        defaultMenuItems={defaultMenuItems}
+        completions={completions}
         onDelete={(key) => {
           const copyOfTableItems = [...tableItems]
           copyOfTableItems.splice(index, 1)
