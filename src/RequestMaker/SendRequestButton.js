@@ -11,7 +11,7 @@
  */
 
 import React from 'react'
-import { Button, Text, View } from '@adobe/react-spectrum'
+import { Button, Switch, Text, View } from '@adobe/react-spectrum'
 
 import Send from '@spectrum-icons/workflow/Send'
 
@@ -20,13 +20,15 @@ import { getHeaders, queryString } from './utils'
 
 const SendRequestButton = ({ url }) => {
   const [state, dispatch] = useRequest()
+  const [selected, setSelection] = React.useState(true)
 
   const sendRequest = async () => {
     try {
       console.log(state)
       const requestOptions = {
         method: state.method,
-        headers: getHeaders(state.headers)
+        headers: getHeaders(state.headers),
+        mode: selected ? 'cors' : 'no-cors'
       }
       if (state.method !== 'GET' && state.body !== null) {
         if (state.bodyType === 'form-data') {
@@ -76,6 +78,9 @@ const SendRequestButton = ({ url }) => {
         <Send />
         <Text>Send</Text>
       </Button>
+      <Switch marginX='size-200' isSelected={selected} onChange={setSelection}>
+        CORS
+      </Switch>
     </View>
   )
 }
