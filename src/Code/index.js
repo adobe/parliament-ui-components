@@ -40,7 +40,7 @@ const parseMetastring = (metastring) => {
   if (matches) {
     for (let i = 0; i < matches.length; i++) {
       const option = matches[i].slice(1, -1).split(':')
-      const value = options[1] ? options[1].trim() : ''
+      const value = option[1] ? option[1].trim() : ''
       if (value.toLowerCase() === 'true') {
         options[option[0]] = true
       } else if (value.toLowerCase() === 'false') {
