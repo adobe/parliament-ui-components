@@ -13,11 +13,18 @@
 import React from 'react'
 import { RequestProvider } from './RequestContext'
 import { RequestMakerUI } from './RequestMakerUI'
+import jsyaml from 'js-yaml'
 
-const RequestMaker = ({ children, ...props }) => (
-  <RequestProvider>
-    <RequestMakerUI {...props}>{children}</RequestMakerUI>
-  </RequestProvider>
+const RequestMaker = ({ children, yaml='', ...props }) => (
+  yaml.length > 0 ? (
+    <RequestProvider>
+      <RequestMakerUI {...jsyaml.load(yaml)}>{children}</RequestMakerUI>
+    </RequestProvider>
+  ) : (
+    <RequestProvider>
+      <RequestMakerUI {...props}>{children}</RequestMakerUI>
+    </RequestProvider>
+  )
 )
 
 export { RequestMaker }
