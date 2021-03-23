@@ -20,6 +20,7 @@ import '@spectrum-css/tooltip'
 import '@adobe/prism-adobe'
 import { ActionButton, defaultTheme, Provider } from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'
+import { RequestMaker } from '../RequestMaker'
 
 const openTooltip = (setIsTooltipOpen) => {
   setIsTooltipOpen(true)
@@ -95,8 +96,9 @@ const Code = (props) => {
   const options = parseMetastring(metastring)
   const isCopyButton = options.copy ?? copyButton
   const isLineNumbers = options.numberLines ?? lineNumbers
+  const isRequestMaker = options.requestMaker ?? false
 
-  return (
+  return isRequestMaker ? (<RequestMaker yaml={children} />) : (
     <Provider
       theme={defaultTheme}
       colorScheme={theme}

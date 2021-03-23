@@ -68,3 +68,12 @@ export const HighlightLines = () => {
 
   return <Code {...props}>{code}</Code>
 }
+
+export const RequestMaker = () => {
+  const props = {
+    metastring: `{requestMaker: true}`
+  }
+  const code = `method: post\nurl: https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker`
+
+  return <Code {...props}>{code}</Code>
+}
