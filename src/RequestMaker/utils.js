@@ -15,7 +15,7 @@ export const queryString = (obj) => {
   return obj &&
     obj.length > 0 &&
     !obj.every((ob) => {
-      return ob.key === ''
+      return ob.key === '' || !ob.enabled
     })
     ? '?' +
         encodeURI(
