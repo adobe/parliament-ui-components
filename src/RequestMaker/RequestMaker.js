@@ -14,42 +14,44 @@ import React from 'react'
 import { RequestProvider } from './RequestContext'
 import { RequestMakerUI } from './RequestMakerUI'
 import jsyaml from 'js-yaml'
-import Query from './Query'
-import Parameter from './Parameter'
+import { Headers } from './Headers'
+import { Query } from './Query'
+import { Parameter } from './Parameter'
 
 const params = (key, element, json) => {
-  return (
-    <Parameter name={key}>{json[element][key]}</Parameter>
-  )
+  return <Parameter name={key}>{json[element][key]}</Parameter>
 }
 
 const jsonQuery = (json) => {
   return (
     <Query>
-      {Object.keys(json['query']).map(query => params(query, 'query', json))}
+      {Object.keys(json.query).map((query) => params(query, 'query', json))}
     </Query>
   )
 }
 const jsonHeaders = (json) => {
   return (
     <Headers>
-      {Object.keys(json['headers']).map(header => params(header, 'headers', json))}
+      {Object.keys(json.headers).map((header) =>
+        params(header, 'headers', json)
+      )}
     </Headers>
   )
 }
 
 const jsonToJsx = (json) => {
-  const query = json["query"] && Object.keys(json["query"]).length > 0 ? jsonQuery(json) : null
-  const headers = json["headers"] && Object.keys(json["headers"]).length > 0 ? jsonHeaders(json): null
-  console.log("dekh")
+  const query =
+    json.query && Object.keys(json.query).length > 0 ? jsonQuery(json) : null
+  const headers =
+    json.headers && Object.keys(json.headers).length > 0
+      ? jsonHeaders(json)
+      : null
+  console.log('dekh')
   console.log([query, headers])
-  return (
-    [query, headers]
-  )
-
+  return [query, headers]
 }
 
-const RequestMaker = ({ children, yaml='', ...props }) => {
+const RequestMaker = ({ children, yaml = '', ...props }) => {
   const yamlJson = jsyaml.load(yaml)
   console.log(yamlJson)
   return yaml.length > 0 ? (
@@ -61,6 +63,6 @@ const RequestMaker = ({ children, yaml='', ...props }) => {
       <RequestMakerUI {...props}>{children}</RequestMakerUI>
     </RequestProvider>
   )
-  }
+}
 
 export { RequestMaker }
