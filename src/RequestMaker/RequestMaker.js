@@ -26,14 +26,14 @@ const params = (key, element, json) => {
 const jsonQuery = (json) => {
   return (
     <Query>
-      {Object.keys(json).forEach(query => params(query, 'query', json))}
+      {Object.keys(json['query']).map(query => params(query, 'query', json))}
     </Query>
   )
 }
 const jsonHeaders = (json) => {
   return (
     <Headers>
-      {Object.keys(json).forEach(header => params(header, 'headers', json))}
+      {Object.keys(json['headers']).map(header => params(header, 'headers', json))}
     </Headers>
   )
 }
@@ -41,14 +41,17 @@ const jsonHeaders = (json) => {
 const jsonToJsx = (json) => {
   const query = json["query"] && Object.keys(json["query"]).length > 0 ? jsonQuery(json) : null
   const headers = json["headers"] && Object.keys(json["headers"]).length > 0 ? jsonHeaders(json): null
+  console.log("dekh")
+  console.log(query)
   return (
-    {query}
+    [jsonQuery(json), jsonHeaders(json)]
   )
 
 }
 
 const RequestMaker = ({ children, yaml='', ...props }) => {
   const yamlJson = jsyaml.load(yaml)
+  console.log(yamlJson)
   return yaml.length > 0 ? (
     <RequestProvider>
       <RequestMakerUI {...yamlJson}>{jsonToJsx(yamlJson)}</RequestMakerUI>
