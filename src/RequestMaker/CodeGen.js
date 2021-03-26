@@ -12,7 +12,7 @@
 
 import React, { useState } from 'react'
 import { View, Picker, Item } from '@adobe/react-spectrum'
-import HTTPSnippet from 'httpsnippet'
+import HTTPSnippet from '@readme/httpsnippet'
 import { Code } from '../Code'
 
 const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
