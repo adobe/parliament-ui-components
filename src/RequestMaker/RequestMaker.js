@@ -14,8 +14,8 @@ import React from 'react'
 import { RequestProvider } from './RequestContext'
 import { RequestMakerUI } from './RequestMakerUI'
 import jsyaml from 'js-yaml'
-import Query from './Query'
-import Parameter from './Parameter'
+import { Query } from './Query'
+import { Parameter } from './Parameter'
 
 const params = (key, element, json) => {
   return (
@@ -41,8 +41,6 @@ const jsonHeaders = (json) => {
 const jsonToJsx = (json) => {
   const query = json["query"] && Object.keys(json["query"]).length > 0 ? jsonQuery(json) : null
   const headers = json["headers"] && Object.keys(json["headers"]).length > 0 ? jsonHeaders(json): null
-  console.log("dekh")
-  console.log([query, headers])
   return (
     [query, headers]
   )
@@ -51,7 +49,6 @@ const jsonToJsx = (json) => {
 
 const RequestMaker = ({ children, yaml='', ...props }) => {
   const yamlJson = jsyaml.load(yaml)
-  console.log(yamlJson)
   return yaml.length > 0 ? (
     <RequestProvider>
       <RequestMakerUI {...yamlJson}>{jsonToJsx(yamlJson)}</RequestMakerUI>
