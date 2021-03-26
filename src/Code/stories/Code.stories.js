@@ -73,7 +73,16 @@ export const RequestMaker = () => {
   const props = {
     metastring: `{requestMaker: true}`
   }
-  const code = `method: post\nurl: https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker`
+  const code = `
+  method: post
+  url: https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker
+  query:
+    res: tes
+    tes: res
+  headers:
+    test: rest
+    rest: test
+  `
 
   return <Code {...props}>{code}</Code>
 }
