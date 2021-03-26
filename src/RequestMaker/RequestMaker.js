@@ -19,7 +19,7 @@ import Parameter from './Parameter'
 
 const params = (key, element, json) => {
   return (
-    <Parameter name={key}>json[element][key]</Parameter>
+    <Parameter name={key}>{json[element][key]}</Parameter>
   )
 }
 
@@ -42,9 +42,9 @@ const jsonToJsx = (json) => {
   const query = json["query"] && Object.keys(json["query"]).length > 0 ? jsonQuery(json) : null
   const headers = json["headers"] && Object.keys(json["headers"]).length > 0 ? jsonHeaders(json): null
   console.log("dekh")
-  console.log(query)
+  console.log([query, headers])
   return (
-    [jsonQuery(json), jsonHeaders(json)]
+    [query, headers]
   )
 
 }
