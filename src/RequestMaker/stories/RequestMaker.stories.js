@@ -248,6 +248,9 @@ export const RequestMakerMethodsArrayWithDefault = () => {
     url:
       'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
+  const items = [
+    {enabled: true, key: 'test', value: 'rest'}
+  ]
 
   return (
     <RequestMaker {...props}>
@@ -259,7 +262,9 @@ export const RequestMakerMethodsArrayWithDefault = () => {
         <Parameter name='one'>query one</Parameter>
         <Parameter name='two'>query two</Parameter>
       </Query>
-      <RequestBody type='raw'>This is my body</RequestBody>
+      <RequestBody type='urlencoded'>
+        {items}
+      </RequestBody>
     </RequestMaker>
   )
 }

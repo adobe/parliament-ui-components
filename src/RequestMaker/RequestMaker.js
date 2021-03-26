@@ -17,31 +17,54 @@ import jsyaml from 'js-yaml'
 import { Headers } from './Headers'
 import { Query } from './Query'
 import { Parameter } from './Parameter'
+import { RequestBody } from './RequestBody'
 
-const params = (key, element, json) => {
-  return <Parameter name={key}>{json[element][key]}</Parameter>
+const getBodyItems = (body) => {
+  const items = []
+  Object.keys(body) && Object.keys(body).length > 0
+    ? Object.keys(body).map((key) =>
+        items.push({
+          enabled: true,
+          key: key,
+          value: body[key],
+          deletable: true
+        })
+      )
+    : null
+  return items
 }
 
 const jsonToJsx = (json) => {
   const query =
     json.query && Object.keys(json.query).length > 0 ? (
       <Query>
-        {Object.keys(json.query).map((query) => params(query, 'query', json))}
+        {Object.keys(json.query).map((query) => (
+          <Parameter name={query}>{json['query'][query]}</Parameter>
+        ))}
       </Query>
     ) : null
   const headers =
     json.headers && Object.keys(json.headers).length > 0 ? (
       <Headers>
-        {Object.keys(json.headers).map((header) =>
-          params(header, 'headers', json)
-        )}
+        {Object.keys(json.headers).map((header) => (
+          <Parameter name={header}>{json['headers'][header]}</Parameter>
+        ))}
       </Headers>
     ) : null
-  return [query, headers]
+  const body =
+    json.body && typeof json.body !== 'string' ? (
+      <RequestBody type='form-data'>{getBodyItems(json.body)}</RequestBody>
+    ) : typeof json.body !== 'undefined' ? (
+      <RequestBody type='raw'>{json.body}</RequestBody>
+    ) : (
+      <RequestBody type='none' />
+    )
+  return [query, headers, body]
 }
 
 const RequestMaker = ({ children, yaml = '', ...props }) => {
   const yamlJson = jsyaml.load(yaml)
+
   return yaml.length > 0 ? (
     <RequestProvider>
       <RequestMakerUI {...yamlJson}>{jsonToJsx(yamlJson)}</RequestMakerUI>
