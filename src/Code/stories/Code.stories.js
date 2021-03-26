@@ -69,7 +69,7 @@ export const HighlightLines = () => {
   return <Code {...props}>{code}</Code>
 }
 
-export const RequestMaker = () => {
+export const RequestMakerNoBody = () => {
   const props = {
     metastring: `{requestMaker: true}`
   }
@@ -82,6 +82,47 @@ export const RequestMaker = () => {
   headers:
     test: rest
     rest: test
+  `
+
+  return <Code {...props}>{code}</Code>
+}
+
+export const RequestMakerWithRawBody = () => {
+  const props = {
+    metastring: `{requestMaker: true}`
+  }
+  const code = `
+  method: post
+  url: https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker
+  query:
+    res: tes
+    tes: res
+  headers:
+    test: rest
+    rest: test
+  body: this is my body
+  `
+
+  return <Code {...props}>{code}</Code>
+}
+
+export const RequestMakerWithParameterizedBody = () => {
+  const props = {
+    metastring: `{requestMaker: true}`
+  }
+  const code = `
+  method: post
+  url: https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker
+  query:
+    res: tes
+    tes: res
+  headers:
+    test: rest
+    rest: test
+    Content-Type: application/x-www-form-urlencoded
+  body:
+    name: hiren
+    email: hireshah@adobe.com
   `
 
   return <Code {...props}>{code}</Code>
