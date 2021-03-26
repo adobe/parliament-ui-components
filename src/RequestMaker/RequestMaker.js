@@ -42,7 +42,6 @@ const jsonToJsx = (json) => {
 
 const RequestMaker = ({ children, yaml = '', ...props }) => {
   const yamlJson = jsyaml.load(yaml)
-  console.log(yamlJson)
   return yaml.length > 0 ? (
     <RequestProvider>
       <RequestMakerUI {...yamlJson}>{jsonToJsx(yamlJson)}</RequestMakerUI>
