@@ -22,32 +22,21 @@ const params = (key, element, json) => {
   return <Parameter name={key}>{json[element][key]}</Parameter>
 }
 
-const jsonQuery = (json) => {
-  return (
-    <Query>
-      {Object.keys(json.query).map((query) => params(query, 'query', json))}
-    </Query>
-  )
-}
-const jsonHeaders = (json) => {
-  return (
-    <Headers>
-      {Object.keys(json.headers).map((header) =>
-        params(header, 'headers', json)
-      )}
-    </Headers>
-  )
-}
-
 const jsonToJsx = (json) => {
   const query =
-    json.query && Object.keys(json.query).length > 0 ? jsonQuery(json) : null
+    json.query && Object.keys(json.query).length > 0 ? (
+      <Query>
+        {Object.keys(json.query).map((query) => params(query, 'query', json))}
+      </Query>
+    ) : null
   const headers =
-    json.headers && Object.keys(json.headers).length > 0
-      ? jsonHeaders(json)
-      : null
-  console.log('dekh')
-  console.log([query, headers])
+    json.headers && Object.keys(json.headers).length > 0 ? (
+      <Headers>
+        {Object.keys(json.headers).map((header) =>
+          params(header, 'headers', json)
+        )}
+      </Headers>
+    ) : null
   return [query, headers]
 }
 
