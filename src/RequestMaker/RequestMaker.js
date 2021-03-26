@@ -14,17 +14,50 @@ import React from 'react'
 import { RequestProvider } from './RequestContext'
 import { RequestMakerUI } from './RequestMakerUI'
 import jsyaml from 'js-yaml'
+import Query from './Query'
+import Parameter from './Parameter'
 
-const RequestMaker = ({ children, yaml='', ...props }) => (
-  yaml.length > 0 ? (
+const params = (key, element, json) => {
+  return (
+    <Parameter name={key}>json[element][key]</Parameter>
+  )
+}
+
+const jsonQuery = (json) => {
+  return (
+    <Query>
+      {Object.keys(json).forEach(query => params(query, 'query', json))}
+    </Query>
+  )
+}
+const jsonHeaders = (json) => {
+  return (
+    <Headers>
+      {Object.keys(json).forEach(header => params(header, 'headers', json))}
+    </Headers>
+  )
+}
+
+const jsonToJsx = (json) => {
+  const query = json["query"] && Object.keys(json["query"]).length > 0 ? jsonQuery(json) : null
+  const headers = json["headers"] && Object.keys(json["headers"]).length > 0 ? jsonHeaders(json): null
+  return (
+    {query}
+  )
+
+}
+
+const RequestMaker = ({ children, yaml='', ...props }) => {
+  const yamlJson = jsyaml.load(yaml)
+  return yaml.length > 0 ? (
     <RequestProvider>
-      <RequestMakerUI {...jsyaml.load(yaml)}>{children}</RequestMakerUI>
+      <RequestMakerUI {...yamlJson}>{jsonToJsx(yamlJson)}</RequestMakerUI>
     </RequestProvider>
   ) : (
     <RequestProvider>
       <RequestMakerUI {...props}>{children}</RequestMakerUI>
     </RequestProvider>
   )
-)
+  }
 
 export { RequestMaker }
