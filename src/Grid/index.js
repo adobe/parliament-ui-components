@@ -18,6 +18,8 @@ const Grid = ({ children, ...props }) => (
   <div
     {...props}
     css={css`
+      position: relative;
+      min-height: 100vh;
       background-color: var(--spectrum-global-color-gray-50);
       display: grid;
       grid-column-gap: 0px;
@@ -42,7 +44,7 @@ const GridHeader = styled.div`
   height: var(--spectrum-global-dimension-size-800);
   width: 100%;
   position: fixed;
-  background-color: white;
+  background-color: var(--spectrum-global-color-gray-50);
   z-index: 2;
 
   @media screen and (min-width: 1201px) {
@@ -60,6 +62,7 @@ const GridContent = styled.main`
   padding-top: var(--spectrum-global-dimension-size-300);
   padding-left: var(--spectrum-global-dimension-size-300);
   padding-right: var(--spectrum-global-dimension-size-300);
+  padding-bottom: var(--spectrum-global-dimension-size-500);
 
   @media screen and (min-width: 1201px) {
     grid-area: 2 / 2 / 2 / 11;
@@ -89,6 +92,9 @@ const GridRightRail = styled.div`
 `
 
 const GridFooter = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   @media screen and (min-width: 1201px) {
     grid-area: 3 / 2 / 4 / 14;
   }
