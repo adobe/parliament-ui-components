@@ -21,7 +21,7 @@ import { RequestBody } from './RequestBody'
 
 const getBodyItems = (body) => {
   const items = []
-  Object.keys(body) && Object.keys(body).length > 0
+  const getItems = Object.keys(body) && Object.keys(body).length > 0
     ? Object.keys(body).map((key) =>
         items.push({
           enabled: true,
@@ -53,7 +53,15 @@ const jsonToJsx = (json) => {
     ) : null
   const body =
     json.body && typeof json.body !== 'string' ? (
-      <RequestBody type='form-data'>{getBodyItems(json.body)}</RequestBody>
+      Object.values(json.headers)
+        .toLocaleString()
+        .toLowerCase()
+        .split(',')
+        .includes('application/x-www-form-urlencoded') ? (
+        <RequestBody type='urlencoded'>{getBodyItems(json.body)}</RequestBody>
+      ) : (
+        <RequestBody type='form-data'>{getBodyItems(json.body)}</RequestBody>
+      )
     ) : typeof json.body !== 'undefined' ? (
       <RequestBody type='raw'>{json.body}</RequestBody>
     ) : (
