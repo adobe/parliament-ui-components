@@ -135,7 +135,7 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
   return (
     <View>
       <Picker
-        width='size-1250'
+        width='size-1600'
         marginBottom='size-100'
         items={codeOptions}
         selectedKey={selected}

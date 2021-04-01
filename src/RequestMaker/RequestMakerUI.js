@@ -11,7 +11,7 @@
  */
 
 import React from 'react'
-import { Flex, View, TextField } from '@adobe/react-spectrum'
+import { Grid, View, TextField } from '@adobe/react-spectrum'
 
 import { queryString } from './utils'
 
@@ -45,17 +45,28 @@ const RequestMakerUI = ({
         padding='size-250'
         backgroundColor='gray-75'
       >
-        <Flex direction='column' gap='size-100'>
-          <Flex direction='row' gap='size-100' width='100%'>
-            <MethodPicker defaultMethod={defaultMethod} methods={methods} />
-            <TextField value={url + queryString(state.query)} width='100%' />
-          </Flex>
+        <Grid
+          areas={['left  right']}
+          columns={['1fr', '3fr']}
+          rows={['auto']}
+          gap='size-100'
+        >
+          <MethodPicker defaultMethod={defaultMethod} methods={methods} />
+          <TextField value={url + queryString(state.query)} width='100%' />
+        </Grid>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'var(--spectrum-global-dimension-size-100'
+          }}
+        >
           <RequestParameters url={url + queryString(state.query)}>
             {children}
           </RequestParameters>
           <SendRequestButton url={url} />
           <ResponsePanel />
-        </Flex>
+        </div>
       </View>
     </div>
   )

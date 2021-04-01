@@ -59,7 +59,7 @@ const MethodPicker = ({ methods, defaultMethod }) => {
 
   return (
     <Picker
-      width='size-1250'
+      width='size-1600'
       items={verbOptions}
       selectedKey={selected}
       onSelectionChange={updateState}
