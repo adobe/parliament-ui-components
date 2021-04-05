@@ -95,8 +95,8 @@ const reducer = (state, action) => {
           deletable: true
         })
       }
-      console.log({ ...state })
-      return { ...state }
+      console.log({ ...state, bodyType: action.bodyType })
+      return { ...state, bodyType: action.bodyType }
     }
     default:
       throw new Error()
