@@ -142,3 +142,26 @@ export const findSelectedPageSiblings = (pathname, pages) => {
 }
 
 export const isExternal = (url) => /^https?:\/\//.test(url)
+
+export const parseMetastring = (metastring) => {
+  const matches = metastring.match(/{.*?(?=})}/g)
+  const options = {}
+  if (matches) {
+    for (let i = 0; i < matches.length; i++) {
+      const option = matches[i].slice(1, -1).split(':')
+      const value = option[1] ? option[1].trim() : ''
+      if (value.toLowerCase() === 'true') {
+        options[option[0]] = true
+      } else if (value.toLowerCase() === 'false') {
+        options[option[0]] = false
+      } else {
+        options[option[0]] = value
+      }
+    }
+  }
+  return options
+}
+
+export const destructureProps = (props) => {
+  return typeof props.children === 'string' ? props : props.children.props
+}

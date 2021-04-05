@@ -12,7 +12,7 @@
 
 import React, { useState } from 'react'
 import { View, Picker, Item } from '@adobe/react-spectrum'
-import { Code } from '../Code'
+import { CodeUI } from '../CodeUI'
 const HTTPSnippet =
   typeof window !== `undefined` ? require('httpsnippet') : null
 
@@ -130,7 +130,7 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
     const props = {
       className: codeOptions.find((item) => item.id === id).lang || 'js'
     }
-    return <Code {...props}>{code}</Code>
+    return <CodeUI {...props}>{code}</CodeUI>
   }
 
   return (

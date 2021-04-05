@@ -15,7 +15,7 @@ import { Tabs, Item } from '@react-spectrum/tabs'
 import { Content, Flex, View } from '@adobe/react-spectrum'
 import GlobeGrid from '@spectrum-icons/workflow/GlobeGrid'
 import { ParameterTable } from './ParameterTable'
-import { Code } from '../Code'
+import { CodeUI } from '../CodeUI'
 import { useRequestState } from './RequestContext'
 import prettyBytes from 'pretty-bytes'
 import prettyMilliseconds from 'pretty-ms'
@@ -74,7 +74,7 @@ const ResponsePanel = (props) => {
       <Tabs aria-label='Response'>
         <Item title='Response Body' key='responseBodyTab'>
           <Content marginTop='size-250' marginStart='size-125'>
-            <Code className={language}>{body}</Code>
+            <CodeUI className={language}>{body}</CodeUI>
           </Content>
         </Item>
         <Item title='Response Headers' key='responseHeaderTab'>
