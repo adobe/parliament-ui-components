@@ -47,7 +47,7 @@ const RequestMakerUI = ({
       >
         <Grid
           areas={['left  right']}
-          columns={['1fr', '3fr']}
+          columns={['auto', '3fr']}
           rows={['auto']}
           gap='size-100'
         >
