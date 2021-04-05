@@ -1,6 +1,6 @@
 {
   "name": "@adobe/parliament-ui-components",
-  "version": "4.0.0-alpha.2",
+  "version": "4.0.0-beta.0",
   "description": "UI Components for Parliament projects",
   "author": {
     "name": "Simon Mac Donald",
