@@ -25,6 +25,7 @@ const AutoComplete = ({
   completions,
   ...props
 }) => {
+  completions = completions ? completions : []
   const textRef = useRef(null)
   const [isOpen, setIsOpen] = useState(false)
   const [val, setVal] = useState(value)
