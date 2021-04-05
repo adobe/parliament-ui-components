@@ -12,8 +12,8 @@
 
 import React from 'react'
 
-const Query = ({ parameters, children }) => {
-  return <div>{children}</div>
+const Query = ({ children, ...props }) => {
+  return <div {...props}>{children}</div>
 }
 
 export { Query }

@@ -12,8 +12,8 @@
 
 import React from 'react'
 
-const Headers = ({ parameters, children }) => {
-  return <div>{children}</div>
+const Headers = ({ children, ...props }) => {
+  return <div {...props}>{children}</div>
 }
 
 export { Headers }

@@ -21,33 +21,38 @@ import { RequestBody } from './RequestBody'
 
 const getBodyItems = (body) => {
   const items = []
-  const getItems = Object.keys(body) && Object.keys(body).length > 0
-    ? Object.keys(body).map((key) =>
-        items.push({
-          enabled: true,
-          key: key,
-          value: body[key],
-          deletable: true
-        })
-      )
-    : null
+  const getItems =
+    Object.keys(body) && Object.keys(body).length > 0
+      ? Object.keys(body).map((key) =>
+          items.push({
+            enabled: true,
+            key: key,
+            value: body[key],
+            deletable: true
+          })
+        )
+      : null
   return items
 }
 
 const jsonToJsx = (json) => {
   const query =
     json.query && Object.keys(json.query).length > 0 ? (
-      <Query>
+      <Query mdxType='query'>
         {Object.keys(json.query).map((query) => (
-          <Parameter name={query}>{json['query'][query]}</Parameter>
+          <Parameter key={query} name={query}>
+            {json.query[query]}
+          </Parameter>
         ))}
       </Query>
     ) : null
   const headers =
     json.headers && Object.keys(json.headers).length > 0 ? (
-      <Headers>
+      <Headers mdxType='headers'>
         {Object.keys(json.headers).map((header) => (
-          <Parameter name={header}>{json['headers'][header]}</Parameter>
+          <Parameter key={header} name={header}>
+            {json.headers[header]}
+          </Parameter>
         ))}
       </Headers>
     ) : null
@@ -58,14 +63,20 @@ const jsonToJsx = (json) => {
         .toLowerCase()
         .split(',')
         .includes('application/x-www-form-urlencoded') ? (
-        <RequestBody type='urlencoded'>{getBodyItems(json.body)}</RequestBody>
+        <RequestBody mdxType='requestbody' type='urlencoded'>
+          {getBodyItems(json.body)}
+        </RequestBody>
       ) : (
-        <RequestBody type='form-data'>{getBodyItems(json.body)}</RequestBody>
+        <RequestBody mdxType='requestbody' type='form-data'>
+          {getBodyItems(json.body)}
+        </RequestBody>
       )
     ) : typeof json.body !== 'undefined' ? (
-      <RequestBody type='raw'>{json.body}</RequestBody>
+      <RequestBody mdxType='requestbody' type='raw'>
+        {json.body}
+      </RequestBody>
     ) : (
-      <RequestBody type='none' />
+      <RequestBody mdxType='requestbody' type='none' />
     )
   return [query, headers, body]
 }
