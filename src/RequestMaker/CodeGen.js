@@ -12,8 +12,9 @@
 
 import React, { useState } from 'react'
 import { View, Picker, Item } from '@adobe/react-spectrum'
-const HTTPSnippet = typeof window !== `undefined` ? require("httpsnippet") : null
 import { Code } from '../Code'
+const HTTPSnippet =
+  typeof window !== `undefined` ? require('httpsnippet') : null
 
 const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
   const codeOptions = [
