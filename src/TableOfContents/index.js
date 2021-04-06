@@ -113,7 +113,7 @@ const renderItem = (item, index, activeId) => {
 }
 
 const renderLink = (item, activeId) => {
-  return activeId === item?.url.slice(1) ? (
+  return activeId === item?.url?.slice(1) ? (
     <Link
       href={item.url}
       css={css`
