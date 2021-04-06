@@ -102,36 +102,29 @@ const renderItem = (item, index, activeId) => {
             margin-top: 0;
           `}
         >
-          <Link
-            href={item.url}
-            css={css`
-              margin-left: -16px;
-              font-weight: ${activeId === item.url.slice(1)
-                ? 'bold'
-                : 'normal'};
-              color: ${activeId === item.url.slice(1)
-                ? 'var(--spectrum-global-color-gray-900)'
-                : ''};
-            `}
-          >
-            {item.title}
-          </Link>
+          {renderLink(item, activeId)}
           {renderItems(item.items, activeId)}
         </ul>
       ) : (
-        <Link
-          href={item.url}
-          css={css`
-            font-weight: ${activeId === item.url.slice(1) ? 'bold' : 'normal'};
-            color: ${activeId === item.url.slice(1)
-              ? 'var(--spectrum-global-color-gray-900)'
-              : ''};
-          `}
-        >
-          {item.title}
-        </Link>
+        renderLink(item, activeId)
       )}
     </li>
+  )
+}
+
+const renderLink = (item, activeId) => {
+  return activeId === item.url.slice(1) ? (
+    <Link
+      href={item.url}
+      css={css`
+        font-weight: bold;
+        color: var(--spectrum-global-color-gray-900);
+      `}
+    >
+      {item.title}
+    </Link>
+  ) : (
+    <Link href={item.url}>{item.title}</Link>
   )
 }
 
