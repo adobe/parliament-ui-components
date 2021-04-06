@@ -42,6 +42,10 @@ const createHeading = (
     isHeading2 ? '100' : '50'
   });`
 
+  const marginBottom = isHeading2
+    ? `var(--spectrum-global-dimension-size-100)!important;`
+    : ''
+
   return (
     <React.Fragment>
       {!isHeading1 && <Anchor id={id} />}
@@ -50,7 +54,7 @@ const createHeading = (
         id={`${id}`}
         className={classNames(
           className,
-          `spectrum-Heading--${headingSizes[level - 1]}`,
+          `spectrum-Heading--size${headingSizes[level - 1]}`,
           {
             'spectrum-Heading--light': isHeading1
           }
@@ -70,6 +74,7 @@ const createHeading = (
           opacity: 1;
         }`}
 
+          ${marginBottom}
           ${styles}
         `}
       >
