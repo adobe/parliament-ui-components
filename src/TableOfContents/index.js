@@ -12,6 +12,7 @@ governing permissions and limitations under the License.
 
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react'
+import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from '../Link'
 import { View } from '@adobe/react-spectrum'
@@ -29,6 +30,9 @@ const TableOfContents = ({
   const tableOfContentsItems = {
     items: tableOfContents.items && tableOfContents.items[index].items
   }
+
+  const idList = getIds(tableOfContents?.items?.[0]?.items)
+  const activeId = useActiveId(idList)
 
   return (
     <View
@@ -67,48 +71,113 @@ const TableOfContents = ({
           `}
         >
           {tableOfContentsItems.items &&
-            tableOfContentsItems.items.map(renderItem, index)}
+            renderItems(tableOfContentsItems.items, activeId)}
         </ul>
       </span>
     </View>
   )
 }
 
-const renderItem = (item, index) => (
-  <li
-    key={index}
-    css={css`
-      margin-top: var(--spectrum-global-dimension-static-size-100);
-      margin-bottom: 0;
-    `}
-  >
-    {item.items ? (
-      <ul
-        css={css`
-          list-style: none;
-          padding-left: var(--spectrum-global-dimension-static-size-200);
-          margin-left: 0;
-          margin-bottom: 0;
-          margin-top: 0;
-        `}
-      >
+const renderItems = (items, activeId) => {
+  return items.map((item, index) => {
+    return renderItem(item, index, activeId)
+  })
+}
+
+const renderItem = (item, index, activeId) => {
+  return (
+    <li
+      key={index}
+      css={css`
+        margin-bottom: 0;
+      `}
+    >
+      {item.items ? (
+        <ul
+          css={css`
+            list-style: none;
+            padding-left: var(--spectrum-global-dimension-static-size-200);
+            margin-left: 0;
+            margin-bottom: 0;
+            margin-top: 0;
+          `}
+        >
+          <Link
+            href={item.url}
+            css={css`
+              margin-left: -16px;
+              font-weight: ${activeId === item.url.slice(1)
+                ? 'bold'
+                : 'normal'};
+              color: ${activeId === item.url.slice(1)
+                ? 'var(--spectrum-global-color-gray-900)'
+                : ''};
+            `}
+          >
+            {item.title}
+          </Link>
+          {renderItems(item.items, activeId)}
+        </ul>
+      ) : (
         <Link
           href={item.url}
           css={css`
-            margin-left: -16px;
+            font-weight: ${activeId === item.url.slice(1) ? 'bold' : 'normal'};
+            color: ${activeId === item.url.slice(1)
+              ? 'var(--spectrum-global-color-gray-900)'
+              : ''};
           `}
         >
           {item.title}
         </Link>
-        {item.items.map(renderItem)}
-      </ul>
-    ) : (
-      <Link href={item.url}>{item.title}</Link>
-    )}
-  </li>
-)
+      )}
+    </li>
+  )
+}
 
-// :rocket
+const getIds = (items) => {
+  return items
+    ? items.reduce((acc, item) => {
+        if (item.url) {
+          // url has a # as first character, remove it to get the raw CSS-id
+          acc.push(item.url.slice(1))
+        }
+        if (item.items) {
+          acc.push(...getIds(item.items))
+        }
+        return acc
+      }, [])
+    : []
+}
+
+const useActiveId = (itemIds) => {
+  const [activeId, setActiveId] = useState(``)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id)
+          }
+        })
+      },
+      { rootMargin: `0% 0% -80% 0%` }
+    )
+
+    itemIds.forEach((id) => {
+      observer.observe(document.getElementById(id))
+    })
+
+    return () => {
+      itemIds.forEach((id) => {
+        observer.unobserve(document.getElementById(id))
+      })
+    }
+  }, [itemIds])
+
+  return activeId
+}
 
 TableOfContents.propTypes = {
   tableOfContents: PropTypes.object
