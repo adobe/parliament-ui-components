@@ -87,6 +87,10 @@ export const OpenAPIBlock = ({ specUrl, spec }) => {
                 -webkit-font-smoothing: auto !important;
               }
 
+              .menu-content {
+                background-color: var(--spectrum-global-color-gray-75);
+              }
+
               [role='navigation'] {
                 padding: var(--spectrum-global-dimension-static-size-400);
 
@@ -207,6 +211,10 @@ export const OpenAPIBlock = ({ specUrl, spec }) => {
                   }
                 }
 
+                label.active {
+                  background-color: var(--spectrum-global-color-gray-200);
+                }
+
                 & > li > [role='menuitem'] {
                   font-weight: var(
                     --spectrum-sidenav-multilevel-main-item-font-weight,
@@ -220,6 +228,8 @@ export const OpenAPIBlock = ({ specUrl, spec }) => {
               }
 
               .api-info {
+                color: var(--spectrum-global-color-gray-900);
+                background-color: var(--spectrum-global-color-gray-0);
                 h1 {
                   font-weight: var(
                     --spectrum-heading-light-xl-emphasis-text-font-weight,
@@ -1158,7 +1168,7 @@ export const OpenAPIBlock = ({ specUrl, spec }) => {
                     solid transparent;
                 }
 
-                a[href] {
+                a {
                   color: var(
                     --spectrum-link-text-color,
                     var(--spectrum-global-color-blue-600)
