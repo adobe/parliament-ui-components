@@ -62,7 +62,7 @@ const DiscoverBlock = ({ width, heading, link, text, image, ...props }) => (
         `
       })}
     {heading && (
-      <div className='spectrum-Heading--M' aria-hidden='true'>
+      <div className='spectrum-Heading--sizeM' aria-hidden='true'>
         &nbsp;
       </div>
     )}

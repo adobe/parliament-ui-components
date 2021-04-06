@@ -34,7 +34,7 @@ const Resources = ({ heading, links, ...props }) => {
     >
       {heading}
       <ul
-        className='spectrum-Body--M'
+        className='spectrum-Body--sizeM'
         css={css`
           list-style: none;
           padding: 0;

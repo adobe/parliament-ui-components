@@ -27,7 +27,7 @@ const centered = css`
 
 const NextPrev = ({ nextPage, previousPage, ...props }) =>
   nextPage || previousPage ? (
-    <div className='spectrum-Body--M' {...props}>
+    <div className='spectrum-Body--sizeM' {...props}>
       <Flex marginBottom='size-800' marginTop='size-800'>
         <View>
           {previousPage && (

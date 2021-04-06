@@ -106,7 +106,7 @@ const OnThisPage = ({ tableOfContents, ...props }) => {
       marginY='size-400'
     >
       <h4
-        className='spectrum-Detail--L'
+        className='spectrum-Detail--sizeL'
         css={css`
           color: var(--spectrum-global-color-gray-600);
         `}
@@ -114,7 +114,7 @@ const OnThisPage = ({ tableOfContents, ...props }) => {
         On this page
       </h4>
       <ol
-        className='spectrum-Body--M'
+        className='spectrum-Body--sizeM'
         css={css`
           list-style: none;
           padding: 0;
@@ -190,7 +190,7 @@ const OnThisPage = ({ tableOfContents, ...props }) => {
     return (
       <View marginY='size-400'>
         <h4
-          className='spectrum-Detail--L'
+          className='spectrum-Detail--sizeL'
           css={css`
             color: var(--spectrum-global-color-gray-600);
             margin-bottom: var(--spectrum-global-dimension-static-size-200);

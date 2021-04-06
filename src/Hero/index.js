@@ -38,7 +38,7 @@ const Hero = ({
         <View marginStart='size-800'>
           {heading &&
             cloneElement(heading, {
-              className: 'spectrum-Heading--XL',
+              className: 'spectrum-Heading--sizeXL',
               css: css`
                 margin-bottom: var(--spectrum-global-dimension-static-size-200);
                 color: ${textColor};
@@ -47,7 +47,7 @@ const Hero = ({
 
           {text &&
             cloneElement(text, {
-              className: 'spectrum-Body--L',
+              className: 'spectrum-Body--sizeL',
               css: css`
                 margin-bottom: var(--spectrum-global-dimension-static-size-200);
                 color: ${textColor};

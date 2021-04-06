@@ -20,7 +20,7 @@ describe('<Heading1 />', () => {
     const heading1 = getByText('Heading1')
 
     expect(heading1).toHaveClass(
-      'spectrum-Heading--XL',
+      'spectrum-Heading--sizeXL',
       'spectrum-Heading--light'
     )
   })

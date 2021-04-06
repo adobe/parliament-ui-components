@@ -233,7 +233,7 @@ const GlobalHeader = ({
                                       marginBottom='size-200'
                                       marginStart='size-200'
                                     >
-                                      <strong className='spectrum-Heading--S'>
+                                      <strong className='spectrum-Heading--sizeS'>
                                         {section.heading}
                                       </strong>
                                     </View>
@@ -281,7 +281,7 @@ const GlobalHeader = ({
                                             {page.description && (
                                               <View marginTop='size-100'>
                                                 <span
-                                                  className='spectrum-Body--XS'
+                                                  className='spectrum-Body--sizeXS'
                                                   css={css`
                                                     color: var(
                                                       --spectrum-global-color-gray-700

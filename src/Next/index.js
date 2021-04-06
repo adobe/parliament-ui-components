@@ -21,7 +21,7 @@ import '@spectrum-css/typography'
 
 const Next = ({ url, title, ...props }) => {
   return (
-    <div className='spectrum-Body spectrum-Body--M' {...props}>
+    <div className='spectrum-Body spectrum-Body--sizeM' {...props}>
       <Link
         to={url}
         rel='next'

@@ -17,7 +17,7 @@ import '@spectrum-css/typography'
 
 const Footer = ({ ...props }) => (
   <footer
-    className='spectrum-Body--XS'
+    className='spectrum-Body--sizeXS'
     css={css`
       margin: 0 var(--spectrum-global-dimension-static-size-400);
     `}

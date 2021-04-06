@@ -39,7 +39,7 @@ const TableOfContents = ({
       {...props}
     >
       <span
-        className='spectrum-Detail--L'
+        className='spectrum-Detail--sizeL'
         css={css`
           color: var(--spectrum-global-color-gray-600);
         `}
@@ -59,7 +59,7 @@ const TableOfContents = ({
         `}
       >
         <ul
-          className='spectrum-Body--M'
+          className='spectrum-Body--sizeM'
           css={css`
             margin: 0;
             padding-left: 0;

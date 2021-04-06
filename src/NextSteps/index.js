@@ -25,7 +25,7 @@ const NextSteps = ({ pages, ...props }) => {
     <View marginTop='size-800' {...props}>
       <Heading4>Next steps</Heading4>
       <ul
-        className='spectrum-Body--M'
+        className='spectrum-Body--sizeM'
         css={css`
           list-style: none;
           padding: 0;
