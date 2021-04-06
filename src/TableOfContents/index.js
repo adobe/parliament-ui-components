@@ -102,7 +102,7 @@ const renderItem = (item, index, activeId) => {
             margin-top: 0;
           `}
         >
-          {renderLink(item, activeId)}
+          {renderLink(item, activeId, true)}
           {renderItems(item.items, activeId)}
         </ul>
       ) : (
@@ -112,11 +112,12 @@ const renderItem = (item, index, activeId) => {
   )
 }
 
-const renderLink = (item, activeId) => {
+const renderLink = (item, activeId, indent = false) => {
   return activeId === item?.url?.slice(1) ? (
     <Link
       href={item.url}
       css={css`
+        ${indent ? `margin-left: -16px;` : ''}
         font-weight: bold;
         color: var(--spectrum-global-color-gray-900);
       `}
@@ -124,7 +125,14 @@ const renderLink = (item, activeId) => {
       {item.title}
     </Link>
   ) : (
-    <Link href={item.url}>{item.title}</Link>
+    <Link
+      href={item.url}
+      css={css`
+        ${indent ? `margin-left: -16px;` : ''}
+      `}
+    >
+      {item.title}
+    </Link>
   )
 }
 
