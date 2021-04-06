@@ -134,7 +134,7 @@ const Header = ({
                 ) : (
                   icon
                 )}
-                <strong className='spectrum-Heading--XXS'>{title}</strong>
+                <strong className='spectrum-Heading--sizeXXS'>{title}</strong>
               </Flex>
             </a>
             <Divider

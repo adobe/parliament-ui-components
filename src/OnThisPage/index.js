@@ -109,6 +109,7 @@ const OnThisPage = ({ tableOfContents, ...props }) => {
         className='spectrum-Detail--sizeL'
         css={css`
           color: var(--spectrum-global-color-gray-600);
+          margin-bottom: var(--spectrum-global-dimension-static-size-250);
         `}
       >
         On this page
@@ -126,12 +127,7 @@ const OnThisPage = ({ tableOfContents, ...props }) => {
         `}
       >
         {tableOfContentsItems.map((section, index) => (
-          <li
-            key={index}
-            css={css`
-              margin-top: var(--spectrum-global-dimension-static-size-150);
-            `}
-          >
+          <li key={index}>
             <Link
               className={classNames({
                 'is-active': withSubHeading && activeHeadingLink === section.url

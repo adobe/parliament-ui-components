@@ -43,7 +43,10 @@ const createHeading = (
   });`
 
   const marginBottom = isHeading2
-    ? `var(--spectrum-global-dimension-size-100)!important;`
+    ? `margin-bottom: var(--spectrum-global-dimension-size-100)!important;`
+    : ''
+  const marginTop = !isHeading1
+    ? `margin-top: var(--spectrum-global-dimension-size-500); `
     : ''
 
   return (
@@ -74,6 +77,7 @@ const createHeading = (
           opacity: 1;
         }`}
 
+          ${marginTop}
           ${marginBottom}
           ${styles}
         `}

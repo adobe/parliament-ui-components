@@ -81,6 +81,7 @@ const CodeUI = (props) => {
       scale='medium'
       UNSAFE_style={{
         borderRadius: 'var(--spectrum-global-dimension-size-50)',
+        marginTop: '1.0rem',
         marginBottom: '1.45rem'
       }}
       {...otherProps}

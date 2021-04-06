@@ -38,14 +38,15 @@ const TableOfContents = ({
       marginY='size-400'
       {...props}
     >
-      <span
+      <h4
         className='spectrum-Detail--sizeL'
         css={css`
           color: var(--spectrum-global-color-gray-600);
+          margin-bottom: var(--spectrum-global-dimension-static-size-250);
         `}
       >
         {title}
-      </span>
+      </h4>
       <span
         css={css`
           * {

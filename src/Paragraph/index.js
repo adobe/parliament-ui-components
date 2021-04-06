@@ -10,12 +10,19 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
+/** @jsx jsx */
+import { css, jsx } from '@emotion/react'
 import classNames from 'classnames'
 import '@spectrum-css/typography'
 
 export const Paragraph = ({ children, className, ...props }) => (
-  <p className={classNames(className, 'spectrum-Body--sizeM')} {...props}>
+  <p
+    className={classNames(className, 'spectrum-Body--sizeM')}
+    css={css`
+      margin-top: var(--spectrum-global-dimension-size-300);
+    `}
+    {...props}
+  >
     {children}
   </p>
 )
