@@ -12,6 +12,7 @@ governing permissions and limitations under the License.
 
 import React from 'react'
 import { render, screen } from 'test-utils'
+import '../../../test-utils/matchMedia'
 import userEvent from '@testing-library/user-event'
 
 describe('<MethodPicker />', () => {

@@ -12,9 +12,20 @@ governing permissions and limitations under the License.
 
 import React from 'react'
 import { render } from 'test-utils'
+import '../../../test-utils/matchMedia'
 import { TableOfContents } from '../index'
 
 describe('<TableOfContents />', () => {
+  beforeEach(() => {
+    // IntersectionObserver isn't available in test environment
+    const mockIntersectionObserver = jest.fn()
+    mockIntersectionObserver.mockReturnValue({
+      observe: () => null,
+      unobserve: () => null,
+      disconnect: () => null
+    })
+    window.IntersectionObserver = mockIntersectionObserver
+  })
   test('should render', () => {
     const { getByTestId } = render(<TableOfContents data-testid='el' />)
     const el = getByTestId('el')
