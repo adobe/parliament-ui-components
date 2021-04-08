@@ -27,6 +27,7 @@ import {
 import Menu from '@spectrum-icons/workflow/ShowMenu'
 
 import { useMediaQuery } from 'react-responsive'
+import { ThemeSwitcher } from '../Provider'
 
 const stretched = css`
   height: 100%;
@@ -42,6 +43,7 @@ const Header = ({
   location = {},
   tabs = [],
   search,
+  themeSwitcher = true,
   ...props
 }) => {
   const isMobile = useMediaQuery({ maxWidth: 767 })
@@ -220,8 +222,9 @@ const Header = ({
                 </Tabs>
               </Flex>
             </View>
-            <Flex direction='row' alignItems='end'>
+            <Flex direction='row' alignItems='end' gap='size-100'>
               <View>{search}</View>
+              {themeSwitcher && <ThemeSwitcher />}
             </Flex>
           </Flex>
         </View>

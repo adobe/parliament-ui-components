@@ -98,3 +98,18 @@ export const WithSearch = () => {
 
   return <Header {...props} />
 }
+
+export const WithSearchWithoutThemeSwitcher = () => {
+  const props = {
+    location: { pathname: '/' },
+    siteTitle: 'My Test Site',
+    search: <div>Search…</div>,
+    tabs: [
+      { title: 'Docs', path: '/' },
+      { title: 'Remote', path: 'https://adobe.com' }
+    ],
+    themeSwitcher: false
+  }
+
+  return <Header {...props} />
+}

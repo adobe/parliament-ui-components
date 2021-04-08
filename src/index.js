@@ -70,4 +70,4 @@ export {
   Headers,
   Parameter
 } from './RequestMaker'
-export { Provider } from './Provider'
+export { Provider, ThemeSwitcher } from './Provider'

@@ -16001,7 +16001,7 @@ react-docgen@^5.0.0:
     node-dir "^0.1.10"
     strip-indent "^3.0.0"
 
-react-dom@16.14.0, react-dom@^16.8.3:
+react-dom@^16.14.0, react-dom@^16.8.3:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
   integrity sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
@@ -16118,6 +16118,11 @@ react-inspector@^4.0.0:
     "@babel/runtime" "^7.6.3"
     is-dom "^1.0.9"
     prop-types "^15.6.1"
+
+react-is-mounted-hook@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-is-mounted-hook/-/react-is-mounted-hook-1.1.0.tgz#568bd82331306a16890ff865b5a294014ff19047"
+  integrity sha512-h53TIe1ofqzFo98/szmPIM0m4ei2NIVtdRn/L0Hs9MNChsmpvPvdVzl9L8qGS3hbxZvlaZYzlmB8ntAMYJGf0A==
 
 react-is@^16.12.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.3:
   version "16.13.1"

@@ -18,8 +18,8 @@ import PropTypes from 'prop-types'
 import { cloneElement } from '../utils'
 
 const Hero = ({
-  background = '#1D7DEE',
-  textColor = 'var(--spectrum-global-color-gray-200)',
+  background = 'var(--spectrum-global-color-blue-400)',
+  textColor = 'var(--spectrum-global-color-static-gray-200)',
   heading,
   text,
   image,
