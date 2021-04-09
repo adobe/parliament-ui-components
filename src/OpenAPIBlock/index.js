@@ -296,6 +296,7 @@ export const OpenAPIBlock = ({ specUrl, spec }) => {
               }
 
               .api-content {
+                color: var(--spectrum-global-color-gray-900);
                 table {
                   margin-bottom: var(
                     --spectrum-global-dimension-size-400,
