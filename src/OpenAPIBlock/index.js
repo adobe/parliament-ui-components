@@ -344,6 +344,20 @@ export const OpenAPIBlock = ({ specUrl, spec }) => {
                   border-top: none;
                 }
 
+                tr:nth-child(2n) {
+                  background-color: var(
+                    --spectrum-table-quiet-row-background-color,
+                    var(--spectrum-alias-background-color-transparent)
+                  );
+                }
+
+                th {
+                  background-color: var(
+                    --spectrum-table-header-background-color,
+                    var(--spectrum-alias-background-color-transparent)
+                  );
+                }
+
                 td {
                   border-bottom: none;
                   border-right: none;
@@ -449,6 +463,10 @@ export const OpenAPIBlock = ({ specUrl, spec }) => {
                 }
 
                 td button {
+                  color: var(
+                    --spectrum-code-s-text-color,
+                    var(--spectrum-alias-text-color)
+                  );
                   font-size: var(
                     --spectrum-table-cell-text-size,
                     var(--spectrum-alias-font-size-default)
@@ -460,6 +478,13 @@ export const OpenAPIBlock = ({ specUrl, spec }) => {
                   font-family: var(
                     --spectrum-code-s-text-font-family,
                     var(--spectrum-alias-code-text-font-family)
+                  );
+                }
+
+                td div div span {
+                  color: var(
+                    --spectrum-code-s-text-color,
+                    var(--spectrum-alias-text-color)
                   );
                 }
 
