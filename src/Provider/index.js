@@ -12,7 +12,7 @@ function useCurrentColorScheme() {
   const [colorScheme, setColorScheme] = useState(undefined)
   const isMounted = useIsMounted()
   useEffect(() => {
-    setColorScheme(localStorage.theme || 'dark')
+    setColorScheme(localStorage.theme || 'light')
   }, [isMounted])
 
   useEffect(() => {
