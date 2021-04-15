@@ -47,7 +47,7 @@ function defaultFocus(theObject, selected, urlPrefix) {
         const updatedPath = stripManifestPath(theObject[prop], urlPrefix)
         if (
           updatedPath &&
-          selected.toLowerCase().endsWith(updatedPath.toLowerCase())
+          updatedPath.toLowerCase().endsWith(selected.toLowerCase())
         ) {
           return theObject.title
         }
