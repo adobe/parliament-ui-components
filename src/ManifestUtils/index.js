@@ -9,6 +9,8 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
+import { withPrefix } from 'gatsby'
+
 function stripManifestPath(path, { org = '', name = '', branch = '' } = {}) {
   if (!path) {
     return ''
@@ -47,7 +49,7 @@ function defaultFocus(theObject, selected, urlPrefix) {
         const updatedPath = stripManifestPath(theObject[prop], urlPrefix)
         if (
           updatedPath &&
-          updatedPath.toLowerCase().endsWith(selected.toLowerCase())
+          withPrefix(updatedPath).toLowerCase().endsWith(selected.toLowerCase())
         ) {
           return theObject.title
         }
