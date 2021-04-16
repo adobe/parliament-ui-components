@@ -17,15 +17,17 @@ import '@spectrum-css/table'
 
 const Table = ({ children, isQuiet, ...props }) => {
   return (
-    <table
-      className={classNames([
-        'spectrum-Table',
-        { 'spectrum-Table--quiet': isQuiet }
-      ])}
-      {...props}
-    >
-      {children}
-    </table>
+    <div style={{ width: '100%', overflowX: 'scroll' }}>
+      <table
+        className={classNames([
+          'spectrum-Table',
+          { 'spectrum-Table--quiet': isQuiet }
+        ])}
+        {...props}
+      >
+        {children}
+      </table>
+    </div>
   )
 }
 
