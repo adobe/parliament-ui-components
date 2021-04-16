@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import {
   ActionButton,
   defaultTheme,
@@ -11,11 +11,11 @@ import useIsMounted from 'react-is-mounted-hook'
 function useCurrentColorScheme() {
   const [colorScheme, setColorScheme] = useState(undefined)
   const isMounted = useIsMounted()
-  useEffect(() => {
+  useLayoutEffect(() => {
     setColorScheme(localStorage.theme || 'light')
   }, [isMounted])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const mq = window.matchMedia('(prefers-color-scheme: dark)')
     const onChange = () => {
       setColorScheme(localStorage.theme || (mq.matches ? 'dark' : 'light'))
