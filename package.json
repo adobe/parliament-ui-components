@@ -96,7 +96,6 @@
     "react-dom": "^16.14.0",
     "react-id-generator": "^3.0.1",
     "react-image": "^4.0.3",
-    "react-is-mounted-hook": "^1.1.0",
     "react-responsive": "^8.1.0",
     "redoc": "2.0.0-rc.38",
     "styled-components": "^5.1.1"
