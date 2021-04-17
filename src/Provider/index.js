@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import {
   ActionButton,
   defaultTheme,
@@ -7,47 +7,62 @@ import {
 import Light from '@spectrum-icons/workflow/Light'
 import Moon from '@spectrum-icons/workflow/Moon'
 
-function useCurrentColorScheme() {
-  const [colorScheme, setColorScheme] = useState(undefined)
+export const ThemeContext = React.createContext()
+export const ThemeProvider = ({ children }) => {
+  const [colorMode, rawSetColorMode] = useState(undefined)
 
   useEffect(() => {
     const root = window.document.documentElement
     const initialColorValue = root.style.getPropertyValue('--initial-theme')
-    setColorScheme(initialColorValue)
-
-    const mq = window.matchMedia('(prefers-color-scheme: dark)')
-    const onChange = () => {
-      setColorScheme(
-        localStorage.getItem('theme') || (mq.matches ? 'dark' : 'light')
-      )
-    }
-
-    mq.addListener(onChange)
-    window.addEventListener('storage', onChange)
-    return () => {
-      mq.removeListener(onChange)
-      window.removeEventListener('storage', onChange)
-    }
+    const persistedPreference = localStorage.getItem('theme')
+    const hasUsedToggle = typeof persistedPreference === 'string'
+    hasUsedToggle
+      ? rawSetColorMode(persistedPreference)
+      : rawSetColorMode(initialColorValue)
   }, [])
 
-  return colorScheme
+  const contextValue = useMemo(() => {
+    function setColorMode(newValue) {
+      localStorage.setItem('theme', newValue)
+      rawSetColorMode(newValue)
+    }
+
+    return {
+      colorMode,
+      setColorMode
+    }
+  }, [colorMode, rawSetColorMode])
+
+  return (
+    <ThemeContext.Provider value={contextValue}>
+      {children}
+    </ThemeContext.Provider>
+  )
 }
 
-export const Provider = ({
+export const Provider = ({ children, ...props }) => {
+  return (
+    <ThemeProvider>
+      <RSThemeProvider {...props}>{children}</RSThemeProvider>
+    </ThemeProvider>
+  )
+}
+
+export const RSThemeProvider = ({
   colorScheme: colorSchemeProp = 'light',
   scale = 'medium',
   children,
   ...props
 }) => {
-  const colorScheme = useCurrentColorScheme()
+  const { colorMode } = React.useContext(ThemeContext)
   return (
     <RSProvider
       theme={defaultTheme}
-      colorScheme={colorScheme || colorSchemeProp}
+      colorScheme={colorMode || colorSchemeProp}
       scale={scale}
     >
       <div
-        className={`spectrum spectrum--${colorScheme} spectrum--${scale}`}
+        className={`spectrum spectrum--${colorMode} spectrum--${scale}`}
         dir='ltr'
         {...props}
       >
@@ -58,19 +73,24 @@ export const Provider = ({
 }
 
 export const ThemeSwitcher = () => {
-  const colorScheme = useCurrentColorScheme()
+  const { colorMode, setColorMode } = React.useContext(ThemeContext)
+
+  // prevents flickering moon/sun
+  if (!colorMode) {
+    return null
+  }
+
   const onPress = () => {
-    const scheme = colorScheme === 'dark' ? 'light' : 'dark'
-    localStorage.setItem('theme', scheme)
-    window.dispatchEvent(new Event('storage'))
+    const scheme = colorMode === 'dark' ? 'light' : 'dark'
+    setColorMode(scheme)
   }
   const label =
-    colorScheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
+    colorMode === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
 
   return (
     <div title={label} role='presentation'>
       <ActionButton aria-label={label} onPress={onPress}>
-        {colorScheme === 'dark' ? <Light /> : <Moon />}
+        {colorMode === 'dark' ? <Light /> : <Moon />}
       </ActionButton>
     </div>
   )
