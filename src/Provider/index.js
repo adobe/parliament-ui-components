@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   ActionButton,
   defaultTheme,
@@ -6,19 +6,20 @@ import {
 } from '@adobe/react-spectrum'
 import Light from '@spectrum-icons/workflow/Light'
 import Moon from '@spectrum-icons/workflow/Moon'
-import useIsMounted from 'react-is-mounted-hook'
 
 function useCurrentColorScheme() {
   const [colorScheme, setColorScheme] = useState(undefined)
-  const isMounted = useIsMounted()
-  useLayoutEffect(() => {
-    setColorScheme(localStorage.theme || 'light')
-  }, [isMounted])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    const root = window.document.documentElement
+    const initialColorValue = root.style.getPropertyValue('--initial-theme')
+    setColorScheme(initialColorValue)
+
     const mq = window.matchMedia('(prefers-color-scheme: dark)')
     const onChange = () => {
-      setColorScheme(localStorage.theme || (mq.matches ? 'dark' : 'light'))
+      setColorScheme(
+        localStorage.getItem('theme') || (mq.matches ? 'dark' : 'light')
+      )
     }
 
     mq.addListener(onChange)
@@ -59,7 +60,8 @@ export const Provider = ({
 export const ThemeSwitcher = () => {
   const colorScheme = useCurrentColorScheme()
   const onPress = () => {
-    localStorage.theme = colorScheme === 'dark' ? 'light' : 'dark'
+    const scheme = colorScheme === 'dark' ? 'light' : 'dark'
+    localStorage.setItem('theme', scheme)
     window.dispatchEvent(new Event('storage'))
   }
   const label =
