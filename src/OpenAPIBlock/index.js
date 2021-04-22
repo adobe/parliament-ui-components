@@ -13,7 +13,15 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react'
 import { useEffect, useState } from 'react'
-import { Flex, ProgressCircle, Switch } from '@adobe/react-spectrum'
+import {
+  defaultTheme,
+  Button,
+  Grid,
+  ProgressCircle,
+  Provider,
+  Switch,
+  View
+} from '@adobe/react-spectrum'
 import { RedocStandalone } from 'redoc'
 
 const hideInternalRoutes = (spec) => {
@@ -29,7 +37,7 @@ const hideInternalRoutes = (spec) => {
   return specCopy
 }
 
-export const OpenAPIBlock = ({ specUrl, spec }) => {
+export const OpenAPIBlock = ({ specUrl, spec, backButton = true, backUrl }) => {
   const [showProgress, setShowProgress] = useState(true)
   const [hideInternal, setHideInternal] = useState(false)
   const [loadingData, setLoadingData] = useState(true)
@@ -56,13 +64,39 @@ export const OpenAPIBlock = ({ specUrl, spec }) => {
         height: calc(100% - 64px);
       `}
     >
-      <Flex direction='column' gap='size-100' alignItems='flex-end'>
-        <div>
-          <Switch isSelected={hideInternal} onChange={setHideInternal}>
-            Hide Internal Routes
-          </Switch>
-        </div>
-      </Flex>
+      <Provider theme={defaultTheme} colorScheme='dark'>
+        <View backgroundColor='blue-400'>
+          <Grid
+            areas={['backToDocs privateRoutes']}
+            columns={['1fr', '1fr']}
+            rows={['auto']}
+            height='size-600'
+            gap='size-100'
+            alignItems='center'
+            marginStart='size-100'
+          >
+            <View gridArea='backToDocs'>
+              {backButton && (
+                <Button
+                  variant='overBackground'
+                  onPress={() => {
+                    backUrl
+                      ? (document.location.href = backUrl)
+                      : window.history.back()
+                  }}
+                >
+                  Back to Docs
+                </Button>
+              )}
+            </View>
+            <View gridArea='privateRoutes' justifySelf='self-end'>
+              <Switch isSelected={hideInternal} onChange={setHideInternal}>
+                Hide Internal Routes
+              </Switch>
+            </View>
+          </Grid>
+        </View>
+      </Provider>
 
       <div
         css={css`
