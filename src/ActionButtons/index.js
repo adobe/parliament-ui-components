@@ -16,7 +16,7 @@ import { ActionButton, Text } from '@adobe/react-spectrum'
 import Bug from '@spectrum-icons/workflow/Bug'
 import Edit from '@spectrum-icons/workflow/Edit'
 
-const ActionButtons = ({ gitUrl, filePath, branch, ...props }) => (
+const ActionButtons = ({ gitUrl, filePath, branch, issues, ...props }) => (
   <div {...props}>
     <ActionButton
       isQuiet
@@ -31,7 +31,9 @@ const ActionButtons = ({ gitUrl, filePath, branch, ...props }) => (
     <ActionButton
       isQuiet
       onPress={() => {
-        document.location.href = `${gitUrl}/issues/new?body=Issue%20in%20${filePath}`
+        issues
+          ? (document.location.href = issues)
+          : (document.location.href = `${gitUrl}/issues/new?body=Issue%20in%20${filePath}`)
       }}
       aria-label='Log issue'
     >
