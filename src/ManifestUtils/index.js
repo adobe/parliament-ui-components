@@ -11,34 +11,11 @@ governing permissions and limitations under the License.
 */
 import { withPrefix } from 'gatsby'
 
-function stripManifestPath(path, { org = '', name = '', branch = '' } = {}) {
-  if (!path) {
-    return ''
-  }
-  if (
-    path.startsWith('http://') ||
-    path.startsWith('https://') ||
-    (org === '' && name === '' && branch === '')
-  ) {
-    return path
-  }
-  const prefix = [org, name, branch]
-  const splitPath = path.split('/').filter((item) => item !== '')
-
-  prefix.map((item) => {
-    if (item.toLocaleLowerCase() === splitPath[0].toLocaleLowerCase()) {
-      splitPath.shift()
-    }
-  })
-
-  return '/' + splitPath.join('/')
-}
-
-function defaultFocus(theObject, selected, urlPrefix) {
+function defaultFocus(theObject, selected) {
   var result = null
   if (theObject instanceof Array) {
     for (var i = 0; i < theObject.length; i++) {
-      result = defaultFocus(theObject[i], selected, urlPrefix)
+      result = defaultFocus(theObject[i], selected)
       if (result) {
         break
       }
@@ -46,7 +23,7 @@ function defaultFocus(theObject, selected, urlPrefix) {
   } else {
     for (var prop in theObject) {
       if (prop === 'path') {
-        const updatedPath = stripManifestPath(theObject[prop], urlPrefix)
+        const updatedPath = theObject[prop]
         if (
           updatedPath &&
           withPrefix(updatedPath).toLowerCase().endsWith(selected.toLowerCase())
@@ -58,7 +35,7 @@ function defaultFocus(theObject, selected, urlPrefix) {
         theObject[prop] instanceof Object ||
         theObject[prop] instanceof Array
       ) {
-        result = defaultFocus(theObject[prop], selected, urlPrefix)
+        result = defaultFocus(theObject[prop], selected)
         if (result) {
           break
         }
@@ -68,4 +45,4 @@ function defaultFocus(theObject, selected, urlPrefix) {
   return result
 }
 
-export { stripManifestPath, defaultFocus }
+export { defaultFocus }

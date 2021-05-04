@@ -11,42 +11,28 @@ governing permissions and limitations under the License.
 */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { navigate } from 'gatsby'
-import { stripManifestPath, defaultFocus } from '../ManifestUtils'
+import { withPrefix } from 'gatsby'
+import { defaultFocus } from '../ManifestUtils'
+import { isExternal } from '../utils'
 
 import '@spectrum-css/sidenav'
 import './index.css'
 
-const nav = (data, gitInfo, defaultFocus) => {
+const nav = (data, defaultFocus) => {
   return (
     <ul className='spectrum-SideNav  spectrum-SideNav--multiLevel'>
       {data.map((node, index) => {
-        const updatedPath = stripManifestPath(node.path, gitInfo)
         const isSelected =
           node.title === defaultFocus
             ? 'spectrum-SideNav-item is-selected'
             : 'spectrum-SideNav-item'
+        const path = isExternal(node.path) ? node.path : withPrefix(node.path)
         return (
           <li className={isSelected} key={index}>
-            <a
-              href='#'
-              className='spectrum-SideNav-itemLink'
-              onClick={() => {
-                if (updatedPath) {
-                  if (
-                    updatedPath.startsWith('http://') ||
-                    updatedPath.startsWith('https://')
-                  ) {
-                    document.location.href = updatedPath
-                  } else {
-                    navigate(updatedPath)
-                  }
-                }
-              }}
-            >
+            <a href={path} className='spectrum-SideNav-itemLink'>
               {node.title}
             </a>
-            {node.pages ? nav(node.pages, gitInfo, defaultFocus) : ''}
+            {node.pages ? nav(node.pages, defaultFocus) : ''}
           </li>
         )
       })}
@@ -54,24 +40,17 @@ const nav = (data, gitInfo, defaultFocus) => {
   )
 }
 
-const Nav = ({ data, selected, gitInfo, ...props }) => {
+const Nav = ({ data = [], selected = '', ...props }) => {
   return (
     <nav aria-label='Side Navigation' {...props}>
-      {nav(data, gitInfo, defaultFocus(data, selected, gitInfo))}
+      {nav(data, defaultFocus(data, selected))}
     </nav>
   )
 }
 
 Nav.propTypes = {
   data: PropTypes.array,
-  selected: PropTypes.string,
-  gitInfo: PropTypes.object
-}
-
-Nav.defaultProps = {
-  data: [],
-  selected: '',
-  gitInfo: {}
+  selected: PropTypes.string
 }
 
 export { Nav }

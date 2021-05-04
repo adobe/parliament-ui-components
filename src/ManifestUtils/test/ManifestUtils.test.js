@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { stripManifestPath, defaultFocus } from '../index'
+import { defaultFocus } from '../index'
 
 const manifest = {
   author: 'Nathan Price',
@@ -23,13 +23,13 @@ const manifest = {
     {
       importedFileName: 'readme',
       pages: [],
-      path: 'AdobeDocs/analytics-1.4-apis/master/README.md',
+      path: '/README.md',
       title: 'Overview'
     },
     {
       importedFileName: 'readme',
       pages: [],
-      path: 'AdobeDocs/analytics-1.4-apis/master/Overview.md',
+      path: '/Overview.md',
       title: 'Overview Top Level'
     },
     {
@@ -38,82 +38,73 @@ const manifest = {
         {
           importedFileName: 'readme',
           pages: [],
-          path: 'AdobeDocs/analytics-1.4-apis/master/docs/Overview.md',
+          path: '/docs/Overview.md',
           title: 'Overview Getting Started'
         },
         {
           importedFileName: 'index',
           pages: [],
-          path:
-            'AdobeDocs/analytics-1.4-apis/master/docs/reporting-api/index.md',
+          path: '/docs/reporting-api/index.md',
           title: 'Reporting API'
         },
         {
           importedFileName: 'index',
           pages: [],
-          path: 'AdobeDocs/analytics-1.4-apis/master/docs/admin-api/index.md',
+          path: '/docs/admin-api/index.md',
           title: 'Admin API'
         },
         {
           importedFileName: 'index',
           pages: [],
-          path:
-            'AdobeDocs/analytics-1.4-apis/master/docs/live-stream-api/index.md',
+          path: '/docs/live-stream-api/index.md',
           title: 'Live Stream'
         },
         {
           importedFileName: 'index',
           pages: [],
-          path:
-            'AdobeDocs/analytics-1.4-apis/master/docs/data-feeds-api/index.md',
+          path: '/docs/data-feeds-api/index.md',
           title: 'Data Feeds'
         },
         {
           importedFileName: 'index',
           pages: [],
-          path:
-            'AdobeDocs/analytics-1.4-apis/master/docs/data-sources-api/index.md',
+          path: '/docs/data-sources-api/index.md',
           title: 'Data Sources'
         },
         {
           importedFileName: 'index',
           pages: [],
-          path:
-            'AdobeDocs/analytics-1.4-apis/master/docs/data-insertion-api/index.md',
+          path: '/docs/data-insertion-api/index.md',
           title: 'Data Insertion'
         },
         {
           importedFileName: 'index',
           pages: [],
-          path:
-            'AdobeDocs/analytics-1.4-apis/master/docs/data-warehouse-api/index.md',
+          path: '/docs/data-warehouse-api/index.md',
           title: 'Data Warehouse'
         },
         {
           importedFileName: 'index',
           pages: [],
-          path:
-            'AdobeDocs/analytics-1.4-apis/master/docs/classifications-api/index.md',
+          path: '/docs/classifications-api/index.md',
           title: 'Classifications'
         },
         {
           importedFileName: 'index',
           pages: [],
-          path:
-            'AdobeDocs/analytics-1.4-apis/master/docs/calc-metrics-api/index.md',
+          path: '/docs/calc-metrics-api/index.md',
           title: 'Calculated Metrics'
         },
         {
           importedFileName: 'index',
           pages: [],
-          path:
-            'AdobeDocs/analytics-1.4-apis/master/docs/segments-api/index.md',
+          path: '/docs/segments-api/index.md',
           title: 'Segments'
         },
         {
           importedFileName: 'jwt',
           pages: [],
-          path: 'AdobeDocs/analytics-1.4-apis/master/jwt.md',
+          path: '/jwt.md',
           title: 'JWT Authentication'
         }
       ],
@@ -127,41 +118,37 @@ const manifest = {
         {
           importedFileName: 'index',
           pages: [],
-          path:
-            'AdobeDocs/analytics-1.4-apis/master/docs/recommendations-api/index.md',
+          path: '/docs/recommendations-api/index.md',
           title: 'Legacy Recommendations API'
         },
         {
           importedFileName: 'index',
           pages: [],
-          path: 'AdobeDocs/analytics-1.4-apis/master/docs/target-api/index.md',
+          path: '/docs/target-api/index.md',
           title: 'Legacy Target API'
         },
         {
           importedFileName: 'index',
           pages: [],
-          path: 'AdobeDocs/analytics-1.4-apis/master/docs/saint-api/index.md',
+          path: '/docs/saint-api/index.md',
           title: 'Legacy Saint API'
         },
         {
           importedFileName: 'index',
           pages: [],
-          path:
-            'AdobeDocs/analytics-1.4-apis/master/docs/reporting-api-1.3/index.md',
+          path: '/docs/reporting-api-1.3/index.md',
           title: 'Legacy Reporting API'
         },
         {
           importedFileName: 'index',
           pages: [],
-          path:
-            'AdobeDocs/analytics-1.4-apis/master/docs/admin-api-1.3/index.md',
+          path: '/docs/admin-api-1.3/index.md',
           title: 'Legacy Admin API'
         },
         {
           importedFileName: 'index',
           pages: [],
-          path:
-            'AdobeDocs/analytics-1.4-apis/master/docs/authentication/index.md',
+          path: '/docs/authentication/index.md',
           title: 'Legacy Authentication'
         }
       ],
@@ -175,221 +162,28 @@ const manifest = {
   view_type: 'mdbook'
 }
 
-describe('stripManifestPath', () => {
-  it('is truthy', () => {
-    expect(stripManifestPath).toBeTruthy()
-  })
-  it('empty to return empty', () => {
-    expect(stripManifestPath('', { org: 'fake', name: 'path' })).toEqual('')
-  })
-  it('lower case to work', () => {
-    expect(
-      stripManifestPath('adobedocs/adobeio-events/master/using.md', {
-        org: 'adobedocs',
-        name: 'adobeio-events',
-        branch: 'master'
-      })
-    ).toEqual('/using.md')
-  })
-  it('upper case to work', () => {
-    expect(
-      stripManifestPath('AdobeDocs/adobeio-events/master/using.md', {
-        org: 'AdobeDocs',
-        name: 'adobeio-events',
-        branch: 'master'
-      })
-    ).toEqual('/using.md')
-  })
-  it('mixed case to work', () => {
-    expect(
-      stripManifestPath('AdobeDocs/adobeio-events/master/using.md', {
-        org: 'adobedocs',
-        name: 'adobeio-events',
-        branch: 'master'
-      })
-    ).toEqual('/using.md')
-  })
-  it('reversed mixed case to work', () => {
-    expect(
-      stripManifestPath('adobedocs/adobeio-events/master/using.md', {
-        org: 'AdobeDocs',
-        name: 'adobeio-events',
-        branch: 'master'
-      })
-    ).toEqual('/using.md')
-  })
-  it('no url prefix to leave path unchanged', () => {
-    expect(
-      stripManifestPath('adobedocs/adobeio-events/master/using.md', {})
-    ).toEqual('adobedocs/adobeio-events/master/using.md')
-  })
-  it('undefined url prefix to leave path unchanged', () => {
-    expect(
-      stripManifestPath('adobedocs/adobeio-events/master/using.md')
-    ).toEqual('adobedocs/adobeio-events/master/using.md')
-  })
-  it('only repo name is in manifest path all options', () => {
-    expect(
-      stripManifestPath('stock-api-docs/docs/01-getting-started.md', {
-        org: 'adobe',
-        name: 'stock-api-docs',
-        branch: 'master'
-      })
-    ).toEqual('/docs/01-getting-started.md')
-  })
-  it('only repo name is in manifest path missing org', () => {
-    expect(
-      stripManifestPath('stock-api-docs/docs/01-getting-started.md', {
-        name: 'stock-api-docs',
-        branch: 'master'
-      })
-    ).toEqual('/docs/01-getting-started.md')
-  })
-  it('only repo name is in manifest path missing branch', () => {
-    expect(
-      stripManifestPath('stock-api-docs/docs/01-getting-started.md', {
-        org: 'adobe',
-        name: 'stock-api-docs'
-      })
-    ).toEqual('/docs/01-getting-started.md')
-  })
-  it('only repo name is in manifest path missing org and branch', () => {
-    expect(
-      stripManifestPath('stock-api-docs/docs/01-getting-started.md', {
-        name: 'stock-api-docs'
-      })
-    ).toEqual('/docs/01-getting-started.md')
-  })
-  it('path does not include org, name or branch', () => {
-    expect(
-      stripManifestPath('/docs/01-getting-started.md', {
-        org: 'adobe',
-        name: 'stock-api-docs',
-        branch: 'master'
-      })
-    ).toEqual('/docs/01-getting-started.md')
-  })
-  it('path does not include org, name or branch. No org passed', () => {
-    expect(
-      stripManifestPath('/docs/01-getting-started.md', {
-        name: 'stock-api-docs',
-        branch: 'master'
-      })
-    ).toEqual('/docs/01-getting-started.md')
-  })
-  it('path does not include org, name or branch', () => {
-    expect(
-      stripManifestPath('/docs/01-getting-started.md', {
-        org: 'adobe',
-        branch: 'master'
-      })
-    ).toEqual('/docs/01-getting-started.md')
-  })
-  it('path does not include org, name or branch', () => {
-    expect(
-      stripManifestPath('/docs/01-getting-started.md', {
-        org: 'adobe',
-        name: 'stock-api-docs'
-      })
-    ).toEqual('/docs/01-getting-started.md')
-  })
-  it('path does not include org, name or branch', () => {
-    expect(
-      stripManifestPath('/docs/01-getting-started.md', {
-        org: 'adobe',
-        branch: 'master'
-      })
-    ).toEqual('/docs/01-getting-started.md')
-  })
-  it('remote link with org in url', () => {
-    expect(
-      stripManifestPath('https://adobe.io/authentication', {
-        org: 'adobe',
-        name: 'stock-api-docs',
-        branch: 'master'
-      })
-    ).toEqual('https://adobe.io/authentication')
-  })
-  it('remote link without org in url', () => {
-    expect(
-      stripManifestPath('https://adobe.io/authentication', {
-        org: 'adobedocs',
-        name: 'stock-api-docs',
-        branch: 'master'
-      })
-    ).toEqual('https://adobe.io/authentication')
-  })
-  it('local reference path without org, repo and branch', () => {
-    expect(
-      stripManifestPath('README.md', {
-        org: 'adobedocs',
-        name: 'stock-api-docs',
-        branch: 'master'
-      })
-    ).toEqual('/README.md')
-  })
-  it('complex local reference path without org, repo and branch', () => {
-    expect(
-      stripManifestPath('docs/reference/openapi.json', {
-        org: 'adobedocs',
-        name: 'stock-api-docs',
-        branch: 'master'
-      })
-    ).toEqual('/docs/reference/openapi.json')
-  })
-  it('complex local reference path leading /', () => {
-    expect(
-      stripManifestPath('/onboarding.md', {
-        org: 'adobedocs',
-        name: 'stock-api-docs',
-        branch: 'master'
-      })
-    ).toEqual('/onboarding.md')
-  })
-})
-
 describe('defaultFocus', () => {
   it('is truthy', () => {
     expect(defaultFocus).toBeTruthy()
   })
   it('org/name/branch', () => {
-    const result = defaultFocus(manifest, '/docs/reporting-api/index.md', {
-      org: 'AdobeDocs',
-      name: 'analytics-1.4-apis',
-      branch: 'master'
-    })
+    const result = defaultFocus(manifest, '/docs/reporting-api/index.md')
     expect(result === 'Reporting API').toBe(true)
   })
   it('org/name', () => {
-    const result = defaultFocus(manifest, '/docs/APIEOL.md', {
-      org: 'AdobeDocs',
-      name: 'analytics-1.4-apis',
-      branch: 'master'
-    })
+    const result = defaultFocus(manifest, '/docs/APIEOL.md')
     expect(result === 'Legacy 1.3 APIs').toBe(true)
   })
   it('deep in strucure', () => {
-    const result = defaultFocus(manifest, '/docs/authentication/index.md', {
-      org: 'AdobeDocs',
-      name: 'analytics-1.4-apis',
-      branch: 'master'
-    })
+    const result = defaultFocus(manifest, '/docs/authentication/index.md')
     expect(result === 'Legacy Authentication').toBe(true)
   })
   it('top level overview', () => {
-    const result = defaultFocus(manifest, '/Overview.md', {
-      org: 'AdobeDocs',
-      name: 'analytics-1.4-apis',
-      branch: 'master'
-    })
+    const result = defaultFocus(manifest, '/Overview.md')
     expect(result === 'Overview Top Level').toBe(true)
   })
   it('deep level overview', () => {
-    const result = defaultFocus(manifest, '/docs/Overview.md', {
-      org: 'AdobeDocs',
-      name: 'analytics-1.4-apis',
-      branch: 'master'
-    })
+    const result = defaultFocus(manifest, '/docs/Overview.md')
     expect(result === 'Overview Getting Started').toBe(true)
   })
 })

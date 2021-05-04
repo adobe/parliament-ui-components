@@ -44,7 +44,7 @@ export {
 export { Paragraph } from './Paragraph'
 export { Prev } from './Prev'
 export { SideNav } from './SideNav'
-export { stripManifestPath, defaultFocus } from './ManifestUtils'
+export { defaultFocus } from './ManifestUtils'
 export { TableOfContents } from './TableOfContents'
 export { Table, THead, Th, TBody, Tr, Td } from './Table'
 export { Feedback } from './Feedback'
