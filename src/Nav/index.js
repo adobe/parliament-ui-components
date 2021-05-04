@@ -18,7 +18,11 @@ import { isExternal } from '../utils'
 import '@spectrum-css/sidenav'
 import './index.css'
 
-const nav = (data, defaultFocus) => {
+const nav = (data, defaultFocus, currDepth, maxDepth) => {
+  if (currDepth >= maxDepth) {
+    return ''
+  }
+
   return (
     <ul className='spectrum-SideNav  spectrum-SideNav--multiLevel'>
       {data.map((node, index) => {
@@ -40,17 +44,18 @@ const nav = (data, defaultFocus) => {
   )
 }
 
-const Nav = ({ data = [], selected = '', ...props }) => {
+const Nav = ({ data = [], selected = '', depth = 2, ...props }) => {
   return (
     <nav aria-label='Side Navigation' {...props}>
-      {nav(data, defaultFocus(data, selected))}
+      {nav(data, defaultFocus(data, selected), 0, depth)}
     </nav>
   )
 }
 
 Nav.propTypes = {
   data: PropTypes.array,
-  selected: PropTypes.string
+  selected: PropTypes.string,
+  depth: PropTypes.number
 }
 
 export { Nav }
