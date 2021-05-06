@@ -36,7 +36,9 @@ const nav = (data, defaultFocus, currDepth, maxDepth) => {
             <a href={path} className='spectrum-SideNav-itemLink'>
               {node.title}
             </a>
-            {node.pages ? nav(node.pages, defaultFocus, currDepth + 1, maxDepth) : ''}
+            {node.pages
+              ? nav(node.pages, defaultFocus, currDepth + 1, maxDepth)
+              : ''}
           </li>
         )
       })}
