@@ -21,6 +21,7 @@ import { RequestBody } from './RequestBody'
 
 const getBodyItems = (body) => {
   const items = []
+  // eslint-disable-next-line
   const getItems =
     Object.keys(body) && Object.keys(body).length > 0
       ? Object.keys(body).map((key) =>
