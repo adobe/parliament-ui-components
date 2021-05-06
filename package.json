@@ -42,7 +42,7 @@
     "format": "eslint . --fix",
     "prepare": "yarn run build",
     "build:example": "cd example && gatsby build",
-    "storybook": "yarn run build:example && start-storybook",
+    "storybook": "yarn run build:example && NODE_ENV=test start-storybook",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"
@@ -56,7 +56,7 @@
   "dependencies": {
     "@adobe/focus-ring-polyfill": "^0.1.5",
     "@adobe/prism-adobe": "^1.0.3",
-    "@adobe/react-spectrum": "^3.9.0",
+    "@adobe/react-spectrum": "^3.10.0",
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/react": "^11.1.2",
     "@emotion/styled": "^11.0.0",
@@ -84,6 +84,7 @@
     "classnames": "^2.2.6",
     "elasticlunr": "^0.9.5",
     "gatsby": "^2.29.0",
+    "https-browserify": "^1.0.0",
     "httpsnippet": "^1.25.0",
     "js-yaml": "^4.0.0",
     "mobx": "^5.15.6",
@@ -98,6 +99,8 @@
     "react-image": "^4.0.3",
     "react-responsive": "^8.1.0",
     "redoc": "2.0.0-rc.38",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {

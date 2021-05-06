@@ -12,8 +12,14 @@ governing permissions and limitations under the License.
 import React from "react"
 import PropTypes from "prop-types"
 
-import { defaultTheme, Provider, SSRProvider } from "@adobe/react-spectrum"
-import { Header, Footer, Feedback, Nav } from "parliament-ui-components"
+import { SSRProvider } from "@adobe/react-spectrum"
+import {
+  Header,
+  Footer,
+  Feedback,
+  Nav,
+  Provider
+} from "parliament-ui-components"
 
 const data = {
   name: "Events",
@@ -144,16 +150,11 @@ const data = {
   ]
 }
 
-const index = ({ location }) => {
+const index = () => {
   const title = "Test Title"
   return (
     <SSRProvider>
-      <Provider
-        theme={defaultTheme}
-        colorScheme="light"
-        scale="medium"
-        UNSAFE_className="spectrum spectrum--light spectrum--medium"
-      >
+      <Provider>
         <Header siteTitle={title} />
         <div>Hello world!</div>
         <Nav

@@ -11,5 +11,10 @@ exports.onCreateWebpackConfig = ({ actions, getConfig, stage }) => {
       require.resolve("core-js/es")
     )
   } catch (err) {}
+  config.resolve.fallback = {
+    http: require.resolve("stream-http"),
+    https: require.resolve("https-browserify"),
+    stream: require.resolve("stream-browserify")
+  }
   actions.replaceWebpackConfig(config)
 }
