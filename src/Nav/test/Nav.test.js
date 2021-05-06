@@ -22,4 +22,31 @@ describe('<Nav />', () => {
 
     expect(el).toBeInTheDocument()
   })
+
+  test('it should render up to a specific depth', () => {
+    const nodes = [
+      {
+        title: 'first-level',
+        path: 'dummy/path',
+        pages: [
+          {
+            title: 'second-level',
+            path: '/YAS',
+            pages: [
+              {
+                title: 'third-level',
+                path: '/NO'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+
+    const { getByText, queryByText } = render(<Nav data={nodes} depth={2} />)
+
+    expect(getByText('first-level')).toBeInTheDocument()
+    expect(getByText('second-level')).toBeInTheDocument()
+    expect(queryByText('third-level')).toBeNull()
+  })
 })
