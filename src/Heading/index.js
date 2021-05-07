@@ -31,6 +31,33 @@ const Anchor = ({ id }) => (
   />
 )
 
+const generateCss = (isHeading1, isHeading2) => {
+  if (isHeading1) {
+    return `& + p {
+      margin-top: var(--spectrum-global-dimension-static-size-300) !important;
+      font-size: var(--spectrum-global-dimension-static-size-225);
+    }`
+  } else if (isHeading2) {
+    return `&:nth-last-child(2) a:last-of-type {
+      opacity: 0;
+      transition: opacity var(--spectrum-global-animation-duration-100) ease-in-out;
+    }
+
+    &:nth-last-child(2):hover a:last-of-type {
+      opacity: 1;
+    }`
+  } else {
+    return `& a:last-of-type {
+      opacity: 0;
+      transition: opacity var(--spectrum-global-animation-duration-100) ease-in-out;
+    }
+
+    &:hover a:last-of-type {
+      opacity: 1;
+    }`
+  }
+}
+
 const createHeading = (
   level,
   { id, children, className, css: styles, ...props }
@@ -49,6 +76,8 @@ const createHeading = (
     ? `margin-top: var(--spectrum-global-dimension-size-500); `
     : ''
 
+  const innerCss = generateCss(isHeading1, isHeading2)
+
   return (
     <React.Fragment>
       {!isHeading1 && <Anchor id={id} />}
@@ -63,19 +92,7 @@ const createHeading = (
           }
         )}
         css={css`
-          ${isHeading1
-            ? `& + p {
-          margin-top: var(--spectrum-global-dimension-static-size-300) !important;
-          font-size: var(--spectrum-global-dimension-static-size-225);
-        }`
-            : `& a {
-          opacity: 0;
-          transition: opacity var(--spectrum-global-animation-duration-100) ease-in-out;
-        }
-
-        &:hover a {
-          opacity: 1;
-        }`}
+          ${innerCss}
 
           ${marginTop}
           ${marginBottom}
