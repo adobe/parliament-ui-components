@@ -36,3 +36,74 @@ export const HeadingFour = () => <Heading4>Heading 4</Heading4>
 export const HeadingFive = () => <Heading5>Heading 5</Heading5>
 
 export const HeadingSix = () => <Heading6>Heading 6</Heading6>
+
+export const HeadingOneWithLink = () => (
+  <Heading1>
+    <a href='#'>Heading 1</a>
+  </Heading1>
+)
+
+export const HeadingTwoWithLink = () => (
+  <Heading2>
+    <a href='#'>Heading 2</a>
+  </Heading2>
+)
+
+export const HeadingThreeWithLink = () => (
+  <Heading3>
+    <a href='#'>Heading 3</a>
+  </Heading3>
+)
+
+export const HeadingFourWithLink = () => (
+  <Heading4>
+    <a href='#'>Heading 4</a>
+  </Heading4>
+)
+
+export const HeadingFiveWithLink = () => (
+  <Heading5>
+    <a href='#'>Heading 5</a>
+  </Heading5>
+)
+
+export const HeadingSixWithLink = () => (
+  <Heading6>
+    <a href='#'>Heading 6</a>
+  </Heading6>
+)
+export const HeadingOneWithLinkAndText = () => (
+  <Heading1>
+    <a href='#'>Heading 1</a> AndText
+  </Heading1>
+)
+
+export const HeadingTwoWithLinkAndText = () => (
+  <Heading2>
+    <a href='#'>Heading 2</a> AndText
+  </Heading2>
+)
+
+export const HeadingThreeWithLinkAndText = () => (
+  <Heading3>
+    <a href='#'>Heading 3</a> AndText
+  </Heading3>
+)
+
+export const HeadingFourWithLinkAndText = () => (
+  <Heading4>
+    <a href='#'>Heading 4</a> AndText
+  </Heading4>
+)
+
+export const HeadingFiveWithLinkAndText = () => (
+  <Heading5>
+    <a href='#'>Heading 5</a> AndText
+  </Heading5>
+)
+
+export const HeadingSixWithLinkAndText = () => (
+  <Heading6>
+    <a href='#'>Heading 6</a> AndText
+  </Heading6>
+)
