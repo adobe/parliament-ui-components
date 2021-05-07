@@ -11,7 +11,7 @@
  */
 
 import React, { useEffect, useState } from 'react'
-import { Tabs, Item } from '@react-spectrum/tabs'
+import { Tabs, TabList, TabPanels, Item } from '@react-spectrum/tabs'
 import { Content, Flex, View } from '@adobe/react-spectrum'
 import GlobeGrid from '@spectrum-icons/workflow/GlobeGrid'
 import { ParameterTable } from './ParameterTable'
@@ -72,16 +72,22 @@ const ResponsePanel = (props) => {
         <View>Size: {prettyBytes(body ? body.length : 0)}</View>
       </Flex>
       <Tabs aria-label='Response'>
-        <Item title='Response Body' key='responseBodyTab'>
-          <Content marginTop='size-250' marginStart='size-125'>
-            <CodeUI className={language}>{body}</CodeUI>
-          </Content>
-        </Item>
-        <Item title='Response Headers' key='responseHeaderTab'>
-          <Content marginTop='size-250' marginStart='size-125'>
-            <ParameterTable readonly items={headers} />
-          </Content>
-        </Item>
+        <TabList>
+          <Item key='responseBodyTab'>Response Body</Item>
+          <Item key='responseHeaderTab'>Response Headers</Item>
+        </TabList>
+        <TabPanels>
+          <Item title='Response Body' key='responseBodyTab'>
+            <Content marginTop='size-250' marginStart='size-125'>
+              <CodeUI className={language}>{body}</CodeUI>
+            </Content>
+          </Item>
+          <Item title='Response Headers' key='responseHeaderTab'>
+            <Content marginTop='size-250' marginStart='size-125'>
+              <ParameterTable readonly items={headers} />
+            </Content>
+          </Item>
+        </TabPanels>
       </Tabs>
     </View>
   ) : (
