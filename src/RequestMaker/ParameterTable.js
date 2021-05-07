@@ -98,7 +98,12 @@ const EmptyRow = {
   deletable: true
 }
 
-const ParameterTable = ({ readonly = false, items, completions, callback }) => {
+const ParameterTable = ({
+  readonly = false,
+  items = [],
+  completions,
+  callback
+}) => {
   const tableItems = [...items]
   if (
     tableItems.filter((item) => item.key === '' && item.value === '').length < 1

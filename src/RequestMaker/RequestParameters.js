@@ -12,7 +12,7 @@
 
 import React, { useEffect } from 'react'
 import { Content, View } from '@adobe/react-spectrum'
-import { Tabs, Item } from '@react-spectrum/tabs'
+import { Tabs, TabList, TabPanels, Item } from '@react-spectrum/tabs'
 import { CodeGen } from './CodeGen'
 import { RequestBody } from './RequestBody'
 import { RequestProvider, useRequest } from './RequestContext'
@@ -76,47 +76,54 @@ const RequestParameters = ({ url, children }) => {
   return (
     <View>
       <Tabs aria-label='Request Parameters'>
-        <Item title='Query' key='queryTab'>
-          <Content marginTop='size-250' marginStart='size-125'>
-            <ParameterTable
-              items={options.query}
-              callback={(data) => {
-                dispatch({
-                  type: RequestProvider.ACTION_TYPES.SET_QUERY_PARAMS,
-                  query: data
-                })
-              }}
-            />
-          </Content>
-        </Item>
-        <Item title='Headers' key='headerTab'>
-          <Content marginTop='size-250' marginStart='size-125'>
-            <ParameterTable
-              items={options.headers}
-              completions={completions}
-              callback={(data) => {
-                dispatch({
-                  type: RequestProvider.ACTION_TYPES.SET_HEADERS,
-                  headers: data
-                })
-              }}
-            />
-          </Content>
-        </Item>
-        <Item title='Body' key='bodyTab'>
-          <Content marginTop='size-250' marginStart='size-125'>
-            <RequestBody
-              type={options.bodyType}
-              contentType={contentType}
-              items={options.body}
-            />
-          </Content>
-        </Item>
-        <Item title='Code Generation' key='codeTab'>
-          <Content marginTop='size-250' marginStart='size-125'>
-            <CodeGen url={url} options={options} />
-          </Content>
-        </Item>
+        <TabList>
+          <Item key='queryTab'>Query</Item>
+          <Item key='headerTab'>Headers</Item>
+          <Item key='bodyTab'>Body</Item>
+        </TabList>
+        <TabPanels>
+          <Item title='Query' key='queryTab'>
+            <Content marginTop='size-250' marginStart='size-125'>
+              <ParameterTable
+                items={options.query}
+                callback={(data) => {
+                  dispatch({
+                    type: RequestProvider.ACTION_TYPES.SET_QUERY_PARAMS,
+                    query: data
+                  })
+                }}
+              />
+            </Content>
+          </Item>
+          <Item title='Headers' key='headerTab'>
+            <Content marginTop='size-250' marginStart='size-125'>
+              <ParameterTable
+                items={options.headers}
+                completions={completions}
+                callback={(data) => {
+                  dispatch({
+                    type: RequestProvider.ACTION_TYPES.SET_HEADERS,
+                    headers: data
+                  })
+                }}
+              />
+            </Content>
+          </Item>
+          <Item title='Body' key='bodyTab'>
+            <Content marginTop='size-250' marginStart='size-125'>
+              <RequestBody
+                type={options.bodyType}
+                contentType={contentType}
+                items={options.body}
+              />
+            </Content>
+          </Item>
+          <Item title='Code Generation' key='codeTab'>
+            <Content marginTop='size-250' marginStart='size-125'>
+              <CodeGen url={url} options={options} />
+            </Content>
+          </Item>
+        </TabPanels>
       </Tabs>
     </View>
   )

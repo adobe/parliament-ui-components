@@ -3062,7 +3062,7 @@
     "@react-types/switch" "^3.1.1"
     "@spectrum-icons/ui" "^3.2.0"
 
-"@react-spectrum/tabs@^3.0.0-beta.0":
+"@react-spectrum/tabs@^3.0.0-rc.0":
   version "3.0.0-rc.0"
   resolved "https://registry.yarnpkg.com/@react-spectrum/tabs/-/tabs-3.0.0-rc.0.tgz#e883ee579ec741e00258c12e20798abb9b4381b9"
   integrity sha512-vOgwz//RHpBwworHflR3XhwkRa6ncVApb5FjNPVhtmQXdRABvRhu5EiD/iMp58/fpr7t9zxPAQgdIpzAdJkIjA==
