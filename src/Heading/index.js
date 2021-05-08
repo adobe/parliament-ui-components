@@ -31,33 +31,6 @@ const Anchor = ({ id }) => (
   />
 )
 
-const generateCss = (isHeading1, isHeading2) => {
-  if (isHeading1) {
-    return `& + p {
-      margin-top: var(--spectrum-global-dimension-static-size-300) !important;
-      font-size: var(--spectrum-global-dimension-static-size-225);
-    }`
-  } else if (isHeading2) {
-    return `&:nth-last-child(2) a:last-of-type {
-      opacity: 0;
-      transition: opacity var(--spectrum-global-animation-duration-100) ease-in-out;
-    }
-
-    &:nth-last-child(2):hover a:last-of-type {
-      opacity: 1;
-    }`
-  } else {
-    return `& a:last-of-type {
-      opacity: 0;
-      transition: opacity var(--spectrum-global-animation-duration-100) ease-in-out;
-    }
-
-    &:hover a:last-of-type {
-      opacity: 1;
-    }`
-  }
-}
-
 const createHeading = (
   level,
   { id, children, className, css: styles, ...props }
@@ -76,7 +49,19 @@ const createHeading = (
     ? `margin-top: var(--spectrum-global-dimension-size-500); `
     : ''
 
-  const innerCss = generateCss(isHeading1, isHeading2)
+  const animateAnchor = `
+    & span a {
+      opacity: 0;
+      transition: opacity var(--spectrum-global-animation-duration-100) ease-in-out;
+
+      &:focus {
+        opacity: 1;
+      }
+    }
+    &:hover span a {
+      opacity: 1;
+    }
+  `
 
   return (
     <React.Fragment>
@@ -92,7 +77,12 @@ const createHeading = (
           }
         )}
         css={css`
-          ${innerCss}
+          ${!isHeading1 && animateAnchor}
+          ${isHeading1 &&
+          `& + p {
+            margin-top: var(--spectrum-global-dimension-static-size-300) !important;
+            font-size: var(--spectrum-global-dimension-static-size-225);
+          }`}
 
           ${marginTop}
           ${marginBottom}
@@ -101,14 +91,13 @@ const createHeading = (
       >
         {children}
         {!isHeading1 && (
-          <Link
-            href={`#${id}`}
+          <span
             css={css`
               ${marginLink}
             `}
           >
-            #
-          </Link>
+            <Link href={`#${id}`}>#</Link>
+          </span>
         )}
       </HeadingTag>
       {isHeading2 && <Divider marginBottom='size-300' />}
