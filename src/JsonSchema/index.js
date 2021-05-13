@@ -16,7 +16,16 @@ import { InlineCode } from '../InlineCode'
 import { Table, TBody, Tr, Td } from '../Table'
 
 export const JsonSchema = ({ schema = {}, ...props }) => {
-  const { title, type, properties = [], required = [] } = schema
+  const {
+    $id,
+    $schema,
+    title,
+    type,
+    properties = [],
+    required = [],
+    ...remainingProps
+  } = schema
+  console.log(remainingProps)
   return (
     <div {...props}>
       {title && <Heading level={1}>{title}</Heading>}
@@ -25,6 +34,13 @@ export const JsonSchema = ({ schema = {}, ...props }) => {
           Type: <InlineCode>{type}</InlineCode>
         </span>
       )}
+      {Object.keys(remainingProps).map((key) => (
+        <JsonSchemaProperty
+          key={key}
+          name={key}
+          property={remainingProps[key]}
+        />
+      ))}
       <JsonSchemaProperties properties={properties} required={required} />
     </div>
   )
