@@ -11,24 +11,22 @@
  */
 
 import React from 'react'
-import { Flex, Heading, Text, View } from '@adobe/react-spectrum'
+import { Flex, Heading, View } from '@adobe/react-spectrum'
 import { InlineCode } from '../InlineCode'
 import { Table, TBody, Tr, Td } from '../Table'
 
 export const JsonSchema = ({ schema = {}, ...props }) => {
-  const { title, type } = schema
+  const { title, type, properties = [], required = [] } = schema
   return (
     <div {...props}>
       {title && <Heading level={1}>{title}</Heading>}
       {type && <Heading level={2}>Type: {type}</Heading>}
-      <JsonSchemaProperties schema={schema} />
+      <JsonSchemaProperties properties={properties} required={required} />
     </div>
   )
 }
 
-const JsonSchemaProperties = ({ schema }) => {
-  const { properties, required = [] } = schema
-  console.log(Object.keys(properties) > 0)
+const JsonSchemaProperties = ({ properties, required }) => {
   return Object.keys(properties).length > 0 ? (
     <Table>
       <TBody>
@@ -51,7 +49,7 @@ const JsonSchemaProperties = ({ schema }) => {
               </Flex>
             </Td>
             <Td>
-              <JsonSchemaPropertyDetails name={key} schema={schema} />
+              <JsonSchemaPropertyDetails name={key} properties={properties} />
             </Td>
           </Tr>
         ))}
@@ -60,39 +58,64 @@ const JsonSchemaProperties = ({ schema }) => {
   ) : null
 }
 
-const JsonSchemaPropertyDetails = ({ name, schema }) => {
-  const {
-    type,
-    description,
-    default: defaultValue,
-    example,
-    enum: enumValue
-  } = schema.properties[name]
+const JsonSchemaPropertyDetails = ({ name, properties }) => {
+  const propKeys = Object.keys(properties[name])
   return (
     <Flex direction='column'>
-      {type && (
-        <View>
-          <InlineCode>{type}</InlineCode>
-        </View>
-      )}
-      {defaultValue && (
-        <View>
-          Default: <InlineCode>{defaultValue}</InlineCode>
-        </View>
-      )}
-      {enumValue && (
-        <View>
-          Enum:{' '}
-          {enumValue.map((item) => (
-            <InlineCode key={item}>{item}</InlineCode>
-          ))}
-        </View>
-      )}
-      {description && (
-        <View>
-          <Text>{description}</Text>
-        </View>
-      )}
+      {propKeys.map((prop) => {
+        return (
+          <JsonSchemaProperty
+            key={prop}
+            name={prop}
+            property={properties[name][prop]}
+          />
+        )
+      })}
     </Flex>
   )
+}
+
+const excludeLabelProps = ['description']
+
+const JsonSchemaProperty = ({ name, property }) => {
+  return (
+    <View key={name}>
+      <JsonSchemaPropertyLabel name={name} />
+      {getJsonSchemaPropertyByType(name, property)}
+    </View>
+  )
+}
+
+const JsonSchemaPropertyLabel = ({ name }) =>
+  !excludeLabelProps.includes(name) ? (
+    <span
+      style={{
+        textTransform: 'capitalize'
+      }}
+    >
+      {name}:&nbsp;
+    </span>
+  ) : null
+
+const getJsonSchemaPropertyByType = (name, property) => {
+  switch (typeof property) {
+    case 'number':
+      return property
+    case 'object':
+      return Array.isArray(property) ? (
+        <>
+          {property.map((item) => (
+            <InlineCode key={item}>{item}</InlineCode>
+          ))}{' '}
+        </>
+      ) : (
+        property
+      )
+    default:
+      return excludeLabelProps.includes(name) ? (
+        property
+      ) : (
+        <InlineCode>{property}</InlineCode>
+      )
+  }
 }
