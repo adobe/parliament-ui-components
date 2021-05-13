@@ -11,7 +11,7 @@
  */
 
 import React from 'react'
-import { Flex, Heading, View } from '@adobe/react-spectrum'
+import { Flex, Heading, View, Well } from '@adobe/react-spectrum'
 import { InlineCode } from '../InlineCode'
 import { Table, TBody, Tr, Td } from '../Table'
 
@@ -20,7 +20,11 @@ export const JsonSchema = ({ schema = {}, ...props }) => {
   return (
     <div {...props}>
       {title && <Heading level={1}>{title}</Heading>}
-      {type && <Heading level={2}>Type: {type}</Heading>}
+      {type && (
+        <span>
+          Type: <InlineCode>{type}</InlineCode>
+        </span>
+      )}
       <JsonSchemaProperties properties={properties} required={required} />
     </div>
   )
@@ -101,6 +105,8 @@ const getJsonSchemaPropertyByType = (name, property) => {
   switch (typeof property) {
     case 'number':
       return property
+    case 'boolean':
+      return <InlineCode>{`${property}`}</InlineCode>
     case 'object':
       return Array.isArray(property) ? (
         <>
@@ -109,7 +115,9 @@ const getJsonSchemaPropertyByType = (name, property) => {
           ))}{' '}
         </>
       ) : (
-        property
+        <Well>
+          <JsonSchema schema={property} />
+        </Well>
       )
     default:
       return excludeLabelProps.includes(name) ? (
