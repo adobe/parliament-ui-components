@@ -18,22 +18,17 @@ import { Table, TBody, Tr, Td } from '../Table'
 export const JsonSchema = ({ schema = {}, ...props }) => {
   const {
     $id,
+    _id,
     $schema,
+    _schema,
     title,
-    type,
     properties = [],
     required = [],
     ...remainingProps
   } = schema
-  console.log(remainingProps)
   return (
     <div {...props}>
       {title && <Heading level={1}>{title}</Heading>}
-      {type && (
-        <span>
-          Type: <InlineCode>{type}</InlineCode>
-        </span>
-      )}
       {Object.keys(remainingProps).map((key) => (
         <JsonSchemaProperty
           key={key}
@@ -81,7 +76,7 @@ const JsonSchemaProperties = ({ properties, required }) => {
 const JsonSchemaPropertyDetails = ({ name, properties }) => {
   const propKeys = Object.keys(properties[name])
   return (
-    <Flex direction='column'>
+    <Flex direction='column' gap='size-50'>
       {propKeys.map((prop) => {
         return (
           <JsonSchemaProperty
@@ -113,7 +108,7 @@ const JsonSchemaPropertyLabel = ({ name }) =>
         textTransform: 'capitalize'
       }}
     >
-      {name}:&nbsp;
+      <strong>{name}:&nbsp;</strong>
     </span>
   ) : null
 
