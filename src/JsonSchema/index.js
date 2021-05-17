@@ -22,6 +22,7 @@ export const JsonSchema = ({ schema = {}, ...props }) => {
     $schema,
     _schema,
     title,
+    definitions,
     properties = [],
     required = [],
     ...remainingProps
