@@ -94,12 +94,43 @@ const JsonSchemaPropertyDetails = ({ name, properties }) => {
 const excludeLabelProps = ['description']
 
 const JsonSchemaProperty = ({ name, property }) => {
-  return (
-    <View key={name}>
-      <JsonSchemaPropertyLabel name={name} />
-      {getJsonSchemaPropertyByType(name, property)}
-    </View>
-  )
+  switch (typeof property) {
+    case 'number':
+      return <DefaultProperty name={name}>{property}</DefaultProperty>
+    case 'boolean':
+      return (
+        <DefaultProperty name={name} highlight>
+          {`${property}`}
+        </DefaultProperty>
+      )
+    case 'object':
+      return (
+        <details>
+          <summary>
+            <JsonSchemaPropertyLabel name={name} />
+          </summary>
+          {Array.isArray(property) ? (
+            <>
+              {property.map((item) => (
+                <InlineCode key={item}>{item}</InlineCode>
+              ))}{' '}
+            </>
+          ) : (
+            <Well>
+              <JsonSchema schema={property} />
+            </Well>
+          )}
+        </details>
+      )
+    default:
+      return excludeLabelProps.includes(name) ? (
+        <DefaultProperty name={name}>{property}</DefaultProperty>
+      ) : (
+        <DefaultProperty name={name} highlight>
+          {property}
+        </DefaultProperty>
+      )
+  }
 }
 
 const JsonSchemaPropertyLabel = ({ name }) =>
@@ -113,29 +144,9 @@ const JsonSchemaPropertyLabel = ({ name }) =>
     </span>
   ) : null
 
-const getJsonSchemaPropertyByType = (name, property) => {
-  switch (typeof property) {
-    case 'number':
-      return property
-    case 'boolean':
-      return <InlineCode>{`${property}`}</InlineCode>
-    case 'object':
-      return Array.isArray(property) ? (
-        <>
-          {property.map((item) => (
-            <InlineCode key={item}>{item}</InlineCode>
-          ))}{' '}
-        </>
-      ) : (
-        <Well>
-          <JsonSchema schema={property} />
-        </Well>
-      )
-    default:
-      return excludeLabelProps.includes(name) ? (
-        property
-      ) : (
-        <InlineCode>{property}</InlineCode>
-      )
-  }
-}
+const DefaultProperty = ({ name, highlight, children }) => (
+  <View key={name}>
+    <JsonSchemaPropertyLabel name={name} />
+    {highlight ? <InlineCode>{children}</InlineCode> : children}
+  </View>
+)
