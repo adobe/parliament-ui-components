@@ -71,3 +71,4 @@ export {
   Parameter
 } from './RequestMaker'
 export { Provider, ThemeSwitcher } from './Provider'
+export { JsonSchema } from './JsonSchema'
