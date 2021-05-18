@@ -55,7 +55,7 @@ const JsonSchemaProperties = ({ properties, required = [] }) => {
             <Td>
               <Flex direction='column'>
                 <View>{key}</View>
-                {required.includes(key) && (
+                {required?.includes(key) && (
                   <View>
                     <span
                       style={{
