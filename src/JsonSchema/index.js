@@ -46,7 +46,7 @@ export const JsonSchema = ({ schema = {}, ...props }) => {
   )
 }
 
-const JsonSchemaProperties = ({ properties, required }) => {
+const JsonSchemaProperties = ({ properties, required = [] }) => {
   return Object.keys(properties).length > 0 ? (
     <Table>
       <TBody>
