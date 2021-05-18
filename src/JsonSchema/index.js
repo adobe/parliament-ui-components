@@ -19,10 +19,14 @@ export const JsonSchema = ({ schema = {}, ...props }) => {
   const {
     $id,
     _id,
+    id,
+    slug,
     $schema,
     _schema,
     title,
     definitions,
+    $defs,
+    _defs,
     properties = [],
     required = [],
     ...remainingProps
@@ -94,6 +98,9 @@ const JsonSchemaPropertyDetails = ({ name, properties }) => {
 const excludeLabelProps = ['description']
 
 const JsonSchemaProperty = ({ name, property }) => {
+  if (property === null) {
+    return ''
+  }
   switch (typeof property) {
     case 'number':
       return <DefaultProperty name={name}>{property}</DefaultProperty>
