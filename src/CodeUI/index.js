@@ -188,10 +188,8 @@ const CodeUI = (props) => {
                     )}
                     <span {...lineProps}>
                       {line.map((token, key) => {
-                        const {
-                          style: tokenStyles,
-                          ...tokenProps
-                        } = getTokenProps({ token, key })
+                        const { style: tokenStyles, ...tokenProps } =
+                          getTokenProps({ token, key })
                         return <span key={key} {...tokenProps} />
                       })}
                     </span>

@@ -82,8 +82,7 @@ const data = {
         {
           importedFileName: "analytics-triggers-event-setup",
           pages: [],
-          path:
-            "adobedocs/adobeio-events/master/using/analytics-triggers-event-setup.md",
+          path: "adobedocs/adobeio-events/master/using/analytics-triggers-event-setup.md",
           title: "Integrate Analytics Triggers"
         },
         {
@@ -95,15 +94,13 @@ const data = {
         {
           importedFileName: "create-event-integration",
           pages: [],
-          path:
-            "https://www.adobe.io/apis/experiencecloud/cloud-manager/docs.html#!AdobeDocs/cloudmanager-api-docs/master/create-event-integration.md",
+          path: "https://www.adobe.io/apis/experiencecloud/cloud-manager/docs.html#!AdobeDocs/cloudmanager-api-docs/master/create-event-integration.md",
           title: "Cloud Manager"
         },
         {
           importedFileName: "gdpr-io-events",
           pages: [],
-          path:
-            "https://www.adobe.io/apis/experienceplatform/gdpr/docs/alldocs.html#!api-specification/markdown/narrative/gdpr/gdpr-io-events.md",
+          path: "https://www.adobe.io/apis/experienceplatform/gdpr/docs/alldocs.html#!api-specification/markdown/narrative/gdpr/gdpr-io-events.md",
           title: "GDPR Events"
         }
       ],

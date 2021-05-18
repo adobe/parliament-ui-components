@@ -18,8 +18,7 @@ export default {
 
 export const RequestMakerDefault = () => {
   const props = {
-    url:
-      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+    url: 'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
 
   return (
@@ -39,8 +38,7 @@ export const RequestMakerDefault = () => {
 
 export const RequestMakerNoBody = () => {
   const props = {
-    url:
-      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+    url: 'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
 
   return (
@@ -59,8 +57,7 @@ export const RequestMakerNoBody = () => {
 
 export const RequestMakerPropParameters = () => {
   const props = {
-    url:
-      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+    url: 'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
 
   const headers = [
@@ -104,8 +101,7 @@ export const RequestMakerPropParameters = () => {
 
 export const RequestMakerPropAndNamedParameters = () => {
   const props = {
-    url:
-      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+    url: 'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
 
   const headers = [
@@ -156,8 +152,7 @@ export const RequestMakerPropAndNamedParameters = () => {
 export const RequestMakerDefaultMethod = () => {
   const props = {
     defaultMethod: 'POST',
-    url:
-      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+    url: 'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
 
   return (
@@ -178,8 +173,7 @@ export const RequestMakerDefaultMethod = () => {
 export const RequestMakerMethodsString = () => {
   const props = {
     methods: 'OPTIONS',
-    url:
-      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+    url: 'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
 
   return (
@@ -200,8 +194,7 @@ export const RequestMakerMethodsString = () => {
 export const RequestMakerMethodsStringArray = () => {
   const props = {
     methods: 'OPTIONS, GET, DELETE',
-    url:
-      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+    url: 'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
 
   return (
@@ -222,8 +215,7 @@ export const RequestMakerMethodsStringArray = () => {
 export const RequestMakerMethodsArray = () => {
   const props = {
     methods: ['HEAD', 'PATCH', 'DELETE'],
-    url:
-      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+    url: 'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
 
   return (
@@ -245,8 +237,7 @@ export const RequestMakerMethodsArrayWithDefault = () => {
   const props = {
     defaultMethod: 'PATCH',
     methods: ['HEAD', 'PATCH', 'DELETE'],
-    url:
-      'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
+    url: 'https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker'
   }
   const items = [{ enabled: true, key: 'test', value: 'rest' }]
 

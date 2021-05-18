@@ -108,8 +108,7 @@ const manifest = {
           title: 'JWT Authentication'
         }
       ],
-      path:
-        'AdobeDocs/analytics-1.4-apis/blob/master/docs/getting-started/getting-started-2.md',
+      path: 'AdobeDocs/analytics-1.4-apis/blob/master/docs/getting-started/getting-started-2.md',
       title: 'Getting Started'
     },
     {

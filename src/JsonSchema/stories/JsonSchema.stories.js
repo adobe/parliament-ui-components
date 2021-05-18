@@ -14,33 +14,54 @@ import React from 'react'
 import { JsonSchema } from '../index'
 
 const personSchema = {
-  $id: 'https://example.com/person.schema.json',
-  $schema: 'https://json-schema.org/draft/2020-12/schema',
-  title: 'Person',
-  type: 'object',
+  _id: 'https://example.com/arrays.schema.json',
+  _schema: 'https://json-schema.org/draft/2020-12/schema',
+  description: 'A representation of a person, company, organization, or place',
+  required: null,
   properties: {
-    firstName: {
-      type: 'string',
-      description: "The person's first name."
+    fruits: {
+      type: 'array',
+      items: {
+        type: 'string'
+      }
     },
-    lastName: {
-      type: 'string',
-      description: "The person's last name."
-    },
-    age: {
-      description: 'Age in years which must be equal to or greater than zero.',
-      type: 'integer',
-      minimum: 0
-    },
-    huntingSkill: {
-      type: 'string',
-      description: 'The measured skill for hunting',
-      default: 'lazy',
-      example: 'adventurous',
-      enum: ['clueless', 'lazy', 'adventurous', 'aggressive']
+    vegetables: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['veggieName', 'veggieLike'],
+        properties: {
+          veggieName: {
+            type: 'string',
+            description: 'The name of the vegetable.'
+          },
+          veggieLike: {
+            type: 'boolean',
+            description: 'Do I like this vegetable?'
+          }
+        }
+      }
     }
   },
-  required: ['firstName', 'lastName']
+  slug: '/arrays.schema.json',
+  title: null,
+  type: 'object',
+  _defs: {
+    veggie: {
+      type: 'object',
+      required: ['veggieName', 'veggieLike'],
+      properties: {
+        veggieName: {
+          type: 'string',
+          description: 'The name of the vegetable.'
+        },
+        veggieLike: {
+          type: 'boolean',
+          description: 'Do I like this vegetable?'
+        }
+      }
+    }
+  }
 }
 
 export default {
