@@ -33,7 +33,15 @@ const nav = (data, defaultFocus, currDepth, maxDepth) => {
         const path = isExternal(node.path) ? node.path : withPrefix(node.path)
         return (
           <li className={isSelected} key={index}>
-            <a href={path} className='spectrum-SideNav-itemLink'>
+            <a
+              href={path}
+              className='spectrum-SideNav-itemLink'
+              style={{
+                paddingLeft: `calc(var(--spectrum-global-dimension-size-150) * ${
+                  currDepth + 1
+                })`
+              }}
+            >
               {node.title}
             </a>
             {node.pages

@@ -42,4 +42,15 @@ export const WithData = () => {
   return <Nav {...props} />
 }
 
+export const WithDataDepthEight = () => {
+  const props = {
+    data: mockData,
+    gitInfo: baseGitInfo,
+    selected: 'test/path/test.md',
+    depth: 8
+  }
+
+  return <Nav {...props} />
+}
+
 WithData.story = { name: 'With Data' }
