@@ -18,9 +18,9 @@ import '@spectrum-css/sidenav'
 import './index.css'
 
 const isPathSelected = (path, selected) => {
-  const compare = !selected.endsWith('/')
-    ? selected
-    : selected.substring(0, selected.length - 1)
+  const compare = selected.endsWith('/')
+    ? selected.substring(0, selected.length - 1)
+    : selected
   return path === compare
 }
 
@@ -30,7 +30,7 @@ const nav = (data, selected, currDepth, maxDepth) => {
   }
 
   return (
-    <ul className='spectrum-SideNav  spectrum-SideNav--multiLevel'>
+    <ul className='spectrum-SideNav spectrum-SideNav--multiLevel'>
       {data.map((node, index) => {
         const path = isExternal(node.path) ? node.path : withPrefix(node.path)
         const isSelected = isPathSelected(path, selected)
