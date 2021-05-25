@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Flex, Heading, View, Well } from '@adobe/react-spectrum'
 import { InlineCode } from '../InlineCode'
 import { Table, TBody, Tr, Td } from '../Table'
@@ -47,7 +47,7 @@ export const JsonSchema = ({ schema = {}, ...props }) => {
 }
 
 const JsonSchemaProperties = ({ properties, required = [] }) => {
-  return Object.keys(properties).length > 0 ? (
+  return properties && Object.keys(properties).length > 0 ? (
     <Table>
       <TBody>
         {Object.keys(properties).map((key) => (
@@ -117,11 +117,11 @@ const JsonSchemaProperty = ({ name, property }) => {
             <JsonSchemaPropertyLabel name={name} />
           </summary>
           {Array.isArray(property) ? (
-            <>
+            <Fragment>
               {property.map((item) => (
                 <InlineCode key={item}>{item}</InlineCode>
               ))}{' '}
-            </>
+            </Fragment>
           ) : (
             <Well>
               <JsonSchema schema={property} />
