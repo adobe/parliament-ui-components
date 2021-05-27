@@ -9,30 +9,30 @@
  * OF ANY KIND, either express or implied. See the License for the schemaific language
  * governing permissions and limitations under the License.
  */
-
-import React, { Fragment } from 'react'
-import { Flex, Heading, View, Well } from '@adobe/react-spectrum'
-import { InlineCode } from '../InlineCode'
-import { Table, TBody, Tr, Td } from '../Table'
+import React from 'react'
+import { Heading } from '@adobe/react-spectrum'
+import { Item, TabList, TabPanels, Tabs } from '@react-spectrum/tabs'
+import { JsonSchemaView, JsonSchemaProperty } from './JsonSchemaView'
+import { JsonSchemaValidate } from './JsonSchemaValidate'
+import { JsonSchemaRaw } from './JsonSchemaRaw'
+import { JsonSchemaInfo } from './JsonSchemaInfo'
 
 export const JsonSchema = ({ schema = {}, ...props }) => {
   const {
     $id,
     _id,
-    id,
-    slug,
     $schema,
     _schema,
     title,
     definitions,
-    $defs,
-    _defs,
+    // eslint-disable-next-line no-unused-vars
     properties = [],
+    // eslint-disable-next-line no-unused-vars
     required = [],
     ...remainingProps
   } = schema
   return (
-    <div {...props}>
+    <div>
       {title && <Heading level={1}>{title}</Heading>}
       {Object.keys(remainingProps).map((key) => (
         <JsonSchemaProperty
@@ -41,119 +41,28 @@ export const JsonSchema = ({ schema = {}, ...props }) => {
           property={remainingProps[key]}
         />
       ))}
-      <JsonSchemaProperties properties={properties} required={required} />
+      <Tabs aria-label={title}>
+        <TabList>
+          <Item key='_view'>View</Item>
+          <Item key='_validate'>Validate</Item>
+          <Item key='_raw'>Raw</Item>
+          <Item key='_info'>Info</Item>
+        </TabList>
+        <TabPanels>
+          <Item key='_view'>
+            <JsonSchemaView schema={schema} {...props} />
+          </Item>
+          <Item key='_validate'>
+            <JsonSchemaValidate schema={schema} {...props} />
+          </Item>
+          <Item key='_raw'>
+            <JsonSchemaRaw schema={schema} {...props} />
+          </Item>
+          <Item key='_info'>
+            <JsonSchemaInfo schema={schema} {...props} />
+          </Item>
+        </TabPanels>
+      </Tabs>
     </div>
   )
 }
-
-const JsonSchemaProperties = ({ properties, required = [] }) => {
-  return properties && Object.keys(properties).length > 0 ? (
-    <Table>
-      <TBody>
-        {Object.keys(properties).map((key) => (
-          <Tr key={key}>
-            <Td>
-              <Flex direction='column'>
-                <View>{key}</View>
-                {required?.includes(key) && (
-                  <View>
-                    <span
-                      style={{
-                        color: 'var(--spectrum-global-color-red-400)'
-                      }}
-                    >
-                      required
-                    </span>
-                  </View>
-                )}
-              </Flex>
-            </Td>
-            <Td>
-              <JsonSchemaPropertyDetails name={key} properties={properties} />
-            </Td>
-          </Tr>
-        ))}
-      </TBody>
-    </Table>
-  ) : null
-}
-
-const JsonSchemaPropertyDetails = ({ name, properties }) => {
-  const propKeys = Object.keys(properties[name])
-  return (
-    <Flex direction='column' gap='size-50'>
-      {propKeys.map((prop) => {
-        return (
-          <JsonSchemaProperty
-            key={prop}
-            name={prop}
-            property={properties[name][prop]}
-          />
-        )
-      })}
-    </Flex>
-  )
-}
-
-const excludeLabelProps = ['description']
-
-const JsonSchemaProperty = ({ name, property }) => {
-  if (property === null) {
-    return ''
-  }
-  switch (typeof property) {
-    case 'number':
-      return <DefaultProperty name={name}>{property}</DefaultProperty>
-    case 'boolean':
-      return (
-        <DefaultProperty name={name} highlight>
-          {`${property}`}
-        </DefaultProperty>
-      )
-    case 'object':
-      return (
-        <details>
-          <summary>
-            <JsonSchemaPropertyLabel name={name} />
-          </summary>
-          {Array.isArray(property) ? (
-            <Fragment>
-              {property.map((item) => (
-                <InlineCode key={item}>{item}</InlineCode>
-              ))}{' '}
-            </Fragment>
-          ) : (
-            <Well>
-              <JsonSchema schema={property} />
-            </Well>
-          )}
-        </details>
-      )
-    default:
-      return excludeLabelProps.includes(name) ? (
-        <DefaultProperty name={name}>{property}</DefaultProperty>
-      ) : (
-        <DefaultProperty name={name} highlight>
-          {property}
-        </DefaultProperty>
-      )
-  }
-}
-
-const JsonSchemaPropertyLabel = ({ name }) =>
-  !excludeLabelProps.includes(name) ? (
-    <span
-      style={{
-        textTransform: 'capitalize'
-      }}
-    >
-      <strong>{name}:&nbsp;</strong>
-    </span>
-  ) : null
-
-const DefaultProperty = ({ name, highlight, children }) => (
-  <View key={name}>
-    <JsonSchemaPropertyLabel name={name} />
-    {highlight ? <InlineCode>{children}</InlineCode> : children}
-  </View>
-)

@@ -6,26 +6,29 @@
  *
  * Unless required by applicable law or agreed to in writing, software distributed under
  * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
+ * OF ANY KIND, either express or implied. See the License for the schemaific language
  * governing permissions and limitations under the License.
  */
 
 import React from 'react'
-import { JsonSchema } from '../index'
-import { schemas } from './mock_jsonschema_data'
+import { Table, TBody, Tr, Td } from '../Table'
 
-export default {
-  title: 'components/JsonSchema',
-  argTypes: {
-    schemaKey: {
-      options: Object.keys(schemas),
-      control: { type: 'select', required: true },
-      defaultValue: Object.keys(schemas)[0]
-    }
-  }
-}
-
-export const Default = ({ schemaKey }) => {
-  const props = { schema: schemas[schemaKey] }
-  return <JsonSchema {...props} />
+export const JsonSchemaInfo = ({ schema = {} }) => {
+  const { $id, $schema } = schema
+  return (
+    <div>
+      <Table>
+        <TBody>
+          <Tr key='id'>
+            <Td>Id</Td>
+            <Td>{$id}</Td>
+          </Tr>
+          <Tr key='schema'>
+            <Td>Schema</Td>
+            <Td>{$schema}</Td>
+          </Tr>
+        </TBody>
+      </Table>
+    </div>
+  )
 }
