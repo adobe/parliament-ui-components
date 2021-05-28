@@ -40,7 +40,6 @@ export const JsonSchemaValidate = ({ schema = {} }) => {
         minWidth='100%'
         minHeight='size-2400'
         onChange={(data) => validateData(data)}
-        defaultValue={{}}
       />
       <Heading level={2}>
         <strong>Your instance is valid:</strong> {String(results.valid)}

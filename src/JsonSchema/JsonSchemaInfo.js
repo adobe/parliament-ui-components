@@ -14,7 +14,8 @@ import React from 'react'
 import { Table, TBody, Tr, Td } from '../Table'
 
 export const JsonSchemaInfo = ({ schema = {} }) => {
-  const { $id, $schema } = schema
+  // eslint-disable-next-line no-unused-vars
+  const { $id, _id, $schema, _schema } = schema
   return (
     <div>
       <Table>

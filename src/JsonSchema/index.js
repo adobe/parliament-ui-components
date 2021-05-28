@@ -21,10 +21,14 @@ export const JsonSchema = ({ schema = {}, ...props }) => {
   const {
     $id,
     _id,
+    id,
+    slug,
     $schema,
     _schema,
     title,
     definitions,
+    $defs,
+    _defs,
     // eslint-disable-next-line no-unused-vars
     properties = [],
     // eslint-disable-next-line no-unused-vars
