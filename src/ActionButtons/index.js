@@ -9,37 +9,49 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
+/** @jsx jsx */
+import { css, jsx } from '@emotion/react'
 import PropTypes from 'prop-types'
 import { ActionButton, Text } from '@adobe/react-spectrum'
 
 import Bug from '@spectrum-icons/workflow/Bug'
 import Edit from '@spectrum-icons/workflow/Edit'
 
-const ActionButtons = ({ gitUrl, filePath, branch, issues, ...props }) => (
+const ActionLink = ({ href, children }) => (
+  <a
+    href={href}
+    css={css`
+      text-decoration: none;
+    `}
+    target='_blank'
+    rel='noopener noreferrer nofollow'
+  >
+    {children}
+  </a>
+)
+
+const ActionButtons = ({
+  gitUrl = '',
+  filePath = '',
+  branch = '',
+  issues,
+  ...props
+}) => (
   <div {...props}>
-    <ActionButton
-      isQuiet
-      onPress={() => {
-        document.location.href = `${gitUrl}/edit/${branch}/${filePath}`
-      }}
-      aria-label='Edit page'
+    <ActionLink href={`${gitUrl}/edit/${branch}/${filePath}`}>
+      <ActionButton isQuiet aria-label='Edit page' excludeFromTabOrder>
+        <Edit size='S' />
+        <Text>Edit this page</Text>
+      </ActionButton>
+    </ActionLink>
+    <ActionLink
+      href={issues || `${gitUrl}/issues/new?body=Issue%20in%20${filePath}`}
     >
-      <Edit size='S' />
-      <Text>Edit this page</Text>
-    </ActionButton>
-    <ActionButton
-      isQuiet
-      onPress={() => {
-        issues
-          ? (document.location.href = issues)
-          : (document.location.href = `${gitUrl}/issues/new?body=Issue%20in%20${filePath}`)
-      }}
-      aria-label='Log issue'
-    >
-      <Bug size='S' />
-      <Text>Log an issue</Text>
-    </ActionButton>
+      <ActionButton isQuiet aria-label='Log issue' excludeFromTabOrder>
+        <Bug size='S' />
+        <Text>Log an issue</Text>
+      </ActionButton>
+    </ActionLink>
   </div>
 )
 
@@ -47,12 +59,6 @@ ActionButtons.propTypes = {
   branch: PropTypes.string,
   filePath: PropTypes.string,
   gitUrl: PropTypes.string
-}
-
-ActionButtons.defaultProps = {
-  branch: '',
-  filePath: '',
-  gitUrl: ''
 }
 
 export { ActionButtons }
