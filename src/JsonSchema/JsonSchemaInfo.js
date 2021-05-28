@@ -14,7 +14,6 @@ import React from 'react'
 import { Table, TBody, Tr, Td } from '../Table'
 
 export const JsonSchemaInfo = ({ schema = {} }) => {
-  // eslint-disable-next-line no-unused-vars
   const { $id, _id, $schema, _schema } = schema
   return (
     <div>
@@ -22,11 +21,11 @@ export const JsonSchemaInfo = ({ schema = {} }) => {
         <TBody>
           <Tr key='id'>
             <Td>Id</Td>
-            <Td>{$id}</Td>
+            <Td>{$id || _id}</Td>
           </Tr>
           <Tr key='schema'>
             <Td>Schema</Td>
-            <Td>{$schema}</Td>
+            <Td>{$schema || _schema}</Td>
           </Tr>
         </TBody>
       </Table>
