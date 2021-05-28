@@ -11,13 +11,11 @@
  */
 
 import React from 'react'
-import { DynamicReactJson } from './DynamicReactJson'
 
-export const JsonSchemaRaw = ({ schema = {} }) => {
-  const { properties = [] } = schema
-  return (
-    <div>
-      <DynamicReactJson src={properties} name={false} indentWidth={2} />
-    </div>
-  )
+export const DynamicReactJson = (props) => {
+  if (typeof window !== 'undefined') {
+    const ReactJson = require('react-json-view').default
+    return <ReactJson {...props} />
+  }
+  return null
 }

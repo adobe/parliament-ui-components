@@ -14,7 +14,7 @@ import React, { Fragment } from 'react'
 import { Flex, Heading, View, Well } from '@adobe/react-spectrum'
 import { InlineCode } from '../InlineCode'
 import { Table, TBody, Tr, Td } from '../Table'
-import ReactJson from 'react-json-view'
+import { DynamicReactJson } from './DynamicReactJson'
 
 export const JsonSchemaView = ({ schema = {}, ...props }) => {
   const {
@@ -36,7 +36,7 @@ export const JsonSchemaView = ({ schema = {}, ...props }) => {
   )
 }
 
-const JsonSchemaProperties = ({ properties, required }) => {
+const JsonSchemaProperties = ({ properties, required = [] }) => {
   return properties && Object.keys(properties).length > 0 ? (
     <Table>
       <TBody>
@@ -51,7 +51,7 @@ const JsonSchemaProperties = ({ properties, required }) => {
                     {properties[key].enum && 'enum'}
                   </DefaultProperty>
                 </View>
-                {required.includes(key) && (
+                {required?.includes(key) && (
                   <View>
                     <span
                       style={{
@@ -105,7 +105,7 @@ const JsonSchemaPropertyExample = ({ name, properties }) => {
   return (
     <View key={name}>
       <JsonSchemaPropertyLabel name='Examples' />
-      <ReactJson src={examples} collapsed name={false} indentWidth={2} />
+      <DynamicReactJson src={examples} collapsed name={false} indentWidth={2} />
     </View>
   )
 }

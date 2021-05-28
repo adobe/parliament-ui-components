@@ -13,7 +13,7 @@
 import React, { useState } from 'react'
 import { Heading, View, TextArea } from '@adobe/react-spectrum'
 import { validate } from 'jsonschema'
-import ReactJson from 'react-json-view'
+import { DynamicReactJson } from './DynamicReactJson'
 
 const cleanupResults = (data) => {
   if (data.errors === undefined) {
@@ -45,7 +45,7 @@ export const JsonSchemaValidate = ({ schema = {} }) => {
         <strong>Your instance is valid:</strong> {String(results.valid)}
       </Heading>
       <Heading level={2}>Errors</Heading>
-      <ReactJson src={results.errors} name={false} indentWidth={2} />
+      <DynamicReactJson src={results.errors} name={false} indentWidth={2} />
     </View>
   )
 }
