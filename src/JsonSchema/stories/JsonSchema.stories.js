@@ -29,3 +29,8 @@ export const Default = ({ schemaKey }) => {
   const props = { schema: schemas[schemaKey] }
   return <JsonSchema {...props} />
 }
+
+export const String = ({ schemaKey }) => {
+  const props = { schema: JSON.stringify(schemas[schemaKey]) }
+  return <JsonSchema {...props} />
+}

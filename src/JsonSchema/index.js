@@ -18,6 +18,7 @@ import { JsonSchemaRaw } from './JsonSchemaRaw'
 import { JsonSchemaInfo } from './JsonSchemaInfo'
 
 export const JsonSchema = ({ schema = {}, ...props }) => {
+  schema = typeof schema === 'string' ? JSON.parse(schema) : schema
   const {
     $id,
     _id,
