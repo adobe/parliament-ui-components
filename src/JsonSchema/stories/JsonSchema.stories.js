@@ -12,6 +12,7 @@
 
 import React from 'react'
 import { JsonSchema } from '../index'
+import { Code } from '../../Code'
 import { schemas } from './mock_jsonschema_data'
 
 export default {
@@ -30,7 +31,16 @@ export const Default = ({ schemaKey }) => {
   return <JsonSchema {...props} />
 }
 
-export const String = ({ schemaKey }) => {
+export const PassedAsString = ({ schemaKey }) => {
   const props = { schema: JSON.stringify(schemas[schemaKey]) }
   return <JsonSchema {...props} />
+}
+
+export const AsCodeComponent = ({ schemaKey }) => {
+  const props = {
+    metastring: `{schema: true}`
+  }
+  const code = `${JSON.stringify(schemas[schemaKey])}`
+
+  return <Code {...props}>{code}</Code>
 }
