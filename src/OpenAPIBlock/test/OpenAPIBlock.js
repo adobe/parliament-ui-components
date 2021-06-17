@@ -25,3 +25,17 @@ describe('<OpenAPIBlock />', () => {
     expect(el).toBeInTheDocument()
   })
 })
+
+describe('<OpenAPIBlock /> using swagger-ui', () => {
+  test('should render', () => {
+    const { getByTestId } = render(
+      <OpenAPIBlock
+        specUrl='https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore.json'
+        engine='swagger-ui'
+      />
+    )
+    const el = getByTestId('el')
+
+    expect(el).toBeInTheDocument()
+  })
+})
