@@ -88,39 +88,41 @@ export const OpenAPIBlock = ({
         height: calc(100% - 64px);
       `}
     >
-      <Provider theme={defaultTheme} colorScheme='dark'>
-        <View backgroundColor='blue-400'>
-          <Grid
-            areas={['backToDocs privateRoutes']}
-            columns={['1fr', '1fr']}
-            rows={['auto']}
-            height='size-600'
-            gap='size-100'
-            alignItems='center'
-            marginStart='size-100'
-          >
-            <View gridArea='backToDocs'>
-              {backButton && (
-                <Button
-                  variant='overBackground'
-                  onPress={() => {
-                    backUrl
-                      ? (document.location.href = backUrl)
-                      : window.history.back()
-                  }}
-                >
-                  Back to Docs
-                </Button>
-              )}
-            </View>
-            <View gridArea='privateRoutes' justifySelf='self-end'>
-              <Switch isSelected={hideInternal} onChange={setHideInternal}>
-                Hide Internal Routes
-              </Switch>
-            </View>
-          </Grid>
-        </View>
-      </Provider>
+      {engine !== 'swagger-ui' && (
+        <Provider theme={defaultTheme} colorScheme='dark'>
+          <View backgroundColor='blue-400'>
+            <Grid
+              areas={['backToDocs privateRoutes']}
+              columns={['1fr', '1fr']}
+              rows={['auto']}
+              height='size-600'
+              gap='size-100'
+              alignItems='center'
+              marginStart='size-100'
+            >
+              <View gridArea='backToDocs'>
+                {backButton && (
+                  <Button
+                    variant='overBackground'
+                    onPress={() => {
+                      backUrl
+                        ? (document.location.href = backUrl)
+                        : window.history.back()
+                    }}
+                  >
+                    Back to Docs
+                  </Button>
+                )}
+              </View>
+              <View gridArea='privateRoutes' justifySelf='self-end'>
+                <Switch isSelected={hideInternal} onChange={setHideInternal}>
+                  Hide Internal Routes
+                </Switch>
+              </View>
+            </Grid>
+          </View>
+        </Provider>
+      )}
 
       <div
         css={css`

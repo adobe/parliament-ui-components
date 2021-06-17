@@ -9,7 +9,8 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-import React from 'react'
+/** @jsx jsx */
+import { css, jsx } from '@emotion/react'
 import { defaultTheme, Provider } from '@adobe/react-spectrum'
 import 'swagger-ui-react/swagger-ui.css'
 
@@ -18,7 +19,13 @@ export const DynamicSwaggerUI = (props) => {
     const SwaggerUI = require('swagger-ui-react').default
     return (
       <Provider theme={defaultTheme} colorScheme='light'>
-        <SwaggerUI {...props} />
+        <div
+          css={css`
+            padding: var(--spectrum-global-dimension-static-size-150);
+          `}
+        >
+          <SwaggerUI {...props} />
+        </div>
       </Provider>
     )
   }
