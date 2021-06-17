@@ -10,13 +10,17 @@
  * governing permissions and limitations under the License.
  */
 import React from 'react'
-
+import { defaultTheme, Provider } from '@adobe/react-spectrum'
 import 'swagger-ui-react/swagger-ui.css'
 
 export const DynamicSwaggerUI = (props) => {
   if (typeof window !== 'undefined') {
     const SwaggerUI = require('swagger-ui-react').default
-    return <SwaggerUI {...props} />
+    return (
+      <Provider theme={defaultTheme} colorScheme='light'>
+        <SwaggerUI {...props} />
+      </Provider>
+    )
   }
   return null
 }
