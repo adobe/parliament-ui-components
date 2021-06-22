@@ -11,8 +11,15 @@
  */
 
 import React, { useEffect, useState } from 'react'
-import { Tabs, TabList, TabPanels, Item } from '@react-spectrum/tabs'
-import { Content, Flex, View } from '@adobe/react-spectrum'
+import {
+  Content,
+  Flex,
+  View,
+  Tabs,
+  TabList,
+  TabPanels,
+  Item
+} from '@adobe/react-spectrum'
 import GlobeGrid from '@spectrum-icons/workflow/GlobeGrid'
 import { ParameterTable } from './ParameterTable'
 import { CodeUI } from '../CodeUI'

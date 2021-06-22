@@ -11,8 +11,14 @@
  */
 
 import React, { useEffect } from 'react'
-import { Content, View } from '@adobe/react-spectrum'
-import { Tabs, TabList, TabPanels, Item } from '@react-spectrum/tabs'
+import {
+  Content,
+  View,
+  Tabs,
+  TabList,
+  TabPanels,
+  Item
+} from '@adobe/react-spectrum'
 import { CodeGen } from './CodeGen'
 import { RequestBody } from './RequestBody'
 import { RequestProvider, useRequest } from './RequestContext'
