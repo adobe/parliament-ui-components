@@ -11,7 +11,6 @@
  */
 
 export const queryString = (obj) => {
-  console.log(obj)
   return obj &&
     obj.length > 0 &&
     !obj.every((ob) => {

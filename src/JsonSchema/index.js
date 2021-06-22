@@ -10,8 +10,7 @@
  * governing permissions and limitations under the License.
  */
 import React from 'react'
-import { Heading } from '@adobe/react-spectrum'
-import { Item, TabList, TabPanels, Tabs } from '@react-spectrum/tabs'
+import { Heading, Item, TabList, TabPanels, Tabs } from '@adobe/react-spectrum'
 import { JsonSchemaView, JsonSchemaProperty } from './JsonSchemaView'
 import { JsonSchemaValidate } from './JsonSchemaValidate'
 import { JsonSchemaRaw } from './JsonSchemaRaw'
