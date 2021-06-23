@@ -40,49 +40,29 @@ const Contributors = ({ href = '#', contributors = [], date, ...props }) => {
       {...props}
     >
       <Flex alignItems='center'>
-        <div
-          css={css`
-            display: inline-flex;
-            flex-direction: row-reverse;
-            padding-left: var(--spectrum-global-dimension-static-size-200);
-          `}
-        >
-          {contributors
-            .slice(0, 5)
-            .reverse()
-            .map((contributor, index) => {
-              const name = contributor.name || contributor.login || 'Unknown'
-              const imgUrl = getAvatarUrl(contributor)
-              return (
-                <span
-                  key={index}
-                  className='u-tooltip-showOnHover'
-                  css={css`
-                    margin-left: calc(
-                      -1 * var(--spectrum-global-dimension-static-size-100)
-                    );
-                    position: relative;
-                    width: calc(
-                      var(--spectrum-global-dimension-static-size-400) +
-                        var(--spectrum-global-dimension-static-size-40)
-                    );
-                    height: calc(
-                      var(--spectrum-global-dimension-static-size-400) +
-                        var(--spectrum-global-dimension-static-size-40)
-                    );
-                    border-radius: var(
-                      --spectrum-global-dimension-static-percent-50
-                    );
-                    background: var(--spectrum-global-color-gray-50);
-                  `}
-                >
-                  <Img
-                    alt={name}
-                    src={[
-                      imgUrl,
-                      `https://github.com/images/gravatars/gravatar-user-420.png`
-                    ]}
+        {contributors.length > 0 && (
+          <div
+            css={css`
+              display: inline-flex;
+              flex-direction: row-reverse;
+              padding-left: var(--spectrum-global-dimension-static-size-200);
+            `}
+          >
+            {contributors
+              .slice(0, 5)
+              .reverse()
+              .map((contributor, index) => {
+                const name = contributor.name || contributor.login || 'Unknown'
+                const imgUrl = getAvatarUrl(contributor)
+                return (
+                  <span
+                    key={index}
+                    className='u-tooltip-showOnHover'
                     css={css`
+                      margin-left: calc(
+                        -1 * var(--spectrum-global-dimension-static-size-100)
+                      );
+                      position: relative;
                       width: calc(
                         var(--spectrum-global-dimension-static-size-400) +
                           var(--spectrum-global-dimension-static-size-40)
@@ -94,18 +74,40 @@ const Contributors = ({ href = '#', contributors = [], date, ...props }) => {
                       border-radius: var(
                         --spectrum-global-dimension-static-percent-50
                       );
-                      border: var(--spectrum-global-dimension-static-size-40)
-                        solid var(--spectrum-global-color-gray-50);
+                      background: var(--spectrum-global-color-gray-50);
                     `}
-                  />
-                  <div className='spectrum-Tooltip spectrum-Tooltip--top'>
-                    <span className='spectrum-Tooltip-label'>{name}</span>
-                    <span className='spectrum-Tooltip-tip' />
-                  </div>
-                </span>
-              )
-            })}
-        </div>
+                  >
+                    <Img
+                      alt={name}
+                      src={[
+                        imgUrl,
+                        `https://github.com/images/gravatars/gravatar-user-420.png`
+                      ]}
+                      css={css`
+                        width: calc(
+                          var(--spectrum-global-dimension-static-size-400) +
+                            var(--spectrum-global-dimension-static-size-40)
+                        );
+                        height: calc(
+                          var(--spectrum-global-dimension-static-size-400) +
+                            var(--spectrum-global-dimension-static-size-40)
+                        );
+                        border-radius: var(
+                          --spectrum-global-dimension-static-percent-50
+                        );
+                        border: var(--spectrum-global-dimension-static-size-40)
+                          solid var(--spectrum-global-color-gray-50);
+                      `}
+                    />
+                    <div className='spectrum-Tooltip spectrum-Tooltip--top'>
+                      <span className='spectrum-Tooltip-label'>{name}</span>
+                      <span className='spectrum-Tooltip-tip' />
+                    </div>
+                  </span>
+                )
+              })}
+          </div>
+        )}
         {count > 0 ? (
           <div
             css={css`
@@ -117,7 +119,9 @@ const Contributors = ({ href = '#', contributors = [], date, ...props }) => {
         ) : null}
         <span
           css={css`
-            padding-left: var(--spectrum-global-dimension-static-size-200);
+            padding-left: ${contributors.length > 0
+              ? `var(--spectrum-global-dimension-static-size-200)`
+              : 0};
           `}
         >
           {date && `Last updated ${date}`}
