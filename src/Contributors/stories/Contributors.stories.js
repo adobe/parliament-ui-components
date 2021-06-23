@@ -105,3 +105,13 @@ export const InvalidImage = () => {
 
   return <Contributors {...props} />
 }
+
+export const EmptyCommitters = () => {
+  const props = {
+    contributors: [],
+    date: 'May 20, 2020',
+    href: ''
+  }
+
+  return <Contributors {...props} />
+}
