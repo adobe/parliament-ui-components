@@ -163,5 +163,5 @@ export const parseMetastring = (metastring) => {
 }
 
 export const destructureProps = (props) => {
-  return typeof props.children === 'string' ? props : props.children.props
+  return typeof props.children === 'string' ? props : props.children[0].props
 }

@@ -56,13 +56,14 @@ const calculateLinesToHighlight = (meta) => {
 }
 
 const CodeUI = (props) => {
+  console.log(props)
   const {
     children,
     className = '',
     theme = 'dark',
     copyButton = true,
     lineNumbers = true,
-    metastring = '',
+    'data-meta': metastring = '',
     ...otherProps
   } = destructureProps(props)
   const tooltipId = nextId()
@@ -86,7 +87,11 @@ const CodeUI = (props) => {
       }}
       {...otherProps}
     >
-      <Highlight {...defaultProps} code={children} language={language}>
+      <Highlight
+        {...defaultProps}
+        code={typeof children === 'string' ? children : children[0]}
+        language={language}
+      >
         {({ className, tokens, getLineProps, getTokenProps }) => {
           const lines = tokens.slice(0, -1)
           const isMultiLine = lines.length > 1
