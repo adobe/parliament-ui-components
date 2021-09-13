@@ -28,7 +28,7 @@ import { completions } from './HeaderCompletions'
 const findChild = (childrenArray, type) => {
   const child = childrenArray.filter(
     (child) =>
-      child.type.name === type || child.props.mdxType === type.toLowerCase()
+      child.type?.name === type || child.props?.mdxType === type.toLowerCase()
   )
   return child.length === 1 ? child[0] : {}
 }
