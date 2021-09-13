@@ -56,7 +56,6 @@ const calculateLinesToHighlight = (meta) => {
 }
 
 const CodeUI = (props) => {
-  console.log(props)
   const {
     children,
     className = '',

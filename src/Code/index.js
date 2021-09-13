@@ -16,8 +16,6 @@ import { JsonSchema } from '../JsonSchema'
 import { CodeUI } from '../CodeUI'
 
 const Code = (props) => {
-  console.log(props)
-
   const { children = '', metastring = '' } = destructureProps(props)
 
   const options = parseMetastring(metastring)
