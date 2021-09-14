@@ -23,6 +23,7 @@ import {
   View
 } from '@adobe/react-spectrum'
 import { ReDocWrapper } from './ReDocWrapper'
+import { StopLightWrapper } from './StopLightWrapper'
 import { DynamicSwaggerUI } from './DynamicSwaggerUI'
 
 const hideInternalRoutes = (spec) => {
@@ -68,6 +69,13 @@ export const OpenAPIBlock = ({
   const openApiRenderer = (engine) =>
     engine === 'swagger-ui' ? (
       <DynamicSwaggerUI
+        spec={!hideInternal ? internal : external}
+        onComplete={() => {
+          setShowProgress(false)
+        }}
+      />
+    ) : engine === 'stoplight' ? (
+      <StopLightWrapper
         spec={!hideInternal ? internal : external}
         onComplete={() => {
           setShowProgress(false)
