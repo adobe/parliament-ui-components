@@ -1,6 +1,6 @@
 {
   "name": "@adobe/parliament-ui-components",
-  "version": "5.0.0-beta.6",
+  "version": "5.0.0-beta.7",
   "description": "UI Components for Parliament projects",
   "author": {
     "name": "Simon Mac Donald",
@@ -86,6 +86,7 @@
     "@spectrum-css/vars": "^3.0.1",
     "@spectrum-icons/workflow": "^3.2.0",
     "@stoplight/elements": "^7.3.2",
+    "@stoplight/elements-core": "^7.3.2",
     "classnames": "^2.2.6",
     "elasticlunr": "^0.9.5",
     "gatsby": "^2.29.0",
