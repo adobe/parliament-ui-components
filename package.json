@@ -1,12 +1,16 @@
 {
   "name": "@adobe/parliament-ui-components",
-  "version": "5.0.0-beta.5",
+  "version": "5.0.0-beta.6",
   "description": "UI Components for Parliament projects",
   "author": {
     "name": "Simon Mac Donald",
     "url": "https://github.com/macdonst"
   },
   "contributors": [
+    {
+      "name": "Hiren Shah",
+      "url": "https://github.com/hirenoble"
+    },
     {
       "name": "James Calcaben",
       "url": "https://github.com/jcalcaben"
