@@ -121,7 +121,9 @@ const Header = ({
               href={titleUrl}
               css={css`
                 text-decoration-line: none;
-                :focus { outline: auto; }
+                :focus {
+                  outline: auto;
+                }
               `}
             >
               <Flex alignItems='center' height='100%'>
@@ -151,7 +153,9 @@ const Header = ({
             <Link
               css={css`
                 text-decoration-line: none;
-                :focus { outline: auto; }
+                :focus {
+                  outline: auto;
+                }
               `}
               to='/'
             >
