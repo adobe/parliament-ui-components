@@ -13,12 +13,12 @@
 
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react'
-import '@stoplight/elements/styles.min.css'
 
 export const StopLightWrapper = ({ spec, onComplete }) => {
   onComplete && onComplete()
   if (typeof window !== 'undefined') {
     const { API } = require('@stoplight/elements')
+    require('@stoplight/elements/styles.min.css')
     return (
       <div
         css={css`
