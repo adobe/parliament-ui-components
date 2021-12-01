@@ -1,6 +1,6 @@
 {
   "name": "@adobe/parliament-ui-components",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "description": "UI Components for Parliament projects",
   "author": {
     "name": "Simon Mac Donald",
@@ -111,7 +111,7 @@
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "styled-components": "^5.1.1",
-    "swagger-ui-react": "^3.50.0"
+    "swagger-ui-react": "^4.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
