@@ -53,15 +53,15 @@ const Header = ({
   const [isPopoverOpen, setPopoverOpen] = useState(false)
   const node = useRef(null)
   const nav = useRef(null)
-  const [tab, setTab] = React.useState(tabs[0].title)
+  const [tab, setTab] = React.useState(tabs[0]?.title)
 
   const positionSelectedTabIndicator = () => {
     const currentPath = location.pathname
-
     const selectedTab =
       tabs
-        .filter((tab) => currentPath.startsWith(tab.path))
-        .sort((a, b) => b.path.length - a.path.length)[0].title || tabs[0].title
+        .filter((tab) => currentPath.startsWith(tab?.path))
+        .sort((a, b) => b.path.length - a.path.length)[0]?.title ||
+      tabs[0]?.title
 
     setTab(selectedTab)
   }
