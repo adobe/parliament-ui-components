@@ -12,17 +12,20 @@
 
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react'
-import { createRef, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'gatsby'
 import { Adobe } from '../Icons'
-import { ActionButton, Divider, Flex, View } from '@adobe/react-spectrum'
-import { cloneElement, isExternal } from '../utils'
+import '@spectrum-css/tabs'
 import {
+  ActionButton,
+  Divider,
+  Flex,
+  View,
   Tabs,
-  TabsIndicator,
-  positionIndicator,
-  animateIndicator
-} from '../Tabs'
+  TabList,
+  Item
+} from '@adobe/react-spectrum'
+import { cloneElement, isExternal } from '../utils'
 
 import Menu from '@spectrum-icons/workflow/ShowMenu'
 
@@ -50,24 +53,20 @@ const Header = ({
   const [isPopoverOpen, setPopoverOpen] = useState(false)
   const node = useRef(null)
   const nav = useRef(null)
-  const selectedTabIndicator = useRef(null)
-  const [tabRefs] = useState([])
+  const [tab, setTab] = React.useState(tabs[0].title)
 
   const positionSelectedTabIndicator = () => {
     const currentPath = location.pathname
 
     const selectedTab =
-      tabRefs
-        .filter((tab) => currentPath.startsWith(tab.current?.pathname))
-        .sort(
-          (a, b) => b.current?.pathname.length - a.current?.pathname.length
-        )[0] || tabRefs[0]
+      tabs
+        .filter((tab) => currentPath.startsWith(tab.path))
+        .sort((a, b) => b.path.length - a.path.length)[0].title || tabs[0].title
 
-    positionIndicator(selectedTabIndicator, selectedTab)
+    setTab(selectedTab)
   }
 
   useEffect(() => {
-    animateIndicator(selectedTabIndicator, false)
     positionSelectedTabIndicator()
   }, [location.pathname])
 
@@ -168,57 +167,26 @@ const Header = ({
                     height='100%'
                   />
                 )}
-                <Tabs
-                  ref={nav}
-                  onFontsReady={() => {
-                    // positionSelectedTabIndicator()
-                    // setIsAnimated(true)
-                  }}
-                >
-                  {tabs.map((tab, i) => {
-                    const { title, path } = tab
-                    const ref = createRef()
-                    tabRefs.push(ref)
-
-                    const isActive = ({ isPartiallyCurrent }) =>
-                      isPartiallyCurrent
-                        ? {
-                            'aria-selected': 'true',
-                            className: 'is-selected spectrum-Tabs-item'
-                          }
-                        : { className: 'spectrum-Tabs-item' }
-
-                    const label = (
-                      <span className='spectrum-Tabs-itemLabel'>{title}</span>
-                    )
-
-                    return isExternal(path) ? (
-                      <a
-                        key={i}
-                        href={path}
-                        ref={ref}
-                        className='spectrum-Tabs-item'
-                      >
-                        {label}
-                      </a>
-                    ) : (
-                      <Link
-                        key={i}
-                        to={path}
-                        ref={ref}
-                        partiallyActive
-                        getProps={isActive}
-                      >
-                        {label}
-                      </Link>
-                    )
-                  })}
-                  <TabsIndicator
-                    ref={selectedTabIndicator}
-                    css={css`
-                      bottom: -10px !important;
-                    `}
-                  />
+                <Tabs items={tabs} selectedKey={tab} isQuiet>
+                  <TabList>
+                    {(item) => (
+                      <Item key={item.title} className='spectrum-Tabs-item'>
+                        {isExternal(item.path) ? (
+                          <a href={item.path}>
+                            <span className='spectrum-Tabs-itemLabel'>
+                              {item.title}
+                            </span>
+                          </a>
+                        ) : (
+                          <Link to={item.path} partiallyActive>
+                            <span className='spectrum-Tabs-itemLabel'>
+                              {item.title}
+                            </span>
+                          </Link>
+                        )}
+                      </Item>
+                    )}
+                  </TabList>
                 </Tabs>
               </Flex>
             </View>
