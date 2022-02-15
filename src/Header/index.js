@@ -182,11 +182,7 @@ const Header = ({
                   isQuiet
                 >
                   <TabList>
-                    {(item) => (
-                      <Item key={item.title} className='spectrum-Tabs-item'>
-                        {item.title}
-                      </Item>
-                    )}
+                    {(item) => <Item key={item.title}>{item.title}</Item>}
                   </TabList>
                 </Tabs>
               </Flex>
