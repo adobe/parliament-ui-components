@@ -15,7 +15,15 @@ import { css, jsx } from '@emotion/react'
 import { useEffect, useRef, useState } from 'react'
 import { Link, navigate } from 'gatsby'
 import { Adobe } from '../Icons'
-import { ActionButton, Divider, Flex, View, Tabs, TabList, Item } from '@adobe/react-spectrum'
+import {
+  ActionButton,
+  Divider,
+  Flex,
+  View,
+  Tabs,
+  TabList,
+  Item
+} from '@adobe/react-spectrum'
 import { cloneElement, isExternal } from '../utils'
 
 import Menu from '@spectrum-icons/workflow/ShowMenu'
@@ -50,9 +58,7 @@ const Header = ({
     const selectedTab =
       tabs
         .filter((tab) => currentPath.startsWith(tab?.path))
-        .sort(
-          (a, b) => b?.path.length - a?.path.length
-        )[0] || tabs[0]
+        .sort((a, b) => b?.path.length - a?.path.length)[0] || tabs[0]
 
     setTab(selectedTab?.title)
   }
@@ -69,9 +75,11 @@ const Header = ({
   }
 
   const handleTabSelection = (title) => {
-    const selectedTab = tabs.find(tab => tab.title === title)
+    const selectedTab = tabs.find((tab) => tab.title === title)
     setTab(selectedTab.title)
-    isExternal(selectedTab.path) ? window.location = selectedTab.path : navigate(selectedTab.path)
+    isExternal(selectedTab.path)
+      ? (window.location = selectedTab.path)
+      : navigate(selectedTab.path)
   }
 
   useEffect(() => {
