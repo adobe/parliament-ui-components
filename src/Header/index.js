@@ -57,10 +57,14 @@ const Header = ({
 
     const selectedTab =
       tabs
-        .filter((tab) => currentPath.startsWith(isExternal(tab?.path) ? tab?.path : withPrefix(tab?.path)))
+        .filter((tab) =>
+          currentPath.startsWith(
+            isExternal(tab?.path) ? tab?.path : withPrefix(tab?.path)
+          )
+        )
         .sort((a, b) => b?.path.length - a?.path.length)[0] || tabs[0]
 
-        setTab(selectedTab?.title)
+    setTab(selectedTab?.title)
   }
 
   useEffect(() => {
