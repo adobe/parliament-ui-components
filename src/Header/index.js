@@ -13,7 +13,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react'
 import { useEffect, useRef, useState } from 'react'
-import { Link, navigate } from 'gatsby'
+import { Link, navigate, withPrefix } from 'gatsby'
 import { Adobe } from '../Icons'
 import {
   ActionButton,
@@ -57,10 +57,10 @@ const Header = ({
 
     const selectedTab =
       tabs
-        .filter((tab) => currentPath.startsWith(tab?.path))
+        .filter((tab) => currentPath.startsWith(isExternal(tab?.path) ? tab?.path : withPrefix(tab?.path)))
         .sort((a, b) => b?.path.length - a?.path.length)[0] || tabs[0]
 
-    setTab(selectedTab?.title)
+        setTab(selectedTab?.title)
   }
 
   useEffect(() => {
