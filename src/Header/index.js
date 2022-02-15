@@ -13,7 +13,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react'
 import React, { useEffect, useRef, useState } from 'react'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import { Adobe } from '../Icons'
 import '@spectrum-css/tabs'
 import {
@@ -64,6 +64,14 @@ const Header = ({
       tabs[0]?.title
 
     setTab(selectedTab)
+  }
+
+  const handleTabSelection = (title) => {
+    const selectedTab = tabs.find((tab) => tab.title === title)
+    setTab(title)
+    isExternal(selectedTab.path)
+      ? (window.location = selectedTab.path)
+      : navigate(selectedTab.path)
   }
 
   useEffect(() => {
@@ -167,23 +175,16 @@ const Header = ({
                     height='100%'
                   />
                 )}
-                <Tabs items={tabs} selectedKey={tab} isQuiet>
+                <Tabs
+                  items={tabs}
+                  selectedKey={tab}
+                  onSelectionChange={handleTabSelection}
+                  isQuiet
+                >
                   <TabList>
                     {(item) => (
                       <Item key={item.title} className='spectrum-Tabs-item'>
-                        {isExternal(item.path) ? (
-                          <a href={item.path}>
-                            <span className='spectrum-Tabs-itemLabel'>
-                              {item.title}
-                            </span>
-                          </a>
-                        ) : (
-                          <Link to={item.path} partiallyActive>
-                            <span className='spectrum-Tabs-itemLabel'>
-                              {item.title}
-                            </span>
-                          </Link>
-                        )}
+                        {item.title}
                       </Item>
                     )}
                   </TabList>
