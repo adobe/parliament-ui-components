@@ -12,17 +12,11 @@
 
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react'
-import { createRef, useEffect, useRef, useState } from 'react'
-import { Link } from 'gatsby'
+import { useEffect, useRef, useState } from 'react'
+import { Link, navigate } from 'gatsby'
 import { Adobe } from '../Icons'
-import { ActionButton, Divider, Flex, View } from '@adobe/react-spectrum'
+import { ActionButton, Divider, Flex, View, Tabs, TabList, Item } from '@adobe/react-spectrum'
 import { cloneElement, isExternal } from '../utils'
-import {
-  Tabs,
-  TabsIndicator,
-  positionIndicator,
-  animateIndicator
-} from '../Tabs'
 
 import Menu from '@spectrum-icons/workflow/ShowMenu'
 
@@ -49,25 +43,21 @@ const Header = ({
   const isMobile = useMediaQuery({ maxWidth: 767 })
   const [isPopoverOpen, setPopoverOpen] = useState(false)
   const node = useRef(null)
-  const nav = useRef(null)
-  const selectedTabIndicator = useRef(null)
-  const [tabRefs] = useState([])
-
+  const [tab, setTab] = useState(tabs[0]?.title)
   const positionSelectedTabIndicator = () => {
     const currentPath = location.pathname
 
     const selectedTab =
-      tabRefs
-        .filter((tab) => currentPath.startsWith(tab.current?.pathname))
+      tabs
+        .filter((tab) => currentPath.startsWith(tab?.path))
         .sort(
-          (a, b) => b.current?.pathname.length - a.current?.pathname.length
-        )[0] || tabRefs[0]
+          (a, b) => b?.path.length - a?.path.length
+        )[0] || tabs[0]
 
-    positionIndicator(selectedTabIndicator, selectedTab)
+    setTab(selectedTab?.title)
   }
 
   useEffect(() => {
-    animateIndicator(selectedTabIndicator, false)
     positionSelectedTabIndicator()
   }, [location.pathname])
 
@@ -76,6 +66,12 @@ const Header = ({
       return
     }
     setPopoverOpen(false)
+  }
+
+  const handleTabSelection = (title) => {
+    const selectedTab = tabs.find(tab => tab.title === title)
+    setTab(selectedTab.title)
+    isExternal(selectedTab.path) ? window.location = selectedTab.path : navigate(selectedTab.path)
   }
 
   useEffect(() => {
@@ -169,56 +165,14 @@ const Header = ({
                   />
                 )}
                 <Tabs
-                  ref={nav}
-                  onFontsReady={() => {
-                    // positionSelectedTabIndicator()
-                    // setIsAnimated(true)
-                  }}
+                  items={tabs}
+                  selectedKey={tab}
+                  onSelectionChange={handleTabSelection}
+                  isQuiet
                 >
-                  {tabs.map((tab, i) => {
-                    const { title, path } = tab
-                    const ref = createRef()
-                    tabRefs.push(ref)
-
-                    const isActive = ({ isPartiallyCurrent }) =>
-                      isPartiallyCurrent
-                        ? {
-                            'aria-selected': 'true',
-                            className: 'is-selected spectrum-Tabs-item'
-                          }
-                        : { className: 'spectrum-Tabs-item' }
-
-                    const label = (
-                      <span className='spectrum-Tabs-itemLabel'>{title}</span>
-                    )
-
-                    return isExternal(path) ? (
-                      <a
-                        key={i}
-                        href={path}
-                        ref={ref}
-                        className='spectrum-Tabs-item'
-                      >
-                        {label}
-                      </a>
-                    ) : (
-                      <Link
-                        key={i}
-                        to={path}
-                        ref={ref}
-                        partiallyActive
-                        getProps={isActive}
-                      >
-                        {label}
-                      </Link>
-                    )
-                  })}
-                  <TabsIndicator
-                    ref={selectedTabIndicator}
-                    css={css`
-                      bottom: -10px !important;
-                    `}
-                  />
+                  <TabList>
+                    {(item) => <Item key={item.title}>{item.title}</Item>}
+                  </TabList>
                 </Tabs>
               </Flex>
             </View>
