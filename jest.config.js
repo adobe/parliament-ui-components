@@ -14,7 +14,8 @@ const config = {
     '\\.css$': 'identity-obj-proxy',
     // Manual mock other files using file-mock.js
     '.+\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      '<rootDir>/__mocks__/file-mock.js'
+      '<rootDir>/__mocks__/file-mock.js',
+    '^gatsby-page-utils/(.*)$': `gatsby-page-utils/dist/$1`
   },
   moduleFileExtensions: ['js', 'json', 'node'],
   testPathIgnorePatterns: ['node_modules', '.cache', 'public'],
