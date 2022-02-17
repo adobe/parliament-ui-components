@@ -11,10 +11,10 @@
  */
 
 import React from 'react'
-import { Link as RSLink} from '@adobe/react-spectrum'
+import { Link as RSLink } from '@adobe/react-spectrum'
 
 export const Link = ({ children, className, href, ...props }) => (
-  <RSLink>
+  <RSLink isQuiet>
     <a {...props} href={href}>
       {children}
     </a>
