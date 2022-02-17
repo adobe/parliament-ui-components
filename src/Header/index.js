@@ -13,7 +13,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react'
 import { useEffect, useRef, useState } from 'react'
-import { Link, navigate, withPrefix } from 'gatsby'
+import { Link, withPrefix } from 'gatsby'
 import { Adobe } from '../Icons'
 import {
   ActionButton,
@@ -81,7 +81,9 @@ const Header = ({
 
   const handleTabSelection = (path) => {
     setTab(path)
-    isExternal(path) ? (window.location = path) : navigate(path)
+    isExternal(path)
+      ? (window.location = path)
+      : (window.location.pathname = withPrefix(path))
   }
 
   useEffect(() => {
