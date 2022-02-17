@@ -12,13 +12,11 @@ governing permissions and limitations under the License.
 
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react'
-import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from '../Link'
 import { View } from '@adobe/react-spectrum'
+import { Link } from '../Link'
 
 import '@spectrum-css/typography'
-import '@spectrum-css/link'
 
 const TableOfContents = ({
   tableOfContents,
@@ -30,9 +28,6 @@ const TableOfContents = ({
   const tableOfContentsItems = {
     items: tableOfContents.items && tableOfContents.items[index].items
   }
-
-  const idList = getIds(tableOfContents?.items?.[0]?.items)
-  const activeId = useActiveId(idList)
 
   return (
     <View
@@ -71,20 +66,20 @@ const TableOfContents = ({
           `}
         >
           {tableOfContentsItems.items &&
-            renderItems(tableOfContentsItems.items, activeId)}
+            renderItems(tableOfContentsItems.items)}
         </ul>
       </span>
     </View>
   )
 }
 
-const renderItems = (items, activeId) => {
+const renderItems = (items) => {
   return items.map((item, index) => {
-    return renderItem(item, index, activeId)
+    return renderItem(item, index)
   })
 }
 
-const renderItem = (item, index, activeId) => {
+const renderItem = (item, index) => {
   return (
     <li
       key={index}
@@ -102,29 +97,18 @@ const renderItem = (item, index, activeId) => {
             margin-top: 0;
           `}
         >
-          {renderLink(item, activeId, true)}
-          {renderItems(item.items, activeId)}
+          {renderLink(item, true)}
+          {renderItems(item.items)}
         </ul>
       ) : (
-        renderLink(item, activeId)
+        renderLink(item)
       )}
     </li>
   )
 }
 
-const renderLink = (item, activeId, indent = false) => {
-  return activeId === item?.url?.slice(1) ? (
-    <Link
-      href={item.url}
-      css={css`
-        ${indent ? `margin-left: -16px;` : ''}
-        font-weight: bold;
-        color: var(--spectrum-global-color-gray-900);
-      `}
-    >
-      {item.title}
-    </Link>
-  ) : (
+const renderLink = (item, indent = false) => {
+  return (
     <Link
       href={item.url}
       css={css`
@@ -134,50 +118,6 @@ const renderLink = (item, activeId, indent = false) => {
       {item.title}
     </Link>
   )
-}
-
-const getIds = (items) => {
-  return items
-    ? items.reduce((acc, item) => {
-        if (item.url) {
-          // url has a # as first character, remove it to get the raw CSS-id
-          acc.push(item.url.slice(1))
-        }
-        if (item.items) {
-          acc.push(...getIds(item.items))
-        }
-        return acc
-      }, [])
-    : []
-}
-
-const useActiveId = (itemIds) => {
-  const [activeId, setActiveId] = useState(``)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id)
-          }
-        })
-      },
-      { rootMargin: `0% 0% -80% 0%` }
-    )
-
-    itemIds.forEach((id) => {
-      observer.observe(document.getElementById(id))
-    })
-
-    return () => {
-      itemIds.forEach((id) => {
-        observer.unobserve(document.getElementById(id))
-      })
-    }
-  }, [itemIds])
-
-  return activeId
 }
 
 TableOfContents.propTypes = {
