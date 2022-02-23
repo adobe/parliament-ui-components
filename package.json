@@ -1,6 +1,6 @@
 {
   "name": "@adobe/parliament-ui-components",
-  "version": "5.2.1",
+  "version": "5.2.2",
   "description": "UI Components for Parliament projects",
   "author": {
     "name": "Simon Mac Donald",
@@ -107,7 +107,7 @@
     "react-image": "^4.0.3",
     "react-json-view": "^1.21.3",
     "react-responsive": "^8.1.0",
-    "redoc": "2.0.0-rc.53",
+    "redoc": "2.0.0-rc.38",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "styled-components": "^5.1.1",
