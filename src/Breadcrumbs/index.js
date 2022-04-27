@@ -32,10 +32,13 @@ const Breadcrumbs = ({ selectedTopPage, selectedSubPages, ...props }) => (
           {selectedTopPage?.title}
         </GatsbyLink>
         <svg
-          className='spectrum-Icon spectrum-UIIcon-ChevronRightSmall spectrum-Breadcrumbs-itemSeparator'
+          className='spectrum-Icon spectrum-Breadcrumbs-itemSeparator'
           focusable='false'
-          role='img'
           aria-hidden='true'
+          css={css`
+            width: var(--spectrum-global-dimension-size-75);
+            height: var(--spectrum-global-dimension-size-100);
+          `}
         >
           <path
             d='M7 5a.747.747 0 00-.22-.53L2.54.23a.75.75 0 10-1.06 1.06L5.19 5 1.48 8.71a.75.75 0 101.06 1.06l4.24-4.24A.747.747 0 007 5z'
@@ -57,10 +60,14 @@ const Breadcrumbs = ({ selectedTopPage, selectedSubPages, ...props }) => (
               {page.title}
             </GatsbyLink>
             <svg
-              className='spectrum-Icon spectrum-UIIcon-ChevronRightSmall spectrum-Breadcrumbs-itemSeparator'
+              className='spectrum-Icon spectrum-Breadcrumbs-itemSeparator'
               focusable='false'
               role='img'
               aria-hidden='true'
+              css={css`
+                width: var(--spectrum-global-dimension-size-75);
+                height: var(--spectrum-global-dimension-size-100);
+              `}
             >
               <path
                 d='M7 5a.747.747 0 00-.22-.53L2.54.23a.75.75 0 10-1.06 1.06L5.19 5 1.48 8.71a.75.75 0 101.06 1.06l4.24-4.24A.747.747 0 007 5z'
