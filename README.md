@@ -116,7 +116,7 @@ This will return your project to the state when you did a `yarn install`.
 
 ## Documentation
 
-TODO
+🚧 TODO 🚧
 
 ## Contributing
 
