@@ -23,12 +23,12 @@ jobs:
         with:
           node-version: 14.15.0
       - run: |
-          npm install
-          npm test
+          yarn install
+          yarn test
       - name: bump and pub
         if: ${{ github.event.inputs.level != '' }}
         run: |
-          npm version ${{ github.event.inputs.level }}
+          yarn version ${{ github.event.inputs.level }}
           git push
       - uses: JS-DevTools/npm-publish@v1
         with:

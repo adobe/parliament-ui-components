@@ -39,7 +39,7 @@
     "node": ">=14.15.0"
   },
   "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs --css-modules false && npm run stripcsscomments",
+    "build": "microbundle-crl --no-compress --format modern,cjs --css-modules false && yarn run stripcsscomments",
     "start": "microbundle-crl watch --no-compress --format modern,cjs --css-modules false",
     "stripcsscomments": "cp dist/index.css dist/temp.css && strip-css-comments dist/temp.css > dist/index.css && rm dist/temp.css",
     "lint": "eslint .",
