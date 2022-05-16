@@ -17,7 +17,15 @@ import { Breadcrumbs } from '../index'
 
 describe('<Breadcrumbs />', () => {
   test('should render', () => {
-    const { getByTestId } = render(<Breadcrumbs data-testid='el' />)
+    const sampleBreadcrumbsPages = [
+      {
+        path: 'sample-path',
+        title: 'Sample page'
+      }
+    ]
+    const { getByTestId } = render(
+      <Breadcrumbs breadcrumbsPages={sampleBreadcrumbsPages} data-testid='el' />
+    )
     const el = getByTestId('el')
 
     expect(el).toBeInTheDocument()
