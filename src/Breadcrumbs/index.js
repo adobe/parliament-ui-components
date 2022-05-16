@@ -16,7 +16,17 @@ import PropTypes from 'prop-types'
 import { Link as GatsbyLink } from 'gatsby'
 import { Breadcrumbs, Item } from '@adobe/react-spectrum'
 
+/**
+ * Parliament Breadcrumbs are deprecated. Please use the React Spectrum v3 Breadcrumbs instead.
+ * See the docs for details: https://react-spectrum.adobe.com/react-spectrum/Breadcrumbs.html.
+ *
+ * @deprecated
+ */
 const ParliamentBreadcrumbs = ({ breadcrumbsPages, ...props }) => {
+  console.warn(
+    'Parliament Breadcrumbs are deprecated. Please use the React Spectrum v3 Breadcrumbs instead. See the docs for details: https://react-spectrum.adobe.com/react-spectrum/Breadcrumbs.html'
+  )
+
   return (
     <Breadcrumbs size='M' {...props}>
       {breadcrumbsPages.map((page) => (
