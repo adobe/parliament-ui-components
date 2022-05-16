@@ -9,18 +9,18 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
-import { Feedback } from '../index'
+import React from "react";
+import { Feedback } from "../index";
 
 export default {
-  title: 'components/Feedback'
-}
+  title: "components/Feedback",
+};
 
 export const Default = () => {
   const props = {
-    onYes: () => window.alert('Thank you'),
-    onNo: () => window.alert('Why not ?')
-  }
+    onYes: () => window.alert("Thank you"),
+    onNo: () => window.alert("Why not ?"),
+  };
 
-  return <Feedback {...props} />
-}
+  return <Feedback {...props} />;
+};

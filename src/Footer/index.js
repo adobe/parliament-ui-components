@@ -11,20 +11,20 @@ governing permissions and limitations under the License.
 */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import { Divider, Flex, View } from '@adobe/react-spectrum'
-import '@spectrum-css/typography'
+import { css, jsx } from "@emotion/react";
+import { Divider, Flex, View } from "@adobe/react-spectrum";
+import "@spectrum-css/typography";
 
 const Footer = ({ ...props }) => (
   <footer
-    className='spectrum-Body--sizeXS'
+    className="spectrum-Body--sizeXS"
     css={css`
       margin: 0 var(--spectrum-global-dimension-static-size-400);
     `}
     {...props}
   >
-    <Divider size='M' />
-    <Flex justifyContent='space-between' alignItems='center'>
+    <Divider size="M" />
+    <Flex justifyContent="space-between" alignItems="center">
       <View>
         <ul
           css={css`
@@ -42,13 +42,13 @@ const Footer = ({ ...props }) => (
           `}
         >
           <li>
-            <a href='https://www.adobe.com/legal/terms.html'>Terms of use</a>
+            <a href="https://www.adobe.com/legal/terms.html">Terms of use</a>
           </li>
           <li>
-            <a href='https://www.adobe.com/privacy.html'>Privacy policy</a>
+            <a href="https://www.adobe.com/privacy.html">Privacy policy</a>
           </li>
           <li>
-            <a href='https://www.adobe.com/privacy/cookies.html'>Cookies</a>
+            <a href="https://www.adobe.com/privacy/cookies.html">Cookies</a>
           </li>
           <li>
             Language: <u>English</u>
@@ -62,6 +62,6 @@ const Footer = ({ ...props }) => (
       </View>
     </Flex>
   </footer>
-)
+);
 
-export { Footer }
+export { Footer };

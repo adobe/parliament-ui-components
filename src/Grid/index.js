@@ -11,8 +11,8 @@ governing permissions and limitations under the License.
 */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import styled from '@emotion/styled'
+import { css, jsx } from "@emotion/react";
+import styled from "@emotion/styled";
 
 const Grid = ({ children, ...props }) => (
   <div
@@ -38,7 +38,7 @@ const Grid = ({ children, ...props }) => (
   >
     {children}
   </div>
-)
+);
 
 const GridHeader = styled.div`
   height: var(--spectrum-global-dimension-size-800);
@@ -56,7 +56,7 @@ const GridHeader = styled.div`
   @media screen and (max-width: 767px) {
     grid-area: 1 / 1 / 2 / 11;
   }
-`
+`;
 
 const GridContent = styled.main`
   padding-top: var(--spectrum-global-dimension-size-300);
@@ -77,7 +77,7 @@ const GridContent = styled.main`
   @media screen and (max-width: 767px) {
     grid-area: 2 / 1 / 3 / 12;
   }
-`
+`;
 
 const GridRightRail = styled.div`
   padding-left: var(--spectrum-global-dimension-size-200);
@@ -89,7 +89,7 @@ const GridRightRail = styled.div`
   @media screen and (max-width: 1200px) {
     display: none;
   }
-`
+`;
 
 const GridFooter = styled.div`
   position: absolute;
@@ -104,7 +104,7 @@ const GridFooter = styled.div`
   @media screen and (max-width: 767px) {
     grid-area: 3 / 1 / 4 / 11;
   }
-`
+`;
 
 const GridNav = styled.div`
   background-color: var(--spectrum-global-color-gray-75);
@@ -118,6 +118,6 @@ const GridNav = styled.div`
   @media screen and (max-width: 767px) {
     display: none;
   }
-`
+`;
 
-export { Grid, GridHeader, GridContent, GridFooter, GridNav, GridRightRail }
+export { Grid, GridHeader, GridContent, GridFooter, GridNav, GridRightRail };

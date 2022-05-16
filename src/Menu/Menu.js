@@ -10,12 +10,12 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
-import { Item } from './Item'
+import { Item } from "./Item";
 
-import '@spectrum-css/menu'
+import "@spectrum-css/menu";
 
 const Menu = ({
   children,
@@ -26,9 +26,9 @@ const Menu = ({
   disabledKeys = [],
   ...props
 }) => {
-  console.log(selectedKeys)
+  console.log(selectedKeys);
   return (
-    <ul className='spectrum-Menu' role='menu' {...props}>
+    <ul className="spectrum-Menu" role="menu" {...props}>
       {items.map((item, index) => (
         <Item
           key={index}
@@ -45,14 +45,14 @@ const Menu = ({
       ))}
       {children}
     </ul>
-  )
-}
+  );
+};
 
 Menu.propTypes = {
   onAction: PropTypes.func,
   items: PropTypes.array,
   selectedKeys: PropTypes.array,
-  disabledKeys: PropTypes.array
-}
+  disabledKeys: PropTypes.array,
+};
 
-export { Menu }
+export { Menu };

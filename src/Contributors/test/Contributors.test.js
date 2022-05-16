@@ -10,16 +10,16 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import React from 'react'
-import { render } from 'test-utils'
-import '../../../test-utils/matchMedia'
-import { Contributors } from '../index'
+import React from "react";
+import { render } from "test-utils";
+import "../../../test-utils/matchMedia";
+import { Contributors } from "../index";
 
-describe('<Contributors />', () => {
-  test('should render', () => {
-    const { getByTestId } = render(<Contributors data-testid='el' />)
-    const el = getByTestId('el')
+describe("<Contributors />", () => {
+  test("should render", () => {
+    const { getByTestId } = render(<Contributors data-testid="el" />);
+    const el = getByTestId("el");
 
-    expect(el).toBeInTheDocument()
-  })
-})
+    expect(el).toBeInTheDocument();
+  });
+});

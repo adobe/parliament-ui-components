@@ -9,15 +9,15 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
-import { Tag, Tags } from '../index'
+import React from "react";
+import { Tag, Tags } from "../index";
 
 export default {
-  title: 'components/Tags'
-}
+  title: "components/Tags",
+};
 
 export const TagChildren = () => {
-  const props = { onDelete: (label) => console.log(label) }
+  const props = { onDelete: (label) => console.log(label) };
 
   return (
     <Tags {...props}>
@@ -26,21 +26,21 @@ export const TagChildren = () => {
       <Tag isDisabled>Tag 3</Tag>
       <Tag isDeletable>Tag 4</Tag>
     </Tags>
-  )
-}
+  );
+};
 
 export const TagItems = () => {
   const props = {
     onDelete: (e) => {
-      console.log(e)
+      console.log(e);
     },
     items: [
-      { name: 'Tag 1' },
-      { name: 'Tag 2', invalid: true },
-      { name: 'Tag 3', disabled: true },
-      { name: 'Tag 4', deletable: true }
-    ]
-  }
+      { name: "Tag 1" },
+      { name: "Tag 2", invalid: true },
+      { name: "Tag 3", disabled: true },
+      { name: "Tag 4", deletable: true },
+    ],
+  };
 
-  return <Tags {...props} />
-}
+  return <Tags {...props} />;
+};

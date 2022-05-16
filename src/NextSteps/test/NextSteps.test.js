@@ -10,18 +10,18 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import React from 'react'
-import { render } from 'test-utils'
-import '../../../test-utils/matchMedia'
-import { NextSteps } from '../index'
+import React from "react";
+import { render } from "test-utils";
+import "../../../test-utils/matchMedia";
+import { NextSteps } from "../index";
 
-describe('<NextSteps />', () => {
-  test('should render', () => {
+describe("<NextSteps />", () => {
+  test("should render", () => {
     const { getByTestId } = render(
-      <NextSteps data-testid='el' pages={[{ title: 'title', path: 'path' }]} />
-    )
-    const el = getByTestId('el')
+      <NextSteps data-testid="el" pages={[{ title: "title", path: "path" }]} />
+    );
+    const el = getByTestId("el");
 
-    expect(el).toBeInTheDocument()
-  })
-})
+    expect(el).toBeInTheDocument();
+  });
+});

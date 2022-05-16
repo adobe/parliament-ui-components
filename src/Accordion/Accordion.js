@@ -10,16 +10,16 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 /** @jsx jsx */
-import { jsx } from '@emotion/react'
+import { jsx } from "@emotion/react";
 
-import '@spectrum-css/accordion'
+import "@spectrum-css/accordion";
 
 const Accordion = ({ children, ...props }) => {
   return (
-    <div className='spectrum-Accordion' role='region' {...props}>
+    <div className="spectrum-Accordion" role="region" {...props}>
       {children}
     </div>
-  )
-}
+  );
+};
 
-export { Accordion }
+export { Accordion };

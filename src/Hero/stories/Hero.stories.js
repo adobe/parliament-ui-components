@@ -9,40 +9,40 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
-import { Heading1 } from '../../Heading'
-import { Paragraph } from '../../Paragraph'
-import { Hero } from '../index'
+import React from "react";
+import { Heading1 } from "../../Heading";
+import { Paragraph } from "../../Paragraph";
+import { Hero } from "../index";
 
 export default {
-  title: 'components/Hero'
-}
+  title: "components/Hero",
+};
 
 export const Default = () => {
-  const heading = <Heading1>Adobe Analytics</Heading1>
+  const heading = <Heading1>Adobe Analytics</Heading1>;
   const text = (
     <Paragraph>
       Adobe Product API offers limitless ways to integrate your most important
       customer data into key business processes. Adobe Product API offer
       limitless ways.
     </Paragraph>
-  )
+  );
   const image = (
     <Paragraph>
       <img
-        alt=''
-        src='https://raw.githubusercontent.com/adobe/gatsby-theme-parliament-example/main/src/pages/overview/illustration.png'
+        alt=""
+        src="https://raw.githubusercontent.com/adobe/gatsby-theme-parliament-example/main/src/pages/overview/illustration.png"
       />
     </Paragraph>
-  )
-  const background = 'rgb(64, 34, 138)'
+  );
+  const background = "rgb(64, 34, 138)";
 
   const props = {
     heading,
     text,
     image,
-    background
-  }
+    background,
+  };
 
-  return <Hero {...props} />
-}
+  return <Hero {...props} />;
+};

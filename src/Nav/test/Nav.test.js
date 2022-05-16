@@ -10,43 +10,43 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import React from 'react'
-import { render } from 'test-utils'
-import '../../../test-utils/matchMedia'
-import { Nav } from '../index'
+import React from "react";
+import { render } from "test-utils";
+import "../../../test-utils/matchMedia";
+import { Nav } from "../index";
 
-describe('<Nav />', () => {
-  test('should render', () => {
-    const { getByTestId } = render(<Nav data-testid='el' />)
-    const el = getByTestId('el')
+describe("<Nav />", () => {
+  test("should render", () => {
+    const { getByTestId } = render(<Nav data-testid="el" />);
+    const el = getByTestId("el");
 
-    expect(el).toBeInTheDocument()
-  })
+    expect(el).toBeInTheDocument();
+  });
 
-  test('it should render up to a specific depth', () => {
+  test("it should render up to a specific depth", () => {
     const nodes = [
       {
-        title: 'first-level',
-        path: 'dummy/path',
+        title: "first-level",
+        path: "dummy/path",
         pages: [
           {
-            title: 'second-level',
-            path: '/YAS',
+            title: "second-level",
+            path: "/YAS",
             pages: [
               {
-                title: 'third-level',
-                path: '/NO'
-              }
-            ]
-          }
-        ]
-      }
-    ]
+                title: "third-level",
+                path: "/NO",
+              },
+            ],
+          },
+        ],
+      },
+    ];
 
-    const { getByText, queryByText } = render(<Nav data={nodes} depth={2} />)
+    const { getByText, queryByText } = render(<Nav data={nodes} depth={2} />);
 
-    expect(getByText('first-level')).toBeInTheDocument()
-    expect(getByText('second-level')).toBeInTheDocument()
-    expect(queryByText('third-level')).toBeNull()
-  })
-})
+    expect(getByText("first-level")).toBeInTheDocument();
+    expect(getByText("second-level")).toBeInTheDocument();
+    expect(queryByText("third-level")).toBeNull();
+  });
+});

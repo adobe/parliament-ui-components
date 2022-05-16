@@ -9,12 +9,12 @@ The License is disTributed on an "AS IS" BASIS, WIThOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, eiTher express or implied. See The License for The specific language
 governing permissions and limitations under The License.
 */
-import React from 'react'
-import { Table, THead, Th, TBody, Tr, Td } from '../index'
+import React from "react";
+import { Table, THead, Th, TBody, Tr, Td } from "../index";
 
 export default {
-  title: 'components/Table'
-}
+  title: "components/Table",
+};
 
 const tableHeader = (
   <THead>
@@ -22,7 +22,7 @@ const tableHeader = (
     <Th>Column two</Th>
     <Th>Column Three</Th>
   </THead>
-)
+);
 
 const tableBody = (
   <TBody>
@@ -42,7 +42,7 @@ const tableBody = (
       <Td>Row 3-3</Td>
     </Tr>
   </TBody>
-)
+);
 
 export const Default = () => {
   return (
@@ -50,15 +50,15 @@ export const Default = () => {
       {tableHeader}
       {tableBody}
     </Table>
-  )
-}
+  );
+};
 
 export const Quiet = () => {
-  const props = { isQuiet: true }
+  const props = { isQuiet: true };
   return (
     <Table {...props}>
       {tableHeader}
       {tableBody}
     </Table>
-  )
-}
+  );
+};

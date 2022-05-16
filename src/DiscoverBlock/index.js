@@ -11,30 +11,30 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import { cloneElement, layoutColumns } from '../utils'
-import '@spectrum-css/typography'
-import PropTypes from 'prop-types'
+import { css, jsx } from "@emotion/react";
+import { cloneElement, layoutColumns } from "../utils";
+import "@spectrum-css/typography";
+import PropTypes from "prop-types";
 
-const imageWidth = '100px'
+const imageWidth = "100px";
 
 const DiscoverBlock = ({ width, heading, link, text, image, ...props }) => (
   <div
-    className={width === '100%' ? 'is-block' : ''}
+    className={width === "100%" ? "is-block" : ""}
     css={css`
       ${image
         ? `
       position: relative;
       margin-left: calc(${imageWidth} + var(--spectrum-global-dimension-static-size-400));
       `
-        : ''}
+        : ""}
       display: inline-flex;
       flex-direction: column;
       margin-right: var(--spectrum-global-dimension-static-size-200);
       width: ${width ||
       layoutColumns(3, [
-        'var(--spectrum-global-dimension-static-size-400)',
-        'var(--spectrum-global-dimension-static-size-400)'
+        "var(--spectrum-global-dimension-static-size-400)",
+        "var(--spectrum-global-dimension-static-size-400)",
       ])};
 
       &:not(.is-block) {
@@ -59,24 +59,24 @@ const DiscoverBlock = ({ width, heading, link, text, image, ...props }) => (
           align-items: flex-start;
           height: 100%;
           width: ${imageWidth};
-        `
+        `,
       })}
     {heading && (
-      <div className='spectrum-Heading--sizeM' aria-hidden='true'>
+      <div className="spectrum-Heading--sizeM" aria-hidden="true">
         &nbsp;
       </div>
     )}
     {link}
     {text}
   </div>
-)
+);
 
 DiscoverBlock.propTypes = {
   width: PropTypes.string,
   heading: PropTypes.element,
   text: PropTypes.element,
   image: PropTypes.element,
-  link: PropTypes.element
-}
+  link: PropTypes.element,
+};
 
-export { DiscoverBlock }
+export { DiscoverBlock };

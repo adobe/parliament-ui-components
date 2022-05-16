@@ -11,14 +11,14 @@ governing permissions and limitations under the License.
 */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import PropTypes from 'prop-types'
-import classNames from 'classnames'
+import { css, jsx } from "@emotion/react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
-import CrossSmall from '@spectrum-icons/workflow/Close'
+import CrossSmall from "@spectrum-icons/workflow/Close";
 
-import '@spectrum-css/tags'
-import '@spectrum-css/vars'
+import "@spectrum-css/tags";
+import "@spectrum-css/vars";
 
 const Tag = ({
   children,
@@ -30,40 +30,40 @@ const Tag = ({
 }) => (
   <div
     className={classNames([
-      'spectrum-Tags-item',
-      { 'spectrum-Tags-item--deletable': isDeletable },
-      { 'is-invalid': isInvalid },
-      { 'is-disabled': isDisabled }
+      "spectrum-Tags-item",
+      { "spectrum-Tags-item--deletable": isDeletable },
+      { "is-invalid": isInvalid },
+      { "is-disabled": isDisabled },
     ])}
     css={css`
       padding-left: var(--spectrum-global-dimension-size-75) !important;
       padding-right: ${isDeletable
         ? `0`
-        : 'var(--spectrum-global-dimension-size-100) !important'};
+        : "var(--spectrum-global-dimension-size-100) !important"};
     `}
-    role='listitem'
+    role="listitem"
   >
-    <span className='spectrum-Tags-itemLabel'>{children}</span>
+    <span className="spectrum-Tags-itemLabel">{children}</span>
     {isDeletable ? (
       <button
-        className='spectrum-ClearButton spectrum-ClearButton--small'
+        className="spectrum-ClearButton spectrum-ClearButton--small"
         aria-label={`Remove ${children}`}
-        tabIndex='-1'
+        tabIndex="-1"
         onClick={() => onDelete && onDelete(children)}
       >
-        <CrossSmall size='XS' />
+        <CrossSmall size="XS" />
       </button>
     ) : (
-      ''
+      ""
     )}
   </div>
-)
+);
 
 Tag.propTypes = {
   isInvalid: PropTypes.bool,
   isDisabled: PropTypes.bool,
   isDeletable: PropTypes.bool,
-  onDelete: PropTypes.func
-}
+  onDelete: PropTypes.func,
+};
 
-export { Tag }
+export { Tag };

@@ -11,9 +11,9 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import PropTypes from 'prop-types'
-import { Button, View } from '@adobe/react-spectrum'
+import { css, jsx } from "@emotion/react";
+import PropTypes from "prop-types";
+import { Button, View } from "@adobe/react-spectrum";
 
 const Feedback = ({ onYes, onNo, ...props }) => (
   <div
@@ -38,9 +38,9 @@ const Feedback = ({ onYes, onNo, ...props }) => (
     >
       <View>
         <Button
-          variant='primary'
+          variant="primary"
           onClick={() => {
-            onYes && onYes()
+            onYes && onYes();
           }}
         >
           Yes
@@ -48,9 +48,9 @@ const Feedback = ({ onYes, onNo, ...props }) => (
       </View>
       <View>
         <Button
-          variant='primary'
+          variant="primary"
           onClick={() => {
-            onNo && onNo()
+            onNo && onNo();
           }}
         >
           No
@@ -58,11 +58,11 @@ const Feedback = ({ onYes, onNo, ...props }) => (
       </View>
     </div>
   </div>
-)
+);
 
 Feedback.propTypes = {
   onYes: PropTypes.func,
-  onNo: PropTypes.func
-}
+  onNo: PropTypes.func,
+};
 
-export { Feedback }
+export { Feedback };

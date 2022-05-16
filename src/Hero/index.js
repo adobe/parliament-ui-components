@@ -11,15 +11,15 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import { Flex, View } from '@adobe/react-spectrum'
-import '@spectrum-css/typography'
-import PropTypes from 'prop-types'
-import { cloneElement } from '../utils'
+import { css, jsx } from "@emotion/react";
+import { Flex, View } from "@adobe/react-spectrum";
+import "@spectrum-css/typography";
+import PropTypes from "prop-types";
+import { cloneElement } from "../utils";
 
 const Hero = ({
-  background = 'var(--spectrum-global-color-blue-400)',
-  textColor = 'var(--spectrum-global-color-static-gray-200)',
+  background = "var(--spectrum-global-color-blue-400)",
+  textColor = "var(--spectrum-global-color-static-gray-200)",
   heading,
   text,
   image,
@@ -34,30 +34,30 @@ const Hero = ({
       `}
       {...props}
     >
-      <Flex height='100%' alignItems='center'>
-        <View marginStart='size-800'>
+      <Flex height="100%" alignItems="center">
+        <View marginStart="size-800">
           {heading &&
             cloneElement(heading, {
-              className: 'spectrum-Heading--sizeXL',
+              className: "spectrum-Heading--sizeXL",
               css: css`
                 margin-bottom: var(--spectrum-global-dimension-static-size-200);
                 color: ${textColor};
-              `
+              `,
             })}
 
           {text &&
             cloneElement(text, {
-              className: 'spectrum-Body--sizeL',
+              className: "spectrum-Body--sizeL",
               css: css`
                 margin-bottom: var(--spectrum-global-dimension-static-size-200);
                 color: ${textColor};
-              `
+              `,
             })}
         </View>
         {image && (
           <View>
             {cloneElement(image, {
-              className: '',
+              className: "",
               css: css`
                 margin: 0;
                 & img {
@@ -65,21 +65,21 @@ const Hero = ({
                   max-height: 210px;
                   object-fit: contain;
                 }
-              `
+              `,
             })}
           </View>
         )}
       </Flex>
     </section>
-  )
-}
+  );
+};
 
 Hero.propTypes = {
   background: PropTypes.string,
   textColor: PropTypes.string,
   heading: PropTypes.element,
   text: PropTypes.element,
-  image: PropTypes.element
-}
+  image: PropTypes.element,
+};
 
-export { Hero }
+export { Hero };

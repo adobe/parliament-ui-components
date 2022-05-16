@@ -11,14 +11,14 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import classNames from 'classnames'
-import '@spectrum-css/typography'
+import { css, jsx } from "@emotion/react";
+import classNames from "classnames";
+import "@spectrum-css/typography";
 
 export const InlineCode = ({ children, className, ...props }) => (
   <code
     {...props}
-    className={classNames(className, 'spectrum-Code4')}
+    className={classNames(className, "spectrum-Code4")}
     css={css`
       background-color: var(--spectrum-global-color-gray-100);
       padding: var(--spectrum-global-dimension-size-50);
@@ -35,4 +35,4 @@ export const InlineCode = ({ children, className, ...props }) => (
   >
     {children}
   </code>
-)
+);

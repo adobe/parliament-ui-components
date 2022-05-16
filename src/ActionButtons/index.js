@@ -10,12 +10,12 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import PropTypes from 'prop-types'
-import { ActionButton, Text } from '@adobe/react-spectrum'
+import { css, jsx } from "@emotion/react";
+import PropTypes from "prop-types";
+import { ActionButton, Text } from "@adobe/react-spectrum";
 
-import Bug from '@spectrum-icons/workflow/Bug'
-import Edit from '@spectrum-icons/workflow/Edit'
+import Bug from "@spectrum-icons/workflow/Bug";
+import Edit from "@spectrum-icons/workflow/Edit";
 
 const ActionLink = ({ href, children }) => (
   <a
@@ -23,42 +23,42 @@ const ActionLink = ({ href, children }) => (
     css={css`
       text-decoration: none;
     `}
-    target='_blank'
-    rel='noopener noreferrer nofollow'
+    target="_blank"
+    rel="noopener noreferrer nofollow"
   >
     {children}
   </a>
-)
+);
 
 const ActionButtons = ({
-  gitUrl = '',
-  filePath = '',
-  branch = '',
+  gitUrl = "",
+  filePath = "",
+  branch = "",
   issues,
   ...props
 }) => (
   <div {...props}>
     <ActionLink href={`${gitUrl}/edit/${branch}/${filePath}`}>
-      <ActionButton isQuiet aria-label='Edit page' excludeFromTabOrder>
-        <Edit size='S' />
+      <ActionButton isQuiet aria-label="Edit page" excludeFromTabOrder>
+        <Edit size="S" />
         <Text>Edit this page</Text>
       </ActionButton>
     </ActionLink>
     <ActionLink
       href={issues || `${gitUrl}/issues/new?body=Issue%20in%20${filePath}`}
     >
-      <ActionButton isQuiet aria-label='Log issue' excludeFromTabOrder>
-        <Bug size='S' />
+      <ActionButton isQuiet aria-label="Log issue" excludeFromTabOrder>
+        <Bug size="S" />
         <Text>Log an issue</Text>
       </ActionButton>
     </ActionLink>
   </div>
-)
+);
 
 ActionButtons.propTypes = {
   branch: PropTypes.string,
   filePath: PropTypes.string,
-  gitUrl: PropTypes.string
-}
+  gitUrl: PropTypes.string,
+};
 
-export { ActionButtons }
+export { ActionButtons };

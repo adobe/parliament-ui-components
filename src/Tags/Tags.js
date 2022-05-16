@@ -10,18 +10,18 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
-import { cloneElement } from '../utils'
-import { Tag } from './Tag'
+import { cloneElement } from "../utils";
+import { Tag } from "./Tag";
 
-import '@spectrum-css/tags'
+import "@spectrum-css/tags";
 
 const Tags = ({ children, items = [], onDelete, ...props }) => {
-  const childrenArray = React.Children.toArray(children)
+  const childrenArray = React.Children.toArray(children);
   return (
-    <div className='spectrum-Tags' role='list' aria-label='list' {...props}>
+    <div className="spectrum-Tags" role="list" aria-label="list" {...props}>
       {items.map((item, index) => (
         <Tag
           key={index}
@@ -34,17 +34,17 @@ const Tags = ({ children, items = [], onDelete, ...props }) => {
         </Tag>
       ))}
       {childrenArray.map((item, index) => {
-        console.log(item)
+        console.log(item);
         return cloneElement(item, {
-          onDelete
-        })
+          onDelete,
+        });
       })}
     </div>
-  )
-}
+  );
+};
 
 Tags.propTypes = {
-  items: PropTypes.array
-}
+  items: PropTypes.array,
+};
 
-export { Tags }
+export { Tags };

@@ -10,29 +10,29 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { Fragment } from 'react'
+import React, { Fragment } from "react";
 import {
   ActionButton,
   Checkbox,
   Grid,
   TextField,
-  View
-} from '@adobe/react-spectrum'
-import PropTypes from 'prop-types'
-import Delete from '@spectrum-icons/workflow/DeleteOutline'
-import { AutoComplete } from '../AutoComplete'
+  View,
+} from "@adobe/react-spectrum";
+import PropTypes from "prop-types";
+import Delete from "@spectrum-icons/workflow/DeleteOutline";
+import { AutoComplete } from "../AutoComplete";
 
 const TableCell = ({ head = false, children }) => (
   <View
-    UNSAFE_className={head ? 'spectrum-Table-headCell' : 'spectrum-Table-cell'}
-    borderBottomWidth='thin'
-    borderColor='dark'
+    UNSAFE_className={head ? "spectrum-Table-headCell" : "spectrum-Table-cell"}
+    borderBottomWidth="thin"
+    borderColor="dark"
   >
     {children}
   </View>
-)
+);
 
-const TableCellHead = ({ children }) => <TableCell head>{children}</TableCell>
+const TableCellHead = ({ children }) => <TableCell head>{children}</TableCell>;
 
 const TableRow = ({ keyItem, value }) => (
   <>
@@ -41,22 +41,22 @@ const TableRow = ({ keyItem, value }) => (
     <TableCell>{value}</TableCell>
     <TableCell />
   </>
-)
+);
 
 const TableRowEditable = ({
   enabled = true,
-  keyItem = '',
-  value = '',
+  keyItem = "",
+  value = "",
   index,
   completions,
   onDelete,
-  onUpdate
+  onUpdate,
 }) => {
   return (
     <>
       <TableCell>
         <Checkbox
-          isSelected={enabled && keyItem !== ''}
+          isSelected={enabled && keyItem !== ""}
           onChange={(value) => onUpdate && onUpdate(index, { enabled: value })}
         />
       </TableCell>
@@ -64,7 +64,7 @@ const TableRowEditable = ({
         <AutoComplete
           value={keyItem}
           index={index}
-          placeholder='key'
+          placeholder="key"
           onUpdate={onUpdate}
           completions={completions}
         />
@@ -73,43 +73,43 @@ const TableRowEditable = ({
         <TextField
           isQuiet
           value={value}
-          width='100%'
-          placeholder='value'
+          width="100%"
+          placeholder="value"
           onChange={(value) => onUpdate && onUpdate(index, { value: value })}
         />
       </TableCell>
       <TableCell>
         <ActionButton
           isQuiet
-          isDisabled={keyItem === '' && value === ''}
+          isDisabled={keyItem === "" && value === ""}
           onPress={() => onDelete && onDelete(index)}
         >
-          <Delete size='S' />
+          <Delete size="S" />
         </ActionButton>
       </TableCell>
     </>
-  )
-}
+  );
+};
 
 const EmptyRow = {
   enabled: true,
-  key: '',
-  value: '',
-  deletable: true
-}
+  key: "",
+  value: "",
+  deletable: true,
+};
 
 const ParameterTable = ({
   readonly = false,
   items = [],
   completions,
-  callback
+  callback,
 }) => {
-  const tableItems = [...items]
+  const tableItems = [...items];
   if (
-    tableItems.filter((item) => item.key === '' && item.value === '').length < 1
+    tableItems.filter((item) => item.key === "" && item.value === "").length < 1
   ) {
     if (!readonly) {
-      tableItems.push({ ...EmptyRow })
+      tableItems.push({ ...EmptyRow });
     }
   }
 
@@ -124,39 +124,39 @@ const ParameterTable = ({
         value={value}
         completions={completions}
         onDelete={(key) => {
-          const copyOfTableItems = [...tableItems]
-          copyOfTableItems.splice(index, 1)
-          callback && callback(copyOfTableItems)
+          const copyOfTableItems = [...tableItems];
+          copyOfTableItems.splice(index, 1);
+          callback && callback(copyOfTableItems);
         }}
         onUpdate={(index, update) => {
-          const copyOfTableItems = [...tableItems]
-          copyOfTableItems[index] = { ...copyOfTableItems[index], ...update }
+          const copyOfTableItems = [...tableItems];
+          copyOfTableItems[index] = { ...copyOfTableItems[index], ...update };
           if (
             copyOfTableItems.filter(
-              (item) => item.key === '' && item.value === ''
+              (item) => item.key === "" && item.value === ""
             ).length < 1
           ) {
-            copyOfTableItems.push({ ...EmptyRow })
+            copyOfTableItems.push({ ...EmptyRow });
           }
-          callback && callback(copyOfTableItems)
+          callback && callback(copyOfTableItems);
         }}
       />
-    )
-  })
+    );
+  });
 
   return (
     <View
-      borderWidth='thin'
-      borderRadius='medium'
-      borderColor='dark'
-      padding='size-250'
-      backgroundColor='gray-50'
-      minHeight='size-2400'
+      borderWidth="thin"
+      borderRadius="medium"
+      borderColor="dark"
+      padding="size-250"
+      backgroundColor="gray-50"
+      minHeight="size-2400"
     >
       <Grid
-        columns={['size-500', '1fr', '1fr', 'size-500']}
-        autoRows='size-675'
-        UNSAFE_className='spectrum-Table'
+        columns={["size-500", "1fr", "1fr", "size-500"]}
+        autoRows="size-675"
+        UNSAFE_className="spectrum-Table"
       >
         <TableCellHead />
         <TableCellHead>Key</TableCellHead>
@@ -165,11 +165,11 @@ const ParameterTable = ({
         {rows}
       </Grid>
     </View>
-  )
-}
+  );
+};
 
 ParameterTable.propTypes = {
-  name: PropTypes.string.isRequired
-}
+  name: PropTypes.string.isRequired,
+};
 
-export { ParameterTable }
+export { ParameterTable };

@@ -11,21 +11,21 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import { Link as GatsbyLink } from 'gatsby'
-import { Heading4 } from '../Heading'
-import { View } from '@adobe/react-spectrum'
-import '@spectrum-css/typography'
-import '@spectrum-css/link'
-import Document from '@spectrum-icons/workflow/Document'
-import PropTypes from 'prop-types'
+import { css, jsx } from "@emotion/react";
+import { Link as GatsbyLink } from "gatsby";
+import { Heading4 } from "../Heading";
+import { View } from "@adobe/react-spectrum";
+import "@spectrum-css/typography";
+import "@spectrum-css/link";
+import Document from "@spectrum-icons/workflow/Document";
+import PropTypes from "prop-types";
 
 const NextSteps = ({ pages, ...props }) => {
   return pages.length > 0 ? (
-    <View marginTop='size-800' {...props}>
+    <View marginTop="size-800" {...props}>
       <Heading4>Next steps</Heading4>
       <ul
-        className='spectrum-Body--sizeM'
+        className="spectrum-Body--sizeM"
         css={css`
           list-style: none;
           padding: 0;
@@ -40,10 +40,10 @@ const NextSteps = ({ pages, ...props }) => {
           >
             <GatsbyLink
               to={page.path}
-              className='spectrum-Link spectrum-Link--quiet'
+              className="spectrum-Link spectrum-Link--quiet"
             >
-              <Document size='XS' />
-              <View elementType='span' marginStart='size-100'>
+              <Document size="XS" />
+              <View elementType="span" marginStart="size-100">
                 {page.title}
               </View>
             </GatsbyLink>
@@ -51,11 +51,11 @@ const NextSteps = ({ pages, ...props }) => {
         ))}
       </ul>
     </View>
-  ) : null
-}
+  ) : null;
+};
 
 NextSteps.propTypes = {
-  pages: PropTypes.array
-}
+  pages: PropTypes.array,
+};
 
-export { NextSteps }
+export { NextSteps };

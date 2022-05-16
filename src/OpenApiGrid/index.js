@@ -10,8 +10,8 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import styled from '@emotion/styled'
+import { css, jsx } from "@emotion/react";
+import styled from "@emotion/styled";
 
 const OpenApiGrid = ({ children, ...props }) => (
   <div
@@ -26,14 +26,14 @@ const OpenApiGrid = ({ children, ...props }) => (
   >
     {children}
   </div>
-)
+);
 
 const OpenApiGridNav = styled.div`
   grid-area: 1 / 1 / 2 / 1;
   @media screen and (max-width: 767px) {
     display: none;
   }
-`
+`;
 
 const OpenApiGridHeader = styled.div`
   height: 64px;
@@ -41,21 +41,21 @@ const OpenApiGridHeader = styled.div`
   background-color: white;
 
   grid-area: 1 / 1 / 2 / 1;
-`
+`;
 
 const OpenApiGridContent = styled.div`
   grid-area: 2 / 1 / 3 / 1;
-`
+`;
 
 const OpenApiGridFooter = styled.div`
   background-color: white;
   grid-area: 3 / 1 / 4 / 1;
-`
+`;
 
 export {
   OpenApiGrid,
   OpenApiGridContent,
   OpenApiGridFooter,
   OpenApiGridNav,
-  OpenApiGridHeader
-}
+  OpenApiGridHeader,
+};

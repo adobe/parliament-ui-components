@@ -11,11 +11,11 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
+import { css, jsx } from "@emotion/react";
 
 export const ReDocWrapper = ({ spec, onComplete }) => {
-  if (typeof window !== 'undefined' && typeof global !== 'undefined') {
-    const { RedocStandalone } = require('redoc')
+  if (typeof window !== "undefined" && typeof global !== "undefined") {
+    const { RedocStandalone } = require("redoc");
     return (
       <div
         css={css`
@@ -29,7 +29,7 @@ export const ReDocWrapper = ({ spec, onComplete }) => {
               background-color: var(--spectrum-global-color-gray-75);
             }
 
-            [role='navigation'] {
+            [role="navigation"] {
               padding: var(--spectrum-global-dimension-static-size-400);
 
               label span[type] {
@@ -47,37 +47,37 @@ export const ReDocWrapper = ({ spec, onComplete }) => {
                 height: var(--spectrum-global-dimension-size-1);
               }
 
-              label span[type='get'] {
+              label span[type="get"] {
                 border: 2px solid var(--spectrum-global-color-blue-400);
                 color: var(--spectrum-global-color-blue-400);
               }
 
-              label span[type='patch'] {
+              label span[type="patch"] {
                 border: 2px solid var(--spectrum-global-color-seafoam-400);
                 color: var(--spectrum-global-color-seafoam-400);
               }
 
-              label span[type='post'] {
+              label span[type="post"] {
                 border: 2px solid var(--spectrum-global-color-green-400);
                 color: var(--spectrum-global-color-green-400);
               }
 
-              label span[type='put'] {
+              label span[type="put"] {
                 border: 2px solid var(--spectrum-global-color-orange-400);
                 color: var(--spectrum-global-color-orange-400);
               }
 
-              label span[type='head'] {
+              label span[type="head"] {
                 border: 2px solid var(--spectrum-global-color-fuchsia-400);
                 color: var(--spectrum-global-color-fuchsia-400);
               }
 
-              label span[type='delete'] {
+              label span[type="delete"] {
                 border: 2px solid var(--spectrum-global-color-red-400);
                 color: var(--spectrum-global-color-red-400);
               }
 
-              [role='menuitem'] {
+              [role="menuitem"] {
                 position: relative;
                 display: inline-flex;
                 align-items: center;
@@ -119,9 +119,9 @@ export const ReDocWrapper = ({ spec, onComplete }) => {
                   --spectrum-sidenav-item-text-size,
                   var(--spectrum-alias-font-size-default)
                 );
-                font-family: adobe-clean, 'Source Sans Pro', -apple-system,
-                  BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Trebuchet MS',
-                  'Lucida Grande', sans-serif;
+                font-family: adobe-clean, "Source Sans Pro", -apple-system,
+                  BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Trebuchet MS",
+                  "Lucida Grande", sans-serif;
                 font-style: normal;
                 text-decoration: none;
                 word-break: break-word;
@@ -153,7 +153,7 @@ export const ReDocWrapper = ({ spec, onComplete }) => {
                 background-color: var(--spectrum-global-color-gray-200);
               }
 
-              & > li > [role='menuitem'] {
+              & > li > [role="menuitem"] {
                 font-weight: var(
                   --spectrum-sidenav-multilevel-main-item-font-weight,
                   var(--spectrum-global-font-weight-bold)
@@ -356,7 +356,7 @@ export const ReDocWrapper = ({ spec, onComplete }) => {
                 );
               }
 
-              td[kind='field'] {
+              td[kind="field"] {
                 background-image: none;
                 border-left: none;
                 color: var(
@@ -391,12 +391,12 @@ export const ReDocWrapper = ({ spec, onComplete }) => {
                 );
               }
 
-              td[kind='field'] span {
+              td[kind="field"] span {
                 display: none;
                 color: var(--spectrum-global-color-red-700);
               }
 
-              td[kind='field'] div {
+              td[kind="field"] div {
                 margin-left: 0px;
               }
 
@@ -514,12 +514,12 @@ export const ReDocWrapper = ({ spec, onComplete }) => {
                 );
               }
 
-              code[class*='language-'],
-              pre[class*='language-'] {
+              code[class*="language-"],
+              pre[class*="language-"] {
                 /*   --hljs-color: rgb(227, 227, 227); */
                 color: rgb(227, 227, 227);
                 background: none;
-                font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
+                font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
                   monospace;
                 font-size: 1em;
                 text-align: left;
@@ -535,20 +535,20 @@ export const ReDocWrapper = ({ spec, onComplete }) => {
               }
 
               /* Code blocks */
-              pre[class*='language-'] {
+              pre[class*="language-"] {
                 padding: 1em;
                 margin: 0.5em 0;
                 overflow: auto;
               }
 
-              :not(pre) > code[class*='language-'],
-              pre[class*='language-'] {
+              :not(pre) > code[class*="language-"],
+              pre[class*="language-"] {
                 /* --hljs-background: rgb(47, 47, 47); */
                 background: rgb(47, 47, 47);
               }
 
               /* Inline code */
-              :not(pre) > code[class*='language-'] {
+              :not(pre) > code[class*="language-"] {
                 color: rgb(227, 227, 227);
                 font-size: 14px;
                 background-color: rgb(50, 50, 50);
@@ -662,32 +662,32 @@ export const ReDocWrapper = ({ spec, onComplete }) => {
                 background-color: inherit;
               }
 
-              button span[type='get'] {
+              button span[type="get"] {
                 border: 2px solid var(--spectrum-global-color-blue-400);
                 color: var(--spectrum-global-color-blue-400);
               }
 
-              button span[type='patch'] {
+              button span[type="patch"] {
                 border: 2px solid var(--spectrum-global-color-seafoam-400);
                 color: var(--spectrum-global-color-seafoam-400);
               }
 
-              button span[type='post'] {
+              button span[type="post"] {
                 border: 2px solid var(--spectrum-global-color-green-400);
                 color: var(--spectrum-global-color-green-400);
               }
 
-              button span[type='put'] {
+              button span[type="put"] {
                 border: 2px solid var(--spectrum-global-color-orange-400);
                 color: var(--spectrum-global-color-orange-400);
               }
 
-              button span[type='head'] {
+              button span[type="head"] {
                 border: 2px solid var(--spectrum-global-color-fuchsia-400);
                 color: var(--spectrum-global-color-fuchsia-400);
               }
 
-              button span[type='delete'] {
+              button span[type="delete"] {
                 border: 2px solid var(--spectrum-global-color-red-400);
                 color: var(--spectrum-global-color-red-400);
               }
@@ -697,16 +697,16 @@ export const ReDocWrapper = ({ spec, onComplete }) => {
                 background-color: rgb(50, 50, 50);
               }
 
-              button + div[aria-hidden] div div[role='button'] div {
+              button + div[aria-hidden] div div[role="button"] div {
                 border-color: rgb(90, 90, 90);
                 background-color: rgb(37, 37, 37);
               }
 
-              button + div[aria-hidden] div div[role='button'] div span {
+              button + div[aria-hidden] div div[role="button"] div span {
                 color: rgb(227, 227, 227);
               }
 
-              div[data-tabs] ul[role='tablist'] {
+              div[data-tabs] ul[role="tablist"] {
                 border-bottom-color: var(
                   --spectrum-tabs-rule-color,
                   rgb(62, 62, 62)
@@ -730,7 +730,7 @@ export const ReDocWrapper = ({ spec, onComplete }) => {
                 background-color: rgb(50, 50, 50);
               }
 
-              div[data-tabs] ul[role='tablist'] li[role='tab'] {
+              div[data-tabs] ul[role="tablist"] li[role="tab"] {
                 position: relative;
                 box-sizing: border-box;
                 height: calc(
@@ -791,14 +791,14 @@ export const ReDocWrapper = ({ spec, onComplete }) => {
                 border-radius: 0px;
               }
 
-              div[data-tabs] ul[role='tablist'] li[aria-selected='true'] {
+              div[data-tabs] ul[role="tablist"] li[aria-selected="true"] {
                 color: var(
                   --spectrum-tabs-text-color-selected,
                   var(--spectrum-global-color-gray-400)
                 );
               }
 
-              div[role='tabpanel'] div div + div div div button {
+              div[role="tabpanel"] div div + div div div button {
                 position: relative;
                 display: -ms-inline-flexbox;
                 display: inline-flex;
@@ -954,7 +954,7 @@ export const ReDocWrapper = ({ spec, onComplete }) => {
                 );
 
                 &:after {
-                  content: '';
+                  content: "";
                   border-radius: var(
                     --spectrum-global-dimension-static-size-25
                   );
@@ -1117,7 +1117,7 @@ export const ReDocWrapper = ({ spec, onComplete }) => {
                 padding-right: 6px;
               }
 
-              div div div div div button[aria-expanded='true'] {
+              div div div div div button[aria-expanded="true"] {
                 border-bottom: var(
                     --spectrum-accordion-item-border-size,
                     var(--spectrum-alias-border-size-thin)
@@ -1154,25 +1154,25 @@ export const ReDocWrapper = ({ spec, onComplete }) => {
             menuToggle: true,
             theme: {
               sidebar: {
-                width: '256px'
+                width: "256px",
               },
               rightPanel: {
-                backgroundColor: 'rgb(37, 37, 37)'
+                backgroundColor: "rgb(37, 37, 37)",
               },
               codeBlock: {
-                backgroundColor: 'rgb(50, 50, 50)'
+                backgroundColor: "rgb(50, 50, 50)",
               },
               typography: {
-                fontFamily: `adobe-clean, 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Trebuchet MS', 'Lucida Grande', sans-serif`
-              }
-            }
+                fontFamily: `adobe-clean, 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Trebuchet MS', 'Lucida Grande', sans-serif`,
+              },
+            },
           }}
           onLoaded={() => {
-            onComplete && onComplete()
+            onComplete && onComplete();
           }}
         />
       </div>
-    )
+    );
   }
-  return null
-}
+  return null;
+};

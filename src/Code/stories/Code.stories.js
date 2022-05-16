@@ -9,13 +9,13 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
+import React from "react";
 
-import { Code } from '../index'
+import { Code } from "../index";
 
 export default {
-  title: 'components/Code'
-}
+  title: "components/Code",
+};
 
 const code = `{
   "op": "copy",
@@ -26,53 +26,53 @@ const code = `{
     "path": "/content/assets/7d391c3c-a3d4-4f66-81ce-40066732db60/source/test.psd"
   }
 }
-`
+`;
 
 export const Default = () => {
-  const props = {}
+  const props = {};
 
-  return <Code {...props}>{code}</Code>
-}
+  return <Code {...props}>{code}</Code>;
+};
 
 export const SyntaxHighlighting = () => {
   const props = {
-    className: `language-json`
-  }
+    className: `language-json`,
+  };
 
-  return <Code {...props}>{code}</Code>
-}
+  return <Code {...props}>{code}</Code>;
+};
 
 export const NoCopyButton = () => {
   const props = {
     className: `language-json`,
-    copyButton: false
-  }
+    copyButton: false,
+  };
 
-  return <Code {...props}>{code}</Code>
-}
+  return <Code {...props}>{code}</Code>;
+};
 
 export const NoLineNumbers = () => {
   const props = {
     className: `language-json`,
-    lineNumbers: false
-  }
+    lineNumbers: false,
+  };
 
-  return <Code {...props}>{code}</Code>
-}
+  return <Code {...props}>{code}</Code>;
+};
 
 export const HighlightLines = () => {
   const props = {
     className: `language-json`,
-    metastring: `{1,3-4}`
-  }
+    metastring: `{1,3-4}`,
+  };
 
-  return <Code {...props}>{code}</Code>
-}
+  return <Code {...props}>{code}</Code>;
+};
 
 export const RequestMakerNoBody = () => {
   const props = {
-    metastring: `{requestMaker: true}`
-  }
+    metastring: `{requestMaker: true}`,
+  };
   const code = `
   method: post
   url: https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker
@@ -82,15 +82,15 @@ export const RequestMakerNoBody = () => {
   headers:
     test: rest
     rest: test
-  `
+  `;
 
-  return <Code {...props}>{code}</Code>
-}
+  return <Code {...props}>{code}</Code>;
+};
 
 export const RequestMakerWithRawBody = () => {
   const props = {
-    metastring: `{requestMaker: true}`
-  }
+    metastring: `{requestMaker: true}`,
+  };
   const code = `
   method: post
   url: https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker
@@ -101,15 +101,15 @@ export const RequestMakerWithRawBody = () => {
     test: rest
     rest: test
   body: this is my body
-  `
+  `;
 
-  return <Code {...props}>{code}</Code>
-}
+  return <Code {...props}>{code}</Code>;
+};
 
 export const RequestMakerWithParameterizedBody = () => {
   const props = {
-    metastring: `{requestMaker: true}`
-  }
+    metastring: `{requestMaker: true}`,
+  };
   const code = `
   method: post
   url: https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker
@@ -123,7 +123,7 @@ export const RequestMakerWithParameterizedBody = () => {
   body:
     name: hiren
     email: hireshah@adobe.com
-  `
+  `;
 
-  return <Code {...props}>{code}</Code>
-}
+  return <Code {...props}>{code}</Code>;
+};

@@ -9,18 +9,18 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
-import { Popover } from '../index'
-import { Menu, Item } from '../../Menu'
-import { SearchField } from '@adobe/react-spectrum'
+import React from "react";
+import { Popover } from "../index";
+import { Menu, Item } from "../../Menu";
+import { SearchField } from "@adobe/react-spectrum";
 
 export default {
-  title: 'components/Popover'
-}
+  title: "components/Popover",
+};
 
 export const OpenPopover = () => {
-  const props = { isOpen: true }
-  const itemProps = { onAction: (e) => console.log(e) }
+  const props = { isOpen: true };
+  const itemProps = { onAction: (e) => console.log(e) };
 
   return (
     <Popover {...props}>
@@ -36,33 +36,33 @@ export const OpenPopover = () => {
         </Item>
       </Menu>
     </Popover>
-  )
-}
+  );
+};
 
 export const OpenPopoverItems = () => {
   const props = {
     isOpen: true,
-    style: { position: 'absolute', left: '0px', top: '32px', zIndex: '1000' }
-  }
+    style: { position: "absolute", left: "0px", top: "32px", zIndex: "1000" },
+  };
   const menuProps = {
     onAction: (e) => {
-      console.log(e)
+      console.log(e);
     },
     items: [
-      { name: 'Cut' },
-      { name: 'Copy' },
-      { name: 'Paste' },
-      { name: 'Replace' }
+      { name: "Cut" },
+      { name: "Copy" },
+      { name: "Paste" },
+      { name: "Replace" },
     ],
-    selectedKeys: ['Copy'],
-    disabledKeys: ['Replace']
-  }
+    selectedKeys: ["Copy"],
+    disabledKeys: ["Replace"],
+  };
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: "relative" }}>
       <SearchField
         onSubmit={(searchTerm) => {
-          console.log(searchTerm)
+          console.log(searchTerm);
         }}
       />
       <Popover {...props}>
@@ -71,5 +71,5 @@ export const OpenPopoverItems = () => {
       <p>This is a bunch of text that the popover should float over top of.</p>
       <p>Moar text!</p>
     </div>
-  )
-}
+  );
+};

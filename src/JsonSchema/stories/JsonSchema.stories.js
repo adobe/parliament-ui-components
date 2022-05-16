@@ -10,37 +10,37 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import { JsonSchema } from '../index'
-import { Code } from '../../Code'
-import { schemas } from './mock_jsonschema_data'
+import React from "react";
+import { JsonSchema } from "../index";
+import { Code } from "../../Code";
+import { schemas } from "./mock_jsonschema_data";
 
 export default {
-  title: 'components/JsonSchema',
+  title: "components/JsonSchema",
   argTypes: {
     schemaKey: {
       options: Object.keys(schemas),
-      control: { type: 'select', required: true },
-      defaultValue: Object.keys(schemas)[0]
-    }
-  }
-}
+      control: { type: "select", required: true },
+      defaultValue: Object.keys(schemas)[0],
+    },
+  },
+};
 
 export const Default = ({ schemaKey }) => {
-  const props = { schema: schemas[schemaKey] }
-  return <JsonSchema {...props} />
-}
+  const props = { schema: schemas[schemaKey] };
+  return <JsonSchema {...props} />;
+};
 
 export const PassedAsString = ({ schemaKey }) => {
-  const props = { schema: JSON.stringify(schemas[schemaKey]) }
-  return <JsonSchema {...props} />
-}
+  const props = { schema: JSON.stringify(schemas[schemaKey]) };
+  return <JsonSchema {...props} />;
+};
 
 export const AsCodeComponent = ({ schemaKey }) => {
   const props = {
-    metastring: `{schema: true}`
-  }
-  const code = `${JSON.stringify(schemas[schemaKey])}`
+    metastring: `{schema: true}`,
+  };
+  const code = `${JSON.stringify(schemas[schemaKey])}`;
 
-  return <Code {...props}>{code}</Code>
-}
+  return <Code {...props}>{code}</Code>;
+};

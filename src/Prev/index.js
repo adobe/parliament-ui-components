@@ -11,49 +11,49 @@ governing permissions and limitations under the License.
 */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import PropTypes from 'prop-types'
-import { Link } from 'gatsby'
+import { css, jsx } from "@emotion/react";
+import PropTypes from "prop-types";
+import { Link } from "gatsby";
 
-import ChevronLeft from '@spectrum-icons/workflow/ChevronLeft'
-import '@spectrum-css/link'
-import '@spectrum-css/typography'
+import ChevronLeft from "@spectrum-icons/workflow/ChevronLeft";
+import "@spectrum-css/link";
+import "@spectrum-css/typography";
 
 const Prev = ({ url, title, ...props }) => {
   return (
-    <div className='spectrum-Body spectrum-Body--sizeM' {...props}>
+    <div className="spectrum-Body spectrum-Body--sizeM" {...props}>
       <Link
         to={url}
-        rel='prev'
+        rel="prev"
         css={css`
           text-decoration: none !important;
           &:hover {
             text-decoration: underline !important;
           }
         `}
-        className='spectrum-Link'
+        className="spectrum-Link"
       >
         <span
           css={css`
             vertical-align: text-top;
           `}
         >
-          <ChevronLeft size='S' />
+          <ChevronLeft size="S" />
         </span>
         <span>{title}</span>
       </Link>
     </div>
-  )
-}
+  );
+};
 
 Prev.propTypes = {
   url: PropTypes.string,
-  title: PropTypes.string
-}
+  title: PropTypes.string,
+};
 
 Prev.defaultProps = {
-  url: '',
-  title: ''
-}
+  url: "",
+  title: "",
+};
 
-export { Prev }
+export { Prev };

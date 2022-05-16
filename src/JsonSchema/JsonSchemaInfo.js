@@ -10,25 +10,25 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import { Table, TBody, Tr, Td } from '../Table'
+import React from "react";
+import { Table, TBody, Tr, Td } from "../Table";
 
 export const JsonSchemaInfo = ({ schema = {} }) => {
-  const { $id, _id, $schema, _schema } = schema
+  const { $id, _id, $schema, _schema } = schema;
   return (
     <div>
       <Table>
         <TBody>
-          <Tr key='id'>
+          <Tr key="id">
             <Td>Id</Td>
             <Td>{$id || _id}</Td>
           </Tr>
-          <Tr key='schema'>
+          <Tr key="schema">
             <Td>Schema</Td>
             <Td>{$schema || _schema}</Td>
           </Tr>
         </TBody>
       </Table>
     </div>
-  )
-}
+  );
+};

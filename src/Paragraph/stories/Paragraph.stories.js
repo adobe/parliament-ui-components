@@ -10,13 +10,13 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import { Paragraph } from '../index'
+import React from "react";
+import { Paragraph } from "../index";
 
 export default {
-  title: 'components/Paragraph'
-}
+  title: "components/Paragraph",
+};
 
 export const Default = () => {
-  return <Paragraph>Some content</Paragraph>
-}
+  return <Paragraph>Some content</Paragraph>;
+};

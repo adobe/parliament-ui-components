@@ -14,25 +14,25 @@ export const queryString = (obj) => {
   return obj &&
     obj.length > 0 &&
     !obj.every((ob) => {
-      return ob.key === '' || !ob.enabled
+      return ob.key === "" || !ob.enabled;
     })
-    ? '?' +
+    ? "?" +
         encodeURI(
           obj
-            .filter((item) => item.enabled && item.key !== '')
-            .map((item) => item.key + '=' + item.value)
-            .join('&')
+            .filter((item) => item.enabled && item.key !== "")
+            .map((item) => item.key + "=" + item.value)
+            .join("&")
         )
-    : ''
-}
+    : "";
+};
 
 export const getHeaders = (headerArray) => {
   return headerArray
-    .filter((item) => item.enabled && item.key !== '')
+    .filter((item) => item.enabled && item.key !== "")
     .reduce((obj, item) => {
       return {
         ...obj,
-        [item.key]: item.value
-      }
-    }, {})
-}
+        [item.key]: item.value,
+      };
+    }, {});
+};

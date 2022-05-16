@@ -11,21 +11,21 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import React from 'react'
-import '@spectrum-css/typography'
-import PropTypes from 'prop-types'
-import { layoutColumns } from '../utils'
-import { Link } from '../Link'
-import LinkOut from '@spectrum-icons/workflow/LinkOut'
+import { css, jsx } from "@emotion/react";
+import React from "react";
+import "@spectrum-css/typography";
+import PropTypes from "prop-types";
+import { layoutColumns } from "../utils";
+import { Link } from "../Link";
+import LinkOut from "@spectrum-icons/workflow/LinkOut";
 
 const Resources = ({ heading, links, ...props }) => {
   return (
     <aside
       css={css`
         min-width: ${layoutColumns(3, [
-          'var(--spectrum-global-dimension-static-size-400)',
-          'var(--spectrum-global-dimension-static-size-100)'
+          "var(--spectrum-global-dimension-static-size-400)",
+          "var(--spectrum-global-dimension-static-size-100)",
         ])};
         margin-left: var(--spectrum-global-dimension-static-size-400);
         margin-top: var(--spectrum-global-dimension-static-size-400);
@@ -34,7 +34,7 @@ const Resources = ({ heading, links, ...props }) => {
     >
       {heading}
       <ul
-        className='spectrum-Body--sizeM'
+        className="spectrum-Body--sizeM"
         css={css`
           list-style: none;
           padding: 0;
@@ -42,16 +42,16 @@ const Resources = ({ heading, links, ...props }) => {
       >
         {links &&
           React.Children.toArray(links.props.children).map((item, i) => {
-            const link = React.Children.toArray(item.props.children)[0]
+            const link = React.Children.toArray(item.props.children)[0];
             const isExternalLink =
-              link.props.href.startsWith('http://') ||
-              link.props.href.startsWith('https://')
+              link.props.href.startsWith("http://") ||
+              link.props.href.startsWith("https://");
             const externalLinkProps = isExternalLink
               ? {
-                  target: '_blank',
-                  rel: 'nofollow noopener noreferrer'
+                  target: "_blank",
+                  rel: "nofollow noopener noreferrer",
                 }
-              : {}
+              : {};
 
             return (
               <li
@@ -71,19 +71,19 @@ const Resources = ({ heading, links, ...props }) => {
                   >
                     {link.props.children}
                   </span>
-                  {isExternalLink && <LinkOut size='XS' />}
+                  {isExternalLink && <LinkOut size="XS" />}
                 </Link>
               </li>
-            )
+            );
           })}
       </ul>
     </aside>
-  )
-}
+  );
+};
 
 Resources.propTypes = {
   heading: PropTypes.element,
-  links: PropTypes.element
-}
+  links: PropTypes.element,
+};
 
-export { Resources }
+export { Resources };

@@ -11,27 +11,27 @@ governing permissions and limitations under the License.
 */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import PropTypes from 'prop-types'
-import { Link } from 'gatsby'
+import { css, jsx } from "@emotion/react";
+import PropTypes from "prop-types";
+import { Link } from "gatsby";
 
-import ChevronRight from '@spectrum-icons/workflow/ChevronRight'
-import '@spectrum-css/link'
-import '@spectrum-css/typography'
+import ChevronRight from "@spectrum-icons/workflow/ChevronRight";
+import "@spectrum-css/link";
+import "@spectrum-css/typography";
 
 const Next = ({ url, title, ...props }) => {
   return (
-    <div className='spectrum-Body spectrum-Body--sizeM' {...props}>
+    <div className="spectrum-Body spectrum-Body--sizeM" {...props}>
       <Link
         to={url}
-        rel='next'
+        rel="next"
         css={css`
           text-decoration: none !important;
           &:hover {
             text-decoration: underline !important;
           }
         `}
-        className='spectrum-Link'
+        className="spectrum-Link"
       >
         <span>{title}</span>
         <span
@@ -39,21 +39,21 @@ const Next = ({ url, title, ...props }) => {
             vertical-align: text-top;
           `}
         >
-          <ChevronRight size='S' />
+          <ChevronRight size="S" />
         </span>
       </Link>
     </div>
-  )
-}
+  );
+};
 
 Next.propTypes = {
   url: PropTypes.string,
-  title: PropTypes.string
-}
+  title: PropTypes.string,
+};
 
 Next.defaultProps = {
-  url: '',
-  title: ''
-}
+  url: "",
+  title: "",
+};
 
-export { Next }
+export { Next };

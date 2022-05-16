@@ -10,8 +10,8 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import '@testing-library/jest-dom'
+import "@testing-library/jest-dom";
 
-import { matchers } from 'jest-emotion'
+import { matchers } from "jest-emotion";
 
-expect.extend(matchers)
+expect.extend(matchers);

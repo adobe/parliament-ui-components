@@ -10,15 +10,15 @@
  * governing permissions and limitations under the License.
  */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import { defaultTheme, Provider } from '@adobe/react-spectrum'
-import 'swagger-ui-react/swagger-ui.css'
+import { css, jsx } from "@emotion/react";
+import { defaultTheme, Provider } from "@adobe/react-spectrum";
+import "swagger-ui-react/swagger-ui.css";
 
 export const DynamicSwaggerUI = (props) => {
-  if (typeof window !== 'undefined') {
-    const SwaggerUI = require('swagger-ui-react').default
+  if (typeof window !== "undefined") {
+    const SwaggerUI = require("swagger-ui-react").default;
     return (
-      <Provider theme={defaultTheme} colorScheme='light'>
+      <Provider theme={defaultTheme} colorScheme="light">
         <div
           css={css`
             padding: var(--spectrum-global-dimension-static-size-150);
@@ -27,7 +27,7 @@ export const DynamicSwaggerUI = (props) => {
           <SwaggerUI {...props} />
         </div>
       </Provider>
-    )
+    );
   }
-  return null
-}
+  return null;
+};

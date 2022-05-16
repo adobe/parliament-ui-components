@@ -9,26 +9,26 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-import React from 'react'
-import { destructureProps, parseMetastring } from '../utils'
-import { RequestMaker } from '../RequestMaker'
-import { JsonSchema } from '../JsonSchema'
-import { CodeUI } from '../CodeUI'
+import React from "react";
+import { destructureProps, parseMetastring } from "../utils";
+import { RequestMaker } from "../RequestMaker";
+import { JsonSchema } from "../JsonSchema";
+import { CodeUI } from "../CodeUI";
 
 const Code = (props) => {
-  const { children = '', metastring = '' } = destructureProps(props)
+  const { children = "", metastring = "" } = destructureProps(props);
 
-  const options = parseMetastring(metastring)
-  const isRequestMaker = options.requestMaker ?? false
-  const isJsonSchema = options.schema ?? false
+  const options = parseMetastring(metastring);
+  const isRequestMaker = options.requestMaker ?? false;
+  const isJsonSchema = options.schema ?? false;
 
   if (isRequestMaker) {
-    return <RequestMaker yaml={children} />
+    return <RequestMaker yaml={children} />;
   } else if (isJsonSchema) {
-    return <JsonSchema schema={children} />
+    return <JsonSchema schema={children} />;
   } else {
-    return <CodeUI {...props} />
+    return <CodeUI {...props} />;
   }
-}
+};
 
-export { Code }
+export { Code };

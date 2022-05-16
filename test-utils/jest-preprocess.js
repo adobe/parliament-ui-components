@@ -12,8 +12,8 @@ governing permissions and limitations under the License.
 
 // Set up Babel config
 const babelOptions = {
-  plugins: ['emotion'],
-  presets: ['babel-preset-gatsby']
-}
+  plugins: ["emotion"],
+  presets: ["babel-preset-gatsby"],
+};
 
-module.exports = require('babel-jest').createTransformer(babelOptions)
+module.exports = require("babel-jest").createTransformer(babelOptions);

@@ -11,10 +11,10 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import { useEffect, useRef, useState } from 'react'
-import { Link, withPrefix } from 'gatsby'
-import { Adobe } from '../Icons'
+import { css, jsx } from "@emotion/react";
+import { useEffect, useRef, useState } from "react";
+import { Link, withPrefix } from "gatsby";
+import { Adobe } from "../Icons";
 import {
   ActionButton,
   Divider,
@@ -22,22 +22,22 @@ import {
   View,
   Tabs,
   TabList,
-  Item
-} from '@adobe/react-spectrum'
-import { cloneElement, isExternal } from '../utils'
+  Item,
+} from "@adobe/react-spectrum";
+import { cloneElement, isExternal } from "../utils";
 
-import Menu from '@spectrum-icons/workflow/ShowMenu'
+import Menu from "@spectrum-icons/workflow/ShowMenu";
 
-import { useMediaQuery } from 'react-responsive'
-import { ThemeSwitcher } from '../Provider'
+import { useMediaQuery } from "react-responsive";
+import { ThemeSwitcher } from "../Provider";
 
 const stretched = css`
   height: 100%;
-`
+`;
 
 const Header = ({
-  title = 'Developer',
-  titleUrl = 'https://developers.corp.adobe.com',
+  title = "Developer",
+  titleUrl = "https://developers.corp.adobe.com",
   siteTitle,
   forceMobile,
   icon,
@@ -48,13 +48,13 @@ const Header = ({
   themeSwitcher = true,
   ...props
 }) => {
-  const isMobile = useMediaQuery({ maxWidth: 767 })
-  const [isPopoverOpen, setPopoverOpen] = useState(false)
-  const node = useRef(null)
-  const [tab, setTab] = useState(tabs[0]?.path)
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const [isPopoverOpen, setPopoverOpen] = useState(false);
+  const node = useRef(null);
+  const [tab, setTab] = useState(tabs[0]?.path);
 
   const positionSelectedTabIndicator = () => {
-    const currentPath = location.pathname
+    const currentPath = location.pathname;
 
     const selectedTab =
       tabs
@@ -63,44 +63,44 @@ const Header = ({
             isExternal(tab?.path) ? tab?.path : withPrefix(tab?.path)
           )
         )
-        .sort((a, b) => b?.path.length - a?.path.length)[0] || tabs[0]
+        .sort((a, b) => b?.path.length - a?.path.length)[0] || tabs[0];
 
-    setTab(selectedTab?.path)
-  }
+    setTab(selectedTab?.path);
+  };
 
   useEffect(() => {
-    positionSelectedTabIndicator()
-  }, [location.pathname])
+    positionSelectedTabIndicator();
+  }, [location.pathname]);
 
   const handleClickOutside = (e) => {
     if (node.current.contains(e.target)) {
-      return
+      return;
     }
-    setPopoverOpen(false)
-  }
+    setPopoverOpen(false);
+  };
 
   const handleTabSelection = (path) => {
-    setTab(path)
+    setTab(path);
     isExternal(path)
       ? (window.location = path)
-      : (window.location.pathname = withPrefix(path))
-  }
+      : (window.location.pathname = withPrefix(path));
+  };
 
   useEffect(() => {
     if (isPopoverOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [isPopoverOpen])
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isPopoverOpen]);
 
   return (
     <header
-      role='banner'
+      role="banner"
       css={css`
         ${stretched}
         border-bottom: var(--spectrum-global-dimension-static-size-10) solid var(--spectrum-global-color-gray-200);
@@ -110,14 +110,14 @@ const Header = ({
       `}
       {...props}
     >
-      <nav css={stretched} role='navigation' aria-label='Global'>
-        <View height='100%' paddingStart='size-300' paddingEnd='size-300'>
-          <Flex alignItems='center' height='100%'>
+      <nav css={stretched} role="navigation" aria-label="Global">
+        <View height="100%" paddingStart="size-300" paddingEnd="size-300">
+          <Flex alignItems="center" height="100%">
             {(isMobile || forceMobile) && menu ? (
               <ActionButton
                 isQuiet
                 onPress={() => {
-                  setPopoverOpen(!isPopoverOpen)
+                  setPopoverOpen(!isPopoverOpen);
                 }}
               >
                 <Menu UNSAFE_style={{ paddingRight: 0, paddingLeft: 0 }} />
@@ -129,7 +129,7 @@ const Header = ({
                 text-decoration-line: none;
               `}
             >
-              <Flex alignItems='center' height='100%'>
+              <Flex alignItems="center" height="100%">
                 {!icon ? (
                   <Adobe
                     css={css`
@@ -144,36 +144,36 @@ const Header = ({
                 ) : (
                   icon
                 )}
-                <strong className='spectrum-Heading--sizeXXS'>{title}</strong>
+                <strong className="spectrum-Heading--sizeXXS">{title}</strong>
               </Flex>
             </a>
             <Divider
-              orientation='vertical'
-              marginStart='size-300'
-              size='M'
-              height='100%'
+              orientation="vertical"
+              marginStart="size-300"
+              size="M"
+              height="100%"
             />
             <Link
               css={css`
                 text-decoration-line: none;
               `}
-              to='/'
+              to="/"
             >
-              <View paddingStart='size-300'>
-                <span className='spectrum-Body spectrum-Body--XXS'>
+              <View paddingStart="size-300">
+                <span className="spectrum-Body spectrum-Body--XXS">
                   {siteTitle}
                 </span>
               </View>
             </Link>
-            <View gridArea='navigation' height='100%' width='100%'>
-              <Flex alignItems='center' height='100%'>
+            <View gridArea="navigation" height="100%" width="100%">
+              <Flex alignItems="center" height="100%">
                 {siteTitle && (
                   <Divider
-                    orientation='vertical'
-                    marginStart='size-300'
-                    marginEnd='size-300'
-                    size='M'
-                    height='100%'
+                    orientation="vertical"
+                    marginStart="size-300"
+                    marginEnd="size-300"
+                    size="M"
+                    height="100%"
                   />
                 )}
                 <Tabs
@@ -188,7 +188,7 @@ const Header = ({
                 </Tabs>
               </Flex>
             </View>
-            <Flex direction='row' alignItems='end' gap='size-100'>
+            <Flex direction="row" alignItems="end" gap="size-100">
               <View>{search}</View>
               {themeSwitcher && <ThemeSwitcher />}
             </Flex>
@@ -197,7 +197,7 @@ const Header = ({
       </nav>
       {(isMobile || forceMobile) && isPopoverOpen && menu ? (
         <div
-          className={`spectrum-Site-sideBar ${isPopoverOpen ? ' is-open' : ''}`}
+          className={`spectrum-Site-sideBar ${isPopoverOpen ? " is-open" : ""}`}
           ref={node}
           css={css`
             margin-top: 64px;
@@ -207,7 +207,7 @@ const Header = ({
         </div>
       ) : undefined}
     </header>
-  )
-}
+  );
+};
 
-export { Header }
+export { Header };

@@ -9,107 +9,107 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
+import React from "react";
 
-import { Header } from '../index'
+import { Header } from "../index";
 
 export default {
-  title: 'components/Header'
-}
+  title: "components/Header",
+};
 
-const Menu = () => <div>This is a dummy menu</div>
+const Menu = () => <div>This is a dummy menu</div>;
 
 export const Default = () => {
   const props = {
-    menu: <Menu />
-  }
+    menu: <Menu />,
+  };
 
-  return <Header {...props} />
-}
+  return <Header {...props} />;
+};
 
 export const WithSiteTitle = () => {
   const props = {
     menu: <Menu />,
-    siteTitle: 'My Test Site'
-  }
+    siteTitle: "My Test Site",
+  };
 
-  return <Header {...props} />
-}
+  return <Header {...props} />;
+};
 
 export const DifferentIcon = () => {
   const props = {
     menu: <Menu />,
-    siteTitle: 'My Test Site',
+    siteTitle: "My Test Site",
     icon: (
       <img
         style={{ height: 32, marginRight: 8 }}
-        src='https://www.adobe.com/content/dam/offers-homepage/us/en/homepage/profilepod/cc.png.img.png'
+        src="https://www.adobe.com/content/dam/offers-homepage/us/en/homepage/profilepod/cc.png.img.png"
       />
-    )
-  }
+    ),
+  };
 
-  return <Header {...props} />
-}
+  return <Header {...props} />;
+};
 
 export const NoMenu = () => {
   const props = {
-    siteTitle: 'My Test Site'
-  }
+    siteTitle: "My Test Site",
+  };
 
-  return <Header {...props} />
-}
+  return <Header {...props} />;
+};
 
 export const WithTabs = () => {
   const props = {
-    location: { pathname: '/' },
-    siteTitle: 'My Test Site',
+    location: { pathname: "/" },
+    siteTitle: "My Test Site",
     tabs: [
-      { title: 'Docs', path: '/' },
-      { title: 'Blog', path: '/blog' }
-    ]
-  }
+      { title: "Docs", path: "/" },
+      { title: "Blog", path: "/blog" },
+    ],
+  };
 
-  return <Header {...props} />
-}
+  return <Header {...props} />;
+};
 
 export const WithRemoteTabs = () => {
   const props = {
-    location: { pathname: '/' },
-    siteTitle: 'My Test Site',
+    location: { pathname: "/" },
+    siteTitle: "My Test Site",
     tabs: [
-      { title: 'Docs', path: '/' },
-      { title: 'Remote', path: 'https://adobe.com' }
-    ]
-  }
+      { title: "Docs", path: "/" },
+      { title: "Remote", path: "https://adobe.com" },
+    ],
+  };
 
-  return <Header {...props} />
-}
+  return <Header {...props} />;
+};
 
 export const WithSearch = () => {
   const props = {
-    location: { pathname: '/' },
-    siteTitle: 'My Test Site',
+    location: { pathname: "/" },
+    siteTitle: "My Test Site",
     search: <div>Search…</div>,
     tabs: [
-      { title: 'Docs', path: '/' },
-      { title: 'Remote', path: 'https://adobe.com' }
-    ]
-  }
+      { title: "Docs", path: "/" },
+      { title: "Remote", path: "https://adobe.com" },
+    ],
+  };
 
-  return <Header {...props} />
-}
+  return <Header {...props} />;
+};
 
 export const WithSearchWithoutThemeSwitcher = () => {
   const props = {
-    location: { pathname: '/' },
-    siteTitle: 'My Test Site',
+    location: { pathname: "/" },
+    siteTitle: "My Test Site",
     search: <div>Search…</div>,
     tabs: [
-      { title: 'Docs', path: '/' },
-      { title: 'Remote', path: 'https://adobe.com' }
+      { title: "Docs", path: "/" },
+      { title: "Remote", path: "https://adobe.com" },
     ],
-    themeSwitcher: false
-  }
+    themeSwitcher: false,
+  };
 
-  return <Header {...props} />
-}
+  return <Header {...props} />;
+};

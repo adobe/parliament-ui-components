@@ -11,165 +11,165 @@
  */
 
 const personSchema = {
-  $id: 'https://example.com/person.schema.json',
-  $schema: 'https://json-schema.org/draft/2020-12/schema',
-  title: 'Person',
-  type: 'object',
+  $id: "https://example.com/person.schema.json",
+  $schema: "https://json-schema.org/draft/2020-12/schema",
+  title: "Person",
+  type: "object",
   properties: {
     firstName: {
-      type: 'string',
-      description: "The person's first name."
+      type: "string",
+      description: "The person's first name.",
     },
     lastName: {
-      type: 'string',
-      description: "The person's last name."
+      type: "string",
+      description: "The person's last name.",
     },
     age: {
-      description: 'Age in years which must be equal to or greater than zero.',
-      type: 'integer',
-      minimum: 0
+      description: "Age in years which must be equal to or greater than zero.",
+      type: "integer",
+      minimum: 0,
     },
     huntingSkill: {
-      type: 'string',
-      description: 'The measured skill for hunting',
-      default: 'lazy',
-      example: 'adventurous',
-      enum: ['clueless', 'lazy', 'adventurous', 'aggressive']
-    }
+      type: "string",
+      description: "The measured skill for hunting",
+      default: "lazy",
+      example: "adventurous",
+      enum: ["clueless", "lazy", "adventurous", "aggressive"],
+    },
   },
-  required: ['firstName', 'lastName']
-}
+  required: ["firstName", "lastName"],
+};
 
 const addressSchema = {
-  $id: 'https://example.com/address.schema.json',
-  $schema: 'https://json-schema.org/draft/2020-12/schema',
-  description: 'An address similar to http://microformats.org/wiki/h-card',
-  type: 'object',
+  $id: "https://example.com/address.schema.json",
+  $schema: "https://json-schema.org/draft/2020-12/schema",
+  description: "An address similar to http://microformats.org/wiki/h-card",
+  type: "object",
   properties: {
-    'post-office-box': {
-      type: 'string'
+    "post-office-box": {
+      type: "string",
     },
-    'extended-address': {
-      type: 'string'
+    "extended-address": {
+      type: "string",
     },
-    'street-address': {
-      type: 'string'
+    "street-address": {
+      type: "string",
     },
     locality: {
-      type: 'string'
+      type: "string",
     },
     region: {
-      type: 'string'
+      type: "string",
     },
-    'postal-code': {
-      type: 'string'
+    "postal-code": {
+      type: "string",
     },
-    'country-name': {
-      type: 'string'
-    }
+    "country-name": {
+      type: "string",
+    },
   },
-  required: ['locality', 'region', 'country-name'],
+  required: ["locality", "region", "country-name"],
   dependentRequired: {
-    'post-office-box': ['street-address'],
-    'extended-address': ['street-address']
-  }
-}
+    "post-office-box": ["street-address"],
+    "extended-address": ["street-address"],
+  },
+};
 
 const houseSchema = {
-  $schema: 'http://json-schema.org/draft-07/schema',
-  $id: 'http://example.com/root.json',
-  type: 'object',
-  title: 'The Root Schema',
+  $schema: "http://json-schema.org/draft-07/schema",
+  $id: "http://example.com/root.json",
+  type: "object",
+  title: "The Root Schema",
   description:
-    'The root schema is the schema that comprises the entire JSON document.',
+    "The root schema is the schema that comprises the entire JSON document.",
   default: {},
-  required: ['checked', 'dimensions', 'id', 'name', 'price', 'tags'],
+  required: ["checked", "dimensions", "id", "name", "price", "tags"],
   properties: {
     checked: {
-      $id: '#/properties/checked',
-      type: 'boolean',
-      title: 'The Checked Schema',
-      description: 'An explanation about the purpose of this instance.',
+      $id: "#/properties/checked",
+      type: "boolean",
+      title: "The Checked Schema",
+      description: "An explanation about the purpose of this instance.",
       default: false,
-      examples: [false]
+      examples: [false],
     },
     dimensions: {
-      $id: '#/properties/dimensions',
-      type: 'object',
-      title: 'The Dimensions Schema',
-      description: 'An explanation about the purpose of this instance.',
+      $id: "#/properties/dimensions",
+      type: "object",
+      title: "The Dimensions Schema",
+      description: "An explanation about the purpose of this instance.",
       default: {},
       examples: [
         {
           height: 10.0,
-          width: 5.0
-        }
+          width: 5.0,
+        },
       ],
-      required: ['width', 'height'],
+      required: ["width", "height"],
       properties: {
         width: {
-          $id: '#/properties/dimensions/properties/width',
-          type: 'integer',
-          title: 'The Width Schema',
-          description: 'An explanation about the purpose of this instance.',
+          $id: "#/properties/dimensions/properties/width",
+          type: "integer",
+          title: "The Width Schema",
+          description: "An explanation about the purpose of this instance.",
           default: 0,
-          examples: [5]
+          examples: [5],
         },
         height: {
-          $id: '#/properties/dimensions/properties/height',
-          type: 'integer',
-          title: 'The Height Schema',
-          description: 'An explanation about the purpose of this instance.',
+          $id: "#/properties/dimensions/properties/height",
+          type: "integer",
+          title: "The Height Schema",
+          description: "An explanation about the purpose of this instance.",
           default: 0,
-          examples: [10]
-        }
-      }
+          examples: [10],
+        },
+      },
     },
     id: {
-      $id: '#/properties/id',
-      type: 'integer',
-      title: 'The Id Schema',
-      description: 'An explanation about the purpose of this instance.',
+      $id: "#/properties/id",
+      type: "integer",
+      title: "The Id Schema",
+      description: "An explanation about the purpose of this instance.",
       default: 0,
-      examples: [1]
+      examples: [1],
     },
     name: {
-      $id: '#/properties/name',
-      type: 'string',
-      title: 'The Name Schema',
-      description: 'An explanation about the purpose of this instance.',
-      default: '',
-      examples: ['A green door']
+      $id: "#/properties/name",
+      type: "string",
+      title: "The Name Schema",
+      description: "An explanation about the purpose of this instance.",
+      default: "",
+      examples: ["A green door"],
     },
     price: {
-      $id: '#/properties/price',
-      type: 'number',
-      title: 'The Price Schema',
-      description: 'An explanation about the purpose of this instance.',
+      $id: "#/properties/price",
+      type: "number",
+      title: "The Price Schema",
+      description: "An explanation about the purpose of this instance.",
       default: 0,
-      examples: [12.5]
+      examples: [12.5],
     },
     tags: {
-      $id: '#/properties/tags',
-      type: 'array',
-      title: 'The Tags Schema',
-      description: 'An explanation about the purpose of this instance.',
+      $id: "#/properties/tags",
+      type: "array",
+      title: "The Tags Schema",
+      description: "An explanation about the purpose of this instance.",
       default: [],
-      examples: [['home', 'green']],
+      examples: [["home", "green"]],
       items: {
-        $id: '#/properties/tags/items',
-        type: 'string',
-        title: 'The Items Schema',
-        description: 'An explanation about the purpose of this instance.',
-        default: '',
-        examples: ['home', 'green']
-      }
-    }
-  }
-}
+        $id: "#/properties/tags/items",
+        type: "string",
+        title: "The Items Schema",
+        description: "An explanation about the purpose of this instance.",
+        default: "",
+        examples: ["home", "green"],
+      },
+    },
+  },
+};
 
 export const schemas = {
   personSchema: personSchema,
   addressSchema: addressSchema,
-  houseSchema_draft07: houseSchema
-}
+  houseSchema_draft07: houseSchema,
+};

@@ -10,60 +10,60 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { useEffect, forwardRef } from 'react'
-import classNames from 'classnames'
-import '@spectrum-css/tabs'
-import { css } from '@emotion/react'
+import React, { useEffect, forwardRef } from "react";
+import classNames from "classnames";
+import "@spectrum-css/tabs";
+import { css } from "@emotion/react";
 
 const positionIndicator = (indicator, selectedTab) => {
   if (selectedTab?.current) {
-    indicator.current.style.transform = `translate(${selectedTab.current.offsetLeft}px, 0px)`
-    indicator.current.style.width = `${selectedTab.current.offsetWidth}px`
+    indicator.current.style.transform = `translate(${selectedTab.current.offsetLeft}px, 0px)`;
+    indicator.current.style.width = `${selectedTab.current.offsetWidth}px`;
   }
-}
+};
 
 const animateIndicator = (indicator, animate) => {
-  indicator.current.style.transition = animate ? '' : 'none'
-}
+  indicator.current.style.transition = animate ? "" : "none";
+};
 
 const Tabs = forwardRef(
   ({ children, className, onFontsReady, ...props }, ref) => {
     useEffect(() => {
       // Font affects positioning of the Tab indicator
       document?.fonts?.ready?.then(() => {
-        onFontsReady && onFontsReady()
-      })
-    }, [])
+        onFontsReady && onFontsReady();
+      });
+    }, []);
 
     return (
       <div
         ref={ref}
         {...props}
         className={classNames(
-          'spectrum-Tabs',
-          'spectrum-Tabs--horizontal',
-          'spectrum-Tabs--quiet',
+          "spectrum-Tabs",
+          "spectrum-Tabs--horizontal",
+          "spectrum-Tabs--quiet",
           className
         )}
-        role='tablist'
+        role="tablist"
       >
         {children}
       </div>
-    )
+    );
   }
-)
+);
 
 const TabsIndicator = forwardRef(({ className, ...props }, ref) => {
   return (
     <div
       {...props}
       ref={ref}
-      className={classNames(className, 'spectrum-Tabs-selectionIndicator')}
+      className={classNames(className, "spectrum-Tabs-selectionIndicator")}
       css={css`
         transition-property: transform, width;
       `}
     />
-  )
-})
+  );
+});
 
-export { Tabs, TabsIndicator, positionIndicator, animateIndicator }
+export { Tabs, TabsIndicator, positionIndicator, animateIndicator };

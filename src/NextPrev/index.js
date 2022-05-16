@@ -11,48 +11,48 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import PropTypes from 'prop-types'
-import { Link as GatsbyLink } from 'gatsby'
-import '@spectrum-css/typography'
-import { Flex, View } from '@adobe/react-spectrum'
-import ChevronLeft from '@spectrum-icons/workflow/ChevronLeft'
-import ChevronRight from '@spectrum-icons/workflow/ChevronRight'
+import { css, jsx } from "@emotion/react";
+import PropTypes from "prop-types";
+import { Link as GatsbyLink } from "gatsby";
+import "@spectrum-css/typography";
+import { Flex, View } from "@adobe/react-spectrum";
+import ChevronLeft from "@spectrum-icons/workflow/ChevronLeft";
+import ChevronRight from "@spectrum-icons/workflow/ChevronRight";
 
 const centered = css`
   display: flex;
   align-items: center;
   gap: var(--spectrum-global-dimension-static-size-100);
-`
+`;
 
 const NextPrev = ({ nextPage, previousPage, ...props }) =>
   nextPage || previousPage ? (
-    <div className='spectrum-Body--sizeM' {...props}>
-      <Flex marginBottom='size-800' marginTop='size-800'>
+    <div className="spectrum-Body--sizeM" {...props}>
+      <Flex marginBottom="size-800" marginTop="size-800">
         <View>
           {previousPage && (
             <GatsbyLink
-              className='spectrum-Link spectrum-Link--quiet'
+              className="spectrum-Link spectrum-Link--quiet"
               to={previousPage.path}
-              rel='prev'
+              rel="prev"
             >
               <div
                 css={css`
                   ${centered}
                 `}
               >
-                <ChevronLeft size='S' />
+                <ChevronLeft size="S" />
                 {previousPage.title}
               </div>
             </GatsbyLink>
           )}
         </View>
-        <View marginStart='auto'>
+        <View marginStart="auto">
           {nextPage && (
             <GatsbyLink
-              className='spectrum-Link spectrum-Link--quiet'
+              className="spectrum-Link spectrum-Link--quiet"
               to={nextPage.path}
-              rel='next'
+              rel="next"
             >
               <div
                 css={css`
@@ -60,18 +60,18 @@ const NextPrev = ({ nextPage, previousPage, ...props }) =>
                 `}
               >
                 {nextPage.title}
-                <ChevronRight size='S' />
+                <ChevronRight size="S" />
               </div>
             </GatsbyLink>
           )}
         </View>
       </Flex>
     </div>
-  ) : null
+  ) : null;
 
 NextPrev.propTypes = {
   nextPage: PropTypes.object,
-  previousPage: PropTypes.object
-}
+  previousPage: PropTypes.object,
+};
 
-export { NextPrev }
+export { NextPrev };

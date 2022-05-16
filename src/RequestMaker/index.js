@@ -10,10 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-export { RequestMaker } from './RequestMaker'
-export { RequestMakerUI } from './RequestMakerUI'
-export { RequestBody } from './RequestBody'
-export { Headers } from './Headers'
-export { Query } from './Query'
-export { CodeGen } from './CodeGen'
-export { Parameter } from './Parameter'
+export { RequestMaker } from "./RequestMaker";
+export { RequestMakerUI } from "./RequestMakerUI";
+export { RequestBody } from "./RequestBody";
+export { Headers } from "./Headers";
+export { Query } from "./Query";
+export { CodeGen } from "./CodeGen";
+export { Parameter } from "./Parameter";

@@ -11,13 +11,13 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import classNames from 'classnames'
-import '@spectrum-css/typography'
+import { css, jsx } from "@emotion/react";
+import classNames from "classnames";
+import "@spectrum-css/typography";
 
 export const Paragraph = ({ children, className, ...props }) => (
   <p
-    className={classNames(className, 'spectrum-Body--sizeM')}
+    className={classNames(className, "spectrum-Body--sizeM")}
     css={css`
       margin-top: var(--spectrum-global-dimension-size-300);
     `}
@@ -25,4 +25,4 @@ export const Paragraph = ({ children, className, ...props }) => (
   >
     {children}
   </p>
-)
+);

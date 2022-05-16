@@ -11,8 +11,8 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import { useEffect, useState } from 'react'
+import { css, jsx } from "@emotion/react";
+import { useEffect, useState } from "react";
 import {
   defaultTheme,
   Button,
@@ -20,75 +20,75 @@ import {
   ProgressCircle,
   Provider,
   Switch,
-  View
-} from '@adobe/react-spectrum'
-import { ReDocWrapper } from './ReDocWrapper'
-import { StopLightWrapper } from './StopLightWrapper'
-import { DynamicSwaggerUI } from './DynamicSwaggerUI'
+  View,
+} from "@adobe/react-spectrum";
+import { ReDocWrapper } from "./ReDocWrapper";
+import { StopLightWrapper } from "./StopLightWrapper";
+import { DynamicSwaggerUI } from "./DynamicSwaggerUI";
 
 const hideInternalRoutes = (spec) => {
-  const specCopy = JSON.parse(JSON.stringify(spec))
-  const { paths } = specCopy
+  const specCopy = JSON.parse(JSON.stringify(spec));
+  const { paths } = specCopy;
   for (const path in paths) {
     for (const route in paths[path]) {
-      if (paths[path][route]['x-internal']) {
-        delete paths[path][route]
+      if (paths[path][route]["x-internal"]) {
+        delete paths[path][route];
       }
     }
   }
-  return specCopy
-}
+  return specCopy;
+};
 
 export const OpenAPIBlock = ({
   specUrl,
   spec,
   backButton = true,
   backUrl,
-  engine = 'redoc'
+  engine = "redoc",
 }) => {
-  const [showProgress, setShowProgress] = useState(true)
-  const [hideInternal, setHideInternal] = useState(false)
-  const [loadingData, setLoadingData] = useState(true)
-  const [internal, setInternal] = useState(null)
-  const [external, setExternal] = useState(null)
+  const [showProgress, setShowProgress] = useState(true);
+  const [hideInternal, setHideInternal] = useState(false);
+  const [loadingData, setLoadingData] = useState(true);
+  const [internal, setInternal] = useState(null);
+  const [external, setExternal] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      let data = spec
+      let data = spec;
       if (specUrl) {
-        data = await (await fetch(specUrl)).json()
+        data = await (await fetch(specUrl)).json();
       }
-      setInternal(data)
-      setExternal(hideInternalRoutes(data))
-      setLoadingData(false)
-    }
+      setInternal(data);
+      setExternal(hideInternalRoutes(data));
+      setLoadingData(false);
+    };
 
-    fetchData()
-  }, [specUrl, spec])
+    fetchData();
+  }, [specUrl, spec]);
 
   const openApiRenderer = (engine) =>
-    engine === 'swagger-ui' ? (
+    engine === "swagger-ui" ? (
       <DynamicSwaggerUI
         spec={!hideInternal ? internal : external}
         onComplete={() => {
-          setShowProgress(false)
+          setShowProgress(false);
         }}
       />
-    ) : engine === 'stoplight' ? (
+    ) : engine === "stoplight" ? (
       <StopLightWrapper
         spec={!hideInternal ? internal : external}
         onComplete={() => {
-          setShowProgress(false)
+          setShowProgress(false);
         }}
       />
     ) : (
       <ReDocWrapper
         spec={!hideInternal ? internal : external}
         onComplete={() => {
-          setShowProgress(false)
+          setShowProgress(false);
         }}
       />
-    )
+    );
 
   return (
     <div
@@ -96,33 +96,33 @@ export const OpenAPIBlock = ({
         height: calc(100% - 64px);
       `}
     >
-      {engine !== 'swagger-ui' && (
-        <Provider theme={defaultTheme} colorScheme='dark'>
-          <View backgroundColor='blue-400'>
+      {engine !== "swagger-ui" && (
+        <Provider theme={defaultTheme} colorScheme="dark">
+          <View backgroundColor="blue-400">
             <Grid
-              areas={['backToDocs privateRoutes']}
-              columns={['1fr', '1fr']}
-              rows={['auto']}
-              height='size-600'
-              gap='size-100'
-              alignItems='center'
-              marginStart='size-100'
+              areas={["backToDocs privateRoutes"]}
+              columns={["1fr", "1fr"]}
+              rows={["auto"]}
+              height="size-600"
+              gap="size-100"
+              alignItems="center"
+              marginStart="size-100"
             >
-              <View gridArea='backToDocs'>
+              <View gridArea="backToDocs">
                 {backButton && (
                   <Button
-                    variant='overBackground'
+                    variant="overBackground"
                     onPress={() => {
                       backUrl
                         ? (document.location.href = backUrl)
-                        : window.history.back()
+                        : window.history.back();
                     }}
                   >
                     Back to Docs
                   </Button>
                 )}
               </View>
-              <View gridArea='privateRoutes' justifySelf='self-end'>
+              <View gridArea="privateRoutes" justifySelf="self-end">
                 <Switch isSelected={hideInternal} onChange={setHideInternal}>
                   Hide Internal Routes
                 </Switch>
@@ -139,14 +139,14 @@ export const OpenAPIBlock = ({
           left: 0;
           right: 0;
           bottom: 0;
-          display: ${showProgress ? 'grid' : 'none'};
+          display: ${showProgress ? "grid" : "none"};
           place-items: center center;
         `}
       >
-        <ProgressCircle aria-label='Loading…' isIndeterminate size='L' />
+        <ProgressCircle aria-label="Loading…" isIndeterminate size="L" />
       </div>
 
       {!loadingData ? openApiRenderer(engine) : null}
     </div>
-  )
-}
+  );
+};

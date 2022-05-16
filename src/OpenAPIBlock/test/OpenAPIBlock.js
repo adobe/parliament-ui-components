@@ -10,32 +10,32 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import React from 'react'
-import { render } from 'test-utils'
-import '../../../test-utils/matchMedia'
-import { OpenAPIBlock } from '../index'
+import React from "react";
+import { render } from "test-utils";
+import "../../../test-utils/matchMedia";
+import { OpenAPIBlock } from "../index";
 
-describe('<OpenAPIBlock />', () => {
-  test('should render', () => {
+describe("<OpenAPIBlock />", () => {
+  test("should render", () => {
     const { getByTestId } = render(
-      <OpenAPIBlock specUrl='https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore.json' />
-    )
-    const el = getByTestId('el')
+      <OpenAPIBlock specUrl="https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore.json" />
+    );
+    const el = getByTestId("el");
 
-    expect(el).toBeInTheDocument()
-  })
-})
+    expect(el).toBeInTheDocument();
+  });
+});
 
-describe('<OpenAPIBlock /> using swagger-ui', () => {
-  test('should render', () => {
+describe("<OpenAPIBlock /> using swagger-ui", () => {
+  test("should render", () => {
     const { getByTestId } = render(
       <OpenAPIBlock
-        specUrl='https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore.json'
-        engine='swagger-ui'
+        specUrl="https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore.json"
+        engine="swagger-ui"
       />
-    )
-    const el = getByTestId('el')
+    );
+    const el = getByTestId("el");
 
-    expect(el).toBeInTheDocument()
-  })
-})
+    expect(el).toBeInTheDocument();
+  });
+});

@@ -9,46 +9,46 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
+import React from "react";
 
-import classNames from 'classnames'
+import classNames from "classnames";
 
-import '@spectrum-css/table'
+import "@spectrum-css/table";
 
 const Table = ({ children, isQuiet, ...props }) => {
   return (
-    <div style={{ width: '100%', overflowX: 'scroll' }}>
+    <div style={{ width: "100%", overflowX: "scroll" }}>
       <table
         className={classNames([
-          'spectrum-Table',
-          { 'spectrum-Table--quiet': isQuiet }
+          "spectrum-Table",
+          { "spectrum-Table--quiet": isQuiet },
         ])}
         {...props}
       >
         {children}
       </table>
     </div>
-  )
-}
+  );
+};
 
 const THead = ({ children }) => {
-  return <thead className='spectrum-Table-head'>{children}</thead>
-}
+  return <thead className="spectrum-Table-head">{children}</thead>;
+};
 
 const Th = ({ children }) => {
-  return <th className='spectrum-Table-headCell'>{children}</th>
-}
+  return <th className="spectrum-Table-headCell">{children}</th>;
+};
 
 const TBody = ({ children }) => {
-  return <tbody className='spectrum-Table-body'>{children}</tbody>
-}
+  return <tbody className="spectrum-Table-body">{children}</tbody>;
+};
 
 const Tr = ({ children }) => {
-  return <tr className='spectrum-Table-row'>{children}</tr>
-}
+  return <tr className="spectrum-Table-row">{children}</tr>;
+};
 
 const Td = ({ children }) => {
-  return <td className='spectrum-Table-cell'>{children}</td>
-}
+  return <td className="spectrum-Table-cell">{children}</td>;
+};
 
-export { Table, THead, Th, TBody, Tr, Td }
+export { Table, THead, Th, TBody, Tr, Td };

@@ -9,20 +9,20 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
+import React from "react";
 
 export default {
-  title: 'components/Search'
-}
+  title: "components/Search",
+};
 
 export const Default = () => {
   return (
     <div>
-      No story as we wait for a fix for{' '}
-      <a href='https://github.com/storybookjs/storybook/issues/11255'>
+      No story as we wait for a fix for{" "}
+      <a href="https://github.com/storybookjs/storybook/issues/11255">
         this storybook issue
       </a>
       .
     </div>
-  )
-}
+  );
+};

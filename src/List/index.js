@@ -10,26 +10,26 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import classNames from 'classnames'
-import PropTypes from 'prop-types'
-import '@spectrum-css/typography'
+import React from "react";
+import classNames from "classnames";
+import PropTypes from "prop-types";
+import "@spectrum-css/typography";
 
-const List = ({ children, elementType = 'ul', className, ...props }) => {
-  const Element = elementType
+const List = ({ children, elementType = "ul", className, ...props }) => {
+  const Element = elementType;
 
   return (
     <Element
       {...props}
-      className={classNames(className, 'spectrum-Body--sizeM')}
+      className={classNames(className, "spectrum-Body--sizeM")}
     >
       {children}
     </Element>
-  )
-}
+  );
+};
 
 List.propTypes = {
-  elementType: PropTypes.string
-}
+  elementType: PropTypes.string,
+};
 
-export { List }
+export { List };

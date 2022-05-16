@@ -10,16 +10,16 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import React from 'react'
-import { render } from 'test-utils'
-import '../../../test-utils/matchMedia'
-import { AutoComplete } from '../index'
+import React from "react";
+import { render } from "test-utils";
+import "../../../test-utils/matchMedia";
+import { AutoComplete } from "../index";
 
-describe('<AutoComplete />', () => {
-  test('should render', () => {
-    const { getByTestId } = render(<AutoComplete data-testid='el' />)
-    const el = getByTestId('el')
+describe("<AutoComplete />", () => {
+  test("should render", () => {
+    const { getByTestId } = render(<AutoComplete data-testid="el" />);
+    const el = getByTestId("el");
 
-    expect(el).toBeInTheDocument()
-  })
-})
+    expect(el).toBeInTheDocument();
+  });
+});

@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-Object.defineProperty(window, 'matchMedia', {
+Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({
     matches: false,
@@ -20,6 +20,6 @@ Object.defineProperty(window, 'matchMedia', {
     removeListener: jest.fn(), // Deprecated
     addEventListener: jest.fn(),
     removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn()
-  }))
-})
+    dispatchEvent: jest.fn(),
+  })),
+});

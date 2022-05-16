@@ -9,48 +9,48 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
-import { Nav } from '../index'
-import mockData from './mockData'
+import React from "react";
+import { Nav } from "../index";
+import mockData from "./mockData";
 
 export default {
-  title: 'components/Nav'
-}
+  title: "components/Nav",
+};
 
 const baseGitInfo = {
-  org: 'adobedocs',
-  name: 'adobeio-events',
-  branch: 'master'
-}
+  org: "adobedocs",
+  name: "adobeio-events",
+  branch: "master",
+};
 
 export const Empty = () => {
   const props = {
     data: [],
     gitInfo: baseGitInfo,
-    selected: 'selected/path/index.md'
-  }
-  return <Nav {...props} />
-}
+    selected: "selected/path/index.md",
+  };
+  return <Nav {...props} />;
+};
 
 export const WithData = () => {
   const props = {
     data: mockData,
     gitInfo: baseGitInfo,
-    selected: 'test/path/test.md'
-  }
+    selected: "test/path/test.md",
+  };
 
-  return <Nav {...props} />
-}
+  return <Nav {...props} />;
+};
 
 export const WithDataDepthEight = () => {
   const props = {
     data: mockData,
     gitInfo: baseGitInfo,
-    selected: 'test/path/test.md',
-    depth: 8
-  }
+    selected: "test/path/test.md",
+    depth: 8,
+  };
 
-  return <Nav {...props} />
-}
+  return <Nav {...props} />;
+};
 
-WithData.story = { name: 'With Data' }
+WithData.story = { name: "With Data" };

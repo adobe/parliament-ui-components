@@ -10,10 +10,10 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import React from 'react'
-import { render } from 'test-utils'
-import '../../../test-utils/matchMedia'
-import { CodeUI } from '../index'
+import React from "react";
+import { render } from "test-utils";
+import "../../../test-utils/matchMedia";
+import { CodeUI } from "../index";
 
 const code = `{
   "op": "copy",
@@ -24,13 +24,13 @@ const code = `{
     "path": "/content/assets/7d391c3c-a3d4-4f66-81ce-40066732db60/source/test.psd"
   }
 }
-`
+`;
 
-describe('<CodeUI />', () => {
-  test('should render', () => {
-    const { getByTestId } = render(<CodeUI data-testid='el'>{code}</CodeUI>)
-    const el = getByTestId('el')
+describe("<CodeUI />", () => {
+  test("should render", () => {
+    const { getByTestId } = render(<CodeUI data-testid="el">{code}</CodeUI>);
+    const el = getByTestId("el");
 
-    expect(el).toBeInTheDocument()
-  })
-})
+    expect(el).toBeInTheDocument();
+  });
+});

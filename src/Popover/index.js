@@ -10,11 +10,11 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
-import '@spectrum-css/popover'
-import { css } from '@emotion/react'
-import classNames from 'classnames'
+import React, { forwardRef } from "react";
+import PropTypes from "prop-types";
+import "@spectrum-css/popover";
+import { css } from "@emotion/react";
+import classNames from "classnames";
 
 const Popover = forwardRef(
   ({ isOpen, children, variant, isQuiet, className, ...props }, ref) => (
@@ -30,22 +30,22 @@ const Popover = forwardRef(
       `}
       className={classNames(
         className,
-        'spectrum-Popover',
-        'spectrum-Popover--bottom',
-        { 'is-open': isOpen },
-        { 'spectrum-Dropdown-popover': variant === 'picker' },
-        { 'spectrum-Dropdown-popover--quiet': variant === 'picker' && isQuiet }
+        "spectrum-Popover",
+        "spectrum-Popover--bottom",
+        { "is-open": isOpen },
+        { "spectrum-Dropdown-popover": variant === "picker" },
+        { "spectrum-Dropdown-popover--quiet": variant === "picker" && isQuiet }
       )}
     >
       {children}
     </div>
   )
-)
+);
 
 Popover.propTypes = {
   variant: PropTypes.string,
   isOpen: PropTypes.bool,
-  isQuiet: PropTypes.bool
-}
+  isQuiet: PropTypes.bool,
+};
 
-export { Popover }
+export { Popover };
