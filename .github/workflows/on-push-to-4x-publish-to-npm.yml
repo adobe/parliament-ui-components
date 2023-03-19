@@ -1,0 +1,21 @@
+name: on-push-to-4x-publish-to-npm
+on:
+  push:
+    branches:
+      - '4.x'
+    paths:
+      - 'package.json'
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.15.0
+      - run: yarn install
+      - run: yarn test
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.ADOBE_BOT_NPM_TOKEN }}
+          access: 'public'
