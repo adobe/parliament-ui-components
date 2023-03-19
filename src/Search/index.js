@@ -117,7 +117,7 @@ const Search = ({
         }}
         onSubmit={() => {
           if (results.length > 1) {
-            loadResult(results[1])
+            loadResult(results[results.length - 1])
           }
         }}
         autoComplete='off'
