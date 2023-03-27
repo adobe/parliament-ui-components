@@ -31,6 +31,8 @@ import Menu from '@spectrum-icons/workflow/ShowMenu'
 import { useMediaQuery } from 'react-responsive'
 import { ThemeSwitcher } from '../Provider'
 
+import './index.css'
+
 const stretched = css`
   height: 100%;
 `
@@ -127,6 +129,9 @@ const Header = ({
               href={titleUrl}
               css={css`
                 text-decoration-line: none;
+                :focus {
+                  outline: auto;
+                }
               `}
             >
               <Flex alignItems='center' height='100%'>
@@ -156,6 +161,9 @@ const Header = ({
             <Link
               css={css`
                 text-decoration-line: none;
+                :focus {
+                  outline: auto;
+                }
               `}
               to='/'
             >
