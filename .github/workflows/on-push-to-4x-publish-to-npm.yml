@@ -11,9 +11,10 @@ jobs:
     env:
       NPM_TOKEN: ${{ secrets.ADOBE_BOT_NPM_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 14.15.0
+          node-version: 16.15.1
       - run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
-      - run: npm deprecate '@adobe/parliament-ui-components@4.6.3' ""
+      - run: npm -v
+      - run: npm unpublish '@adobe/parliament-ui-components@4.6.3'
