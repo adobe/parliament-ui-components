@@ -16,4 +16,4 @@ jobs:
         with:
           node-version: 14.15.0
       - run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
-      - run: npm unpublish @adobe/parliament-ui-components@4.6.3 -f
+      - run: npm deprecate -f '@adobe/parliament-ui-components@4.6.3' "this package has been deprecated"
