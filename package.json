@@ -1,6 +1,6 @@
 {
   "name": "@adobe/parliament-ui-components",
-  "version": "5.2.2",
+  "version": "5.2.3",
   "description": "UI Components for Parliament projects",
   "author": {
     "name": "Simon Mac Donald",
@@ -36,7 +36,7 @@
   "module": "dist/index.modern.js",
   "source": "src/index.js",
   "engines": {
-    "node": ">=14.15.0"
+    "node": ">=14.19.0"
   },
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs --css-modules false && yarn run stripcsscomments",
@@ -107,7 +107,7 @@
     "react-image": "^4.0.3",
     "react-json-view": "^1.21.3",
     "react-responsive": "^8.1.0",
-    "redoc": "2.0.0-rc.38",
+    "redoc": "2.1.3",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "styled-components": "^5.1.1",
