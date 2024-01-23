@@ -9,31 +9,31 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
+import React from "react";
 
-import { ActionButtons } from '../index'
+import { ActionButtons } from "../index";
 
 export default {
-  title: 'components/ActionButtons'
-}
+  title: "components/ActionButtons",
+};
 
 export const Default = () => {
   const props = {
-    branch: 'stable',
-    filePath: 'path/to/file',
-    gitUrl: 'github.url'
-  }
+    branch: "stable",
+    filePath: "path/to/file",
+    gitUrl: "github.url",
+  };
 
-  return <ActionButtons {...props} />
-}
+  return <ActionButtons {...props} />;
+};
 
 export const WithIssues = () => {
   const props = {
-    branch: 'stable',
-    filePath: 'path/to/file',
-    gitUrl: 'github.url',
-    issues: 'jira.url'
-  }
+    branch: "stable",
+    filePath: "path/to/file",
+    gitUrl: "github.url",
+    issues: "jira.url",
+  };
 
-  return <ActionButtons {...props} />
-}
+  return <ActionButtons {...props} />;
+};

@@ -11,11 +11,11 @@ governing permissions and limitations under the License.
 */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import PropTypes from 'prop-types'
-import classNames from 'classnames'
+import { css, jsx } from "@emotion/react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
-import '@spectrum-css/menu'
+import "@spectrum-css/menu";
 
 const Item = ({
   children,
@@ -30,21 +30,21 @@ const Item = ({
 }) =>
   isDivider ? (
     <li
-      className='spectrum-Menu-divider'
-      role='separator'
+      className="spectrum-Menu-divider"
+      role="separator"
       {...props}
       style={{
-        height: 'var(--spectrum-alias-border-size-thick)',
-        marginTop: '12px',
-        marginBottom: '16px'
+        height: "var(--spectrum-alias-border-size-thick)",
+        marginTop: "12px",
+        marginBottom: "16px",
       }}
     />
   ) : (
     <li
       className={classNames([
-        { 'spectrum-Menu-item': !isSectionHeading },
-        { 'is-selected': isSelected },
-        { 'is-disabled': isDisabled }
+        { "spectrum-Menu-item": !isSectionHeading },
+        { "is-selected": isSelected },
+        { "is-disabled": isDisabled },
       ])}
       css={css`
         padding: var(--spectrum-global-dimension-size-85)
@@ -53,36 +53,36 @@ const Item = ({
           var(--spectrum-global-dimension-size-150);
         margin-bottom: 0px;
       `}
-      role={!isSectionHeading ? 'menuitem' : 'group'}
+      role={!isSectionHeading ? "menuitem" : "group"}
       aria-selected={isSelected}
       aria-disabled={isDisabled}
-      tabIndex='0'
+      tabIndex="0"
       onClick={() => {
-        onAction && onAction(item || children)
+        onAction && onAction(item || children);
       }}
       onKeyUp={(e) => {
-        onKeyPress && onKeyPress(e.key, item || children)
+        onKeyPress && onKeyPress(e.key, item || children);
       }}
       {...props}
     >
       <span
         className={
           isSectionHeading
-            ? 'spectrum-Menu-sectionHeading'
-            : 'spectrum-Menu-itemLabel'
+            ? "spectrum-Menu-sectionHeading"
+            : "spectrum-Menu-itemLabel"
         }
-        style={isSectionHeading ? { marginTop: '0px', padding: '0px' } : {}}
+        style={isSectionHeading ? { marginTop: "0px", padding: "0px" } : {}}
       >
         {children}
       </span>
     </li>
-  )
+  );
 
 Item.propTypes = {
   isSelected: PropTypes.bool,
   isDisabled: PropTypes.bool,
   isDivider: PropTypes.bool,
-  isSectionHeading: PropTypes.bool
-}
+  isSectionHeading: PropTypes.bool,
+};
 
-export { Item }
+export { Item };

@@ -11,23 +11,23 @@
  * governing permissions and limitations under the License.
  */
 /** @jsx jsx */
-import { jsx } from '@emotion/react'
-import { defaultTheme, Provider } from '@adobe/react-spectrum'
+import { jsx } from "@emotion/react";
+import { defaultTheme, Provider } from "@adobe/react-spectrum";
 export const StopLightWrapper = ({ spec, onComplete }) => {
-  onComplete && onComplete()
-  if (typeof window !== 'undefined') {
-    const { API } = require('@stoplight/elements')
+  onComplete && onComplete();
+  if (typeof window !== "undefined") {
+    const { API } = require("@stoplight/elements");
     return (
-      <Provider theme={defaultTheme} colorScheme='light'>
+      <Provider theme={defaultTheme} colorScheme="light">
         <link
-          rel='stylesheet'
-          href='https://unpkg.com/@stoplight/elements/styles.min.css'
+          rel="stylesheet"
+          href="https://unpkg.com/@stoplight/elements/styles.min.css"
         />
         <div>
-          <API apiDescriptionDocument={spec} router='hash' />
+          <API apiDescriptionDocument={spec} router="hash" />
         </div>
       </Provider>
-    )
+    );
   }
-  return null
-}
+  return null;
+};

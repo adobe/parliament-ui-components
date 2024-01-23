@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import {
   Content,
   Flex,
@@ -18,79 +18,79 @@ import {
   Tabs,
   TabList,
   TabPanels,
-  Item
-} from '@adobe/react-spectrum'
-import GlobeGrid from '@spectrum-icons/workflow/GlobeGrid'
-import { ParameterTable } from './ParameterTable'
-import { CodeUI } from '../CodeUI'
-import { useRequestState } from './RequestContext'
-import prettyBytes from 'pretty-bytes'
-import prettyMilliseconds from 'pretty-ms'
+  Item,
+} from "@adobe/react-spectrum";
+import GlobeGrid from "@spectrum-icons/workflow/GlobeGrid";
+import { ParameterTable } from "./ParameterTable";
+import { CodeUI } from "../CodeUI";
+import { useRequestState } from "./RequestContext";
+import prettyBytes from "pretty-bytes";
+import prettyMilliseconds from "pretty-ms";
 
 const ResponsePanel = (props) => {
-  const [headers, setHeaders] = useState(null)
-  const [body, setBody] = useState('')
-  const [language, setLanguage] = useState('text')
-  const state = useRequestState()
+  const [headers, setHeaders] = useState(null);
+  const [body, setBody] = useState("");
+  const [language, setLanguage] = useState("text");
+  const state = useRequestState();
 
   const parseResponse = async (response) => {
     if (response) {
-      const contentType = response.headers.get('content-type')
-      if (contentType?.indexOf('application/json') > -1) {
-        setLanguage('json')
+      const contentType = response.headers.get("content-type");
+      if (contentType?.indexOf("application/json") > -1) {
+        setLanguage("json");
       } else {
-        setLanguage('text')
+        setLanguage("text");
       }
-      const responseBody = await response.text()
-      setBody(`${responseBody}\n`)
+      const responseBody = await response.text();
+      setBody(`${responseBody}\n`);
       setHeaders(
         Array.from(response.headers.entries()).map((header) => {
           return {
             enabled: false,
             key: header[0],
             value: header[1],
-            deletable: false
-          }
+            deletable: false,
+          };
         })
-      )
+      );
     }
-  }
+  };
 
   useEffect(() => {
-    parseResponse(state.response)
-  }, [state.response])
+    parseResponse(state.response);
+  }, [state.response]);
 
-  console.log(state.response)
+  console.log(state.response);
 
   return state.response ? (
     <View>
       <Flex
-        direction='row'
-        gap='size-100'
-        justifyContent='flex-end'
-        position='relative'
-        top='size-450'
+        direction="row"
+        gap="size-100"
+        justifyContent="flex-end"
+        position="relative"
+        top="size-450"
       >
         <View>
-          <GlobeGrid size='S' />
+          <GlobeGrid size="S" />
         </View>
         <View>Status: {state.response.status}</View>
         <View>Time: {prettyMilliseconds(state.requestTime)}</View>
         <View>Size: {prettyBytes(body ? body.length : 0)}</View>
       </Flex>
-      <Tabs aria-label='Response'>
+      <Tabs aria-label="Response">
         <TabList>
-          <Item key='responseBodyTab'>Response Body</Item>
-          <Item key='responseHeaderTab'>Response Headers</Item>
+          <Item key="responseBodyTab">Response Body</Item>
+          <Item key="responseHeaderTab">Response Headers</Item>
         </TabList>
         <TabPanels>
-          <Item title='Response Body' key='responseBodyTab'>
-            <Content marginTop='size-250' marginStart='size-125'>
+          <Item title="Response Body" key="responseBodyTab">
+            <Content marginTop="size-250" marginStart="size-125">
               <CodeUI className={language}>{body}</CodeUI>
             </Content>
           </Item>
-          <Item title='Response Headers' key='responseHeaderTab'>
-            <Content marginTop='size-250' marginStart='size-125'>
+          <Item title="Response Headers" key="responseHeaderTab">
+            <Content marginTop="size-250" marginStart="size-125">
               <ParameterTable readonly items={headers} />
             </Content>
           </Item>
@@ -98,10 +98,10 @@ const ResponsePanel = (props) => {
       </Tabs>
     </View>
   ) : (
-    ''
-  )
-}
+    ""
+  );
+};
 
-ResponsePanel.propTypes = {}
+ResponsePanel.propTypes = {};
 
-export { ResponsePanel }
+export { ResponsePanel };

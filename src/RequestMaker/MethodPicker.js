@@ -10,65 +10,67 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { useEffect, useState } from 'react'
-import { Picker, Item } from '@adobe/react-spectrum'
-import { RequestProvider, useRequestDispatch } from './RequestContext'
+import React, { useEffect, useState } from "react";
+import { Picker, Item } from "@adobe/react-spectrum";
+import { RequestProvider, useRequestDispatch } from "./RequestContext";
 
 const options = [
-  { id: 'get', name: 'GET' },
-  { id: 'put', name: 'PUT' },
-  { id: 'post', name: 'POST' },
-  { id: 'delete', name: 'DELETE' },
-  { id: 'options', name: 'OPTIONS' },
-  { id: 'head', name: 'HEAD' },
-  { id: 'patch', name: 'PATCH' }
-]
+  { id: "get", name: "GET" },
+  { id: "put", name: "PUT" },
+  { id: "post", name: "POST" },
+  { id: "delete", name: "DELETE" },
+  { id: "options", name: "OPTIONS" },
+  { id: "head", name: "HEAD" },
+  { id: "patch", name: "PATCH" },
+];
 
 const filterOptions = (methods) => {
   if (!methods) {
-    return options
+    return options;
   }
-  if (typeof methods === 'string') {
+  if (typeof methods === "string") {
     const verbOptions = methods
-      .split(',')
-      .map((method) => method.trim().toLowerCase())
-    return options.filter((option) => verbOptions.includes(option.id))
+      .split(",")
+      .map((method) => method.trim().toLowerCase());
+    return options.filter((option) => verbOptions.includes(option.id));
   } else if (Array.isArray(methods)) {
-    console.log(options.filter((option) => methods.includes(option.name)))
-    return options.filter((option) => methods.includes(option.name))
+    console.log(options.filter((option) => methods.includes(option.name)));
+    return options.filter((option) => methods.includes(option.name));
   }
-  return options
-}
+  return options;
+};
 
 const MethodPicker = ({ methods, defaultMethod }) => {
-  const dispatch = useRequestDispatch()
-  const verbOptions = filterOptions(methods)
-  const [selected, setSelected] = useState(defaultMethod || verbOptions[0].name)
+  const dispatch = useRequestDispatch();
+  const verbOptions = filterOptions(methods);
+  const [selected, setSelected] = useState(
+    defaultMethod || verbOptions[0].name
+  );
 
   const updateState = (method) => {
-    setSelected(method)
+    setSelected(method);
     dispatch({
       type: RequestProvider.ACTION_TYPES.SET_METHOD,
-      method
-    })
-  }
+      method,
+    });
+  };
 
   useEffect(() => {
-    updateState(defaultMethod)
-  }, [])
+    updateState(defaultMethod);
+  }, []);
 
   return (
     <Picker
-      width='size-1600'
+      width="size-1600"
       items={verbOptions}
       selectedKey={selected}
       onSelectionChange={updateState}
     >
       {(item) => <Item key={item.name}>{item.name}</Item>}
     </Picker>
-  )
-}
+  );
+};
 
-MethodPicker.propTypes = {}
+MethodPicker.propTypes = {};
 
-export { MethodPicker }
+export { MethodPicker };

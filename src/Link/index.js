@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import { Link as RSLink } from '@adobe/react-spectrum'
+import React from "react";
+import { Link as RSLink } from "@adobe/react-spectrum";
 
 export const Link = ({ children, className, href, ...props }) => (
   <RSLink isQuiet>
@@ -19,4 +19,4 @@ export const Link = ({ children, className, href, ...props }) => (
       {children}
     </a>
   </RSLink>
-)
+);

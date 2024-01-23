@@ -10,10 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
 
 const Query = ({ children, ...props }) => {
-  return <div {...props}>{children}</div>
-}
+  return <div {...props}>{children}</div>;
+};
 
-export { Query }
+export { Query };

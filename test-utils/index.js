@@ -10,14 +10,14 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { render } from '@testing-library/react'
-import { Provider } from '../src/Provider'
+import { render } from "@testing-library/react";
+import { Provider } from "../src/Provider";
 
 const customRender = (ui, options) =>
-  render(ui, { wrapper: Provider, ...options })
+  render(ui, { wrapper: Provider, ...options });
 
 // re-export everything
-export * from '@testing-library/react'
+export * from "@testing-library/react";
 
 // override render method
-export { customRender as render }
+export { customRender as render };

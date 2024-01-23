@@ -9,20 +9,20 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
-import { AutoComplete } from '../index'
+import React from "react";
+import { AutoComplete } from "../index";
 
 export default {
-  title: 'components/AutoComplete'
-}
+  title: "components/AutoComplete",
+};
 
 export const Default = () => {
   const completions = [
-    { name: 'Cut' },
-    { name: 'Copy' },
-    { name: 'Paste' },
-    { name: 'Replace' }
-  ]
+    { name: "Cut" },
+    { name: "Copy" },
+    { name: "Paste" },
+    { name: "Replace" },
+  ];
 
-  return <AutoComplete completions={completions} />
-}
+  return <AutoComplete completions={completions} />;
+};

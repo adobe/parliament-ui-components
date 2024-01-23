@@ -10,13 +10,13 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import { Link } from '../index'
+import React from "react";
+import { Link } from "../index";
 
 export default {
-  title: 'components/Link'
-}
+  title: "components/Link",
+};
 
 export const Default = () => {
-  return <Link href='https://adobe.io'>adobe.io</Link>
-}
+  return <Link href="https://adobe.io">adobe.io</Link>;
+};

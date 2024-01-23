@@ -10,70 +10,70 @@
  *  governing permissions and limitations under the License.
  */
 /** @jsx jsx */
-import { useState, useRef, useEffect } from 'react'
-import { jsx } from '@emotion/react'
-import { TextField } from '@adobe/react-spectrum'
-import { Menu } from '../Menu'
-import { Popover } from '../Popover'
+import { useState, useRef, useEffect } from "react";
+import { jsx } from "@emotion/react";
+import { TextField } from "@adobe/react-spectrum";
+import { Menu } from "../Menu";
+import { Popover } from "../Popover";
 
 const AutoComplete = ({
-  value = '',
+  value = "",
   index,
-  width = '100%',
-  placeholder = '',
+  width = "100%",
+  placeholder = "",
   onUpdate,
   completions,
   ...props
 }) => {
-  completions = completions || []
-  const textRef = useRef(null)
-  const [isOpen, setIsOpen] = useState(false)
-  const [val, setVal] = useState(value)
-  const [menuItems, setMenuItems] = useState(completions)
+  completions = completions || [];
+  const textRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [val, setVal] = useState(value);
+  const [menuItems, setMenuItems] = useState(completions);
   const popProps = {
     isOpen: isOpen,
     style: {
-      position: 'absolute',
-      left: '15px',
-      top: '38px',
-      zIndex: '1000',
-      'overflow-y': 'auto',
-      'max-height': '300px',
-      'min-width': '150px'
-    }
-  }
+      position: "absolute",
+      left: "15px",
+      top: "38px",
+      zIndex: "1000",
+      "overflow-y": "auto",
+      "max-height": "300px",
+      "min-width": "150px",
+    },
+  };
   const loadCompletion = (item) => {
-    setIsOpen(false)
-    setVal(item.name)
-    onUpdate && onUpdate(index, { key: item.name })
-  }
+    setIsOpen(false);
+    setVal(item.name);
+    onUpdate && onUpdate(index, { key: item.name });
+  };
   const handleChange = (value) => {
-    setVal(value)
-    onUpdate && onUpdate(index, { key: value })
+    setVal(value);
+    onUpdate && onUpdate(index, { key: value });
     const menu = completions.filter(
       (menuItem) =>
         menuItem.name.toLowerCase().indexOf(value.toLowerCase()) > -1
-    )
+    );
     if (value.length > 0 && menu.length > 0) {
-      setMenuItems(menu)
-      setIsOpen(true)
+      setMenuItems(menu);
+      setIsOpen(true);
     } else {
-      setMenuItems(completions)
-      setIsOpen(false)
+      setMenuItems(completions);
+      setIsOpen(false);
     }
-  }
+  };
   const handleClickOutside = (event) => {
     if (textRef.current && !textRef.current.contains(event.target)) {
-      setIsOpen(false)
+      setIsOpen(false);
     }
-  }
+  };
 
   useEffect(() => {
-    document.addEventListener('click', handleClickOutside, true)
+    document.addEventListener("click", handleClickOutside, true);
     return () => {
-      document.removeEventListener('click', handleClickOutside, true)
-    }
-  })
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  });
 
   return (
     <div ref={textRef} {...props}>
@@ -83,7 +83,7 @@ const AutoComplete = ({
         width={width}
         placeholder={placeholder}
         onChange={handleChange}
-        autoComplete='off'
+        autoComplete="off"
       />
       {completions && (
         <Popover {...popProps}>
@@ -91,17 +91,17 @@ const AutoComplete = ({
             onAction={loadCompletion}
             items={menuItems}
             onKeyPress={(key, item) => {
-              if (key === 'Enter') {
-                loadCompletion(item)
-              } else if (key === 'Escape') {
-                setIsOpen(false)
+              if (key === "Enter") {
+                loadCompletion(item);
+              } else if (key === "Escape") {
+                setIsOpen(false);
               }
             }}
           />
         </Popover>
       )}
     </div>
-  )
-}
+  );
+};
 
-export { AutoComplete }
+export { AutoComplete };

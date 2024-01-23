@@ -10,13 +10,13 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
 
-import { List } from '../index'
+import { List } from "../index";
 
 export default {
-  title: 'components/List'
-}
+  title: "components/List",
+};
 
 export const Default = () => (
   <List>
@@ -24,4 +24,4 @@ export const Default = () => (
     <li>Item 2</li>
     <li>Item 3</li>
   </List>
-)
+);

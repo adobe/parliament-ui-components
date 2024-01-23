@@ -9,15 +9,15 @@
  * OF ANY KIND, either express or implied. See the License for the schemaific language
  * governing permissions and limitations under the License.
  */
-import React from 'react'
-import { Heading, Item, TabList, TabPanels, Tabs } from '@adobe/react-spectrum'
-import { JsonSchemaView, JsonSchemaProperty } from './JsonSchemaView'
-import { JsonSchemaValidate } from './JsonSchemaValidate'
-import { JsonSchemaRaw } from './JsonSchemaRaw'
-import { JsonSchemaInfo } from './JsonSchemaInfo'
+import React from "react";
+import { Heading, Item, TabList, TabPanels, Tabs } from "@adobe/react-spectrum";
+import { JsonSchemaView, JsonSchemaProperty } from "./JsonSchemaView";
+import { JsonSchemaValidate } from "./JsonSchemaValidate";
+import { JsonSchemaRaw } from "./JsonSchemaRaw";
+import { JsonSchemaInfo } from "./JsonSchemaInfo";
 
 export const JsonSchema = ({ schema = {}, ...props }) => {
-  schema = typeof schema === 'string' ? JSON.parse(schema) : schema
+  schema = typeof schema === "string" ? JSON.parse(schema) : schema;
   const {
     $id,
     _id,
@@ -34,7 +34,7 @@ export const JsonSchema = ({ schema = {}, ...props }) => {
     // eslint-disable-next-line no-unused-vars
     required = [],
     ...remainingProps
-  } = schema
+  } = schema;
   return (
     <div>
       {title && <Heading level={1}>{title}</Heading>}
@@ -47,26 +47,26 @@ export const JsonSchema = ({ schema = {}, ...props }) => {
       ))}
       <Tabs aria-label={title}>
         <TabList>
-          <Item key='_view'>View</Item>
-          <Item key='_validate'>Validate</Item>
-          <Item key='_raw'>Raw</Item>
-          <Item key='_info'>Info</Item>
+          <Item key="_view">View</Item>
+          <Item key="_validate">Validate</Item>
+          <Item key="_raw">Raw</Item>
+          <Item key="_info">Info</Item>
         </TabList>
         <TabPanels>
-          <Item key='_view'>
+          <Item key="_view">
             <JsonSchemaView schema={schema} {...props} />
           </Item>
-          <Item key='_validate'>
+          <Item key="_validate">
             <JsonSchemaValidate schema={schema} {...props} />
           </Item>
-          <Item key='_raw'>
+          <Item key="_raw">
             <JsonSchemaRaw schema={schema} {...props} />
           </Item>
-          <Item key='_info'>
+          <Item key="_info">
             <JsonSchemaInfo schema={schema} {...props} />
           </Item>
         </TabPanels>
       </Tabs>
     </div>
-  )
-}
+  );
+};

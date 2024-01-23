@@ -9,59 +9,59 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
-import { Text } from '@adobe/react-spectrum'
+import React from "react";
+import { Text } from "@adobe/react-spectrum";
 
-import { Alert } from '../index'
+import { Alert } from "../index";
 
 export default {
-  title: 'components/Alert'
-}
+  title: "components/Alert",
+};
 
 export const AlertInfo = () => {
   const props = {
-    variant: 'info'
-  }
+    variant: "info",
+  };
 
   return (
     <Alert {...props}>
       <Text>This is the Info alert component</Text>
     </Alert>
-  )
-}
+  );
+};
 
 export const AlertHelp = () => {
   const props = {
-    variant: 'help'
-  }
+    variant: "help",
+  };
 
   return (
     <Alert {...props}>
       <Text>This is the Help alert component</Text>
     </Alert>
-  )
-}
+  );
+};
 
 export const AlertWarning = () => {
   const props = {
-    variant: 'warning'
-  }
+    variant: "warning",
+  };
 
   return (
     <Alert {...props}>
       <Text>This is the Warning alert component</Text>
     </Alert>
-  )
-}
+  );
+};
 
 export const AlertError = () => {
   const props = {
-    variant: 'error'
-  }
+    variant: "error",
+  };
 
   return (
     <Alert {...props}>
       <Text>This is the Error alert component</Text>
     </Alert>
-  )
-}
+  );
+};

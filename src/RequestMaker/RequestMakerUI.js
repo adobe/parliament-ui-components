@@ -10,16 +10,16 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import { Grid, View, TextField } from '@adobe/react-spectrum'
+import React from "react";
+import { Grid, View, TextField } from "@adobe/react-spectrum";
 
-import { queryString } from './utils'
+import { queryString } from "./utils";
 
-import { MethodPicker } from './MethodPicker'
-import { RequestParameters } from './RequestParameters'
-import { ResponsePanel } from './ResponsePanel'
-import { useRequestState } from './RequestContext'
-import { SendRequestButton } from './SendRequestButton'
+import { MethodPicker } from "./MethodPicker";
+import { RequestParameters } from "./RequestParameters";
+import { ResponsePanel } from "./ResponsePanel";
+import { useRequestState } from "./RequestContext";
+import { SendRequestButton } from "./SendRequestButton";
 
 const RequestMakerUI = ({
   methods,
@@ -28,37 +28,37 @@ const RequestMakerUI = ({
   children,
   ...props
 }) => {
-  const state = useRequestState()
+  const state = useRequestState();
 
   return (
     <div
       style={{
         margin:
-          'var(--spectrum-global-dimension-size-200) 0 var(--spectrum-global-dimension-size-200) 0'
+          "var(--spectrum-global-dimension-size-200) 0 var(--spectrum-global-dimension-size-200) 0",
       }}
       {...props}
     >
       <View
-        borderWidth='thick'
-        borderRadius='medium'
-        borderColor='dark'
-        padding='size-250'
-        backgroundColor='gray-75'
+        borderWidth="thick"
+        borderRadius="medium"
+        borderColor="dark"
+        padding="size-250"
+        backgroundColor="gray-75"
       >
         <Grid
-          areas={['left  right']}
-          columns={['auto', '3fr']}
-          rows={['auto']}
-          gap='size-100'
+          areas={["left  right"]}
+          columns={["auto", "3fr"]}
+          rows={["auto"]}
+          gap="size-100"
         >
           <MethodPicker defaultMethod={defaultMethod} methods={methods} />
-          <TextField value={url + queryString(state.query)} width='100%' />
+          <TextField value={url + queryString(state.query)} width="100%" />
         </Grid>
         <div
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 'var(--spectrum-global-dimension-size-100'
+            display: "flex",
+            flexDirection: "column",
+            gap: "var(--spectrum-global-dimension-size-100",
           }}
         >
           <RequestParameters url={url + queryString(state.query)}>
@@ -69,8 +69,8 @@ const RequestMakerUI = ({
         </div>
       </View>
     </div>
-  )
-}
-RequestMakerUI.propTypes = {}
+  );
+};
+RequestMakerUI.propTypes = {};
 
-export { RequestMakerUI }
+export { RequestMakerUI };

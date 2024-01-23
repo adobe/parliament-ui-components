@@ -10,94 +10,94 @@
  * governing permissions and limitations under the License.
  */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import { createRef, useState } from 'react'
-import nextId from 'react-id-generator'
-import classNames from 'classnames'
-import Highlight, { defaultProps } from 'prism-react-renderer'
-import '@spectrum-css/typography'
-import '@spectrum-css/tooltip'
-import '@adobe/prism-adobe'
-import { ActionButton, defaultTheme, Provider } from '@adobe/react-spectrum'
-import PropTypes from 'prop-types'
-import { destructureProps, parseMetastring } from '../utils'
+import { css, jsx } from "@emotion/react";
+import { createRef, useState } from "react";
+import nextId from "react-id-generator";
+import classNames from "classnames";
+import Highlight, { defaultProps } from "prism-react-renderer";
+import "@spectrum-css/typography";
+import "@spectrum-css/tooltip";
+import "@adobe/prism-adobe";
+import { ActionButton, defaultTheme, Provider } from "@adobe/react-spectrum";
+import PropTypes from "prop-types";
+import { destructureProps, parseMetastring } from "../utils";
 
 const openTooltip = (setIsTooltipOpen) => {
-  setIsTooltipOpen(true)
+  setIsTooltipOpen(true);
   setTimeout(() => {
-    setIsTooltipOpen(false)
-  }, 3000)
-}
+    setIsTooltipOpen(false);
+  }, 3000);
+};
 
 const copy = (textarea, document, setIsTooltipOpen) => {
-  textarea.current.select()
-  document.execCommand('copy')
-  openTooltip(setIsTooltipOpen)
-}
+  textarea.current.select();
+  document.execCommand("copy");
+  openTooltip(setIsTooltipOpen);
+};
 
-const RE = /{([\d,-]+)}/
+const RE = /{([\d,-]+)}/;
 
 const calculateLinesToHighlight = (meta) => {
   if (!RE.test(meta)) {
-    return () => false
+    return () => false;
   }
   const lineNumbers = RE.exec(meta)[1]
     .split(`,`)
-    .map((v) => v.split(`-`).map((x) => parseInt(x, 10)))
-  console.log(lineNumbers)
+    .map((v) => v.split(`-`).map((x) => parseInt(x, 10)));
+  console.log(lineNumbers);
 
   return (index) => {
-    const lineNumber = index + 1
+    const lineNumber = index + 1;
     const inRange = lineNumbers.some(([start, end]) =>
       end ? lineNumber >= start && lineNumber <= end : lineNumber === start
-    )
-    return inRange
-  }
-}
+    );
+    return inRange;
+  };
+};
 
 const CodeUI = (props) => {
   const {
     children,
-    className = '',
-    theme = 'dark',
+    className = "",
+    theme = "dark",
     copyButton = true,
     lineNumbers = true,
-    'data-meta': metastring = '',
+    "data-meta": metastring = "",
     ...otherProps
-  } = destructureProps(props)
-  const tooltipId = nextId()
-  const [isTooltipOpen, setIsTooltipOpen] = useState(false)
-  const language = className.replace(/language-/, '')
+  } = destructureProps(props);
+  const tooltipId = nextId();
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+  const language = className.replace(/language-/, "");
 
-  const shouldHighlightLine = calculateLinesToHighlight(metastring)
-  const options = parseMetastring(metastring)
-  const isCopyButton = options.copy ?? copyButton
-  const isLineNumbers = options.numberLines ?? lineNumbers
+  const shouldHighlightLine = calculateLinesToHighlight(metastring);
+  const options = parseMetastring(metastring);
+  const isCopyButton = options.copy ?? copyButton;
+  const isLineNumbers = options.numberLines ?? lineNumbers;
 
   return (
     <Provider
       theme={defaultTheme}
       colorScheme={theme}
-      scale='medium'
+      scale="medium"
       UNSAFE_style={{
-        borderRadius: 'var(--spectrum-global-dimension-size-50)',
-        marginTop: '1.0rem',
-        marginBottom: '1.45rem'
+        borderRadius: "var(--spectrum-global-dimension-size-50)",
+        marginTop: "1.0rem",
+        marginBottom: "1.45rem",
       }}
       {...otherProps}
     >
       <Highlight
         {...defaultProps}
-        code={typeof children === 'string' ? children : children[0]}
+        code={typeof children === "string" ? children : children[0]}
         language={language}
       >
         {({ className, tokens, getLineProps, getTokenProps }) => {
-          const lines = tokens.slice(0, -1)
-          const isMultiLine = lines.length > 1
-          const textarea = createRef()
+          const lines = tokens.slice(0, -1);
+          const isMultiLine = lines.length > 1;
+          const textarea = createRef();
 
           return (
-            <pre className={classNames(className, 'spectrum-Code4')}>
+            <pre className={classNames(className, "spectrum-Code4")}>
               {isCopyButton && (
                 <div
                   css={css`
@@ -106,8 +106,8 @@ const CodeUI = (props) => {
                 >
                   <textarea
                     readOnly
-                    aria-hidden='true'
-                    tabIndex='-1'
+                    aria-hidden="true"
+                    tabIndex="-1"
                     css={css`
                       position: fixed;
                       left: -999px;
@@ -119,23 +119,23 @@ const CodeUI = (props) => {
                   <ActionButton
                     aria-describedby={tooltipId}
                     onPress={() => {
-                      copy(textarea, document, setIsTooltipOpen)
+                      copy(textarea, document, setIsTooltipOpen);
                     }}
                     UNSAFE_style={{
-                      position: 'absolute',
-                      top: '0',
-                      right: '0'
+                      position: "absolute",
+                      top: "0",
+                      right: "0",
                     }}
                   >
                     Copy
                   </ActionButton>
                   <span
-                    role='tooltip'
+                    role="tooltip"
                     id={tooltipId}
                     css={css`
                       display: block;
                       position: absolute;
-                      top: ${isMultiLine ? '4px' : '-2px'};
+                      top: ${isMultiLine ? "4px" : "-2px"};
                       right: var(--spectrum-global-dimension-static-size-600);
                       left: initial;
                       font-family: var(
@@ -144,27 +144,27 @@ const CodeUI = (props) => {
                       );
                     `}
                     className={classNames(
-                      'spectrum-Tooltip spectrum-Tooltip--left',
+                      "spectrum-Tooltip spectrum-Tooltip--left",
                       {
-                        'is-open': isTooltipOpen
+                        "is-open": isTooltipOpen,
                       }
                     )}
                   >
-                    <span className='spectrum-Tooltip-label'>
+                    <span className="spectrum-Tooltip-label">
                       Copied to your clipboard
                     </span>
-                    <span className='spectrum-Tooltip-tip' />
+                    <span className="spectrum-Tooltip-tip" />
                   </span>
                 </div>
               )}
               {tokens.slice(0, -1).map((line, i) => {
                 const { style: lineStyles, ...lineProps } = getLineProps({
                   line,
-                  key: i
-                })
+                  key: i,
+                });
 
                 if (shouldHighlightLine(i)) {
-                  lineProps.className = `${lineProps.className} highlight-line`
+                  lineProps.className = `${lineProps.className} highlight-line`;
                 }
 
                 return (
@@ -193,23 +193,23 @@ const CodeUI = (props) => {
                     <span {...lineProps}>
                       {line.map((token, key) => {
                         const { style: tokenStyles, ...tokenProps } =
-                          getTokenProps({ token, key })
-                        return <span key={key} {...tokenProps} />
+                          getTokenProps({ token, key });
+                        return <span key={key} {...tokenProps} />;
                       })}
                     </span>
                   </div>
-                )
+                );
               })}
             </pre>
-          )
+          );
         }}
       </Highlight>
     </Provider>
-  )
-}
+  );
+};
 
 CodeUI.propTypes = {
-  theme: PropTypes.oneOf(['light', 'dark'])
-}
+  theme: PropTypes.oneOf(["light", "dark"]),
+};
 
-export { CodeUI }
+export { CodeUI };

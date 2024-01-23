@@ -9,39 +9,39 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
-import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import { Link } from 'gatsby'
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import { Link } from "gatsby";
 
-import '@spectrum-css/sidenav'
+import "@spectrum-css/sidenav";
 
-import './index.css'
+import "./index.css";
 
 const isExternalPath = (path) => {
-  return path.startsWith('http://') || path.startsWith('https://')
-}
+  return path.startsWith("http://") || path.startsWith("https://");
+};
 
 const nav = (items, selectedKeys, disabledKeys, onSelectionChange) => {
   const classes = {
-    root: 'spectrum-SideNav spectrum-SideNav--multiLevel',
-    link: 'spectrum-SideNav-itemLink'
-  }
+    root: "spectrum-SideNav spectrum-SideNav--multiLevel",
+    link: "spectrum-SideNav-itemLink",
+  };
 
   const listItems = items.map((item, index) => {
-    let link
+    let link;
 
-    const { title, icon, path } = item
+    const { title, icon, path } = item;
 
     const subTree = item.children
       ? nav(item.children, selectedKeys, disabledKeys, onSelectionChange)
-      : undefined
+      : undefined;
 
     const itemClasses = classNames([
-      'spectrum-SideNav-item',
-      { 'is-selected': selectedKeys.includes(title) },
-      { 'is-disabled': disabledKeys.includes(title) }
-    ])
+      "spectrum-SideNav-item",
+      { "is-selected": selectedKeys.includes(title) },
+      { "is-disabled": disabledKeys.includes(title) },
+    ]);
 
     if (path) {
       if (isExternalPath(path)) {
@@ -49,13 +49,13 @@ const nav = (items, selectedKeys, disabledKeys, onSelectionChange) => {
           <a href={path} className={classes.link}>
             {title}
           </a>
-        )
+        );
       } else {
         link = (
           <Link to={path} className={classes.link}>
             {title}
           </Link>
-        )
+        );
       }
     } else {
       link = (
@@ -63,7 +63,7 @@ const nav = (items, selectedKeys, disabledKeys, onSelectionChange) => {
           {icon}
           {item.title}
         </span>
-      )
+      );
     }
 
     return (
@@ -71,11 +71,11 @@ const nav = (items, selectedKeys, disabledKeys, onSelectionChange) => {
         {link}
         {subTree}
       </li>
-    )
-  })
+    );
+  });
 
-  return <ul className={classes.root}>{listItems}</ul>
-}
+  return <ul className={classes.root}>{listItems}</ul>;
+};
 
 const SideNav = ({
   items = [],
@@ -83,13 +83,13 @@ const SideNav = ({
   disabledKeys = [],
   ...props
 }) => {
-  return <nav {...props}>{nav(items, selectedKeys, disabledKeys)}</nav>
-}
+  return <nav {...props}>{nav(items, selectedKeys, disabledKeys)}</nav>;
+};
 
 SideNav.propTypes = {
   items: PropTypes.array,
   selectedKeys: PropTypes.array,
-  disabledKeys: PropTypes.array
-}
+  disabledKeys: PropTypes.array,
+};
 
-export { SideNav }
+export { SideNav };

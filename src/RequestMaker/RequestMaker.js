@@ -10,17 +10,17 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import { RequestProvider } from './RequestContext'
-import { RequestMakerUI } from './RequestMakerUI'
-import jsyaml from 'js-yaml'
-import { Headers } from './Headers'
-import { Query } from './Query'
-import { Parameter } from './Parameter'
-import { RequestBody } from './RequestBody'
+import React from "react";
+import { RequestProvider } from "./RequestContext";
+import { RequestMakerUI } from "./RequestMakerUI";
+import jsyaml from "js-yaml";
+import { Headers } from "./Headers";
+import { Query } from "./Query";
+import { Parameter } from "./Parameter";
+import { RequestBody } from "./RequestBody";
 
 const getBodyItems = (body) => {
-  const items = []
+  const items = [];
   // eslint-disable-next-line
   const getItems =
     Object.keys(body) && Object.keys(body).length > 0
@@ -29,61 +29,61 @@ const getBodyItems = (body) => {
             enabled: true,
             key: key,
             value: body[key],
-            deletable: true
+            deletable: true,
           })
         )
-      : null
-  return items
-}
+      : null;
+  return items;
+};
 
 const jsonToJsx = (json) => {
   const query =
     json.query && Object.keys(json.query).length > 0 ? (
-      <Query mdxType='query'>
+      <Query mdxType="query">
         {Object.keys(json.query).map((query) => (
           <Parameter key={query} name={query}>
             {json.query[query]}
           </Parameter>
         ))}
       </Query>
-    ) : null
+    ) : null;
   const headers =
     json.headers && Object.keys(json.headers).length > 0 ? (
-      <Headers mdxType='headers'>
+      <Headers mdxType="headers">
         {Object.keys(json.headers).map((header) => (
           <Parameter key={header} name={header}>
             {json.headers[header]}
           </Parameter>
         ))}
       </Headers>
-    ) : null
+    ) : null;
   const body =
-    json.body && typeof json.body !== 'string' ? (
+    json.body && typeof json.body !== "string" ? (
       Object.values(json.headers)
         .toLocaleString()
         .toLowerCase()
-        .split(',')
-        .includes('application/x-www-form-urlencoded') ? (
-        <RequestBody mdxType='requestbody' type='urlencoded'>
+        .split(",")
+        .includes("application/x-www-form-urlencoded") ? (
+        <RequestBody mdxType="requestbody" type="urlencoded">
           {getBodyItems(json.body)}
         </RequestBody>
       ) : (
-        <RequestBody mdxType='requestbody' type='form-data'>
+        <RequestBody mdxType="requestbody" type="form-data">
           {getBodyItems(json.body)}
         </RequestBody>
       )
-    ) : typeof json.body !== 'undefined' ? (
-      <RequestBody mdxType='requestbody' type='raw'>
+    ) : typeof json.body !== "undefined" ? (
+      <RequestBody mdxType="requestbody" type="raw">
         {json.body}
       </RequestBody>
     ) : (
-      <RequestBody mdxType='requestbody' type='none' />
-    )
-  return [query, headers, body]
-}
+      <RequestBody mdxType="requestbody" type="none" />
+    );
+  return [query, headers, body];
+};
 
-const RequestMaker = ({ children, yaml = '', ...props }) => {
-  const yamlJson = jsyaml.load(yaml)
+const RequestMaker = ({ children, yaml = "", ...props }) => {
+  const yamlJson = jsyaml.load(yaml);
 
   return yaml.length > 0 ? (
     <RequestProvider>
@@ -93,7 +93,7 @@ const RequestMaker = ({ children, yaml = '', ...props }) => {
     <RequestProvider>
       <RequestMakerUI {...props}>{children}</RequestMakerUI>
     </RequestProvider>
-  )
-}
+  );
+};
 
-export { RequestMaker }
+export { RequestMaker };

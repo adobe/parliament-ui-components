@@ -11,34 +11,34 @@ governing permissions and limitations under the License.
 */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import PropTypes from 'prop-types'
-import { View } from '@adobe/react-spectrum'
-import { Link } from '../Link'
+import { css, jsx } from "@emotion/react";
+import PropTypes from "prop-types";
+import { View } from "@adobe/react-spectrum";
+import { Link } from "../Link";
 
-import '@spectrum-css/typography'
+import "@spectrum-css/typography";
 
 const TableOfContents = ({
   tableOfContents,
-  title = 'On this page',
+  title = "On this page",
   ...props
 }) => {
-  const index = tableOfContents.items && tableOfContents.items.length - 1
+  const index = tableOfContents.items && tableOfContents.items.length - 1;
 
   const tableOfContentsItems = {
-    items: tableOfContents.items && tableOfContents.items[index].items
-  }
+    items: tableOfContents.items && tableOfContents.items[index].items,
+  };
 
   return (
     <View
-      elementType='nav'
-      role='navigation'
-      aria-label='Article Outline'
-      marginY='size-400'
+      elementType="nav"
+      role="navigation"
+      aria-label="Article Outline"
+      marginY="size-400"
       {...props}
     >
       <h4
-        className='spectrum-Detail--sizeL'
+        className="spectrum-Detail--sizeL"
         css={css`
           color: var(--spectrum-global-color-gray-600);
           margin-bottom: var(--spectrum-global-dimension-static-size-250);
@@ -59,7 +59,7 @@ const TableOfContents = ({
         `}
       >
         <ul
-          className='spectrum-Body--sizeM'
+          className="spectrum-Body--sizeM"
           css={css`
             margin: 0;
             padding-left: 0;
@@ -70,14 +70,14 @@ const TableOfContents = ({
         </ul>
       </span>
     </View>
-  )
-}
+  );
+};
 
 const renderItems = (items) => {
   return items.map((item, index) => {
-    return renderItem(item, index)
-  })
-}
+    return renderItem(item, index);
+  });
+};
 
 const renderItem = (item, index) => {
   return (
@@ -104,28 +104,28 @@ const renderItem = (item, index) => {
         renderLink(item)
       )}
     </li>
-  )
-}
+  );
+};
 
 const renderLink = (item, indent = false) => {
   return (
     <Link
       href={item.url}
       css={css`
-        ${indent ? `margin-left: -16px;` : ''}
+        ${indent ? `margin-left: -16px;` : ""}
       `}
     >
       {item.title}
     </Link>
-  )
-}
+  );
+};
 
 TableOfContents.propTypes = {
-  tableOfContents: PropTypes.object
-}
+  tableOfContents: PropTypes.object,
+};
 
 TableOfContents.defaultProps = {
-  tableOfContents: {}
-}
+  tableOfContents: {},
+};
 
-export { TableOfContents }
+export { TableOfContents };

@@ -8,59 +8,59 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
-import Star from '@spectrum-icons/workflow/Star'
-import { SideNav } from '../index'
+import React from "react";
+import Star from "@spectrum-icons/workflow/Star";
+import { SideNav } from "../index";
 
-const icon = <Star size='S' />
+const icon = <Star size="S" />;
 
 export default {
-  title: 'components/SideNav'
-}
+  title: "components/SideNav",
+};
 
 export const FlatItems = () => {
   const props = {
     items: [
-      { title: 'Aardvark', path: 'aardvark' },
-      { title: 'Kangaroo', path: 'kangaroo' },
-      { title: 'Snake', path: 'snake' },
-      { title: 'Hippo', path: 'hippo' }
+      { title: "Aardvark", path: "aardvark" },
+      { title: "Kangaroo", path: "kangaroo" },
+      { title: "Snake", path: "snake" },
+      { title: "Hippo", path: "hippo" },
     ],
-    selectedKeys: ['Kangaroo'],
-    disabledKeys: ['Snake']
-  }
-  return <SideNav {...props} />
-}
+    selectedKeys: ["Kangaroo"],
+    disabledKeys: ["Snake"],
+  };
+  return <SideNav {...props} />;
+};
 
 export const FlatItemsWithIcon = () => {
   const props = {
     items: [
-      { title: 'Aardvark', icon: icon },
-      { title: 'Kangaroo', icon: icon },
-      { title: 'Snake', icon: icon },
-      { title: 'Hippo', icon: icon }
+      { title: "Aardvark", icon: icon },
+      { title: "Kangaroo", icon: icon },
+      { title: "Snake", icon: icon },
+      { title: "Hippo", icon: icon },
     ],
-    selectedKeys: ['Kangaroo'],
-    disabledKeys: ['Snake']
-  }
-  return <SideNav {...props} />
-}
+    selectedKeys: ["Kangaroo"],
+    disabledKeys: ["Snake"],
+  };
+  return <SideNav {...props} />;
+};
 
 export const Multilevel = () => {
   const props = {
     items: [
       {
-        title: 'Mammals',
+        title: "Mammals",
         children: [
-          { title: 'Aardvark' },
-          { title: 'Kangaroo' },
-          { title: 'Hippo' }
-        ]
+          { title: "Aardvark" },
+          { title: "Kangaroo" },
+          { title: "Hippo" },
+        ],
       },
-      { title: 'Reptiles', children: [{ title: 'Snake' }] }
+      { title: "Reptiles", children: [{ title: "Snake" }] },
     ],
-    selectedKeys: ['Kangaroo'],
-    disabledKeys: ['Snake']
-  }
-  return <SideNav {...props} />
-}
+    selectedKeys: ["Kangaroo"],
+    disabledKeys: ["Snake"],
+  };
+  return <SideNav {...props} />;
+};

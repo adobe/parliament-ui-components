@@ -9,15 +9,15 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
-import { Menu, Item } from '../index'
+import React from "react";
+import { Menu, Item } from "../index";
 
 export default {
-  title: 'components/Menu'
-}
+  title: "components/Menu",
+};
 
 export const MenuChildren = () => {
-  const props = {}
+  const props = {};
 
   return (
     <Menu {...props}>
@@ -27,23 +27,23 @@ export const MenuChildren = () => {
       <Item isDivider />
       <Item isDisabled>United States of America</Item>
     </Menu>
-  )
-}
+  );
+};
 
 export const MenuItems = () => {
   const props = {
     onAction: (e) => {
-      console.log(e)
+      console.log(e);
     },
     items: [
-      { name: 'Cut' },
-      { name: 'Copy' },
-      { name: 'Paste' },
-      { name: 'Replace' }
+      { name: "Cut" },
+      { name: "Copy" },
+      { name: "Paste" },
+      { name: "Replace" },
     ],
-    selectedKeys: ['Copy'],
-    disabledKeys: ['Replace']
-  }
+    selectedKeys: ["Copy"],
+    disabledKeys: ["Replace"],
+  };
 
-  return <Menu {...props} />
-}
+  return <Menu {...props} />;
+};

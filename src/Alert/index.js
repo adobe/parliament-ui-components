@@ -10,34 +10,34 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
+import { css, jsx } from "@emotion/react";
 
-import Info from '@spectrum-icons/workflow/Info'
-import Help from '@spectrum-icons/workflow/Help'
-import AlertIcon from '@spectrum-icons/workflow/Alert'
+import Info from "@spectrum-icons/workflow/Info";
+import Help from "@spectrum-icons/workflow/Help";
+import AlertIcon from "@spectrum-icons/workflow/Alert";
 
-import '@spectrum-css/alert'
+import "@spectrum-css/alert";
 
 const Alert = ({ variant, children, ...props }) => {
   const styles = {
-    width: 'var(--spectrum-global-dimension-size-175)',
-    height: 'var(--spectrum-global-dimension-size-175)',
-    float: 'right'
-  }
-  let icon = <Info UNSAFE_style={styles} />
+    width: "var(--spectrum-global-dimension-size-175)",
+    height: "var(--spectrum-global-dimension-size-175)",
+    float: "right",
+  };
+  let icon = <Info UNSAFE_style={styles} />;
   switch (variant) {
-    case 'help':
-      icon = <Help UNSAFE_style={styles} />
-      break
-    case 'error':
-      icon = <AlertIcon UNSAFE_style={styles} />
-      break
-    case 'warning':
-      icon = <AlertIcon UNSAFE_style={styles} />
-      break
-    case 'info':
+    case "help":
+      icon = <Help UNSAFE_style={styles} />;
+      break;
+    case "error":
+      icon = <AlertIcon UNSAFE_style={styles} />;
+      break;
+    case "warning":
+      icon = <AlertIcon UNSAFE_style={styles} />;
+      break;
+    case "info":
     default:
-      break
+      break;
   }
   return (
     <div
@@ -48,7 +48,7 @@ const Alert = ({ variant, children, ...props }) => {
       {...props}
     >
       <div
-        className='spectrum-Icon spectrum-UIIcon-InfoLarge spectrum-Alert-icon'
+        className="spectrum-Icon spectrum-UIIcon-InfoLarge spectrum-Alert-icon"
         css={css`
           display: inline;
           position: unset;
@@ -56,11 +56,11 @@ const Alert = ({ variant, children, ...props }) => {
       >
         {icon}
       </div>
-      <div className='spectrum-Alert-content' style={{ margin: '0' }}>
+      <div className="spectrum-Alert-content" style={{ margin: "0" }}>
         {children}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export { Alert }
+export { Alert };

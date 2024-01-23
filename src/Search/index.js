@@ -11,116 +11,116 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import { useEffect, useRef, useState } from 'react'
-import { Heading, SearchField, Text } from '@adobe/react-spectrum'
-import { Menu } from '../Menu'
-import { Popover } from '../Popover'
-import { navigate } from 'gatsby'
-import { isExternal } from '../utils'
+import { css, jsx } from "@emotion/react";
+import { useEffect, useRef, useState } from "react";
+import { Heading, SearchField, Text } from "@adobe/react-spectrum";
+import { Menu } from "../Menu";
+import { Popover } from "../Popover";
+import { navigate } from "gatsby";
+import { isExternal } from "../utils";
 
 const Search = ({
   sections,
   searchCallback,
-  placeholder = 'Search…',
-  width = 'size-4600',
+  placeholder = "Search…",
+  width = "size-4600",
   debounceTime = 200,
   ...props
 }) => {
-  const searchRef = useRef(null)
-  const searchField = useRef(null)
-  const [results, setResults] = useState([])
-  const [isOpen, setIsOpen] = useState(false)
-  const [query, setQuery] = useState('')
+  const searchRef = useRef(null);
+  const searchField = useRef(null);
+  const [results, setResults] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [query, setQuery] = useState("");
 
   const handleClickOutside = (event) => {
     if (searchRef.current && !searchRef.current.contains(event.target)) {
-      setIsOpen(false)
-      setQuery('')
+      setIsOpen(false);
+      setQuery("");
     }
-  }
+  };
 
   useEffect(() => {
-    document.addEventListener('click', handleClickOutside, true)
+    document.addEventListener("click", handleClickOutside, true);
     return () => {
-      document.removeEventListener('click', handleClickOutside, true)
-    }
-  })
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  });
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      search(query)
-    }, debounceTime)
+      search(query);
+    }, debounceTime);
     return () => {
-      clearTimeout(handler)
-    }
-  }, [query])
+      clearTimeout(handler);
+    };
+  }, [query]);
 
   const search = async (searchTerm) => {
     if (searchTerm.length > 0) {
-      const searchResults = await searchCallback(searchTerm)
+      const searchResults = await searchCallback(searchTerm);
       const results = sections
         .map((section) => {
           const acc = searchResults
             .filter((result) => result !== null && result.type === section.key)
             .map((result) => {
-              return { name: result.title, ...result }
-            })
+              return { name: result.title, ...result };
+            });
           return acc.length > 0
             ? [{ heading: true, name: section.name }, ...acc]
-            : acc
+            : acc;
         })
-        .filter((section) => section.length > 0)
+        .filter((section) => section.length > 0);
 
       for (let i = 1; i < results.length; i++) {
         if (results[i - 1].length > 0) {
-          results[i].unshift({ divider: true })
+          results[i].unshift({ divider: true });
         }
       }
 
-      setResults(results.flat())
-      setIsOpen(true)
+      setResults(results.flat());
+      setIsOpen(true);
     } else {
-      setIsOpen(false)
+      setIsOpen(false);
     }
-  }
+  };
 
   const loadResult = (item) => {
-    setIsOpen(false)
+    setIsOpen(false);
     if (isExternal(item.path)) {
-      document.location.href = item.path
+      document.location.href = item.path;
     } else {
-      const path = item.path.startsWith('/') ? item.path : `/${item.path}`
-      navigate(path)
+      const path = item.path.startsWith("/") ? item.path : `/${item.path}`;
+      navigate(path);
     }
-  }
+  };
 
   return (
     <div
       ref={searchRef}
       style={{
-        position: 'relative'
+        position: "relative",
       }}
       {...props}
     >
       <SearchField
         ref={searchField}
         placeholder={placeholder}
-        aria-label='Search'
+        aria-label="Search"
         width={width}
         value={query}
         onClear={() => {
-          setIsOpen(false)
+          setIsOpen(false);
         }}
         onChange={(searchTerm) => {
-          setQuery(searchTerm)
+          setQuery(searchTerm);
         }}
         onSubmit={() => {
           if (results.length > 1) {
-            loadResult(results[1])
+            loadResult(results[1]);
           }
         }}
-        autoComplete='off'
+        autoComplete="off"
       />
       <Popover
         isOpen={isOpen}
@@ -135,18 +135,18 @@ const Search = ({
         {results.length > 0 ? (
           <Menu
             style={{
-              marginTop: '12px',
-              marginBottom: '12px'
+              marginTop: "12px",
+              marginBottom: "12px",
             }}
             items={results}
             onAction={loadResult}
             onKeyPress={(key, item) => {
-              if (key === 'Enter') {
-                loadResult(item)
-              } else if (key === 'Escape') {
-                setQuery('')
-                searchField.current.focus()
-                setIsOpen(false)
+              if (key === "Enter") {
+                loadResult(item);
+              } else if (key === "Escape") {
+                setQuery("");
+                searchField.current.focus();
+                setIsOpen(false);
               }
             }}
           />
@@ -161,7 +161,7 @@ const Search = ({
               margin-top: 64px;
             `}
           >
-            <Heading level={2} UNSAFE_style={{ marginBottom: '8px' }}>
+            <Heading level={2} UNSAFE_style={{ marginBottom: "8px" }}>
               No Results Found
             </Heading>
             <Text>
@@ -171,7 +171,7 @@ const Search = ({
         )}
       </Popover>
     </div>
-  )
-}
+  );
+};
 
-export { Search }
+export { Search };

@@ -10,11 +10,11 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { Fragment } from 'react'
-import { Flex, Heading, View, Well } from '@adobe/react-spectrum'
-import { InlineCode } from '../InlineCode'
-import { Table, TBody, Tr, Td } from '../Table'
-import { DynamicReactJson } from './DynamicReactJson'
+import React, { Fragment } from "react";
+import { Flex, Heading, View, Well } from "@adobe/react-spectrum";
+import { InlineCode } from "../InlineCode";
+import { Table, TBody, Tr, Td } from "../Table";
+import { DynamicReactJson } from "./DynamicReactJson";
 
 export const JsonSchemaView = ({ schema = {}, ...props }) => {
   const {
@@ -28,13 +28,13 @@ export const JsonSchemaView = ({ schema = {}, ...props }) => {
     required = [],
     // eslint-disable-next-line no-unused-vars
     ...remainingProps
-  } = schema
+  } = schema;
   return (
     <div {...props}>
       <JsonSchemaProperties properties={properties} required={required} />
     </div>
-  )
-}
+  );
+};
 
 const JsonSchemaProperties = ({ properties, required = [] }) => {
   return properties && Object.keys(properties).length > 0 ? (
@@ -43,19 +43,19 @@ const JsonSchemaProperties = ({ properties, required = [] }) => {
         {Object.keys(properties).map((key) => (
           <Tr key={key}>
             <Td>
-              <Flex direction='column'>
+              <Flex direction="column">
                 <View>{key}</View>
                 <View>
-                  <DefaultProperty name='Type'>
+                  <DefaultProperty name="Type">
                     {properties[key].type}
-                    {properties[key].enum && 'enum'}
+                    {properties[key].enum && "enum"}
                   </DefaultProperty>
                 </View>
                 {required?.includes(key) && (
                   <View>
                     <span
                       style={{
-                        color: 'var(--spectrum-global-color-red-400)'
+                        color: "var(--spectrum-global-color-red-400)",
                       }}
                     >
                       required
@@ -74,90 +74,90 @@ const JsonSchemaProperties = ({ properties, required = [] }) => {
         ))}
       </TBody>
     </Table>
-  ) : null
-}
+  ) : null;
+};
 
 const JsonSchemaPropertyDetails = ({ name, properties }) => {
-  const propKeys = Object.keys(properties[name])
+  const propKeys = Object.keys(properties[name]);
   return (
-    <Flex direction='column' gap='size-50'>
+    <Flex direction="column" gap="size-50">
       {propKeys.sort(PropertiesCompareFunction).map((prop) => {
-        if (prop !== 'type') {
+        if (prop !== "type") {
           return (
             <JsonSchemaProperty
               key={prop}
               name={prop}
               property={properties[name][prop]}
             />
-          )
+          );
         }
       })}
     </Flex>
-  )
-}
+  );
+};
 
 const JsonSchemaPropertyExample = ({ name, properties }) => {
-  const examples = properties[name].examples
+  const examples = properties[name].examples;
   if (examples === undefined) {
-    return ''
+    return "";
   }
 
   return (
     <View key={name}>
-      <JsonSchemaPropertyLabel name='Examples' />
+      <JsonSchemaPropertyLabel name="Examples" />
       <DynamicReactJson src={examples} collapsed name={false} indentWidth={2} />
     </View>
-  )
-}
+  );
+};
 
 /**
  * Description first.
  */
 const PropertiesCompareFunction = (a, b) => {
-  if (a === 'description') {
-    return -1
+  if (a === "description") {
+    return -1;
   }
-  if (b === 'description') {
-    return 1
+  if (b === "description") {
+    return 1;
   }
-  return 0
-}
+  return 0;
+};
 
-const excludeLabelProps = ['description']
-const excludedProperties = ['examples', '$id']
+const excludeLabelProps = ["description"];
+const excludedProperties = ["examples", "$id"];
 
 export const JsonSchemaProperty = ({ name, property }) => {
   if (property === null || excludedProperties.includes(name)) {
-    return ''
+    return "";
   }
 
   switch (typeof property) {
-    case 'number':
-      return <DefaultProperty name={name}>{property}</DefaultProperty>
-    case 'boolean':
+    case "number":
+      return <DefaultProperty name={name}>{property}</DefaultProperty>;
+    case "boolean":
       return (
         <DefaultProperty name={name} highlight>
           {`${property}`}
         </DefaultProperty>
-      )
-    case 'object':
-      if (name === 'enum') {
+      );
+    case "object":
+      if (name === "enum") {
         return (
           <DefaultProperty name={name}>
             <>
               {property.map((item) => (
                 <InlineCode key={item}>{item}</InlineCode>
-              ))}{' '}
+              ))}{" "}
             </>
           </DefaultProperty>
-        )
+        );
       } else {
         if (Array.isArray(property)) {
           if (property.length === 0) {
-            return ''
+            return "";
           }
         } else if (Object.keys(property).length === 0) {
-          return ''
+          return "";
         }
 
         return (
@@ -170,12 +170,12 @@ export const JsonSchemaProperty = ({ name, property }) => {
                 <Fragment>
                   s
                   {property.map((item) => {
-                    if (typeof item === 'object') {
-                      return <InnerJsonSchema schema={item} />
+                    if (typeof item === "object") {
+                      return <InnerJsonSchema schema={item} />;
                     } else {
-                      return <InlineCode key={item}>{item}</InlineCode>
+                      return <InlineCode key={item}>{item}</InlineCode>;
                     }
-                  })}{' '}
+                  })}{" "}
                 </Fragment>
               </>
             ) : (
@@ -184,7 +184,7 @@ export const JsonSchemaProperty = ({ name, property }) => {
               </Well>
             )}
           </details>
-        )
+        );
       }
     default:
       return excludeLabelProps.includes(name) ? (
@@ -193,27 +193,27 @@ export const JsonSchemaProperty = ({ name, property }) => {
         <DefaultProperty name={name} highlight>
           {property}
         </DefaultProperty>
-      )
+      );
   }
-}
+};
 
 const JsonSchemaPropertyLabel = ({ name }) =>
   !excludeLabelProps.includes(name) ? (
     <span
       style={{
-        textTransform: 'capitalize'
+        textTransform: "capitalize",
       }}
     >
       <strong>{name}:&nbsp;</strong>
     </span>
-  ) : null
+  ) : null;
 
 const DefaultProperty = ({ name, highlight, children }) => (
   <View key={name}>
     <JsonSchemaPropertyLabel name={name} />
     {highlight ? <InlineCode>{children}</InlineCode> : children}
   </View>
-)
+);
 
 const InnerJsonSchema = ({ schema = {}, ...props }) => {
   const {
@@ -228,7 +228,7 @@ const InnerJsonSchema = ({ schema = {}, ...props }) => {
     // eslint-disable-next-line no-unused-vars
     required = [],
     ...remainingProps
-  } = schema
+  } = schema;
   return (
     <div>
       {title && <Heading level={2}>{title}</Heading>}
@@ -241,5 +241,5 @@ const InnerJsonSchema = ({ schema = {}, ...props }) => {
       ))}
       <JsonSchemaView schema={schema} {...props} />
     </div>
-  )
-}
+  );
+};

@@ -9,49 +9,49 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
-import { TableOfContents } from '../index'
-import mockData from './mockData'
+import React from "react";
+import { TableOfContents } from "../index";
+import mockData from "./mockData";
 
 export default {
-  title: 'components/TableOfContents'
-}
+  title: "components/TableOfContents",
+};
 
 export const Empty = () => {
-  const props = { tableOfContents: {} }
-  return <TableOfContents {...props} />
-}
+  const props = { tableOfContents: {} };
+  return <TableOfContents {...props} />;
+};
 
 export const WithData = () => {
   const props = {
-    tableOfContents: mockData.regular
-  }
-  return <TableOfContents {...props} />
-}
+    tableOfContents: mockData.regular,
+  };
+  return <TableOfContents {...props} />;
+};
 
 export const WithTwoH1s = () => {
   const props = {
-    tableOfContents: mockData.twoH1s
-  }
-  return <TableOfContents {...props} />
-}
+    tableOfContents: mockData.twoH1s,
+  };
+  return <TableOfContents {...props} />;
+};
 
 export const WithDifferentData = () => {
   const props = {
-    tableOfContents: mockData.moreTestData
-  }
-  return <TableOfContents {...props} />
-}
+    tableOfContents: mockData.moreTestData,
+  };
+  return <TableOfContents {...props} />;
+};
 
 export const WithCustomTitle = () => {
   const props = {
-    title: 'In this Update',
-    tableOfContents: mockData.moreTestData
-  }
-  return <TableOfContents {...props} />
-}
+    title: "In this Update",
+    tableOfContents: mockData.moreTestData,
+  };
+  return <TableOfContents {...props} />;
+};
 
-WithData.story = { name: 'With Data' }
-WithTwoH1s.story = { name: 'With Two+ H1s' }
-WithDifferentData.story = { name: 'With Different Data' }
-WithCustomTitle.story = { name: 'With Custom Title' }
+WithData.story = { name: "With Data" };
+WithTwoH1s.story = { name: "With Two+ H1s" };
+WithDifferentData.story = { name: "With Different Data" };
+WithCustomTitle.story = { name: "With Custom Title" };

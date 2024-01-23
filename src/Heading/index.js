@@ -11,43 +11,43 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import React from 'react'
-import classNames from 'classnames'
-import '@spectrum-css/typography'
-import { Divider } from '@adobe/react-spectrum'
-import { Link } from '../Link'
+import { css, jsx } from "@emotion/react";
+import React from "react";
+import classNames from "classnames";
+import "@spectrum-css/typography";
+import { Divider } from "@adobe/react-spectrum";
+import { Link } from "../Link";
 
-const headingSizes = ['XL', 'L', 'M', 'S', 'XS', 'XXS']
+const headingSizes = ["XL", "L", "M", "S", "XS", "XXS"];
 
 const Anchor = ({ id }) => (
   <span
-    aria-hidden='true'
+    aria-hidden="true"
     id={id}
     css={css`
       position: relative;
       top: calc(-1 * var(--spectrum-global-dimension-static-size-800));
     `}
   />
-)
+);
 
 const createHeading = (
   level,
   { id, children, className, css: styles, ...props }
 ) => {
-  const HeadingTag = `h${level}`
-  const isHeading1 = level === 1
-  const isHeading2 = level === 2
+  const HeadingTag = `h${level}`;
+  const isHeading1 = level === 1;
+  const isHeading2 = level === 2;
   const marginLink = `margin-inline-start: var(--spectrum-global-dimension-static-size-${
-    isHeading2 ? '100' : '50'
-  });`
+    isHeading2 ? "100" : "50"
+  });`;
 
   const marginBottom = isHeading2
     ? `margin-bottom: var(--spectrum-global-dimension-size-100)!important;`
-    : ''
+    : "";
   const marginTop = !isHeading1
     ? `margin-top: var(--spectrum-global-dimension-size-500); `
-    : ''
+    : "";
 
   const animateAnchor = `
     & span a {
@@ -61,7 +61,7 @@ const createHeading = (
     &:hover span a {
       opacity: 1;
     }
-  `
+  `;
 
   return (
     <React.Fragment>
@@ -73,7 +73,7 @@ const createHeading = (
           className,
           `spectrum-Heading--size${headingSizes[level - 1]}`,
           {
-            'spectrum-Heading--light': isHeading1
+            "spectrum-Heading--light": isHeading1,
           }
         )}
         css={css`
@@ -100,14 +100,14 @@ const createHeading = (
           </span>
         )}
       </HeadingTag>
-      {isHeading2 && <Divider marginBottom='size-300' />}
+      {isHeading2 && <Divider marginBottom="size-300" />}
     </React.Fragment>
-  )
-}
+  );
+};
 
-export const Heading1 = (props) => createHeading(1, props)
-export const Heading2 = (props) => createHeading(2, props)
-export const Heading3 = (props) => createHeading(3, props)
-export const Heading4 = (props) => createHeading(4, props)
-export const Heading5 = (props) => createHeading(5, props)
-export const Heading6 = (props) => createHeading(6, props)
+export const Heading1 = (props) => createHeading(1, props);
+export const Heading2 = (props) => createHeading(2, props);
+export const Heading3 = (props) => createHeading(3, props);
+export const Heading4 = (props) => createHeading(4, props);
+export const Heading5 = (props) => createHeading(5, props);
+export const Heading6 = (props) => createHeading(6, props);

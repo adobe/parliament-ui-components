@@ -10,12 +10,12 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
 
 export const DynamicReactJson = (props) => {
-  if (typeof window !== 'undefined') {
-    const ReactJson = require('react-json-view').default
-    return <ReactJson {...props} />
+  if (typeof window !== "undefined") {
+    const ReactJson = require("react-json-view").default;
+    return <ReactJson {...props} />;
   }
-  return null
-}
+  return null;
+};

@@ -9,15 +9,15 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import { useEffect } from 'react'
+import { useEffect } from "react";
 
 const useLaunchScript = (scriptUrl) => {
   useEffect(() => {
-    const script = document.createElement('script')
-    script.src = scriptUrl
-    script.async = 'true'
-    document.body.appendChild(script)
-  }, [scriptUrl])
-}
+    const script = document.createElement("script");
+    script.src = scriptUrl;
+    script.async = "true";
+    document.body.appendChild(script);
+  }, [scriptUrl]);
+};
 
-export { useLaunchScript }
+export { useLaunchScript };

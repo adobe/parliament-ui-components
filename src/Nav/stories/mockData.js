@@ -11,158 +11,158 @@ governing permissions and limitations under the License.
 */
 const mockData = [
   {
-    importedFileName: 'readme',
+    importedFileName: "readme",
     pages: [
       {
-        importedFileName: 'webhook-docs-intro',
+        importedFileName: "webhook-docs-intro",
         pages: [
           {
-            importedFileName: 'webhook-docs-intro',
+            importedFileName: "webhook-docs-intro",
             pages: [
               {
-                importedFileName: 'webhook-docs-intro',
+                importedFileName: "webhook-docs-intro",
                 pages: [
                   {
-                    importedFileName: 'webhook-docs-intro',
+                    importedFileName: "webhook-docs-intro",
                     pages: [
                       {
-                        importedFileName: 'webhook-docs-intro',
+                        importedFileName: "webhook-docs-intro",
                         pages: [
                           {
-                            importedFileName: 'webhook-docs-intro',
+                            importedFileName: "webhook-docs-intro",
                             pages: [
                               {
-                                importedFileName: 'webhook-docs-intro',
+                                importedFileName: "webhook-docs-intro",
                                 pages: [],
-                                path: 'adobedocs/adobeio-events/master/intro/webhook_docs_intro.md',
-                                title: 'Depth 8'
-                              }
+                                path: "adobedocs/adobeio-events/master/intro/webhook_docs_intro.md",
+                                title: "Depth 8",
+                              },
                             ],
-                            path: 'adobedocs/adobeio-events/master/intro/webhook_docs_intro.md',
-                            title: 'Depth 7'
-                          }
+                            path: "adobedocs/adobeio-events/master/intro/webhook_docs_intro.md",
+                            title: "Depth 7",
+                          },
                         ],
-                        path: 'adobedocs/adobeio-events/master/intro/webhook_docs_intro.md',
-                        title: 'Depth 6'
-                      }
+                        path: "adobedocs/adobeio-events/master/intro/webhook_docs_intro.md",
+                        title: "Depth 6",
+                      },
                     ],
-                    path: 'adobedocs/adobeio-events/master/intro/webhook_docs_intro.md',
-                    title: 'Depth 5'
-                  }
+                    path: "adobedocs/adobeio-events/master/intro/webhook_docs_intro.md",
+                    title: "Depth 5",
+                  },
                 ],
-                path: 'adobedocs/adobeio-events/master/intro/webhook_docs_intro.md',
-                title: 'Depth 4'
-              }
+                path: "adobedocs/adobeio-events/master/intro/webhook_docs_intro.md",
+                title: "Depth 4",
+              },
             ],
-            path: 'adobedocs/adobeio-events/master/intro/webhook_docs_intro.md',
-            title: 'Depth 3'
-          }
+            path: "adobedocs/adobeio-events/master/intro/webhook_docs_intro.md",
+            title: "Depth 3",
+          },
         ],
-        path: 'adobedocs/adobeio-events/master/intro/webhook_docs_intro.md',
-        title: 'Introduction to Webhooks'
+        path: "adobedocs/adobeio-events/master/intro/webhook_docs_intro.md",
+        title: "Introduction to Webhooks",
       },
       {
-        importedFileName: 'events-api',
+        importedFileName: "events-api",
         pages: [],
-        path: 'adobedocs/adobeio-events/master/intro/events-api.md',
-        title: 'Working with Events Using Management API'
+        path: "adobedocs/adobeio-events/master/intro/events-api.md",
+        title: "Working with Events Using Management API",
       },
       {
-        importedFileName: 'journaling_api',
+        importedFileName: "journaling_api",
         pages: [],
-        path: 'adobedocs/adobeio-events/master/intro/journaling_api.md',
-        title: 'Journaling API'
+        path: "adobedocs/adobeio-events/master/intro/journaling_api.md",
+        title: "Journaling API",
       },
       {
-        importedFileName: 'test.md',
+        importedFileName: "test.md",
         pages: [],
-        path: 'test/path/test.md',
-        title: 'Test of Focus'
+        path: "test/path/test.md",
+        title: "Test of Focus",
       },
       {
-        importedFileName: 'authentication.md',
+        importedFileName: "authentication.md",
         pages: [],
-        path: 'https://adobe.io/authentication',
-        title: 'Test of Remote Link'
-      }
+        path: "https://adobe.io/authentication",
+        title: "Test of Remote Link",
+      },
     ],
-    path: 'adobedocs/adobeio-events/master/readme.md',
-    title: 'Getting Started'
+    path: "adobedocs/adobeio-events/master/readme.md",
+    title: "Getting Started",
   },
   {
-    importedFileName: 'using',
+    importedFileName: "using",
     pages: [
       {
-        importedFileName: 'aem-event-setup',
+        importedFileName: "aem-event-setup",
         pages: [],
-        path: 'adobedocs/adobeio-events/master/using/aem-event-setup.md',
-        title: 'Setting Up AEM Events'
+        path: "adobedocs/adobeio-events/master/using/aem-event-setup.md",
+        title: "Setting Up AEM Events",
       },
       {
-        importedFileName: 'analytics-triggers-event-setup',
+        importedFileName: "analytics-triggers-event-setup",
         pages: [],
-        path: 'adobedocs/adobeio-events/master/using/analytics-triggers-event-setup.md',
-        title: 'Integrate Analytics Triggers'
+        path: "adobedocs/adobeio-events/master/using/analytics-triggers-event-setup.md",
+        title: "Integrate Analytics Triggers",
       },
       {
-        importedFileName: 'cc-asset-event-setup',
+        importedFileName: "cc-asset-event-setup",
         pages: [],
-        path: 'adobedocs/adobeio-events/master/using/cc-asset-event-setup.md',
-        title: 'Setting Up Creative Cloud Asset Events'
+        path: "adobedocs/adobeio-events/master/using/cc-asset-event-setup.md",
+        title: "Setting Up Creative Cloud Asset Events",
       },
       {
-        importedFileName: 'create-event-integration',
+        importedFileName: "create-event-integration",
         pages: [],
-        path: 'https://www.adobe.io/apis/experiencecloud/cloud-manager/docs.html#!AdobeDocs/cloudmanager-api-docs/master/create-event-integration.md',
-        title: 'Cloud Manager'
+        path: "https://www.adobe.io/apis/experiencecloud/cloud-manager/docs.html#!AdobeDocs/cloudmanager-api-docs/master/create-event-integration.md",
+        title: "Cloud Manager",
       },
       {
-        importedFileName: 'gdpr-io-events',
+        importedFileName: "gdpr-io-events",
         pages: [],
-        path: 'https://www.adobe.io/apis/experienceplatform/gdpr/docs/alldocs.html#!api-specification/markdown/narrative/gdpr/gdpr-io-events.md',
-        title: 'GDPR Events'
-      }
+        path: "https://www.adobe.io/apis/experienceplatform/gdpr/docs/alldocs.html#!api-specification/markdown/narrative/gdpr/gdpr-io-events.md",
+        title: "GDPR Events",
+      },
     ],
-    path: 'adobedocs/adobeio-events/master/using.md',
-    title: 'Using Adobe I/O Events'
+    path: "adobedocs/adobeio-events/master/using.md",
+    title: "Using Adobe I/O Events",
   },
   {
-    importedFileName: 'support',
+    importedFileName: "support",
     pages: [
       {
-        importedFileName: 'debug',
+        importedFileName: "debug",
         pages: [],
-        path: 'adobedocs/adobeio-events/master/support/debug.md',
-        title: 'Debugging'
+        path: "adobedocs/adobeio-events/master/support/debug.md",
+        title: "Debugging",
       },
       {
-        importedFileName: 'tracing',
+        importedFileName: "tracing",
         pages: [],
-        path: 'adobedocs/adobeio-events/master/support/tracing.md',
-        title: 'Tracing'
+        path: "adobedocs/adobeio-events/master/support/tracing.md",
+        title: "Tracing",
       },
       {
-        importedFileName: 'Forums',
+        importedFileName: "Forums",
         pages: [],
-        path: 'https://forums.adobe.com/community/adobe-io/adobe-io-events',
-        title: 'Forums'
+        path: "https://forums.adobe.com/community/adobe-io/adobe-io-events",
+        title: "Forums",
       },
       {
-        importedFileName: 'faq',
+        importedFileName: "faq",
         pages: [],
-        path: 'adobedocs/adobeio-events/master/support/faq.md',
-        title: 'Frequently Asked Questions (FAQ)'
+        path: "adobedocs/adobeio-events/master/support/faq.md",
+        title: "Frequently Asked Questions (FAQ)",
       },
       {
-        importedFileName: 'release_notes',
+        importedFileName: "release_notes",
         pages: [],
-        path: 'adobedocs/adobeio-events/master/support/release_notes.md',
-        title: 'Release Notes'
-      }
+        path: "adobedocs/adobeio-events/master/support/release_notes.md",
+        title: "Release Notes",
+      },
     ],
-    path: 'adobedocs/adobeio-events/master/support.md',
-    title: 'Support'
-  }
-]
+    path: "adobedocs/adobeio-events/master/support.md",
+    title: "Support",
+  },
+];
 
-export default mockData
+export default mockData;

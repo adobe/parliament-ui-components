@@ -10,14 +10,14 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
 
 const Parameter = ({ key, children }) => {
   return (
     <div>
       {key}: {children}
     </div>
-  )
-}
+  );
+};
 
-export { Parameter }
+export { Parameter };

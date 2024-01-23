@@ -10,14 +10,14 @@
  * governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import { DynamicReactJson } from './DynamicReactJson'
+import React from "react";
+import { DynamicReactJson } from "./DynamicReactJson";
 
 export const JsonSchemaRaw = ({ schema = {} }) => {
-  const { properties = [] } = schema
+  const { properties = [] } = schema;
   return (
     <div>
       <DynamicReactJson src={properties} name={false} indentWidth={2} />
     </div>
-  )
-}
+  );
+};

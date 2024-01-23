@@ -10,35 +10,35 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { useState } from 'react'
-import { Heading, View, TextArea } from '@adobe/react-spectrum'
-import { validate } from 'jsonschema'
-import { DynamicReactJson } from './DynamicReactJson'
+import React, { useState } from "react";
+import { Heading, View, TextArea } from "@adobe/react-spectrum";
+import { validate } from "jsonschema";
+import { DynamicReactJson } from "./DynamicReactJson";
 
 const cleanupResults = (data) => {
   if (data.errors === undefined) {
-    return data
+    return data;
   }
 
   data.errors.map((error) => {
-    delete error.instance
-  })
-  return data
-}
+    delete error.instance;
+  });
+  return data;
+};
 
 export const JsonSchemaValidate = ({ schema = {} }) => {
-  const [results, setResults] = useState(cleanupResults(validate({}, schema)))
+  const [results, setResults] = useState(cleanupResults(validate({}, schema)));
 
   const validateData = (data) => {
-    const retval = validate(JSON.parse(data), schema)
-    setResults(cleanupResults(retval))
-  }
+    const retval = validate(JSON.parse(data), schema);
+    setResults(cleanupResults(retval));
+  };
 
   return (
     <View key={name}>
       <TextArea
-        minWidth='100%'
-        minHeight='size-2400'
+        minWidth="100%"
+        minHeight="size-2400"
         onChange={(data) => validateData(data)}
       />
       <Heading level={2}>
@@ -47,5 +47,5 @@ export const JsonSchemaValidate = ({ schema = {} }) => {
       <Heading level={2}>Errors</Heading>
       <DynamicReactJson src={results.errors} name={false} indentWidth={2} />
     </View>
-  )
-}
+  );
+};

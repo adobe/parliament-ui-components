@@ -10,134 +10,134 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { useState } from 'react'
-import { View, Picker, Item } from '@adobe/react-spectrum'
-import { CodeUI } from '../CodeUI'
+import React, { useState } from "react";
+import { View, Picker, Item } from "@adobe/react-spectrum";
+import { CodeUI } from "../CodeUI";
 const HTTPSnippet =
-  typeof window !== `undefined` ? require('httpsnippet') : null
+  typeof window !== `undefined` ? require("httpsnippet") : null;
 
-const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
+const CodeGen = ({ CodeGen = "shell_curl", url, options }) => {
   const codeOptions = [
     {
-      name: 'cURL',
-      id: 'shell_curl',
-      lang: 'shell'
+      name: "cURL",
+      id: "shell_curl",
+      lang: "shell",
     },
     {
-      name: 'Node.js (fetch)',
-      id: 'node_fetch',
-      lang: 'js'
+      name: "Node.js (fetch)",
+      id: "node_fetch",
+      lang: "js",
     },
     {
-      name: 'Node.js (request)',
-      id: 'node_request',
-      lang: 'js'
+      name: "Node.js (request)",
+      id: "node_request",
+      lang: "js",
     },
     {
-      name: 'Javascript (fetch)',
-      id: 'javascript_fetch',
-      lang: 'js'
+      name: "Javascript (fetch)",
+      id: "javascript_fetch",
+      lang: "js",
     },
     {
-      name: 'Javascript (axios)',
-      id: 'javascript_axios',
-      lang: 'js'
+      name: "Javascript (axios)",
+      id: "javascript_axios",
+      lang: "js",
     },
     {
-      name: 'python',
-      id: 'python_requests',
-      lang: 'python'
+      name: "python",
+      id: "python_requests",
+      lang: "python",
     },
     {
-      name: 'PHP',
-      id: 'php_http2'
+      name: "PHP",
+      id: "php_http2",
     },
     {
-      name: 'Java',
-      id: 'java_unirest'
+      name: "Java",
+      id: "java_unirest",
     },
     {
-      name: 'Ruby',
-      id: 'ruby_native'
+      name: "Ruby",
+      id: "ruby_native",
     },
     {
-      name: 'Kotlin',
-      id: 'kotlin'
+      name: "Kotlin",
+      id: "kotlin",
     },
     {
-      name: 'Swift',
-      id: 'swift'
+      name: "Swift",
+      id: "swift",
     },
     {
-      name: 'R',
-      id: 'r'
+      name: "R",
+      id: "r",
     },
     {
-      name: 'Go',
-      id: 'go_native',
-      lang: 'go'
+      name: "Go",
+      id: "go_native",
+      lang: "go",
     },
     {
-      name: 'C',
-      id: 'c',
-      lang: 'c'
+      name: "C",
+      id: "c",
+      lang: "c",
     },
     {
-      name: 'C#',
-      id: 'csharp_restsharp'
-    }
-  ]
-  const [selected, setSelected] = useState(CodeGen)
+      name: "C#",
+      id: "csharp_restsharp",
+    },
+  ];
+  const [selected, setSelected] = useState(CodeGen);
   const getNameValArray = (items) => {
-    items = Array.isArray(items) ? items : []
+    items = Array.isArray(items) ? items : [];
     return items
-      .filter((item) => item.enabled && item.key !== '')
+      .filter((item) => item.enabled && item.key !== "")
       .map((item) => {
-        return { name: item.key, value: item.value }
-      })
-  }
+        return { name: item.key, value: item.value };
+      });
+  };
   const getPostData = (options) => {
-    const postData = {}
+    const postData = {};
     if (
       options.method &&
-      options.method !== 'GET' &&
-      options.method !== 'HEAD' &&
-      options.method !== 'OPTIONS'
+      options.method !== "GET" &&
+      options.method !== "HEAD" &&
+      options.method !== "OPTIONS"
     ) {
-      if (options.bodyType === 'raw') {
-        postData.mimeType = 'text/plain'
-        postData.text = options.body
-      } else if (options.bodyType === 'form-data') {
-        postData.mimeType = 'multipart/form-data'
-        postData.params = options.body ? getNameValArray(options.body) : []
-      } else if (options.bodyType === 'urlencoded') {
-        postData.mimeType = 'application/x-www-form-urlencoded'
-        postData.params = options.body ? getNameValArray(options.body) : []
+      if (options.bodyType === "raw") {
+        postData.mimeType = "text/plain";
+        postData.text = options.body;
+      } else if (options.bodyType === "form-data") {
+        postData.mimeType = "multipart/form-data";
+        postData.params = options.body ? getNameValArray(options.body) : [];
+      } else if (options.bodyType === "urlencoded") {
+        postData.mimeType = "application/x-www-form-urlencoded";
+        postData.params = options.body ? getNameValArray(options.body) : [];
       }
     }
-    return postData
-  }
+    return postData;
+  };
   const renderByCode = (id) => {
     const snippet = new HTTPSnippet({
-      method: options.method || 'GET',
+      method: options.method || "GET",
       url: url,
       headers: getNameValArray(options.headers),
-      postData: getPostData(options)
-    })
+      postData: getPostData(options),
+    });
 
-    const langs = id.split('_')
-    const code = snippet.convert(langs[0], langs[1]) + '\n'
+    const langs = id.split("_");
+    const code = snippet.convert(langs[0], langs[1]) + "\n";
     const props = {
-      className: codeOptions.find((item) => item.id === id).lang || 'js'
-    }
-    return <CodeUI {...props}>{code}</CodeUI>
-  }
+      className: codeOptions.find((item) => item.id === id).lang || "js",
+    };
+    return <CodeUI {...props}>{code}</CodeUI>;
+  };
 
   return (
     <View>
       <Picker
-        width='size-1600'
-        marginBottom='size-100'
+        width="size-1600"
+        marginBottom="size-100"
         items={codeOptions}
         selectedKey={selected}
         onSelectionChange={(selected) => setSelected(selected)}
@@ -146,7 +146,7 @@ const CodeGen = ({ CodeGen = 'shell_curl', url, options }) => {
       </Picker>
       {renderByCode(selected)}
     </View>
-  )
-}
+  );
+};
 
-export { CodeGen }
+export { CodeGen };

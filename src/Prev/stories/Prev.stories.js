@@ -9,18 +9,18 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
-import { Prev } from '../index'
+import React from "react";
+import { Prev } from "../index";
 
 export default {
-  title: 'components/Prev'
-}
+  title: "components/Prev",
+};
 
 export const Default = () => {
   const props = {
-    title: 'My Documentation Site',
-    url: 'https://localhost'
-  }
+    title: "My Documentation Site",
+    url: "https://localhost",
+  };
 
-  return <Prev {...props} />
-}
+  return <Prev {...props} />;
+};

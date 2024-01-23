@@ -14,5 +14,5 @@ governing permissions and limitations under the License.
 // Related to jest.config.js globals
 // Load in this loadershim into `setupFiles` for all files that will be included before all tests are run
 global.___loader = {
-  enqueue: jest.fn()
-}
+  enqueue: jest.fn(),
+};

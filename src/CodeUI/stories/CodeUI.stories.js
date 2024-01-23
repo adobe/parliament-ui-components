@@ -9,13 +9,13 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import React from 'react'
+import React from "react";
 
-import { CodeUI } from '../index'
+import { CodeUI } from "../index";
 
 export default {
-  title: 'components/CodeUI'
-}
+  title: "components/CodeUI",
+};
 
 const code = `{
   "op": "copy",
@@ -26,45 +26,45 @@ const code = `{
     "path": "/content/assets/7d391c3c-a3d4-4f66-81ce-40066732db60/source/test.psd"
   }
 }
-`
+`;
 
 export const Default = () => {
-  const props = {}
+  const props = {};
 
-  return <CodeUI {...props}>{code}</CodeUI>
-}
+  return <CodeUI {...props}>{code}</CodeUI>;
+};
 
 export const SyntaxHighlighting = () => {
   const props = {
-    className: `language-json`
-  }
+    className: `language-json`,
+  };
 
-  return <CodeUI {...props}>{code}</CodeUI>
-}
+  return <CodeUI {...props}>{code}</CodeUI>;
+};
 
 export const NoCopyButton = () => {
   const props = {
     className: `language-json`,
-    copyButton: false
-  }
+    copyButton: false,
+  };
 
-  return <CodeUI {...props}>{code}</CodeUI>
-}
+  return <CodeUI {...props}>{code}</CodeUI>;
+};
 
 export const NoLineNumbers = () => {
   const props = {
     className: `language-json`,
-    lineNumbers: false
-  }
+    lineNumbers: false,
+  };
 
-  return <CodeUI {...props}>{code}</CodeUI>
-}
+  return <CodeUI {...props}>{code}</CodeUI>;
+};
 
 export const HighlightLines = () => {
   const props = {
     className: `language-json`,
-    metastring: `{1,3-4}`
-  }
+    metastring: `{1,3-4}`,
+  };
 
-  return <CodeUI {...props}>{code}</CodeUI>
-}
+  return <CodeUI {...props}>{code}</CodeUI>;
+};

@@ -10,15 +10,15 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import { useState } from 'react'
-import PropTypes from 'prop-types'
-import classNames from 'classnames'
+import { css, jsx } from "@emotion/react";
+import { useState } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
-import ChevronRight from '@spectrum-icons/workflow/ChevronRight'
+import ChevronRight from "@spectrum-icons/workflow/ChevronRight";
 
-import '@spectrum-css/accordion'
-import './index.css'
+import "@spectrum-css/accordion";
+import "./index.css";
 
 const AccordionItem = ({
   header,
@@ -28,50 +28,50 @@ const AccordionItem = ({
   uppercase = true,
   ...props
 }) => {
-  const [open, setOpen] = useState(isOpen)
+  const [open, setOpen] = useState(isOpen);
   const onClick = () => {
     if (!isDisabled) {
-      setOpen((open) => !open)
+      setOpen((open) => !open);
     }
-  }
+  };
   return (
     <div
       className={classNames([
-        'spectrum-Accordion-item',
-        { 'is-open': open },
-        { 'is-disabled': isDisabled }
+        "spectrum-Accordion-item",
+        { "is-open": open },
+        { "is-disabled": isDisabled },
       ])}
-      role='presentation'
+      role="presentation"
       {...props}
     >
-      <h3 className='spectrum-Accordion-itemHeading'>
+      <h3 className="spectrum-Accordion-itemHeading">
         <button
-          className='spectrum-Accordion-itemHeader'
-          type='button'
+          className="spectrum-Accordion-itemHeader"
+          type="button"
           aria-expanded={open}
           onClick={onClick}
           css={css`
-            text-transform: ${uppercase ? 'uppercase' : 'none'};
+            text-transform: ${uppercase ? "uppercase" : "none"};
           `}
         >
           {header}
         </button>
         <ChevronRight
-          size='S'
-          UNSAFE_className='spectrum-Accordion-itemIndicator parliament-Accordion-itemIndicator'
+          size="S"
+          UNSAFE_className="spectrum-Accordion-itemIndicator parliament-Accordion-itemIndicator"
         />
       </h3>
-      <div className='spectrum-Accordion-itemContent' role='region'>
+      <div className="spectrum-Accordion-itemContent" role="region">
         {children}
       </div>
     </div>
-  )
-}
+  );
+};
 
 AccordionItem.propTypes = {
   header: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   isOpen: PropTypes.bool,
-  isDisabled: PropTypes.bool
-}
+  isDisabled: PropTypes.bool,
+};
 
-export { AccordionItem }
+export { AccordionItem };

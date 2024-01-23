@@ -11,35 +11,35 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
-import PropTypes from 'prop-types'
-import { Flex } from '@adobe/react-spectrum'
-import { Img } from 'react-image'
-import '@spectrum-css/tooltip'
+import { css, jsx } from "@emotion/react";
+import PropTypes from "prop-types";
+import { Flex } from "@adobe/react-spectrum";
+import { Img } from "react-image";
+import "@spectrum-css/tooltip";
 
-const Contributors = ({ href = '#', contributors = [], date, ...props }) => {
+const Contributors = ({ href = "#", contributors = [], date, ...props }) => {
   const getAvatarUrl = function (contributor) {
     if (
-      contributor.avatarUrl.startsWith('https://git.corp.adobe.com/') &&
+      contributor.avatarUrl.startsWith("https://git.corp.adobe.com/") &&
       contributor.login
     ) {
-      return `https://s7d2.scene7.com/is/image/IMGDIR/${contributor.login}`
+      return `https://s7d2.scene7.com/is/image/IMGDIR/${contributor.login}`;
     }
-    return contributor.avatarUrl
-  }
-  const count = contributors.length - 5
+    return contributor.avatarUrl;
+  };
+  const count = contributors.length - 5;
   return (
     <a
       href={href}
-      target='_blank'
-      rel='noopener noreferrer nofollow'
+      target="_blank"
+      rel="noopener noreferrer nofollow"
       css={css`
         text-decoration: none;
         color: inherit;
       `}
       {...props}
     >
-      <Flex alignItems='center'>
+      <Flex alignItems="center">
         {contributors.length > 0 && (
           <div
             css={css`
@@ -52,12 +52,12 @@ const Contributors = ({ href = '#', contributors = [], date, ...props }) => {
               .slice(0, 5)
               .reverse()
               .map((contributor, index) => {
-                const name = contributor.name || contributor.login || 'Unknown'
-                const imgUrl = getAvatarUrl(contributor)
+                const name = contributor.name || contributor.login || "Unknown";
+                const imgUrl = getAvatarUrl(contributor);
                 return (
                   <span
                     key={index}
-                    className='u-tooltip-showOnHover'
+                    className="u-tooltip-showOnHover"
                     css={css`
                       margin-left: calc(
                         -1 * var(--spectrum-global-dimension-static-size-100)
@@ -81,7 +81,7 @@ const Contributors = ({ href = '#', contributors = [], date, ...props }) => {
                       alt={name}
                       src={[
                         imgUrl,
-                        `https://github.com/images/gravatars/gravatar-user-420.png`
+                        `https://github.com/images/gravatars/gravatar-user-420.png`,
                       ]}
                       css={css`
                         width: calc(
@@ -99,12 +99,12 @@ const Contributors = ({ href = '#', contributors = [], date, ...props }) => {
                           solid var(--spectrum-global-color-gray-50);
                       `}
                     />
-                    <div className='spectrum-Tooltip spectrum-Tooltip--top'>
-                      <span className='spectrum-Tooltip-label'>{name}</span>
-                      <span className='spectrum-Tooltip-tip' />
+                    <div className="spectrum-Tooltip spectrum-Tooltip--top">
+                      <span className="spectrum-Tooltip-label">{name}</span>
+                      <span className="spectrum-Tooltip-tip" />
                     </div>
                   </span>
-                )
+                );
               })}
           </div>
         )}
@@ -128,13 +128,13 @@ const Contributors = ({ href = '#', contributors = [], date, ...props }) => {
         </span>
       </Flex>
     </a>
-  )
-}
+  );
+};
 
 Contributors.propTypes = {
   href: PropTypes.string,
   contributors: PropTypes.array,
-  date: PropTypes.string
-}
+  date: PropTypes.string,
+};
 
-export { Contributors }
+export { Contributors };

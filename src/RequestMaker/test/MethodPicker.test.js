@@ -10,47 +10,47 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import React from 'react'
-import { render, screen } from 'test-utils'
-import '../../../test-utils/matchMedia'
-import userEvent from '@testing-library/user-event'
+import React from "react";
+import { render, screen } from "test-utils";
+import "../../../test-utils/matchMedia";
+import userEvent from "@testing-library/user-event";
 
-describe('<MethodPicker />', () => {
-  test('MethodPicker is updated correctly when POST is selected', () => {
+describe("<MethodPicker />", () => {
+  test("MethodPicker is updated correctly when POST is selected", () => {
     render(
-      <select data-testid='select'>
-        <option data-testid='GET' value='GET'>
+      <select data-testid="select">
+        <option data-testid="GET" value="GET">
           GET
         </option>
-        <option data-testid='PUT' value='PUT'>
+        <option data-testid="PUT" value="PUT">
           PUT
         </option>
-        <option data-testid='POST' value='POST'>
+        <option data-testid="POST" value="POST">
           POST
         </option>
-        <option data-testid='DELETE' value='DELETE'>
+        <option data-testid="DELETE" value="DELETE">
           DELETE
         </option>
-        <option data-testid='OPTIONS' value='OPTIONS'>
+        <option data-testid="OPTIONS" value="OPTIONS">
           OPTIONS
         </option>
-        <option data-testid='HEAD' value='HEAD'>
+        <option data-testid="HEAD" value="HEAD">
           HEAD
         </option>
-        <option data-testid='PATCH' value='PATCH'>
+        <option data-testid="PATCH" value="PATCH">
           PATCH
         </option>
       </select>
-    )
+    );
 
-    userEvent.selectOptions(screen.getByTestId('select'), ['POST'])
+    userEvent.selectOptions(screen.getByTestId("select"), ["POST"]);
 
-    expect(screen.getByTestId('GET').selected).toBe(false)
-    expect(screen.getByTestId('PUT').selected).toBe(false)
-    expect(screen.getByTestId('POST').selected).toBe(true)
-    expect(screen.getByTestId('DELETE').selected).toBe(false)
-    expect(screen.getByTestId('OPTIONS').selected).toBe(false)
-    expect(screen.getByTestId('HEAD').selected).toBe(false)
-    expect(screen.getByTestId('PATCH').selected).toBe(false)
-  })
-})
+    expect(screen.getByTestId("GET").selected).toBe(false);
+    expect(screen.getByTestId("PUT").selected).toBe(false);
+    expect(screen.getByTestId("POST").selected).toBe(true);
+    expect(screen.getByTestId("DELETE").selected).toBe(false);
+    expect(screen.getByTestId("OPTIONS").selected).toBe(false);
+    expect(screen.getByTestId("HEAD").selected).toBe(false);
+    expect(screen.getByTestId("PATCH").selected).toBe(false);
+  });
+});
