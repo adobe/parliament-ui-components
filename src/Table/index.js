@@ -17,7 +17,7 @@ import '@spectrum-css/table'
 
 const Table = ({ children, isQuiet, ...props }) => {
   return (
-    <div style={{ width: '100%', overflowX: 'scroll' }}>
+    <div style={{ width: '100%', overflowX: 'auto' }}>
       <table
         className={classNames([
           'spectrum-Table',
