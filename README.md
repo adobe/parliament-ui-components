@@ -56,7 +56,7 @@ yarn test
 This project uses [Storybook][http://storybook.js.org/] for testing the look and behavior of its UI components.
 
 ```bash
-yarn storybook
+yarn start-storybook
 ```
 
 ## Concurrent Development
