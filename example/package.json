@@ -13,11 +13,11 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \""
   },
   "dependencies": {
+    "@adobe/parliament-ui-components": "file:..",
     "@adobe/react-spectrum": "^3.6.0",
     "core-js": "^3.2.1",
     "gatsby": "^2.15.34",
     "gatsby-plugin-remove-serviceworker": "^1.0.0",
-    "parliament-ui-components": "file:..",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "regenerator-runtime": "^0.13.3"
